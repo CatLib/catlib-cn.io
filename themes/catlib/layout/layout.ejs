@@ -13,7 +13,8 @@
     </head>
 
     <body>
-        <%- partial('partials/header') %>
+        <%- partial('partials/header' , { 'isIndex' : isIndex }) %>
         <%- body %>
+        <%- partial('partials/footer' , { 'isIndex' : isIndex }) %>
     </body>
 </html>

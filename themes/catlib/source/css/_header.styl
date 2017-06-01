@@ -1,9 +1,9 @@
 #header
     background-color #fff
     height: $header-height
-    padding $heading-padding-vertical 60px
+    padding $heading-padding-vertical 20px
     position relative
-    z-index 2
+    z-index 999
 
 #logo
     display inline-block
@@ -33,3 +33,32 @@
         display inline-block
         position relative
         margin 0 .6em
+
+@media screen and (max-width: 900px)
+    #mobile-header
+        position relative
+        padding $heading-padding-vertical 20px
+        height: $header-height
+        .github
+            display none
+        #mobile-nav-toggle
+            padding-top 4px
+            float left
+            .mobile-nav-toggle-bar
+                border-bottom: 2px solid $index-color-v2
+                display block
+                width 25px
+                height 2px
+                margin-bottom 4px
+
+    #mobile-header.index
+        background-color: $index-color;
+        #github
+            display block
+            float right
+            img
+                width: $header-height
+                height: $header-height
+    
+    #header
+        display: none

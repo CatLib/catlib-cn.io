@@ -1,2 +1,53 @@
 @import "_common"
 @import "_header"
+@import "_footer"
+
+#index-body
+    background: $index-color
+    height 350px
+    text-align center
+    h2
+        color: $index-h2-color
+        padding 40px 40px
+        line-height: 50px
+        font-size 24px
+        margin-bottom 30px
+    #get-start
+        border: 1px solid $index-start-button-border-color
+        padding 12px 40px
+        color: $index-start-button-font-color
+
+@media screen and (max-width: 699px)
+    #index-content
+        padding 40px 40px 20px 40px
+        text-align center
+        .intro-feature
+            height 135px
+            padding-bottom 60px
+            img
+                width 45px
+                height 45px
+            h3
+                color: $index-color
+                font-size 20px
+            p
+                font-size 14px
+
+@media screen and (min-width: 700px)
+    #index-content
+        padding 40px 40px 20px 40px
+        text-align center
+        li
+            width 50%
+            float left
+            .intro-feature
+                height 135px
+                padding-bottom 60px
+                img
+                    width 45px
+                    height 45px
+                h3
+                    color: $index-color
+                    font-size 20px
+                p
+                    font-size 14px

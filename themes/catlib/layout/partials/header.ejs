@@ -1,3 +1,13 @@
+<div id="mobile-header" class="<%- isIndex ? 'index' : '' %>">
+    <a id="mobile-nav-toggle" href="#">
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+      <span class="mobile-nav-toggle-bar"></span>
+    </a>
+    <a id="github" href="<%- theme.github %>">
+      <img src="<%- url_for("/images/github.png") %>">
+    </a>
+</div>
 <div id="header">
   <a id="logo" href="<%- url_for("/") %>">
     <img src="<%- url_for("/images/logo.png") %>">
