@@ -10,9 +10,13 @@
 
     <%- css(isIndex ? 'css/index' : 'css/page') %>
 
+    <script src="<%- url_for("/js/vue.js") %>"></script>
+    <script>window.PAGE_TYPE = "<%- page.type %>"</script>
+
     </head>
 
     <body>
+        <%- page.type %>
         <%- partial('partials/header' , { 'isIndex' : isIndex }) %>
         <%- body %>
         <%- partial('partials/footer' , { 'isIndex' : isIndex }) %>

@@ -1,5 +1,8 @@
+#mobile-header
+    display none
+
 #header
-    background-color #fff
+    background-color: $page-nav-background
     height: $header-height
     padding $heading-padding-vertical 20px
     position relative
@@ -33,19 +36,53 @@
         display inline-block
         position relative
         margin 0 .6em
+        color: $index-color
+        a
+            color: $index-color
 
-@media screen and (max-width: 900px)
+
+#header.index
+    background-color: $index-color;
+    #nav
+        li
+            color: $index-color-v2
+            a
+                color: $index-color-v2
+        
+
+.search-query
+    height 30px
+    line-height 30px
+    padding 0 15px 0 30px
+    border 1px solid #fff
+    color $dark
+    outline none
+    border-radius 15px
+    margin-right 10px
+    transition .2s ease
+    background url(../images/search.png) 8px 5px no-repeat
+    background-size 20px
+    vertical-align middle !important
+    &:focus
+        background #fff url(../images/search.focus.png) 8px 5px no-repeat
+        background-size 20px
+
+
+@media screen and (max-width: 899px)
     #mobile-header
         position relative
         padding $heading-padding-vertical 20px
         height: $header-height
-        .github
+        display block
+        background-color: $page-nav-background
+        #github
             display none
+                
         #mobile-nav-toggle
             padding-top 4px
             float left
             .mobile-nav-toggle-bar
-                border-bottom: 2px solid $index-color-v2
+                border-bottom: 2px solid $index-color
                 display block
                 width 25px
                 height 2px
@@ -59,6 +96,10 @@
             img
                 width: $header-height
                 height: $header-height
+        #mobile-nav-toggle
+            .mobile-nav-toggle-bar
+                border-bottom: 2px solid $index-color-v2
+        
     
     #header
         display: none

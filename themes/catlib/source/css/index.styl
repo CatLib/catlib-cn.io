@@ -4,7 +4,7 @@
 
 #index-body
     background: $index-color
-    height 350px
+    height 325px
     text-align center
     h2
         color: $index-h2-color
@@ -16,10 +16,14 @@
         border: 1px solid $index-start-button-border-color
         padding 12px 40px
         color: $index-start-button-font-color
+    
+    #get-start:hover
+        background-color: $index-start-button-border-color
+        color: $index-color
 
 @media screen and (max-width: 699px)
     #index-content
-        padding 40px 40px 20px 40px
+        padding 60px 40px 40px 40px
         text-align center
         .intro-feature
             height 135px
@@ -34,8 +38,14 @@
                 font-size 14px
 
 @media screen and (min-width: 700px)
+    #index-body
+        height 500px
+        h2
+            padding 120px 80px 80px 80px
+            font-size 36px
+
     #index-content
-        padding 40px 40px 20px 40px
+        padding 60px 40px 40px 40px
         text-align center
         li
             width 50%
@@ -48,6 +58,11 @@
                     height 45px
                 h3
                     color: $index-color
-                    font-size 20px
+                    font-size 24px
                 p
-                    font-size 14px
+                    font-size 15px
+
+    #index-content
+        ul
+            margin 0 auto
+            max-width 1150px

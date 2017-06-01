@@ -8,11 +8,8 @@
       <img src="<%- url_for("/images/github.png") %>">
     </a>
 </div>
-<div id="header">
-  <a id="logo" href="<%- url_for("/") %>">
-    <img src="<%- url_for("/images/logo.png") %>">
-  </a>
+<div id="header" class="<%- isIndex ? 'index' : '' %>">
   <ul id="nav">
-    <%- partial('partials/main_menu') %>
+    <%- partial('partials/nav') %>
   </ul>
 </div>
