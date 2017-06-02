@@ -3,8 +3,8 @@
         <input type="text" id="search-query" class="search-query">
     </form>
 </li>
-<li><a href="<%- url_for("/") %>" class="nav-link<%- page.path.match(/\//) ? ' current' : '' %>">首页</a></li>
-<li><a href="<%- url_for("/v1/guide/index.html") %>" class="nav-link<%- page.path.match(/index/) ? ' current' : '' %>">教程</a></li>
-<li><a href="<%- url_for("/v1/guide/contribution.html") %>" class="nav-link<%- page.path.match(/contribution/) ? ' current' : '' %>">贡献指南</a></li>
-<li><a href="<%- url_for("/v1/guide/update.html") %>" class="nav-link<%- page.path.match(/update/) ? ' current' : '' %>">更新记录</a></li>
-<li><a href="<%- url_for("/v1/guide/use.html") %>" class="nav-link<%- page.path.match(/use/) ? ' current' : '' %>">使用案例</a></li>
+<li><a href="<%- url_for("/") %>" class="nav-link<%- page.path.match(/\//) ? ' current' : '' %>"><%= __('nav.index')%></a></li>
+<li><a href="<%- url_for("/v1/guide/index.html") %>" class="nav-link<%- page.path.match(/index/) ? ' current' : '' %>"><%= __('nav.guide')%></a></li>
+<li><a href="<%- url_for("/v1/guide/contribution.html") %>" class="nav-link<%- page.path.match(/contribution/) ? ' current' : '' %>"><%= __('nav.contribution')%></a></li>
+<li><a href="<%- url_for("/v1/guide/update.html") %>" class="nav-link<%- page.path.match(/update/) ? ' current' : '' %>"><%= __('nav.update')%></a></li>
+<li><a href="<%- url_for("/v1/guide/use.html") %>" class="nav-link<%- page.path.match(/use/) ? ' current' : '' %>"><%= __('nav.use')%></a></li>
