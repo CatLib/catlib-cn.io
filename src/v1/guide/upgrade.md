@@ -1,7 +1,6 @@
 ---
 title: 升级指南
 type: guide
-lang: zh-CN
 order: 1
 ---
 

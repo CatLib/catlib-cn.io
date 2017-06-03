@@ -1,7 +1,6 @@
 ---
 title: 版本说明
 type: guide
-lang: zh-CN
 order: 0
 ---
 

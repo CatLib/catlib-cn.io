@@ -18,9 +18,8 @@
     </div>
 </nav>
 
-<div class="container clear">
+<div id="container" class="container clear">
     <%- partial('partials/sidebar') %>
-
     <%- partial('partials/article') %>
 </div>
 
@@ -30,3 +29,21 @@
         <p><%- theme.copyright_desc %></p>
     </div>
 </footer>
+
+
+<script>
+var vm = new Vue({
+    el : '#container',
+    data: {
+        sub_nav : [ ]
+    },
+    created:function(){
+        var obj = [];
+        $("article h3").each(function(){
+            obj.push({name :  $(this).find("a").attr("title") , href : "#"+$(this).attr("id") });
+        });
+
+        this.sub_nav = obj;       
+    }
+});
+</script>

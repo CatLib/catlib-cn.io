@@ -1,7 +1,6 @@
 ---
 title: 路由
 type: guide
-lang: zh-CN
 order: 21
 ---
 

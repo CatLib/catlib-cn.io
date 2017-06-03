@@ -1,9 +1,12 @@
 <article class="clearfix">
-    <%- page.content%>
+    <%- page.content %>
 </article>
 
 <div class="sub-nav hiden-in-phone">
     <dl id="sub-nav">
         <dt>本文内容</dt>
+        <dd v-for="(ele, index) in sub_nav">
+           <a v-bind:href="ele.href">{{ ele.name }}</a>
+        </dd>
     </dl>
 </div> 
