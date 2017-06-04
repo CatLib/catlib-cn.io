@@ -6,4 +6,4 @@ order: 1
 
 ## 升级指南
 
-<p class="tip">这份文档等待您进行完善</p>
+<p class="tip">这是 CatLib 正式发布的第一个主版本。无需升级。</p>
