@@ -1,9 +1,9 @@
 ---
-title: 第一次使用
+title: 配置
 type: guide
-order: 0
+order: 104
 ---
 
-## 第一次使用
+## 配置
 
 <p class="tip">这份文档等待您进行完善</p>

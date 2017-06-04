@@ -1,9 +1,9 @@
 ---
-title: 第一次使用
+title: 命名规范
 type: guide
-order: 0
+order: 4
 ---
 
-## 第一次使用
+## 贡献指南
 
 <p class="tip">这份文档等待您进行完善</p>

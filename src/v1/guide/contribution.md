@@ -1,9 +1,9 @@
 ---
-title: 第一次使用
+title: 贡献指南
 type: guide
-order: 0
+order: 5
 ---
 
-## 第一次使用
+## 贡献指南
 
 <p class="tip">这份文档等待您进行完善</p>

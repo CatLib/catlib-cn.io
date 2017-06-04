@@ -1,9 +1,9 @@
 ---
-title: 第一次使用
+title: 常见错误
 type: guide
-order: 0
+order: 3
 ---
 
-## 第一次使用
+## 常见错误
 
 <p class="tip">这份文档等待您进行完善</p>
