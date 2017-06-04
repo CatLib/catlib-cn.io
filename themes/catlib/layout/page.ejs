@@ -46,4 +46,41 @@ var vm = new Vue({
         this.sub_nav = obj;       
     }
 });
+
+var isShow = false;
+$("nav").on("click","#btn-menu" , function(){
+
+    if(!isShow){
+        
+        if($(document).scrollTop() > $(".sidebar").height() - 100){
+
+            $('html, body').animate({scrollTop:0} , 300, "swing",function(){
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+            });
+        }else{
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+
+        }
+
+    }else{
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+    }
+    isShow = !isShow;
+
+});
+
+$(".container").on("click" , "article" , function(){
+
+    if(isShow){
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+        isShow = false;    
+    }
+
+});
 </script>
