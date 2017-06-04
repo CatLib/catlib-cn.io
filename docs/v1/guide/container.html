@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+    <title>服务容器 — CatLib</title>
+    <meta charset="utf-8">
+    <meta name="description" content="CatLib Unity Framework.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="/docs/css/page.css">
+
+    <script src="/docs/js/vue.js"></script>
+    <script src="/docs/js/jquery.js"></script>
+    <script>window.PAGE_TYPE = "guide"</script>
+
+    </head>
+
+    <body>
+        <nav class="nav">
+    <div class="border">
+        <img src="/docs/images/logo.png" />
+        <button class="hiden-in-phone">V1.0</button>
+        <button id="btn-menu" class="hiden-in-pc">菜单</button>
+        <ul class="nav-link hiden-in-phone">
+            <!--li>
+                <form id="search-form">
+                    <input type="text" id="search-query" class="search-query">
+                </form>
+            </li!-->
+            <li><a href="/docs/v1/guide/use.html" class="nav-link-li">使用案例</a></li>
+            <li><a href="/docs/v1/guide/update.html" class="nav-link-li">更新记录</a></li>
+            <li><a href="/docs/v1/guide/contribution.html" class="nav-link-li">贡献指南</a></li>
+            <li><a href="/docs/v1/guide/index.html" class="nav-link-li">教程</a></li>
+            <li><a href="/docs/" class="nav-link-li current">首页</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div id="container" class="container clear">
+    <section class="sidebar clearfix">
+    <ul>
+        
+            
+            
+                <li><h3>基础</h3></li>
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/index.html" class="sidebar-link">介绍</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/upgrade.html" class="sidebar-link">升级指南</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/version.html" class="sidebar-link">版本说明</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/error.html" class="sidebar-link">常见错误</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/style.html" class="sidebar-link">命名规范</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/contribution.html" class="sidebar-link">贡献指南</a></p>
+            </li>
+        
+            
+            
+            
+                <li><h3>系统架构</h3></li>
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/service-provider.html" class="sidebar-link">服务提供者</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/container.html" class="sidebar-link current">服务容器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/core.html" class="sidebar-link">CatLib核心</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/api.html" class="sidebar-link">服务接口</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/config.html" class="sidebar-link">配置</a></p>
+            </li>
+        
+            
+            
+            
+            
+                <li><h3>核心组件</h3></li>
+            
+            <li>
+                <p><a href="/docs/v1/guide/routing.html" class="sidebar-link">路由</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/stl.html" class="sidebar-link">标准库</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/file-system.html" class="sidebar-link">文件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/event.html" class="sidebar-link">事件</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/time.html" class="sidebar-link">时间</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/timer.html" class="sidebar-link">计时器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/facade.html" class="sidebar-link">服务门面</a></p>
+            </li>
+        
+    </ul>
+</section>
+    <article class="clearfix">
+    <h2 id="服务容器"><a href="#服务容器" class="headerlink" title="服务容器"></a>服务容器</h2><p>Container 服务容器是一个用于管理类的依赖和执行依赖注入的强大工具。其实质是通过反射来对构造函数或者标记为<code>[Inject]</code>特性的属性选择器进行注入(将服务实现依赖注入到类中)。</p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>几乎所有的服务绑定都是在服务提供者中完成。如果一个服务或类没有基于任何接口或者别名那么就没有必要将其绑定到容器。</p>
+<p>容器并不需要被告知如何构建对象，因为它会使用反射服务自动解析出具体的对象。在一个服务提供者中，可以通过<code>App</code>变量访问容器，然后使用<code>Bind()</code>方法注册一个服务或类的绑定。</p>
+<p class="tip">下面文档中所使用的代码均是局部代码。您需要根据使用场景酌情调整。</p>
+
+<h3 id="构建服务容器"><a href="#构建服务容器" class="headerlink" title="构建服务容器"></a>构建服务容器</h3><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> container = <span class="keyword">new</span> Container();</div></pre></td></tr></table></figure>
+<p>CatLib核心(<code>Application</code>)继承服务容器，她拥有服务容器的全部功能，所以下面的演示例子用到的都是这种上下文环境。</p>
+<h3 id="绑定服务"><a href="#绑定服务" class="headerlink" title="绑定服务"></a>绑定服务</h3><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Instance.Bind&lt;ConfigManager&gt;().Alias&lt;IConfigManager&gt;().Alias(<span class="string">"config.manager"</span>);</div></pre></td></tr></table></figure>
+<p>上述代码进行了一次简单的绑定，实现的作用是将<code>ConfigManager</code>绑定到容器，并且给定了<code>IConfigManager</code>(接口别名)和<code>config.manager</code>(字符串别名)的别名。</p>
+<p>随后您就可以使用别名来构建服务了:</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> manager1 = App.Instance.Make&lt;IConfigManager&gt;();</div><div class="line"><span class="keyword">var</span> manager2 = App.Instance.Make(<span class="string">"config.manager"</span>) <span class="keyword">as</span> IConfigManager;</div></pre></td></tr></table></figure>
+<h3 id="绑定服务-单例"><a href="#绑定服务-单例" class="headerlink" title="绑定服务(单例)"></a>绑定服务(单例)</h3><p>在上面的绑定中我们会发现<code>manager1</code>和<code>manager2</code>是不相等的，这是由于使用常规绑定所导致的，常规绑定服务后，每次<code>Make()</code>都会生成新的服务实例。</p>
+<p>下面我们将使用单例绑定来对服务进行绑定:</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Instance.Singleton&lt;ConfigManager&gt;().Alias&lt;IConfigManager&gt;().Alias(<span class="string">"config.manager"</span>);</div></pre></td></tr></table></figure>
+<h3 id="绑定实例"><a href="#绑定实例" class="headerlink" title="绑定实例"></a>绑定实例</h3><p>CatLib还允许您对自己构建的实例进行绑定，随后对容器该实例的调用总是返回给定的实例。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Instance.Instance(<span class="string">"config.manager"</span> , <span class="keyword">new</span> ConfigManager());</div></pre></td></tr></table></figure>
+<p>需要注意的是在以下几种情况将不能绑定:</p>
+<ul>
+<li>服务在绑定服务时使用了常规绑定</li>
+</ul>
+<h3 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h3><p>别名是服务容器非常重要的一项功能，它可以提供：接口绑定指定实现的能力。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Instance.Singleton&lt;ConfigManager&gt;().Alias&lt;IConfigManager&gt;().Alias(<span class="string">"config.manager"</span>);</div></pre></td></tr></table></figure>
+<p>在高层使用时只需要使用别名就能获得ConfigManager的服务，而无需关注底层实现，从而可以实现无感知替换。</p>
+<h3 id="上下文绑定"><a href="#上下文绑定" class="headerlink" title="上下文绑定"></a>上下文绑定</h3><p>有时侯我们可能有两个类使用同一个接口，但我们希望在每个类中注入不同实现,我们可以通过如下代码为它来指定实现。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Instance.Singleton&lt;FileLog&gt;().Alias(<span class="string">"log.file"</span>);</div><div class="line">App.Instance.Singleton&lt;DatabaseLog&gt;().Alias(<span class="string">"log.database"</span>);</div></pre></td></tr></table></figure>
+<p>(<code>FileLog</code>和<code>DatabaseLog</code>均实现了<code>ILog</code>接口)</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Bind&lt;LogService1&gt;().Needs&lt;ILog&gt;().Given(<span class="string">"log.database"</span>);</div><div class="line">App.Bind&lt;LogService2&gt;().Needs&lt;ILog&gt;().Given(<span class="string">"log.file"</span>);</div></pre></td></tr></table></figure>
+<p>这样当生成<code>LogService1</code>服务时给定的ILog实例将会是<code>DatabaseLog</code> ，<code>LogService2</code>服务时给定的ILog实例将会是<code>FileLog</code>。</p>
+<p>除此以外我们还可以使用<code>[Inject]</code>标记来对注入实例指定实现，一般情况下CatLib的注入上下文绑定功能是使用就近原则的（除非您对别名做了额外的上下文定义，这种罕见情况不在这份基础文档的描述范围之内）。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">LogService</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Inject(<span class="meta-string">"log.database"</span>)</span>]</div><div class="line">    <span class="keyword">public</span> ILog Log &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LogService</span>(<span class="params">[Inject(<span class="string">"log.file"</span></span>)]ILog logWithFile)</span></div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="生成服务"><a href="#生成服务" class="headerlink" title="生成服务"></a>生成服务</h3><p>您可以通过<code>Make()</code>方法来生成服务，服务名可以为接口或别名。如果通过容器去生成一个没有被绑定的服务，那么容器会尝试解决需要被生成的服务，如果尝试解决失败，那么将会返回一个<code>null</code>。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> manager = App.Instance.Make&lt;IConfigManager&gt;();</div><div class="line">manager = App.Instance.Make(<span class="string">"config.manager"</span>) <span class="keyword">as</span> IConfigManager;</div></pre></td></tr></table></figure>
+<h3 id="函数注入调用"><a href="#函数注入调用" class="headerlink" title="函数注入调用"></a>函数注入调用</h3><p>容器允许您对函数进行依赖注入调用，同服务注入一样，容器会自动识别函数所需求的参数，并使用依赖注入的方式来填充需求参数。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> DemoService();</div><div class="line"><span class="comment">// DemoService 类中存在一个叫 FuncName 的方法</span></div><div class="line"><span class="keyword">var</span> result = App.Instance.Call(instance , <span class="string">"FuncName"</span>);</div></pre></td></tr></table></figure>
+<h3 id="服务编组"><a href="#服务编组" class="headerlink" title="服务编组"></a>服务编组</h3><p>您可以为多个服务进行编组，编组后将允许您一次生成多个服务。这在一些场景中是非常有用的比如：日志将会被记录到文件日志服务和网络日志服务。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Instance.Singleton&lt;FileLog&gt;().Alias(<span class="string">"log.file"</span>);</div><div class="line">App.Instance.Singleton&lt;NetworkLog&gt;().Alias(<span class="string">"log.network"</span>);</div><div class="line">App.Instance.Tag(<span class="string">"log"</span> , <span class="string">"log.file"</span> , <span class="string">"log.network"</span>);</div><div class="line"><span class="keyword">var</span> logServices = App.Instance.Tagged(<span class="string">"log"</span>);</div></pre></td></tr></table></figure>
+<h3 id="释放静态服务"><a href="#释放静态服务" class="headerlink" title="释放静态服务"></a>释放静态服务</h3><p>容器允许您对已经生成的静态服务进行释放，以便于减少不必要的内存开销。</p>
+<p>您可以通过服务名或者别名来对静态实例进行释放：</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Instance.Release(<span class="string">"config.manager"</span>);</div></pre></td></tr></table></figure>
+<h3 id="解除绑定"><a href="#解除绑定" class="headerlink" title="解除绑定"></a>解除绑定</h3><p>您可以通过<code>UnBind()</code>来对已经绑定的服务进行解除绑定。如果被绑定的类是静态的，那么解除绑定会自动释放已经被生成的静态实例，同时触发<code>OnRelease()</code>释放事件。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> binder = App.Instance.Singleton&lt;ConfigManager&gt;().Alias(<span class="string">"config.manager"</span>);</div><div class="line">binder.UnBind();</div></pre></td></tr></table></figure>
+<h3 id="当查询生成类型时"><a href="#当查询生成类型时" class="headerlink" title="当查询生成类型时"></a>当查询生成类型时</h3><p>当容器尝试去推测一个没有被绑定过的服务时，会通过遍历<code>OnFindType()</code>注册的查询函数来查询服务的<code>Type</code>。</p>
+<p>一般情况下，这种使用场景多数用于跨程序集的Type查找。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Instance.OnFindType((finder)=&gt; Type.GetType(finder) , <span class="number">200</span>);</div><div class="line">App.Instance.OnFindType((finder)=&gt; MyType.GetType(finder) , <span class="number">100</span>);</div></pre></td></tr></table></figure>
+<p><code>OnFindType()</code> 允许传入一个优先级，优先级高的会被优先调用。</p>
+<p></p><p class="tip">注意，当生成的服务依赖于<code>OnFindType()</code>来推测服务时，服务构建将会使用c#的反射服务，这一过程对性能的损耗非常严重。所以您应该尽可能使用静态绑定而不是依赖推测来动态生成。</p><p></p>
+<h3 id="当服务解决-构建-时"><a href="#当服务解决-构建-时" class="headerlink" title="当服务解决(构建)时"></a>当服务解决(构建)时</h3><p>服务容器在每一次新解析对象时都会触发服务解决的事件，可以使用<code>OnResolving()</code>方法监听该事件。</p>
+<p>使用场景往往用于对于解决服务的修饰(初始化，监控等)，从而允许你在对象被传递给消费者之前为其设置额外属性。</p>
+<p>解决事件分为2种类型，局部解决事件将会优于全局解决事件被调用：</p>
+<ul>
+<li>基于指定服务的解决事件，只有当指定服务被解决时才会被触发。</li>
+<li>基于全局的解决事件，任何服务的解决或者绑定实例都会触发。</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 基于服务的解决事件</span></div><div class="line">App.Instance.Singleton&lt;ConfigManager&gt;().OnResolving((binder, obj) =&gt;</div><div class="line">&#123;</div><div class="line">    <span class="comment">//todo: 对于ConfigManager这个类型的实例进行修饰</span></div><div class="line">    <span class="keyword">return</span> obj;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 基于全局的解决事件</span></div><div class="line">App.Instance.OnResolving((binder, obj) =&gt;</div><div class="line">&#123;</div><div class="line">    <span class="comment">//todo: 对于解决所有服务或者进行绑定的实例进行修饰</span></div><div class="line">    <span class="keyword">return</span> obj;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="当静态实例释放时"><a href="#当静态实例释放时" class="headerlink" title="当静态实例释放时"></a>当静态实例释放时</h3><p>如果托管于服务容器的静态实例被释放时都会触发释放事件，可以使用<code>OnRelease()</code>方法监听该事件。</p>
+<p>托管的静态实例包括:</p>
+<ul>
+<li>通过<code>Instance()</code>绑定的静态实例</li>
+<li>通过<code>Singleton()</code>绑定并生成的静态实例</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 基于服务的静态实例释放事件</span></div><div class="line">App.Instance.Singleton&lt;ConfigManager&gt;().OnRelease((binder, obj) =&gt;</div><div class="line">&#123;</div><div class="line">    <span class="comment">//todo: 对于ConfigManager这个类型的静态实例释放时</span></div><div class="line">    <span class="keyword">return</span> obj;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 基于全局的静态实例释放事件</span></div><div class="line">App.Instance.OnRelease((binder, obj) =&gt;</div><div class="line">&#123;</div><div class="line">    <span class="comment">//todo: 对于解决所有服务或者进行绑定的静态实例释放时</span></div><div class="line">    <span class="keyword">return</span> obj;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h3 id="性能优化相关"><a href="#性能优化相关" class="headerlink" title="性能优化相关"></a>性能优化相关</h3><p>一般情况下我们推荐使用静态绑定的方式来对无依赖注入的服务进行实例。以便于能够获得更好的性能。</p>
+<p>下面的代码将进行静态绑定：</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Instance.Singleton&lt;ConfigManager&gt;((binder, param)=&gt; <span class="keyword">new</span> ConfigManager()).Alias(<span class="string">"config.manager"</span>);</div></pre></td></tr></table></figure>
+<p>下面的代码将进行动态绑定：</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Instance.Singleton&lt;ConfigManager&gt;().Alias(<span class="string">"config.manager"</span>);</div></pre></td></tr></table></figure>
+<p>除了进行静态绑定外，我们还需要尽可能将服务设置为单例绑定，服务容器对于单例服务的优化要优于实例服务。</p>
+<p>我们已经测试了服务生成调用所花费的时间以供您参考，所有的测试均建立于：<code>100万</code>次服务生成测试（测试<code>100次</code>的平均值），和<code>Debug</code>编译的程序集上。</p>
+<ul>
+<li>静态绑定生成(进行单例绑定): <code>329 ms</code></li>
+<li>静态绑定生成(进行实例绑定): <code>844 ms</code></li>
+<li>动态绑定生成(进行单例绑定): <code>365 ms</code></li>
+<li>动态绑定生成(进行实例绑定): <code>11537 ms</code></li>
+</ul>
+
+    <div class="footer">
+        发现错误？想参与编辑？ 
+        <a href="https://github.com/catlib/catlib.github.io/blob/master/src/v1/guide/container.md" target="_blank">
+            在 Github 上编辑此页！
+        </a>
+    </div>
+</article>
+
+<div class="sub-nav hiden-in-phone">
+    <dl id="sub-nav">
+        <dt>本文内容</dt>
+        <dd v-for="(ele, index) in sub_nav">
+           <a v-bind:href="ele.href">{{ ele.name }}</a>
+        </dd>
+    </dl>
+</div> 
+</div>
+
+<footer>
+    <div>
+        <p>© Copyright 2010-2016 catlib.io All Rights Reserved</p>
+        <p>喵喵喵，快来一起玩喵~</p>
+    </div>
+</footer>
+
+
+<script>
+var vm = new Vue({
+    el : '#container',
+    data: {
+        sub_nav : [ ]
+    },
+    created:function(){
+        var obj = [];
+        $("article h3").each(function(){
+            obj.push({name :  $(this).find("a").attr("title") , href : "#"+$(this).attr("id") });
+        });
+
+        this.sub_nav = obj;       
+    }
+});
+
+var isShow = false;
+$("nav").on("click","#btn-menu" , function(){
+
+    if(!isShow){
+        
+        if($(document).scrollTop() > $(".sidebar").height() - 100){
+
+            $('html, body').animate({scrollTop:0} , 300, "swing",function(){
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+            });
+        }else{
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+
+        }
+
+    }else{
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+    }
+    isShow = !isShow;
+
+});
+
+$(".container").on("click" , "article" , function(){
+
+    if(isShow){
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+        isShow = false;    
+    }
+
+});
+</script>
+    </body>
+</html>

@@ -1,0 +1,343 @@
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+    <title>命名规范 — CatLib</title>
+    <meta charset="utf-8">
+    <meta name="description" content="CatLib Unity Framework.">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="/docs/css/page.css">
+
+    <script src="/docs/js/vue.js"></script>
+    <script src="/docs/js/jquery.js"></script>
+    <script>window.PAGE_TYPE = "guide"</script>
+
+    </head>
+
+    <body>
+        <nav class="nav">
+    <div class="border">
+        <img src="/docs/images/logo.png" />
+        <button class="hiden-in-phone">V1.0</button>
+        <button id="btn-menu" class="hiden-in-pc">菜单</button>
+        <ul class="nav-link hiden-in-phone">
+            <!--li>
+                <form id="search-form">
+                    <input type="text" id="search-query" class="search-query">
+                </form>
+            </li!-->
+            <li><a href="/docs/v1/guide/use.html" class="nav-link-li">使用案例</a></li>
+            <li><a href="/docs/v1/guide/update.html" class="nav-link-li">更新记录</a></li>
+            <li><a href="/docs/v1/guide/contribution.html" class="nav-link-li">贡献指南</a></li>
+            <li><a href="/docs/v1/guide/index.html" class="nav-link-li">教程</a></li>
+            <li><a href="/docs/" class="nav-link-li current">首页</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div id="container" class="container clear">
+    <section class="sidebar clearfix">
+    <ul>
+        
+            
+            
+                <li><h3>基础</h3></li>
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/index.html" class="sidebar-link">介绍</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/upgrade.html" class="sidebar-link">升级指南</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/version.html" class="sidebar-link">版本说明</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/error.html" class="sidebar-link">常见错误</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/style.html" class="sidebar-link current">命名规范</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/contribution.html" class="sidebar-link">贡献指南</a></p>
+            </li>
+        
+            
+            
+            
+                <li><h3>系统架构</h3></li>
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/service-provider.html" class="sidebar-link">服务提供者</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/container.html" class="sidebar-link">服务容器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/core.html" class="sidebar-link">CatLib核心</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/api.html" class="sidebar-link">服务接口</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/config.html" class="sidebar-link">配置</a></p>
+            </li>
+        
+            
+            
+            
+            
+                <li><h3>核心组件</h3></li>
+            
+            <li>
+                <p><a href="/docs/v1/guide/routing.html" class="sidebar-link">路由</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/stl.html" class="sidebar-link">标准库</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/file-system.html" class="sidebar-link">文件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/event.html" class="sidebar-link">事件</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/time.html" class="sidebar-link">时间</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/timer.html" class="sidebar-link">计时器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/docs/v1/guide/facade.html" class="sidebar-link">服务门面</a></p>
+            </li>
+        
+    </ul>
+</section>
+    <article class="clearfix">
+    <h2 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h2><p>本文档描述了CatLib框架中的命名规范。我们也建议您的项目使用这份命名规范，我们会对其保持维护。</p>
+<p class="tip">如果您要为为 CatLib 发起贡献，您必须遵循这份命名规范文档。</p>
+
+<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ul>
+<li>代码必须使用4个空格缩进，而不要使用制表符(tab)</li>
+</ul>
+<h3 id="类名及函数"><a href="#类名及函数" class="headerlink" title="类名及函数"></a>类名及函数</h3><ul>
+<li><p>类名必须StudlyCaps（驼峰式大写）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Bootstrap</span>&#123; &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>函数名必须为StudlyCaps（驼峰式大写）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">MyFunc</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="类变量及属性"><a href="#类变量及属性" class="headerlink" title="类变量及属性"></a>类变量及属性</h3><ul>
+<li><p>类公共全局变量名必须StudlyCaps（驼峰式大写）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">internal</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>类受保护的全局变量名必须camelCase（驼峰式小写）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">protected</span> <span class="keyword">string</span> myName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">string</span> myName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>类静态变量名必须StudlyCaps（驼峰式大写）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">internal</span> <span class="keyword">static</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>类公共常量必须StudlyCaps（驼峰式大写）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">const</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">internal</span> <span class="keyword">const</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>类受保护的常量必须字母必须全部大写用下划线分隔符来分隔各个单词</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">protected</span> <span class="keyword">const</span> <span class="keyword">string</span> MY_NAME = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">const</span> <span class="keyword">string</span> MY_NAME = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>函数局部变量名必须camelCase（驼峰式小写）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">MyFunc</span>(<span class="params">Action func</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">var</span> myFunc = func;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>类属性名必须StudlyCaps（驼峰式大写）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> Name&#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line"><span class="keyword">internal</span> <span class="keyword">string</span> Name&#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line"><span class="keyword">protected</span> <span class="keyword">string</span> Name&#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line"><span class="keyword">private</span> <span class="keyword">string</span> Name&#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="接口及枚举"><a href="#接口及枚举" class="headerlink" title="接口及枚举"></a>接口及枚举</h3><ul>
+<li><p>接口必须IStudlyCaps（驼峰式大写）并且以I开头</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IBootstrap</span> &#123; &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>枚举名必须为复数形式</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> MyEnums&#123; &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>枚举名必须StudlyCaps（驼峰式大写）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> MyEnums</div><div class="line">&#123;</div><div class="line">    MyNameOne = <span class="number">1</span>,</div><div class="line">    MyNameTwo = <span class="number">2</span>,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="委托及事件"><a href="#委托及事件" class="headerlink" title="委托及事件"></a>委托及事件</h3><ul>
+<li><p>公共委托，事件必须StudlyCaps（驼峰式大写）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> Action MyAction;</div><div class="line"><span class="keyword">internal</span> Action MyAction;</div><div class="line"><span class="keyword">public</span> <span class="keyword">event</span> Action MyAction;</div><div class="line"><span class="keyword">internal</span> <span class="keyword">event</span> Action MyAction;</div></pre></td></tr></table></figure>
+</li>
+<li><p>受保护委托，事件必须camelCase（驼峰式小写）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">private</span> Action myAction;</div><div class="line"><span class="keyword">protected</span> Action myAction;</div><div class="line"><span class="keyword">private</span> <span class="keyword">event</span> Action myAction;</div><div class="line"><span class="keyword">protected</span> <span class="keyword">event</span> Action myAction;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><ul>
+<li>模板必须以T开头之后为StudlyCaps（驼峰式大写）<figure class="highlight"><table><tr><td class="code"><pre><div class="line">public class Bootstrap&lt;TType&gt;&#123; &#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h3><ul>
+<li>文件名必须和类名一致</li>
+<li>文件必须只使用UTF-8而不使用BOM代码</li>
+<li>一个文件中不能出现2个及以上的类，除非它是内部类或者类的重载</li>
+</ul>
+
+    <div class="footer">
+        发现错误？想参与编辑？ 
+        <a href="https://github.com/catlib/catlib.github.io/blob/master/src/v1/guide/style.md" target="_blank">
+            在 Github 上编辑此页！
+        </a>
+    </div>
+</article>
+
+<div class="sub-nav hiden-in-phone">
+    <dl id="sub-nav">
+        <dt>本文内容</dt>
+        <dd v-for="(ele, index) in sub_nav">
+           <a v-bind:href="ele.href">{{ ele.name }}</a>
+        </dd>
+    </dl>
+</div> 
+</div>
+
+<footer>
+    <div>
+        <p>© Copyright 2010-2016 catlib.io All Rights Reserved</p>
+        <p>喵喵喵，快来一起玩喵~</p>
+    </div>
+</footer>
+
+
+<script>
+var vm = new Vue({
+    el : '#container',
+    data: {
+        sub_nav : [ ]
+    },
+    created:function(){
+        var obj = [];
+        $("article h3").each(function(){
+            obj.push({name :  $(this).find("a").attr("title") , href : "#"+$(this).attr("id") });
+        });
+
+        this.sub_nav = obj;       
+    }
+});
+
+var isShow = false;
+$("nav").on("click","#btn-menu" , function(){
+
+    if(!isShow){
+        
+        if($(document).scrollTop() > $(".sidebar").height() - 100){
+
+            $('html, body').animate({scrollTop:0} , 300, "swing",function(){
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+            });
+        }else{
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+
+        }
+
+    }else{
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+    }
+    isShow = !isShow;
+
+});
+
+$(".container").on("click" , "article" , function(){
+
+    if(isShow){
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+        isShow = false;    
+    }
+
+});
+</script>
+    </body>
+</html>
