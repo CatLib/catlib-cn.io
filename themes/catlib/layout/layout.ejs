@@ -12,11 +12,13 @@
 
     <script src="<%- url_for("/js/vue.js") %>"></script>
     <script src="<%- url_for("/js/jquery.js") %>"></script>
-    <script>window.PAGE_TYPE = "<%- page.type %>"</script>
-
     </head>
 
     <body>
-        <%- body %>
+        <% if(isIndex){ %>
+            <%- partial('index') %>
+        <% }else{ %>
+            <%- partial('page') %>
+        <% } %>
     </body>
 </html>
