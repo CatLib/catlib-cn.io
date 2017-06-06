@@ -14,18 +14,44 @@ order: 4
 
 ### 概述
 
-- 代码必须使用4个空格缩进，而不要使用制表符(tab)
+- `代码`必须使用`4个空格`缩进，而不要使用制表符(tab)
+- 使用`using XXX`，而不是new XXX.xxx()
+- `{}`必须换行,且内部代码`顶格书写`
+``` csharp
+if(true)
+{
+    var tf = true;
+}
+```
+
+- 使用`///`对`代码`进行注释
+``` csharp
+/// <summary>
+/// 更新Uri地址
+/// </summary>
+public string UpdateUri = "http://catlib.io";
+```
+
+- `模板`必须为`TStudlyCaps`（驼峰式大写）以`T开头`
+``` csharp
+public class Bootstrap<TType>{ }
+```
+
+- `接口`必须为`IStudlyCaps`（驼峰式大写）以`I开头`
+``` csharp
+public interface IBootstrap { }
+```
 
 ### 类名及函数
 
-- 类名必须StudlyCaps（驼峰式大写）
+- `类名`必须为`StudlyCaps`（驼峰式大写）
 ``` csharp
 public class Bootstrap
 { 
 }
 ```
 
-- 函数名必须为StudlyCaps（驼峰式大写）
+- `函数名`必须为`StudlyCaps`（驼峰式大写）
 ``` csharp
 public void MyFunc()
 {
@@ -34,71 +60,47 @@ public void MyFunc()
 
 ### 变量,常量及属性
 
-- 类公共全局变量名必须StudlyCaps（驼峰式大写）
+- 类`公共变量名`必须为`StudlyCaps`（驼峰式大写）
 ``` csharp
-public string MyName = "hello";
-internal string MyName = "hello";
+public string VariableName = "hello";
 ```
 
-- 类受保护的全局变量名必须camelCase（驼峰式小写）
+- 类`受保护变量名`必须为`camelCase`（驼峰式小写）
 ``` csharp
-protected string myName = "hello";
-private string myName = "hello";
+internal string variableName = "hello";
+protected string variableName = "hello";
+protected internal string variableName = "hello";
+private string variableName = "hello";
 ```
 
-- 类静态变量名必须StudlyCaps（驼峰式大写）
+- 类`属性名`必须为`StudlyCaps`（驼峰式大写）
 ``` csharp
-public static string MyName = "hello";
-internal static string MyName = "hello";
-protected static string MyName = "hello";
-private static string MyName = "hello";
+public string VariableName{ get; set; }
 ```
 
-- 常量必须StudlyCaps（驼峰式大写）
+- `静态变量`和`常量`必须为`StudlyCaps`（驼峰式大写）
 ``` csharp
-public const string MyName = "hello";
-internal const string MyName = "hello";
-protected const string MyName = "hello";
-private const string MyName = "hello";
+public const string VariableName = "hello";
+public static readonly string VariableName = "hello";
+public static string VariableName = "hello";
 ```
 
-- 静态只读变量必须StudlyCaps（驼峰式大写）
+- `参数`必须为`camelCase`（驼峰式小写）
 ``` csharp
-public static readonly string MyName = "hello";
-internal static readonly string MyName = "hello";
-protected static readonly string MyName = "hello";
-private static readonly string MyName = "hello";
-```
-
-- 函数局部变量名必须camelCase（驼峰式小写）
-``` csharp
-public void MyFunc(Action func)
+public void FunctionName(Action callFunction)
 {
-    var myFunc = func;
+    var localVariable = callFunction;
 }
 ```
 
-- 类属性名必须StudlyCaps（驼峰式大写）
-``` csharp
-public string Name{ get; set; }
-internal string Name{ get; set; }
-protected string Name{ get; set; }
-private string Name{ get; set; }
-```
+### 枚举
 
-### 接口及枚举
-
-- 接口必须IStudlyCaps（驼峰式大写）并且以I开头
-``` csharp
-public interface IBootstrap { }
-```
-
-- 枚举名必须为必须StudlyCaps（驼峰式大写）
+- `枚举名`必须为`StudlyCaps`（驼峰式大写）
 ``` csharp
 public enum ApplicationEvents{ }
 ```
 
-- 枚举元素名必须StudlyCaps（驼峰式大写）且为单数形式
+- `枚举元素名`必须为`StudlyCaps`（驼峰式大写）
 ``` csharp
 public enum ApplicationEvents
 {
@@ -107,66 +109,23 @@ public enum ApplicationEvents
 }
 ```
 
-### 代码风格及注释
-
--{}必须换行,且内部代码顶格书写
-``` csharp
-if(true)
-{
-    var tf = true;
-}
-```
-
--使用`///`对代码进行注释
-``` csharp
-/// <summary>
-/// 更新Uri地址
-/// </summary>
-public string UpdateUri = "http://catlib.io";
-```
-
-### 委托及事件
-
-- 公共委托，事件必须StudlyCaps（驼峰式大写）
-``` csharp
-public Action MyAction;
-internal Action MyAction;
-public event Action MyAction;
-internal event Action MyAction;
-```
-
-- 受保护委托，事件必须camelCase（驼峰式小写）
-``` csharp
-private Action myAction;
-protected Action myAction;
-private event Action myAction;
-protected event Action myAction;
-```
-
 ### 命名空间
 
-- 代码必须在`项目名`的根命名空间中
+- `代码`必须在`项目名`的根命名空间中
 ``` csharp
 namespace CatLib
 {
 }
 ```
 
-- 组件代码必须在`项目名.组件名`的命名空间中
+- 组件`代码`必须在`项目名.组件名`的命名空间中
 ``` csharp
 namespace CatLib.Routing
 {
 }
 ```
 
-### 模板
-
-- 模板必须以T开头之后为StudlyCaps（驼峰式大写）
-``` csharp
-public class Bootstrap<TType>{ }
-```
-
 ### 文件
-- 文件名必须和类名一致
-- 文件必须只使用UTF-8而不使用BOM代码
-- 一个文件中不能出现2个及以上的类，除非它是内部类或者类的重载
+- `文件名`必须和`类名`一致
+- `文件`必须只使用`UTF-8`而不使用BOM代码
+- 一个文件中不能出现`2个`及以上的类，除非它是内部类或者类的重载

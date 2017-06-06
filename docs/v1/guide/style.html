@@ -207,76 +207,66 @@
 <p class="tip">如果没有明确指定<code>访问级别(public|private等)</code>则表示对所有访问级别生效。</p>
 
 <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ul>
-<li>代码必须使用4个空格缩进，而不要使用制表符(tab)</li>
+<li><code>代码</code>必须使用<code>4个空格</code>缩进，而不要使用制表符(tab)</li>
+<li>使用<code>using XXX</code>，而不是new XXX.xxx()</li>
+<li><p><code>{}</code>必须换行,且内部代码<code>顶格书写</code></p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span>(<span class="literal">true</span>)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">var</span> tf = <span class="literal">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>使用<code>///</code>对<code>代码</code>进行注释</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> 更新Uri地址</span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></div><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> UpdateUri = <span class="string">"http://catlib.io"</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>模板</code>必须为<code>TStudlyCaps</code>（驼峰式大写）以<code>T开头</code></p>
+<figure class="highlight"><table><tr><td class="code"><pre><div class="line">public class Bootstrap&lt;TType&gt;&#123; &#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p><code>接口</code>必须为<code>IStudlyCaps</code>（驼峰式大写）以<code>I开头</code></p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IBootstrap</span> &#123; &#125;</div></pre></td></tr></table></figure>
+</li>
 </ul>
 <h3 id="类名及函数"><a href="#类名及函数" class="headerlink" title="类名及函数"></a>类名及函数</h3><ul>
-<li><p>类名必须StudlyCaps（驼峰式大写）</p>
+<li><p><code>类名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Bootstrap</span></div><div class="line">&#123; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
-<li><p>函数名必须为StudlyCaps（驼峰式大写）</p>
+<li><p><code>函数名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">MyFunc</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="变量-常量及属性"><a href="#变量-常量及属性" class="headerlink" title="变量,常量及属性"></a>变量,常量及属性</h3><ul>
-<li><p>类公共全局变量名必须StudlyCaps（驼峰式大写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">internal</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
+<li><p>类<code>公共变量名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
 </li>
-<li><p>类受保护的全局变量名必须camelCase（驼峰式小写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">protected</span> <span class="keyword">string</span> myName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">string</span> myName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
+<li><p>类<code>受保护变量名</code>必须为<code>camelCase</code>（驼峰式小写）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">internal</span> <span class="keyword">string</span> variableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">protected</span> <span class="keyword">string</span> variableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">protected</span> <span class="keyword">internal</span> <span class="keyword">string</span> variableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">string</span> variableName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
 </li>
-<li><p>类静态变量名必须StudlyCaps（驼峰式大写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">internal</span> <span class="keyword">static</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
+<li><p>类<code>属性名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> VariableName&#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div></pre></td></tr></table></figure>
 </li>
-<li><p>常量必须StudlyCaps（驼峰式大写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">const</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">internal</span> <span class="keyword">const</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">protected</span> <span class="keyword">const</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">const</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
+<li><p><code>静态变量</code>和<code>常量</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">const</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
 </li>
-<li><p>静态只读变量必须StudlyCaps（驼峰式大写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">internal</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
-</li>
-<li><p>函数局部变量名必须camelCase（驼峰式小写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">MyFunc</span>(<span class="params">Action func</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">var</span> myFunc = func;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>类属性名必须StudlyCaps（驼峰式大写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> Name&#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line"><span class="keyword">internal</span> <span class="keyword">string</span> Name&#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line"><span class="keyword">protected</span> <span class="keyword">string</span> Name&#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line"><span class="keyword">private</span> <span class="keyword">string</span> Name&#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div></pre></td></tr></table></figure>
+<li><p><code>参数</code>必须为<code>camelCase</code>（驼峰式小写）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">FunctionName</span>(<span class="params">Action callFunction</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">var</span> localVariable = callFunction;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="接口及枚举"><a href="#接口及枚举" class="headerlink" title="接口及枚举"></a>接口及枚举</h3><ul>
-<li><p>接口必须IStudlyCaps（驼峰式大写）并且以I开头</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IBootstrap</span> &#123; &#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>枚举名必须为必须StudlyCaps（驼峰式大写）</p>
+<h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><ul>
+<li><p><code>枚举名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> ApplicationEvents&#123; &#125;</div></pre></td></tr></table></figure>
 </li>
-<li><p>枚举元素名必须StudlyCaps（驼峰式大写）且为单数形式</p>
+<li><p><code>枚举元素名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> ApplicationEvents</div><div class="line">&#123;</div><div class="line">    OnStart  = <span class="number">1</span>,</div><div class="line">    OnInited = <span class="number">2</span>,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="代码风格及注释"><a href="#代码风格及注释" class="headerlink" title="代码风格及注释"></a>代码风格及注释</h3><p>-{}必须换行,且内部代码顶格书写<br><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span>(<span class="literal">true</span>)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">var</span> tf = <span class="literal">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>-使用<code>///</code>对代码进行注释<br><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> 更新Uri地址</span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></div><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> UpdateUri = <span class="string">"http://catlib.io"</span>;</div></pre></td></tr></table></figure></p>
-<h3 id="委托及事件"><a href="#委托及事件" class="headerlink" title="委托及事件"></a>委托及事件</h3><ul>
-<li><p>公共委托，事件必须StudlyCaps（驼峰式大写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> Action MyAction;</div><div class="line"><span class="keyword">internal</span> Action MyAction;</div><div class="line"><span class="keyword">public</span> <span class="keyword">event</span> Action MyAction;</div><div class="line"><span class="keyword">internal</span> <span class="keyword">event</span> Action MyAction;</div></pre></td></tr></table></figure>
-</li>
-<li><p>受保护委托，事件必须camelCase（驼峰式小写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">private</span> Action myAction;</div><div class="line"><span class="keyword">protected</span> Action myAction;</div><div class="line"><span class="keyword">private</span> <span class="keyword">event</span> Action myAction;</div><div class="line"><span class="keyword">protected</span> <span class="keyword">event</span> Action myAction;</div></pre></td></tr></table></figure>
-</li>
-</ul>
 <h3 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h3><ul>
-<li><p>代码必须在<code>项目名</code>的根命名空间中</p>
+<li><p><code>代码</code>必须在<code>项目名</code>的根命名空间中</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">namespace</span> <span class="title">CatLib</span></div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
-<li><p>组件代码必须在<code>项目名.组件名</code>的命名空间中</p>
+<li><p>组件<code>代码</code>必须在<code>项目名.组件名</code>的命名空间中</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">namespace</span> <span class="title">CatLib.Routing</span></div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><ul>
-<li>模板必须以T开头之后为StudlyCaps（驼峰式大写）<figure class="highlight"><table><tr><td class="code"><pre><div class="line">public class Bootstrap&lt;TType&gt;&#123; &#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
 <h3 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h3><ul>
-<li>文件名必须和类名一致</li>
-<li>文件必须只使用UTF-8而不使用BOM代码</li>
-<li>一个文件中不能出现2个及以上的类，除非它是内部类或者类的重载</li>
+<li><code>文件名</code>必须和<code>类名</code>一致</li>
+<li><code>文件</code>必须只使用<code>UTF-8</code>而不使用BOM代码</li>
+<li>一个文件中不能出现<code>2个</code>及以上的类，除非它是内部类或者类的重载</li>
 </ul>
 
     <div class="footer">
