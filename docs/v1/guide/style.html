@@ -213,13 +213,16 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span>(<span class="literal">true</span>)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">var</span> tf = <span class="literal">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>使用<code>///</code>对<code>代码</code>进行注释</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> 更新Uri地址</span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></div><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> UpdateUri = <span class="string">"http://catlib.io"</span>;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> 这里对代码进行了注释</span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></div><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> VariableName = <span class="string">"VariableName"</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>对于容易<code>产生歧义的表达式</code>您应该使用<code>括号</code>包括</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span>(variable1 + (++variable2) &gt; <span class="number">0</span>)</div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>模板</code>必须为<code>TStudlyCaps</code>（驼峰式大写）以<code>T开头</code></p>
-<figure class="highlight"><table><tr><td class="code"><pre><div class="line">public class Bootstrap&lt;TType&gt;&#123; &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="code"><pre><div class="line">public class Bootstrap&lt;TType&gt;</div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>接口</code>必须为<code>IStudlyCaps</code>（驼峰式大写）以<code>I开头</code></p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IBootstrap</span> &#123; &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IBootstrap</span> </div><div class="line">&#123; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="类名及函数"><a href="#类名及函数" class="headerlink" title="类名及函数"></a>类名及函数</h3><ul>
@@ -249,7 +252,7 @@
 </ul>
 <h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><ul>
 <li><p><code>枚举名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> ApplicationEvents&#123; &#125;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> ApplicationEvents</div><div class="line">&#123; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>枚举元素名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> ApplicationEvents</div><div class="line">&#123;</div><div class="line">    OnStart  = <span class="number">1</span>,</div><div class="line">    OnInited = <span class="number">2</span>,</div><div class="line">&#125;</div></pre></td></tr></table></figure>

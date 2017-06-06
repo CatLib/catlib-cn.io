@@ -16,19 +16,19 @@ order: 100
 
 在`Register()`方法中，你唯一要做的事情就是绑定实现到服务容器，不要尝试在其中进行任何其它功能。因为很有可能你就使用了一个没有被注册的服务。
 
-当服务提供商的`Init()`方法被触发时，就意味着框架所有的服务提供商的`Register()`都已经被执行，也就是说我们可以在`Init()`中访问其他服务提供者所提供的服务。
+当服务提供商的`Init()`方法被触发时，就意味着框架所有的服务提供商的`Register()`都已经被执行，也就是说我们可以在`Init()`中访问其他服务提供者所提供的服务，只有当所有服务提供者的`Init()`执行完成后才会触发框架启动完成的事件。
 
 ``` csharp
 using CatLib;
 public class ConfigProvider : ServiceProvide
 {
-    public override void Init()
+    public override IEnumerator Init()
     {
-        // todo: 初始化
+        yield return base.Init();
     }
     public override void Register()
     {
-        App.Singleton<ConfigManager>().Alias<IConfigManager>().Alias("config.manager");
+        // 注册服务
     }
 }
 ```
@@ -37,7 +37,7 @@ public class ConfigProvider : ServiceProvide
 
 <p class="tip">注册了服务提供商并不意味着服务都会被立即实例化，通常情况下很多是延迟实例化的，只有真的用到它们的时候才会实例化。</p>
 
-如果框架使用者想要使用某个服务，那么必须先对这个服务进行注册:
+如果框架使用者想要使用某个服务，那么必须先对这个服务进行注册，您只有在框架`Application.Init()`触发之前才能注册服务提供者:
 
 ``` csharp
 App.Instance.Register(typeof(ConfigProvider));
@@ -63,9 +63,9 @@ public class Providers
 }
 ```
 
-### 服务启动流程
+### 初始化优先级
 
-对于一个复杂的服务您可以通过服务启动流程来完成高耗时的启动操作。同时你也可以通过配置启动优先级来调整服务提供者启动流程的启动顺序，注意CatLib中的所有的优先级特性都是采用就近原则的。即为函数标记的优先级特性将会优先于类的优先级特性。
+您可以通过配置启动优先级来调整服务提供者启动流程的启动顺序，注意CatLib中的所有的优先级特性都是采用就近原则的。即为函数标记的优先级特性将会优先于类的优先级特性。
 
 ``` csharp
 using CatLib;
@@ -73,24 +73,22 @@ using CatLib;
 public class ConfigProvider : ServiceProvide
 {
     [Priority(100)]
-    public virtual IEnumerator OnProviderProcess()
+    public virtual IEnumerator Init()
     {
-        // OnProviderProcess 的启动优先级会使用100而不是200
+        // Init 的启动优先级会使用100而不是200 ， 由于就近原则
         yield break;
     }
     public override void Register()
     {
-        App.Singleton<ConfigManager>().Alias<IConfigManager>().Alias("config.manager");
+        // 注册服务
     }
 }
 ```
-
-只有当所有的服务提供者的`OnProviderProcess()`执行完成后才会触发框架启动完成的事件。
 
 关于更多优先级相关资料，请参考：[优先级](../core.html#优先级)
 
 ### 启动顺序
 
-除了`OnProviderProcess()`可以指定具体的服务提供者之间的启动优先级外`Register()`和`Init()`均是无序执行的。
+除了`Init()`可以指定具体的服务提供者之间的启动优先级外`Register()`是无序执行的。
 
-他们的流程是这样的：所有注册服务提供者触发`Register()` -> 所有注册服务提供者触发`Init()` -> 按照优先级依次执行所有服务提供者`OnProviderProcess()` -> 框架启动完成。
+他们的流程是这样的：所有注册服务提供者执行`Register()` -> 按照优先级依次执行`Init()` -> 框架启动完成。

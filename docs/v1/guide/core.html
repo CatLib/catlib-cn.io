@@ -201,7 +201,12 @@
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="CatLib核心"><a href="#CatLib核心" class="headerlink" title="CatLib核心"></a>CatLib核心</h2><p class="tip">这份文档等待您进行完善</p>
+    <h2 id="CatLib核心"><a href="#CatLib核心" class="headerlink" title="CatLib核心"></a>CatLib核心</h2><p>应用程序是CatLib程序的核心，也是所谓的程序入口。应用程序通过引导来加载服务提供者和其他一些必须的资源。应用程序在一般情况下只允许启动一个。</p>
+<h3 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h3><p><code>启动引导</code> -&gt; <code>初始化</code> -&gt; <code>完成</code></p>
+<p>启动引导一般用于加载服务提供者或者一些其他资源，在引导过程中请不要通过框架生成任何服务，否则您可以使用到一个未经注册的服务。</p>
+<p>初始化过程在内部处理上被细分为：<code>基础初始化</code> 和 <code>启动流程</code> 。</p>
+<p>基础初始化用于初始化当前服务提供者所提供的服务，而启动流程则用于处理一些比较耗时的初始化任务。</p>
+
     <div class="footer">
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.github.io/blob/master/src/v1/guide/core.md" target="_blank">

@@ -27,19 +27,30 @@ if(true)
 - 使用`///`对`代码`进行注释
 ``` csharp
 /// <summary>
-/// 更新Uri地址
+/// 这里对代码进行了注释
 /// </summary>
-public string UpdateUri = "http://catlib.io";
+public string VariableName = "VariableName";
+```
+
+- 对于容易`产生歧义的表达式`您应该使用`括号`包括
+``` csharp
+if(variable1 + (++variable2) > 0)
+{
+}
 ```
 
 - `模板`必须为`TStudlyCaps`（驼峰式大写）以`T开头`
 ``` csharp
-public class Bootstrap<TType>{ }
+public class Bootstrap<TType>
+{
+}
 ```
 
 - `接口`必须为`IStudlyCaps`（驼峰式大写）以`I开头`
 ``` csharp
-public interface IBootstrap { }
+public interface IBootstrap 
+{ 
+}
 ```
 
 ### 类名及函数
@@ -97,7 +108,9 @@ public void FunctionName(Action callFunction)
 
 - `枚举名`必须为`StudlyCaps`（驼峰式大写）
 ``` csharp
-public enum ApplicationEvents{ }
+public enum ApplicationEvents
+{ 
+}
 ```
 
 - `枚举元素名`必须为`StudlyCaps`（驼峰式大写）
