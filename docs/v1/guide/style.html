@@ -42,6 +42,14 @@
         
             
             
+            
+            
+            <li>
+                <p><a href="/zh-CN/v1/guide/version.html" class="sidebar-link">版本说明</a></p>
+            </li>
+        
+            
+            
                 <li><h3>基础</h3></li>
             
             
@@ -56,6 +64,14 @@
             
             <li>
                 <p><a href="/v1/guide/upgrade.html" class="sidebar-link">升级指南</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/zh-CN/v1/guide/upgrade.html" class="sidebar-link">升级指南</a></p>
             </li>
         
             
@@ -215,7 +231,7 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">MyFunc</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="类变量及属性"><a href="#类变量及属性" class="headerlink" title="类变量及属性"></a>类变量及属性</h3><ul>
+<h3 id="变量-常量及属性"><a href="#变量-常量及属性" class="headerlink" title="变量,常量及属性"></a>变量,常量及属性</h3><ul>
 <li><p>类公共全局变量名必须StudlyCaps（驼峰式大写）</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">internal</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
 </li>
@@ -225,11 +241,11 @@
 <li><p>类静态变量名必须StudlyCaps（驼峰式大写）</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">internal</span> <span class="keyword">static</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
 </li>
-<li><p>类公共常量必须StudlyCaps（驼峰式大写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">const</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">internal</span> <span class="keyword">const</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
+<li><p>常量必须StudlyCaps（驼峰式大写）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">const</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">internal</span> <span class="keyword">const</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">protected</span> <span class="keyword">const</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">const</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
 </li>
-<li><p>类受保护的常量必须字母必须全部大写用下划线分隔符来分隔各个单词</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">protected</span> <span class="keyword">const</span> <span class="keyword">string</span> MY_NAME = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">const</span> <span class="keyword">string</span> MY_NAME = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
+<li><p>静态只读变量必须StudlyCaps（驼峰式大写）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">internal</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">protected</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">string</span> MyName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
 </li>
 <li><p>函数局部变量名必须camelCase（驼峰式小写）</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">MyFunc</span>(<span class="params">Action func</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">var</span> myFunc = func;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -245,7 +261,7 @@
 <li><p>枚举名必须为复数形式</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> MyEnums&#123; &#125;</div></pre></td></tr></table></figure>
 </li>
-<li><p>枚举名必须StudlyCaps（驼峰式大写）</p>
+<li><p>枚举名必须StudlyCaps（驼峰式大写）且为单数形式</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> MyEnums</div><div class="line">&#123;</div><div class="line">    MyNameOne = <span class="number">1</span>,</div><div class="line">    MyNameTwo = <span class="number">2</span>,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>

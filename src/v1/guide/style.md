@@ -28,7 +28,7 @@ public void MyFunc()
 }
 ```
 
-### 类变量及属性
+### 变量,常量及属性
 
 - 类公共全局变量名必须StudlyCaps（驼峰式大写）
 ``` csharp
@@ -50,16 +50,20 @@ protected static string MyName = "hello";
 private static string MyName = "hello";
 ```
 
-- 类公共常量必须StudlyCaps（驼峰式大写）
+- 常量必须StudlyCaps（驼峰式大写）
 ``` csharp
 public const string MyName = "hello";
 internal const string MyName = "hello";
+protected const string MyName = "hello";
+private const string MyName = "hello";
 ```
 
-- 类受保护的常量必须字母必须全部大写用下划线分隔符来分隔各个单词
+- 静态只读变量必须StudlyCaps（驼峰式大写）
 ``` csharp
-protected const string MY_NAME = "hello";
-private const string MY_NAME = "hello";
+public static readonly string MyName = "hello";
+internal static readonly string MyName = "hello";
+protected static readonly string MyName = "hello";
+private static readonly string MyName = "hello";
 ```
 
 - 函数局部变量名必须camelCase（驼峰式小写）
@@ -90,7 +94,7 @@ public interface IBootstrap { }
 public enum MyEnums{ }
 ```
 
-- 枚举名必须StudlyCaps（驼峰式大写）
+- 枚举名必须StudlyCaps（驼峰式大写）且为单数形式
 ``` csharp
 public enum MyEnums
 {
