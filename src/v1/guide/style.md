@@ -10,6 +10,8 @@ order: 4
 
 <p class="tip">如果您要为为 CatLib 发起贡献，您必须遵循这份命名规范文档。</p>
 
+<p class="tip">如果没有明确指定`访问级别(public|private等)`则表示对所有访问级别生效。</p>
+
 ### 概述
 
 - 代码必须使用4个空格缩进，而不要使用制表符(tab)
@@ -18,7 +20,9 @@ order: 4
 
 - 类名必须StudlyCaps（驼峰式大写）
 ``` csharp
-public class Bootstrap{ }
+public class Bootstrap
+{ 
+}
 ```
 
 - 函数名必须为StudlyCaps（驼峰式大写）
@@ -89,18 +93,36 @@ private string Name{ get; set; }
 public interface IBootstrap { }
 ```
 
-- 枚举名必须为复数形式
+- 枚举名必须为必须StudlyCaps（驼峰式大写）
 ``` csharp
-public enum MyEnums{ }
+public enum ApplicationEvents{ }
 ```
 
-- 枚举名必须StudlyCaps（驼峰式大写）且为单数形式
+- 枚举元素名必须StudlyCaps（驼峰式大写）且为单数形式
 ``` csharp
-public enum MyEnums
+public enum ApplicationEvents
 {
-    MyNameOne = 1,
-    MyNameTwo = 2,
+    OnStart  = 1,
+    OnInited = 2,
 }
+```
+
+### 代码风格及注释
+
+-{}必须换行,且内部代码顶格书写
+``` csharp
+if(true)
+{
+    var tf = true;
+}
+```
+
+-使用`///`对代码进行注释
+``` csharp
+/// <summary>
+/// 更新Uri地址
+/// </summary>
+public string UpdateUri = "http://catlib.io";
 ```
 
 ### 委托及事件
@@ -119,6 +141,22 @@ private Action myAction;
 protected Action myAction;
 private event Action myAction;
 protected event Action myAction;
+```
+
+### 命名空间
+
+- 代码必须在`项目名`的根命名空间中
+``` csharp
+namespace CatLib
+{
+}
+```
+
+- 组件代码必须在`项目名.组件名`的命名空间中
+``` csharp
+namespace CatLib.Routing
+{
+}
 ```
 
 ### 模板
