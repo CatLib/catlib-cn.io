@@ -2,18 +2,18 @@
     <div class="border">
         <img src="<%- url_for('images/logo.png')%>" />
         <button class="hiden-in-phone">V1.0</button>
-        <button id="btn-menu" class="hiden-in-pc"><%=__('nav.menu')%></button>
+        <button id="btn-menu" class="hiden-in-pc">菜单</button>
         <ul class="nav-link hiden-in-phone">
             <!--li>
                 <form id="search-form">
                     <input type="text" id="search-query" class="search-query">
                 </form>
             </li!-->
-            <li><a href="<%- url_for("/v1/guide/use.html") %>" class="nav-link-li<%- page.path.match(/use/) ? ' current' : '' %>"><%= __('nav.use')%></a></li>
-            <li><a href="<%- url_for("/v1/guide/version.html") %>" class="nav-link-li<%- page.path.match(/version/) ? ' current' : '' %>"><%= __('nav.update')%></a></li>
-            <li><a href="<%- url_for("/v1/guide/contribution.html") %>" class="nav-link-li<%- page.path.match(/contribution/) ? ' current' : '' %>"><%= __('nav.contribution')%></a></li>
-            <li><a href="<%- url_for("/v1/guide/index.html") %>" class="nav-link-li<%- page.path.match(/index/) ? ' current' : '' %>"><%= __('nav.guide')%></a></li>
-            <li><a href="<%- url_for("/") %>" class="nav-link-li<%- page.path.match(/\//) ? ' current' : '' %>"><%= __('nav.index')%></a></li>
+            <li><a href="<%- url_for("/v1/guide/use.html") %>" class="nav-link-li<%- page.path.match(/use/) ? ' current' : '' %>">使用案例</a></li>
+            <li><a href="<%- url_for("/v1/guide/version.html") %>" class="nav-link-li<%- page.path.match(/version/) ? ' current' : '' %>">版本说明</a></li>
+            <li><a href="<%- url_for("/v1/guide/contribution.html") %>" class="nav-link-li<%- page.path.match(/contribution/) ? ' current' : '' %>">贡献指南</a></li>
+            <li><a href="<%- url_for("/v1/guide/index.html") %>" class="nav-link-li<%- page.path.match(/index/) ? ' current' : '' %>">介绍</a></li>
+            <li><a href="<%- url_for("/") %>" class="nav-link-li<%- page.path.match(/\//) ? ' current' : '' %>">首页</a></li>
         </ul>
     </div>
 </nav>

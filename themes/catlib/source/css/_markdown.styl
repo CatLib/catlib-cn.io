@@ -92,6 +92,21 @@ article
             color #FFF
         p a:hover
             color:rgb(252,216,214);
+    ol
+        list-style-type:none;
+        counter-reset:sectioncounter;
+        padding-left 1 rem
+        position inherit
+        font-size 0.9rem
+        li
+            color rgb(82,82,82);
+        li:before
+            content:counter(sectioncounter) ". "
+            counter-increment:sectioncounter 
+    hr
+        height:1px;
+        border:none;
+        border-top:1px dashed rgb(220,220,220);
     figure
         margin 1.2rem 0
     .highlight
@@ -135,9 +150,9 @@ article
         &.html .code:after
             content 'HTML'
         &.csharp .code:after
-            content 'c#'
+            content 'C#'
         &.lua .code:after
-            content 'c#'
+            content 'Lua'
         &.js .code:after
             content 'JS'
         &.bash .code:after
