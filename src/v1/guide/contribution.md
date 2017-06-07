@@ -43,7 +43,7 @@ CatLib 强烈鼓励使用 GitHub 的 pull requests(以下简称PR)，来提供�
 
 ### 组件贡献者
 
-<p class="tip">虚以待位</p>
+> 虚以待位
 
 ### 其他贡献者
 

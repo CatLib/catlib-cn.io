@@ -8,7 +8,7 @@ order: 2
 
 ### V1.0
 
-<p class="tip">本版本为 CatLib 第一个正式版本</p>
+> 本版本为 CatLib 第一个正式版本
 
 - 新增CatLib核心
 - 新增标准库 - 容器

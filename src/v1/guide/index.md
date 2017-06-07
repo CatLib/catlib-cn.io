@@ -6,7 +6,7 @@ order: 0
 
 ## 介绍
 
-<p class="tip">CatLib要求Unity最低版本为5.3+</p>
+> CatLib要求Unity最低版本为5.3+
 
 ### CatLib是什么
 
@@ -14,7 +14,7 @@ CatLib 是一套`渐进式`的`服务提供者框架`。框架为客户端提供
 
 ### 从Github上Clone
 
-<p class="tip">CatLib:[https://github.com/catlib/catlib](https://github.com/catlib/catlib)</p>
+> CatLib:[https://github.com/catlib/catlib](https://github.com/catlib/catlib)
 
 首先先从Github上Clone出CatLib项目吧！
 
@@ -24,7 +24,7 @@ CatLib 是一套`渐进式`的`服务提供者框架`。框架为客户端提供
 
 ### 第一次使用
 
-<p class="tip">CatLib是易于上手的。你只需要有良好的 c# 基础。你就可以非常快速地通过阅读这份 指南 投入开发。</p>
+> CatLib是易于上手的。你只需要有良好的 c# 基础。你就可以非常快速地通过阅读这份 指南 投入开发。
 
 尝试学习CatLib的最简单的方法就是去查看框架自带的`Demo`和`服务接口`，您可以在1分钟以内了解基本服务使用方法。
 

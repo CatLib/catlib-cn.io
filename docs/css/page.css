@@ -194,43 +194,17 @@ article ul li {
   color: #525252;
 }
 article blockquote {
-  background-color: #f66;
-  border-radius: 3px;
-  color: #fff;
-  padding: 10px 15px 10px 15px;
-  margin-bottom: 50px;
-}
-article blockquote p {
-  color: #fff;
-  margin: 0 auto;
-}
-article blockquote p a {
-  text-decoration: underline;
-  color: #fff;
-}
-article blockquote p a:hover {
-  color: #fcd8d6;
-}
-article code {
-  border-radius: 3px;
-  background-color: #f0f2f1;
-  font-size: 0.75rem;
-  line-height: 1.8;
-  padding: 1px 5px 1px 5px;
-  color: #f66;
-  font-family: source-code-pro, monospace;
-  margin-left: 5px;
-  margin-right: 5px;
-  text-shadow: 0px 1px #fff;
-}
-article p.tip {
   padding: 12px 24px 12px 30px;
   margin: 2em 0;
   border-left: 4px solid #f66;
   background-color: #f8f8f8;
   position: relative;
 }
-article p.tip:before {
+article blockquote p {
+  padding: 0;
+  margin: 0;
+}
+article blockquote:before {
   position: absolute;
   top: 14px;
   left: -12px;
@@ -246,11 +220,44 @@ article p.tip:before {
   font-family: 'Roboto Mono', Monaco, courier, monospace;
   font-size: 14px;
 }
-article p.tip code {
+article blockquote code {
   background-color: #efefef;
 }
-article p.tip em {
+article blockquote em {
   color: $medium;
+}
+article code {
+  border-radius: 3px;
+  background-color: #f0f2f1;
+  font-size: 0.75rem;
+  line-height: 1.8;
+  padding: 1px 5px 1px 5px;
+  color: #f66;
+  font-family: source-code-pro, monospace;
+  margin-left: 5px;
+  margin-right: 5px;
+  text-shadow: 0px 1px #fff;
+}
+article p.tip {
+  background-color: #f66;
+  border-radius: 3px;
+  color: #fff;
+  padding: 10px 15px 10px 15px;
+  margin-bottom: 50px;
+}
+article p.tip a {
+  color: #fff;
+}
+article p.tip p {
+  color: #fff;
+  margin: 0 auto;
+}
+article p.tip p a {
+  text-decoration: underline;
+  color: #fff;
+}
+article p.tip p a:hover {
+  color: #fcd8d6;
 }
 article figure {
   margin: 1.2rem 0;
