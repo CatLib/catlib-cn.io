@@ -22,6 +22,40 @@ var container = new Container();
 ```
 CatLib核心(`Application`)继承服务容器，她拥有服务容器的全部功能，所以下面的演示例子用到的都是这种上下文环境。
 
+### 依赖注入标记
+
+CatLib容器采用标记特性的方法来识别哪些属性是允许被注入的。
+
+- 任何需要被进行依赖注入的属性选择器需要标记`[Inject]`特性，同时其`Setter`的访问级别必须为`public`。
+- 任意构造函数的参数会自动完成注入
+
+``` csharp
+public class Service
+{
+    [Inject]
+    public IFileSystem LocalFileSystem { get; set; }
+
+    public Service(IFileSystem fileSystem)
+    {
+        //fileSystem 和 LocalFileSystem 都会被自动注入
+    }
+}
+```
+
+> 注意，您不能在`构造函数`中访问被标记为注入的`属性选择器`，因为属性选择器的注入会在构造函数之后进行。
+
+### 必须的依赖注入
+
+在一些场景中可能必须需求注入某些依赖，那么我们可以通过注入标记的`Require`来标记为强依赖，这样当无法进行注入时框架将会抛出一个`RunTimeException`异常。
+
+``` csharp
+public class Service
+{
+    [Inject(Require = true)]
+    public IFileSystem LocalFileSystem { get; set; }
+}
+```
+
 ### 绑定服务
 
 ``` csharp
