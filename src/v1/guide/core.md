@@ -6,7 +6,7 @@ order: 102
 
 ## CatLib核心
 
-应用程序是CatLib程序的核心，也是所谓的程序入口。应用程序通过引导来加载服务提供者和其他一些必须的资源。应用程序在一般情况下只允许启动一个。
+应用程序是CatLib程序的核心，也是所谓的程序入口。应用程序通过引导来加载服务提供者和其他一些必须的资源。应用程序在一般情况下只允许启动一个，且只能在主线程中启动。
 
 ### 启动流程
 
@@ -14,7 +14,135 @@ order: 102
 
 启动引导一般用于加载服务提供者或者一些其他资源，在引导过程中请不要通过框架生成任何服务，否则您可以使用到一个未经注册的服务。
 
-初始化过程在内部处理上被细分为：`基础初始化` 和 `启动流程` 。
+### 从零开始
 
-基础初始化用于初始化当前服务提供者所提供的服务，而启动流程则用于处理一些比较耗时的初始化任务。
+现在我们将从零开始引导catlib框架启动以便于您能了解框架启动原理，事实上在真实项目中我们已经帮您写好了引导程序。
 
+首先我们需要定义个一个引导程序，引导程序必须继承自`IBootstrap`接口，我们可以在引导程序中对服务提供者进行注册或者，执行其他引导业务。一般情况下我们建议优先完成服务提供者的注册。注意您只有在初始化之前能注册服务提供者，一旦框架初始化那么调用`Register()`将会导致一个异常。
+
+``` csharp
+public class GameBootstrap : IBootstrap
+{
+    public void Bootstrap()
+    {
+        App.Instance.Register(typeof(CoreProvider));
+    }
+}
+```
+
+随后我们需要一个入口程序，用于被Unity挂载并触发启动流程。在入口程序中，我们只需要实例一个CatLib应用程序，并设定对应引导程序（引导程序会根据设置顺序加载）.最后再执行初始化。
+
+> 注意如果您的使用的是`CatLib.dll`会存在构建跨程序集问题，所以您需要提供`OnFindType()`方法来帮助框架获取当前程序集的类型。
+
+``` csharp
+public class Program : MonoBehaviour 
+{
+    public void Awake()
+    {
+        var application = new Application(this);
+        application.OnFindType((t) => Type.GetType(t));
+        application.Bootstrap(new Type[]{ typeof(GameBootstrap) });
+        application.Init(()=>
+        {
+            // 框架启动完成
+        });
+    }
+}
+```
+
+### 从CatLib.Unity开始
+
+除去上文描述的方案外，CatLib已经为开发者准备好了引导程序，在CatLib.Unity项目中您可以通过配置`Providers.cs`文件来设定框架的服务提供者。
+
+CatLib.Unity默认的用户代码入口在`Main.cs`文件中，当然你也可以同过路由标记来指定启动入口(这需要您删除Main.cs文件,事实上Main.cs的入口也是通过路由完成的)。
+
+通过路由来标记启动入口,入口的uri固定为`bootstrap://main`：
+
+``` csharp
+[Routed]
+public class Main
+{
+    [Routed("bootstrap://main")]
+    public void Bootstrap()
+    {
+        //todo: user code here
+        Debug.Log("hello world! user code here!");
+    }
+}
+```
+
+### 主线程调用
+
+CatLib核心提供了子线程代码块调度到主线程执行的能力。这在游戏系统中是非常常用的。
+
+``` csharp
+App.Instance.MainThread(()=>
+{
+    //主线程中执行的代码块
+});
+```
+
+当然您可也可以通过`IsMainThread`来判断是否处于主线程中。
+
+``` csharp
+var isMainThread = App.Instance.IsMainThread;
+```
+
+### 挂载执行
+
+挂载执行允许您非继承自`MonoBehaviour`的类拥有`MonoBehaviour`的一部分能力
+
+您需要实现任意一个增强接口才能进行挂载，可以被实现的增强接口有:`IUpdate`,`ILateUpdate`,`IDestroy`
+
+``` csharp
+public class Element : IUpdate
+{
+    public void Update()
+    {
+        //todo
+    }
+}
+```
+
+``` csharp
+var ele = new Element();
+App.Instance.Attach(ele);
+```
+
+一个对象只能被挂载一次，但您可以通过卸载来卸载挂载的对象：
+
+``` csharp
+App.Instance.Detach(ele);
+```
+
+### 协同
+
+CatLib允许非继承自`MonoBehaviour`的类通过这个接口来启动一个协同程序。
+
+``` csharp
+App.Instance.StartCoroutine(/* todo: 你的协同函数 */);
+```
+
+### 全局事件
+
+CatLib核心提供的全局事件，其内部实现实质为事件组件的实现，只是我们规范了核心所触发的事件为全局事件。
+
+``` csharp
+App.Instance.Trigger("event");
+```
+
+### 程序内GUID
+
+CatLib核心提供了获取当前核心实例内的唯一GUID。
+
+``` csharp
+var guid = App.Instance.GetGuid();
+```
+
+### 获取CatLib版本号
+
+您可以通过`Version`获取当前CatLib核心版本号。
+
+``` csharp
+var version = App.Instance.Version;
+```

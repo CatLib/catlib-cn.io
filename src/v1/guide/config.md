@@ -1,7 +1,7 @@
 ---
-title: 配置
+title: 环境配置
 type: guide
-order: 104
+order: 200
 ---
 
 ## 配置
