@@ -209,6 +209,17 @@
 </blockquote>
 <h3 id="构建服务容器"><a href="#构建服务容器" class="headerlink" title="构建服务容器"></a>构建服务容器</h3><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> container = <span class="keyword">new</span> Container();</div></pre></td></tr></table></figure>
 <p>CatLib核心(<code>Application</code>)继承服务容器，她拥有服务容器的全部功能，所以下面的演示例子用到的都是这种上下文环境。</p>
+<h3 id="依赖注入标记"><a href="#依赖注入标记" class="headerlink" title="依赖注入标记"></a>依赖注入标记</h3><p>CatLib容器采用标记特性的方法来识别哪些属性是允许被注入的。</p>
+<ul>
+<li>任何需要被进行依赖注入的属性选择器需要标记<code>[Inject]</code>特性，同时其<code>Setter</code>的访问级别必须为<code>public</code>。</li>
+<li>任意构造函数的参数会自动完成注入</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Service</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Inject</span>]</div><div class="line">    <span class="keyword">public</span> IFileSystem LocalFileSystem &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Service</span>(<span class="params">IFileSystem fileSystem</span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">//fileSystem 和 LocalFileSystem 都会被自动注入</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意，您不能在<code>构造函数</code>中访问被标记为注入的<code>属性选择器</code>，因为属性选择器的注入会在构造函数之后进行。</p>
+</blockquote>
+<h3 id="必须的依赖注入"><a href="#必须的依赖注入" class="headerlink" title="必须的依赖注入"></a>必须的依赖注入</h3><p>在一些场景中可能必须需求注入某些依赖，那么我们可以通过注入标记的<code>Require</code>来标记为强依赖，这样当无法进行注入时框架将会抛出一个<code>RunTimeException</code>异常。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Service</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Inject(Require = true)</span>]</div><div class="line">    <span class="keyword">public</span> IFileSystem LocalFileSystem &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="绑定服务"><a href="#绑定服务" class="headerlink" title="绑定服务"></a>绑定服务</h3><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Instance.Bind&lt;ConfigManager&gt;().Alias&lt;IConfigManager&gt;().Alias(<span class="string">"config.manager"</span>);</div></pre></td></tr></table></figure>
 <p>上述代码进行了一次简单的绑定，实现的作用是将<code>ConfigManager</code>绑定到容器，并且给定了<code>IConfigManager</code>(接口别名)和<code>config.manager</code>(字符串别名)的别名。</p>
 <p>随后您就可以使用别名来构建服务了:</p>
