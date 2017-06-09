@@ -214,6 +214,8 @@ article table tr td {
 }
 article table tr th {
   background-color: #e8e8e8;
+  font-weight: bold;
+  font-size: 0.85rem;
 }
 article table tr td {
   font-size: 0.75rem;
