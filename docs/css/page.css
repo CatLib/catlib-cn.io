@@ -193,6 +193,31 @@ article ul {
 article ul li {
   color: #525252;
 }
+article table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 0;
+  border-spacing: 0;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+article table tr:nth-child(even) td {
+  background-color: #f7f7f7;
+}
+article table .title-row {
+  background-color: #ededed;
+}
+article table tr th,
+article table tr td {
+  padding: 0.5rem 1rem 0.5rem 1rem;
+  color: #525252;
+}
+article table tr th {
+  background-color: #e8e8e8;
+}
+article table tr td {
+  font-size: 0.75rem;
+}
 article blockquote {
   padding: 12px 24px 12px 30px;
   margin: 2em 0;
@@ -259,6 +284,25 @@ article p.tip p a {
 article p.tip p a:hover {
   color: #fcd8d6;
 }
+article ol {
+  list-style-type: none;
+  counter-reset: sectioncounter;
+  padding-left: 1rem;
+  position: inherit;
+  font-size: 0.9rem;
+}
+article ol li {
+  color: #525252;
+}
+article ol li:before {
+  content: counter(sectioncounter) ". ";
+  counter-increment: sectioncounter;
+}
+article hr {
+  height: 1px;
+  border: none;
+  border-top: 1px dashed #dcdcdc;
+}
 article figure {
   margin: 1.2rem 0;
 }
@@ -316,10 +360,10 @@ article .highlight.html .code:after {
   content: 'HTML';
 }
 article .highlight.csharp .code:after {
-  content: 'c#';
+  content: 'C#';
 }
 article .highlight.lua .code:after {
-  content: 'c#';
+  content: 'Lua';
 }
 article .highlight.js .code:after {
   content: 'JS';
