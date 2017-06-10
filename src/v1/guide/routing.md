@@ -425,12 +425,77 @@ Router.Instance.Reg("ui://call2" , (request,response)=>
 Router.Instance.Dispatch("ui://call");
 ```
 
-### 设定默认的Scheme
+### 修改默认的Scheme
 
 CatLib路由系统的默认Scheme为`catlib`。但您可以通过`SetDefaultScheme()`来修改默认的Scheme。
 
 ``` csharp
 Router.Instance.SetDefaultScheme("home");
+```
+
+### 路由编译剥离
+
+CatLib路由系统在在编译时会剥离掉不必要扫描的程序集。
+
+下面的程序集在编译时不会被剥离：
+
+- Assembly-CSharp
+- Assembly-CSharp-Editor-firstpass
+- Assembly-CSharp-Editor
+- CatLib
+- CatLib.Tests
+
+您可以通过`OnStripping()`方法来处理剥离，当方法返回`True`时会剥离程序集。
+
+> 这个修改您需要在`RoutingProvider`中进行。
+
+### 路由自动命名
+
+使用特性路由时，如果您没有给定路由`uri`那么将会使用路由自动命名机制。
+
+``` csharp
+[Routed]
+public class AttrRouting
+{
+    [Routed]
+    public void Call()
+    {
+        res.SetContext("hello world");
+    }
+    [Routed]
+    public void CallNPC()
+    {
+        res.SetContext("hello world");
+    }
+}
+```
+
+自动命名的规则是：根据类名或函数名转为全小写，单词之间用`-`进行分割的字符串,连续的大写视为一个单词。
+
+上述路由将会被转化为：`catlib://attr-routing/call`和`catlib://attr-routing/call-npc`。
+
+### 自动路由注入
+
+使用特性路由时您可以使用自动参数注入来获取需要的参数。CatLib容器会自动解析并注入需求参数。
+
+其中`IRequest`和 `IResponse`类型为`当前路由`的请求和响应。
+
+``` csharp
+[Routed]
+public class AttrRouting
+{
+    [Routed]
+    public void Call(IRequest request, IResponse response)
+    {
+        res.SetContext("hello world");
+    }
+
+    [Routed]
+    public void Call2(IResponse response, IApplication App , IRouter router)
+    {
+        res.SetContext("hello world");
+    }
+}
 ```
 
 ### 性能优化相关
