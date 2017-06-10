@@ -126,3 +126,32 @@ CatLib默认的配置容器都默认支持如下转换类型:
 
 ### 拓展配置容器
 
+CatLib允许您扩展配置容器，您可以通过扩展方法来定义额外的配置容器。
+
+> 如果您要使用自定义的配置容器请实现`IConfig`接口。
+
+``` csharp
+manager.Extend(()=>
+{
+    return new Config();
+}, "new")
+```
+
+如果需要获得刚刚扩展的配置容器，只需要使用`Get()`进行访问。
+
+``` csharp
+IConfig extendConfig1 = manager.Get("new");
+IConfig extendConfig2 = manager["new"];
+// extendConfig1 == extendConfig2
+```
+
+### 修改默认配置容器
+
+您可以使用自定义的配置容器来代替默认的配置容器。修改后`Default`使用的配置容器将是您替换的配置容器。
+
+> 注意! 由于CatLib的组件配置使用默认的配置容器，所以在没有了解组件的配置使用情况前，谨慎修改。
+
+``` csharp
+manager.SetDefault("new.default");
+IConfig config = manager.Default;
+```

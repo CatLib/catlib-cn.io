@@ -129,10 +129,42 @@ App.Instance.StartCoroutine(/* todo: 你的协同函数 */);
 
 ### 全局事件
 
-CatLib核心提供的全局事件，其内部实现实质为事件组件的实现，只是我们规范了核心所触发的事件为全局事件。
+CatLib核心提供的全局事件系统，您只需要通过简单的API就可以调用。
+
+#### **触发全局事件**
 
 ``` csharp
 App.Instance.Trigger("event");
+```
+
+#### **监听全局事件**
+
+监听全局事件时允许您传入触发次数，如果您没有传入则表示事件一直有效，反正如果达到触发，则事件自动被撤销。
+
+``` csharp
+App.Instance.On("event" , (sender , e)=>
+{
+    // 接受到事件
+}, 10)
+```
+
+#### **撤销监听全局事件**
+
+``` csharp
+var handler = App.Instance.On("event" , (sender , e)=>
+{
+    // 接受到事件
+});
+handler.Cancel();
+```
+
+#### **监听一次全局事件**
+
+``` csharp
+var handler = App.Instance.One("event" , (sender , e)=>
+{
+    // 接受到事件
+});
 ```
 
 ### 程序内GUID

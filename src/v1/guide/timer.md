@@ -1,7 +1,7 @@
 ---
 title: 计时器
 type: guide
-order: 260
+order: 250
 ---
 
 ## 计时器
