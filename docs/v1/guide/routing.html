@@ -296,8 +296,28 @@
 <p>假设我们进行了一次递归调用,异常将会按照如下流程触发：</p>
 <p><code>触发异常</code> =&gt; <code>局部异常处理(嵌套的Dispatch(&quot;ui://call2&quot;))</code> =&gt; <code>局部异常处理(ui://call)</code> =&gt; <code>全局异常处理</code> =&gt; <code>Dispatch()抛出异常</code></p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">Router.Instance.Reg(<span class="string">"ui://call"</span> , (request,response)=&gt;</div><div class="line">&#123;</div><div class="line">    Router.Instance.Dispatch(<span class="string">"ui://call2"</span>);</div><div class="line">&#125;);</div><div class="line">Router.Instance.Reg(<span class="string">"ui://call2"</span> , (request,response)=&gt;</div><div class="line">&#123;</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">"ex"</span>);</div><div class="line">&#125;);</div><div class="line">Router.Instance.Dispatch(<span class="string">"ui://call"</span>);</div></pre></td></tr></table></figure>
-<h3 id="设定默认的Scheme"><a href="#设定默认的Scheme" class="headerlink" title="设定默认的Scheme"></a>设定默认的Scheme</h3><p>CatLib路由系统的默认Scheme为<code>catlib</code>。但您可以通过<code>SetDefaultScheme()</code>来修改默认的Scheme。</p>
+<h3 id="修改默认的Scheme"><a href="#修改默认的Scheme" class="headerlink" title="修改默认的Scheme"></a>修改默认的Scheme</h3><p>CatLib路由系统的默认Scheme为<code>catlib</code>。但您可以通过<code>SetDefaultScheme()</code>来修改默认的Scheme。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">Router.Instance.SetDefaultScheme(<span class="string">"home"</span>);</div></pre></td></tr></table></figure>
+<h3 id="路由编译剥离"><a href="#路由编译剥离" class="headerlink" title="路由编译剥离"></a>路由编译剥离</h3><p>CatLib路由系统在在编译时会剥离掉不必要扫描的程序集。</p>
+<p>下面的程序集在编译时不会被剥离：</p>
+<ul>
+<li>Assembly-CSharp</li>
+<li>Assembly-CSharp-Editor-firstpass</li>
+<li>Assembly-CSharp-Editor</li>
+<li>CatLib</li>
+<li>CatLib.Tests</li>
+</ul>
+<p>您可以通过<code>OnStripping()</code>方法来处理剥离，当方法返回<code>True</code>时会剥离程序集。</p>
+<blockquote>
+<p>这个修改您需要在<code>RoutingProvider</code>中进行。</p>
+</blockquote>
+<h3 id="路由自动命名"><a href="#路由自动命名" class="headerlink" title="路由自动命名"></a>路由自动命名</h3><p>使用特性路由时，如果您没有给定路由<code>uri</code>那么将会使用路由自动命名机制。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">[<span class="meta">Routed</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AttrRouting</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Routed</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line">    [<span class="meta">Routed</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">CallNPC</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>自动命名的规则是：根据类名或函数名转为全小写，单词之间用<code>-</code>进行分割的字符串,连续的大写视为一个单词。</p>
+<p>上述路由将会被转化为：<code>catlib://attr-routing/call</code>和<code>catlib://attr-routing/call-npc</code>。</p>
+<h3 id="自动路由注入"><a href="#自动路由注入" class="headerlink" title="自动路由注入"></a>自动路由注入</h3><p>使用特性路由时您可以使用自动参数注入来获取需要的参数。CatLib容器会自动解析并注入需求参数。</p>
+<p>其中<code>IRequest</code>和 <code>IResponse</code>类型为<code>当前路由</code>的请求和响应。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">[<span class="meta">Routed</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AttrRouting</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Routed</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call</span>(<span class="params">IRequest request, IResponse response</span>)</span></div><div class="line">    &#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [<span class="meta">Routed</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call2</span>(<span class="params">IResponse response, IApplication App , IRouter router</span>)</span></div><div class="line">    &#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="性能优化相关"><a href="#性能优化相关" class="headerlink" title="性能优化相关"></a>性能优化相关</h3><p>CatLib 路由系统是一个复杂的系统，您不应该使用在高性能需求的地方或者频繁调用。</p>
 <p>我们给出了下面几种优化方案：</p>
 <ul>
