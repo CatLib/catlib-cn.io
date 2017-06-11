@@ -168,7 +168,7 @@ article h3:before {
   opacity: 0.3;
 }
 article h4 {
-  font-size: 1.125rem;
+  font-size: 1rem;
   margin-top: 2.125rem;
   margin-bottom: 1.25rem;
 }
@@ -191,6 +191,7 @@ article ul {
   font-size: 0.9rem;
 }
 article ul li {
+  padding-top: 0.25rem;
   color: #525252;
 }
 article table {
@@ -295,6 +296,7 @@ article ol {
 }
 article ol li {
   color: #525252;
+  padding-top: 0.25rem;
 }
 article ol li:before {
   content: counter(sectioncounter) ". ";
@@ -531,6 +533,8 @@ article {
 .sub-nav dl dd {
   margin-bottom: 0.25rem;
   padding-left: 0.5rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .sub-nav dl dd.select {
   border-left: 0.125rem #f4645f solid;
