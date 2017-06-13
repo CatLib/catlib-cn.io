@@ -234,6 +234,33 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> guid = App.Instance.GetGuid();</div></pre></td></tr></table></figure>
 <h3 id="获取CatLib版本号"><a href="#获取CatLib版本号" class="headerlink" title="获取CatLib版本号"></a>获取CatLib版本号</h3><p>您可以通过<code>Version</code>获取当前CatLib核心版本号。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> version = App.Instance.Version;</div></pre></td></tr></table></figure>
+<h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p>您可以通过<code>IEnv</code>获取环境信息。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> env = App.Instance.Make&lt;IEnv&gt;();</div></pre></td></tr></table></figure>
+<h4 id="SetAssetPath"><a href="#SetAssetPath" class="headerlink" title="SetAssetPath"></a><strong>SetAssetPath</strong></h4><p>您可以通过<code>SetAssetPath</code>来设定资源路径，注意资源路径必须可以被写入。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">env.SetAssetPath(UnityEngine.Application.PersistentDataPath);</div></pre></td></tr></table></figure>
+<h4 id="AssetPath"><a href="#AssetPath" class="headerlink" title="AssetPath"></a><strong>AssetPath</strong></h4><p>获取被设定的资源路径。默认情况下为：</p>
+<p>在编辑器模式下：</p>
+<ul>
+<li><code>生产环境</code>为：<code>UnityEngine.Application.PersistentDataPath</code></li>
+<li><code>仿真环境</code>为：<code>StreamingAssets</code>文件夹</li>
+<li><code>开发者模式</code>为：<code>UnityEngine.Application.dataPath</code></li>
+</ul>
+<p>脱离编辑器模式：</p>
+<ul>
+<li>自动设定为：<code>UnityEngine.Application.PersistentDataPath</code></li>
+</ul>
+<p>不论在任何模式下，如果开发者手动设定了<code>SetAssetPath</code>。那么始终返回开发者设定的，<code>AssetPath</code>。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> assetPath = env.AssetPath;</div></pre></td></tr></table></figure>
+<h4 id="SetDebugLevel"><a href="#SetDebugLevel" class="headerlink" title="SetDebugLevel"></a><strong>SetDebugLevel</strong></h4><p>设定CatLib的调试等级。CatLib的调试等级分为：</p>
+<ul>
+<li><code>Prod</code>生产环境</li>
+<li><code>Staging</code>仿真环境</li>
+<li><code>Dev</code>开发者模式</li>
+<li><code>Auto</code>自动模式，在Unity编辑器下为开发者模式，发布后为生产环境。</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">env.SetDebugLevel(DebugLevels.Prod);</div></pre></td></tr></table></figure>
+<h4 id="DebugLevel"><a href="#DebugLevel" class="headerlink" title="DebugLevel"></a><strong>DebugLevel</strong></h4><p>获取调试等级。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> debugLevel = env.DebugLevel;</div></pre></td></tr></table></figure>
     <div class="footer">
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.github.io/blob/master/src/v1/guide/application.md" target="_blank">
