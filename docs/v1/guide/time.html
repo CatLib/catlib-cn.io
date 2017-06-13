@@ -193,10 +193,43 @@
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h2><blockquote>
-<p>这份文档等待您进行完善</p>
-</blockquote>
-
+    <h2 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h2><p>CatLib时间组件允许建立自己独立的时间体系。</p>
+<h3 id="默认的时间"><a href="#默认的时间" class="headerlink" title="默认的时间"></a>默认的时间</h3><p>默认的时间是基于Unity的时间的简单包装。</p>
+<h3 id="时间API"><a href="#时间API" class="headerlink" title="时间API"></a>时间API</h3><p>下述内容的描述是基于<code>默认时间</code>的，如果使用了<code>扩展时间</code>，其意义可能发生变化。</p>
+<h4 id="Time"><a href="#Time" class="headerlink" title="Time"></a><strong>Time</strong></h4><p>从游戏开始到现在所用的时间(秒)</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> time = timeManager.Default.Time;</div></pre></td></tr></table></figure>
+<h4 id="DeltaTime"><a href="#DeltaTime" class="headerlink" title="DeltaTime"></a><strong>DeltaTime</strong></h4><p>上一帧到当前帧的时间(秒)</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> deltaTime = timeManager.Default.DeltaTime;</div></pre></td></tr></table></figure>
+<h4 id="FixedTime"><a href="#FixedTime" class="headerlink" title="FixedTime"></a><strong>FixedTime</strong></h4><p>游戏开始到现在的时间（秒）</p>
+<p>通过固定时间更新</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> fixedTime = timeManager.Default.FixedTime;</div></pre></td></tr></table></figure>
+<h4 id="TimeSinceLevelLoad"><a href="#TimeSinceLevelLoad" class="headerlink" title="TimeSinceLevelLoad"></a><strong>TimeSinceLevelLoad</strong></h4><p>从当前场景开始到目前为止的时间（秒）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> timeSinceLevelLoad = timeManager.Default.TimeSinceLevelLoad;</div></pre></td></tr></table></figure>
+<h4 id="FixedDeltaTime"><a href="#FixedDeltaTime" class="headerlink" title="FixedDeltaTime"></a><strong>FixedDeltaTime</strong></h4><p>固定帧的更新时间</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> fixedDeltaTime = timeManager.Default.FixedDeltaTime;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">timeManager.Default.FixedDeltaTime = <span class="number">0.2</span>f;</div></pre></td></tr></table></figure>
+<h4 id="MaximumDeltaTime"><a href="#MaximumDeltaTime" class="headerlink" title="MaximumDeltaTime"></a><strong>MaximumDeltaTime</strong></h4><p>能获取的最大帧与帧之间的更新时间</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> maximumDeltaTime = timeManager.Default.MaximumDeltaTime;</div></pre></td></tr></table></figure>
+<h4 id="SmoothDeltaTime"><a href="#SmoothDeltaTime" class="headerlink" title="SmoothDeltaTime"></a><strong>SmoothDeltaTime</strong></h4><p>平稳的更新时间，根据前N帧的加权平均值</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> smoothDeltaTime = timeManager.Default.SmoothDeltaTime;</div></pre></td></tr></table></figure>
+<h4 id="TimeScale"><a href="#TimeScale" class="headerlink" title="TimeScale"></a><strong>TimeScale</strong></h4><p>时间缩放系数</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> timeScale = timeManager.Default.TimeScale;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">timeManager.Default.TimeScale = <span class="number">0.5</span>f;</div></pre></td></tr></table></figure>
+<h4 id="FrameCount"><a href="#FrameCount" class="headerlink" title="FrameCount"></a><strong>FrameCount</strong></h4><p>从游戏开始到目前为止的总帧数</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> frameCount = timeManager.Default.FrameCount;</div></pre></td></tr></table></figure>
+<h4 id="RealtimeSinceStartup"><a href="#RealtimeSinceStartup" class="headerlink" title="RealtimeSinceStartup"></a><strong>RealtimeSinceStartup</strong></h4><p>从游戏开始到目前为止的总时间（哪怕时间缩放系数为0也会增长）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> realtimeSinceStartup = timeManager.Default.RealtimeSinceStartup;</div></pre></td></tr></table></figure>
+<h4 id="CaptureFramerate"><a href="#CaptureFramerate" class="headerlink" title="CaptureFramerate"></a><strong>CaptureFramerate</strong></h4><p>每秒的帧率</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> captureFramerate = timeManager.Default.CaptureFramerate;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">timeManager.Default.CaptureFramerate = <span class="number">30</span>;</div></pre></td></tr></table></figure>
+<h4 id="UnscaledDeltaTime"><a href="#UnscaledDeltaTime" class="headerlink" title="UnscaledDeltaTime"></a><strong>UnscaledDeltaTime</strong></h4><p>不计算时间缩放系数的帧与帧之间的更新时间。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> unscaledDeltaTime = timeManager.Default.UnscaledDeltaTime;</div></pre></td></tr></table></figure>
+<h4 id="UnscaledTime"><a href="#UnscaledTime" class="headerlink" title="UnscaledTime"></a><strong>UnscaledTime</strong></h4><p>不考虑时间缩放系数，从游戏开始到目前为止的总时间</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> unscaledTime = timeManager.Default.UnscaledTime;</div></pre></td></tr></table></figure>
+<h3 id="扩展时间"><a href="#扩展时间" class="headerlink" title="扩展时间"></a>扩展时间</h3><p>您可以通过<code>Extend()</code>方法拓展出新的时间。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">timeManager.Extend(()=&gt;</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> UnityTime();</div><div class="line">&#125;,<span class="string">"NewTime"</span>);</div></pre></td></tr></table></figure>
+<p>通过<code>Get()</code>可以获得您拓展的时间。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> timeSystem = timeManager.Get(<span class="string">"NewTime"</span>);</div></pre></td></tr></table></figure>
     <div class="footer">
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.github.io/blob/master/src/v1/guide/time.md" target="_blank">

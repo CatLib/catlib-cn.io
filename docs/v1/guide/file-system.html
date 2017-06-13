@@ -225,9 +225,9 @@
 <h4 id="GetList"><a href="#GetList" class="headerlink" title="GetList"></a><strong>GetList</strong></h4><p>通过<code>GetList()</code>可以获取指定路径下的所有文件夹和文件的句柄(注意不会迭代子文件夹)。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> list = disk.GetList();</div></pre></td></tr></table></figure>
 <h3 id="自定义文件系统"><a href="#自定义文件系统" class="headerlink" title="自定义文件系统"></a>自定义文件系统</h3><p>CatLib文件系统允许您自定义您的文件系统驱动，您只需要使用<code>Extend()</code>就可以自定义拓展。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">fileSystemManager.Extend(()=&gt;</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> FileSystem(<span class="keyword">new</span> Local(<span class="string">"/user/data"</span>));</div><div class="line">&#125;,<span class="string">"mydisk"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">fileSystemManager.Extend(()=&gt;</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> FileSystem(<span class="keyword">new</span> Local(<span class="string">"/user/data"</span>));</div><div class="line">&#125;,<span class="string">"MyDisk"</span>);</div></pre></td></tr></table></figure>
 <p>扩展后您可以通过<code>Disk()</code>来获取扩展实例。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> newDisk = fileSystemManager.Disk(<span class="string">"mydisk"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> newDisk = fileSystemManager.Disk(<span class="string">"MyDisk"</span>);</div></pre></td></tr></table></figure>
     <div class="footer">
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.github.io/blob/master/src/v1/guide/file-system.md" target="_blank">

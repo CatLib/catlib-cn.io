@@ -132,11 +132,11 @@ CatLib文件系统允许您自定义您的文件系统驱动，您只需要使�
 fileSystemManager.Extend(()=>
 {
     return new FileSystem(new Local("/user/data"));
-},"mydisk");
+},"MyDisk");
 ```
 
 扩展后您可以通过`Disk()`来获取扩展实例。
 
 ``` csharp
-var newDisk = fileSystemManager.Disk("mydisk");
+var newDisk = fileSystemManager.Disk("MyDisk");
 ```
