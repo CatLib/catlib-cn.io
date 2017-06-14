@@ -262,22 +262,22 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">Router.Instance.Dispatch(<span class="string">"ui://main/call"</span>);</div><div class="line">Router.Instance.Dispatch(<span class="string">"ui2://func"</span>);</div></pre></td></tr></table></figure>
 <p>上述代码以绝对地址的形式定义了特性路由，这样编译时将不会使用默认的<code>Scheme</code>。</p>
 <h3 id="什么是路由中间件"><a href="#什么是路由中间件" class="headerlink" title="什么是路由中间件"></a>什么是路由中间件</h3><p>路由中间件允许拦截，修改路由请求及响应，中间件将会按照顺序依次执行。</p>
-<p>路由中间件在宏观面上分为：<code>全局中间件</code> ， <code>环境中间件</code> ，<code>区域中间件</code> , 中间件的执行流程为：</p>
-<p>(调度入口) <code>全局中间件</code> =&gt; <code>环境中间件</code> =&gt; <code>区域中间件</code> =&gt; <code>目标路由方法</code><br>(调度出口) <code>全局中间件</code> &lt;= <code>环境中间件</code> &lt;= <code>区域中间件</code> &lt;= <code>目标路由方法</code></p>
+<p>路由中间件在宏观面上分为：<code>全局中间件</code> ， <code>类中间件</code> ，<code>路由条目中间件</code> , 中间件的执行流程为：</p>
+<p>(调度入口) <code>全局中间件</code> =&gt; <code>类中间件</code> =&gt; <code>路由条目中间件</code> =&gt; <code>目标路由方法</code><br>(调度出口) <code>全局中间件</code> &lt;= <code>类中间件</code> &lt;= <code>路由条目中间件</code> &lt;= <code>目标路由方法</code></p>
 <blockquote>
-<p><code>全局中间件</code> 和 <code>环境中间件</code> , <code>区域中间件</code> 为不同的过滤器链池所以她们之间的<code>优先级</code>不产生影响。</p>
+<p><code>全局中间件</code> ， <code>类中间件</code> 和 <code>路由条目中间件</code> 为不同的过滤器链池所以她们之间的<code>优先级</code>不产生影响。</p>
 </blockquote>
-<h3 id="特性路由中间件"><a href="#特性路由中间件" class="headerlink" title="特性路由中间件"></a>特性路由中间件</h3><p>路由条目中间件属于<code>区域中间件</code>。</p>
-<p>通过特性路由的方式进行路由，将允许您设定类的中间件接口：<code>IMiddleware</code>;</p>
+<h3 id="类中间件"><a href="#类中间件" class="headerlink" title="类中间件"></a>类中间件</h3><p>类中间件属于<code>类中间件</code>的过滤器链池。</p>
+<p>通过特性路由的方式和类注册方式，将允许您设定类的中间件接口：<code>IMiddleware</code>;</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">[<span class="meta">Routed</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AttrRouting</span> : <span class="title">IMiddleware</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> IFilterChain&lt;IRequest, IResponse&gt; Middleware </div><div class="line">    &#123;</div><div class="line">        <span class="keyword">get</span></div><div class="line">        &#123;</div><div class="line">            <span class="comment">// 过滤器链</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    [<span class="meta">Routed</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call</span>(<span class="params">IRequest request, IResponse response</span>)</span></div><div class="line">    &#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>如果您的路由标记类中设定了中间件接口，那么在调度到当前类下的路由方法时将会经过设定的中间件。</p>
-<h3 id="路由条目中间件"><a href="#路由条目中间件" class="headerlink" title="路由条目中间件"></a>路由条目中间件</h3><p>路由条目中间件属于<code>环境中间件</code>。</p>
+<h3 id="路由条目中间件"><a href="#路由条目中间件" class="headerlink" title="路由条目中间件"></a>路由条目中间件</h3><p>路由条目中间件属于<code>路由条目中间件</code>的过滤器链池。</p>
 <p>路由条目中间件能够为当前路由条目设定中间件，它可以指定具体的路由执行指定的中间件。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">Router.Instance.Reg(<span class="string">"character/&#123;type?&#125;"</span>, (request, response) =&gt;</div><div class="line">&#123;</div><div class="line">    response.SetContext(<span class="string">"type:"</span> + request[<span class="string">"type"</span>]);</div><div class="line">&#125;).Middleware((request,response,next)=&gt;</div><div class="line">&#123;</div><div class="line">    <span class="comment">// 中间件逻辑 ， 在路由执行之前</span></div><div class="line">    <span class="keyword">var</span> result = next(request,response);</div><div class="line">    <span class="comment">// 中间件逻辑 ， 在路由执行之后</span></div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h3 id="路由组中间件"><a href="#路由组中间件" class="headerlink" title="路由组中间件"></a>路由组中间件</h3><p>路由组中间件属于<code>环境中间件</code>。</p>
+<h3 id="路由组中间件"><a href="#路由组中间件" class="headerlink" title="路由组中间件"></a>路由组中间件</h3><p>路由组中间件属于<code>路由条目中间件</code>的过滤器链池。</p>
 <p>路由组中间件将对所有组内的路由生效。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">Router.Instance.Group(()=&gt;</div><div class="line">&#123;</div><div class="line">  <span class="comment">// 注册路由条目  </span></div><div class="line">&#125;).Middleware((request,response,next)=&gt;</div><div class="line">&#123;</div><div class="line">    <span class="comment">// 中间件逻辑</span></div><div class="line">    <span class="keyword">return</span> next(request,response);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h3 id="全局中间件"><a href="#全局中间件" class="headerlink" title="全局中间件"></a>全局中间件</h3><p>全局中间件属于<code>全局中间件</code>。</p>
+<h3 id="全局中间件"><a href="#全局中间件" class="headerlink" title="全局中间件"></a>全局中间件</h3><p>全局中间件属于<code>全局中间件</code>的过滤器链池。</p>
 <p>全局中间件会对所有调度的路由条目进行处理。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">Router.Instance.Middleware((request,response,next)=&gt;</div><div class="line">&#123;</div><div class="line">    <span class="comment">// 中间件逻辑</span></div><div class="line">    <span class="keyword">return</span> next(request,response);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <h3 id="无法找到路由条目"><a href="#无法找到路由条目" class="headerlink" title="无法找到路由条目"></a>无法找到路由条目</h3><p>CatLib路由系统允许您使用中间件的方式来处理<code>NotFoundRouteException</code>（无法找到可以被使用的路由条目）。</p>
@@ -285,10 +285,10 @@
 <p>您可以传入一个<code>优先级</code>来决定哪个处理方案被优先执行，这在终止冒泡时非常有用。</p>
 <h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><p>在执行目标方法时，可能会引发某些异常，所以我们需要进行异常处理。</p>
 <p>CatLib的路由异常处理系统在触发异常时会冒泡处理各级异常处理链，异常处理被分为：<code>全局异常处理</code>和<code>局部异常处理</code>，同中间件一样，她们的过滤器链池是不同的。</p>
-<p>异常处理总是从<code>局部</code>开始的，CatLib的异常处理器会依次调用异常处理函数，逐层冒泡执行。</p>
+<p>异常处理总是从<code>局部</code>开始的，CatLib的异常处理器会依次调用异常处理函数，逐层冒泡执行（如果冒泡被终止那么后续异常抛出也会被终止）。</p>
 <p><code>触发异常</code> =&gt; <code>局部异常处理</code> =&gt; <code>全局异常处理</code> =&gt; <code>Dispatch()抛出异常</code></p>
 <blockquote>
-<p>请注意<code>递归路由调度</code>的异常处理方案。</p>
+<p>请注意<code>递归路由调度</code>的时的异常处理。</p>
 </blockquote>
 <h4 id="路由条目的异常处理"><a href="#路由条目的异常处理" class="headerlink" title="路由条目的异常处理"></a><strong>路由条目的异常处理</strong></h4><p>路由条目的异常处理属于<code>局部异常处理</code>。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">Router.Instance.Reg(<span class="string">"character/&#123;type?&#125;"</span>, (request, response) =&gt;</div><div class="line">&#123;</div><div class="line">    response.SetContext(<span class="string">"type:"</span> + request[<span class="string">"type"</span>]);</div><div class="line">&#125;).OnError((request,response,ex,next) =&gt;</div><div class="line">&#123;</div><div class="line">    <span class="comment">// 在其他异常处理类执行之前</span></div><div class="line">    <span class="keyword">var</span> result = next(request,response,ex);</div><div class="line">    <span class="comment">// 在其他异常处理类执行之后</span></div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
@@ -297,9 +297,8 @@
 <h4 id="全局异常处理"><a href="#全局异常处理" class="headerlink" title="全局异常处理"></a><strong>全局异常处理</strong></h4><p>路由条目的异常处理属于<code>全局异常处理</code>。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">Router.Instance.OnError((request,response,ex,next) =&gt;</div><div class="line">&#123;</div><div class="line">    <span class="comment">// 在其他异常处理类执行之前</span></div><div class="line">    <span class="keyword">var</span> result = next(request,response,ex);</div><div class="line">    <span class="comment">// 在其他异常处理类执行之后</span></div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <h3 id="递归路由调度"><a href="#递归路由调度" class="headerlink" title="递归路由调度"></a>递归路由调度</h3><p>CatLib路由系统已经对递归调用做了良好的支持，您可以安全的进行递归调用。</p>
-<p>在递归调用的情况下，全局异常处理只会执行一次。</p>
-<p>假设我们进行了一次递归调用,异常将会按照如下流程触发：</p>
-<p><code>触发异常</code> =&gt; <code>局部异常处理(嵌套的Dispatch(&quot;ui://call2&quot;))</code> =&gt; <code>局部异常处理(ui://call)</code> =&gt; <code>全局异常处理</code> =&gt; <code>Dispatch()抛出异常</code></p>
+<h4 id="递归路由调度时异常处理的流程"><a href="#递归路由调度时异常处理的流程" class="headerlink" title="递归路由调度时异常处理的流程"></a><strong>递归路由调度时异常处理的流程</strong></h4><p>假设我们进行了一次递归调用,异常将会按照如下流程触发：</p>
+<p><code>触发异常</code> =&gt; <code>局部异常处理(嵌套的Dispatch(&quot;ui://call2&quot;))</code> =&gt; <code>全局异常处理</code> =&gt; <code>局部异常处理(ui://call)</code> =&gt; <code>全局异常处理</code> =&gt; <code>Dispatch()抛出异常</code></p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">Router.Instance.Reg(<span class="string">"ui://call"</span> , (request,response)=&gt;</div><div class="line">&#123;</div><div class="line">    Router.Instance.Dispatch(<span class="string">"ui://call2"</span>);</div><div class="line">&#125;);</div><div class="line">Router.Instance.Reg(<span class="string">"ui://call2"</span> , (request,response)=&gt;</div><div class="line">&#123;</div><div class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">"ex"</span>);</div><div class="line">&#125;);</div><div class="line">Router.Instance.Dispatch(<span class="string">"ui://call"</span>);</div></pre></td></tr></table></figure>
 <h3 id="修改默认的Scheme"><a href="#修改默认的Scheme" class="headerlink" title="修改默认的Scheme"></a>修改默认的Scheme</h3><p>CatLib路由系统的默认Scheme为<code>catlib</code>。但您可以通过<code>SetDefaultScheme()</code>来修改默认的Scheme。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">Router.Instance.SetDefaultScheme(<span class="string">"home"</span>);</div></pre></td></tr></table></figure>
