@@ -259,34 +259,6 @@ Router.Instance.Dispatch("ui2://func");
 
 > `全局中间件` ， `类中间件` 和 `路由条目中间件` 为不同的过滤器链池所以她们之间的`优先级`不产生影响。
 
-### 类中间件
-
-类中间件属于`类中间件`的过滤器链池。
-
-通过特性路由的方式和类注册方式，将允许您设定类的中间件接口：`IMiddleware`;
-
-``` csharp
-[Routed]
-public class AttrRouting : IMiddleware
-{
-    public IFilterChain<IRequest, IResponse> Middleware 
-    {
-        get
-        {
-            // 过滤器链
-        }
-    }
-    
-    [Routed]
-    public void Call(IRequest request, IResponse response)
-    {
-        res.SetContext("hello world");
-    }
-}
-```
-
-如果您的路由标记类中设定了中间件接口，那么在调度到当前类下的路由方法时将会经过设定的中间件。
-
 ### 路由条目中间件
 
 路由条目中间件属于`路由条目中间件`的过滤器链池。
@@ -322,6 +294,34 @@ Router.Instance.Group(()=>
     return next(request,response);
 });
 ```
+
+### 类中间件
+
+类中间件属于`类中间件`的过滤器链池。
+
+通过特性路由的方式和类注册方式，将允许您设定类的中间件接口：`IMiddleware`;
+
+``` csharp
+[Routed]
+public class AttrRouting : IMiddleware
+{
+    public IFilterChain<IRequest, IResponse> Middleware 
+    {
+        get
+        {
+            // 过滤器链
+        }
+    }
+    
+    [Routed]
+    public void Call(IRequest request, IResponse response)
+    {
+        res.SetContext("hello world");
+    }
+}
+```
+
+如果您的路由标记类中设定了中间件接口，那么在调度到当前类下的路由方法时将会经过设定的中间件。
 
 ### 全局中间件
 
