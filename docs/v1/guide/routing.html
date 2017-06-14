@@ -194,11 +194,12 @@
 </section>
     <article class="clearfix">
     <h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>CatLib路由系统可以赋予您通过一个uri调度到指定功能的能力。</p>
-<h3 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h3><h4 id="基本构成"><a href="#基本构成" class="headerlink" title="基本构成"></a><strong>基本构成</strong></h4><p>CatLib路由系统由<code>特性路由</code>，<code>路由条目</code>，<code>路由编译器</code>，<code>路由组</code>组成。</p>
+<h3 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h3><h4 id="基本构成"><a href="#基本构成" class="headerlink" title="基本构成"></a><strong>基本构成</strong></h4><p>CatLib路由系统由<code>路由器</code>，<code>特性路由</code>，<code>路由条目</code>，<code>路由编译器</code>，<code>路由组</code>组成。</p>
+<p><code>路由器</code>负责整个路由系统的调度</p>
 <p><code>路由条目</code>是路由系统中的基本单位，她确定了具体的一条路由及路由的目标。</p>
 <p><code>路由组</code>则是一个群体范围，一个路由组内部可以有多个路由条目，反之一个路由条目也可以拥有多个路由组。</p>
 <p><code>特性路由</code>是路由系统的扩展，允许开发者以特性的形式对路由目标方法进行标记后对标记的路由方法进行调度。</p>
-<p><code>路由编译器</code>用于编译路由所提供的配置参数。</p>
+<p><code>路由编译器</code>用于编译路由条目。编译后的路由条目可以被路由器使用。</p>
 <h4 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a><strong>名词解释</strong></h4><p><code>调度</code>一个方法，通过路由的方式调用被路由的方法。</p>
 <h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><ul>
 <li>(客户端,服务器)通过URI控制客户端切换UI，场景等。</li>
