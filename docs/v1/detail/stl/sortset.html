@@ -236,7 +236,7 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> list = sortset.GetElementRangeByRank(<span class="number">10</span>,<span class="number">20</span>);</div></pre></td></tr></table></figure>
 <h3 id="GetElementRangeByScore"><a href="#GetElementRangeByScore" class="headerlink" title="GetElementRangeByScore"></a>GetElementRangeByScore</h3><p>根据<code>分数</code>获取范围内的元素列表,排序按照分数从小到大。(默认包括等于<code>min</code>或<code>max</code>)</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> list = sortset.GetElementRangeByScore(<span class="number">100</span>,<span class="number">200</span>);</div></pre></td></tr></table></figure>
-<h3 id="GetScore"><a href="#GetScore" class="headerlink" title="GetScore"></a>GetScore</h3><p>返回有序集中<code>element</code>的分数，如果<code>element</code>不存在则返回<code>default(TScore)</code>。</p>
+<h3 id="GetScore"><a href="#GetScore" class="headerlink" title="GetScore"></a>GetScore</h3><p>返回有序集中<code>element</code>的分数，如果<code>element</code>不存在则引发<code>KeyNotFoundException</code>。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> score = sortset.GetScore(<span class="string">"this is element"</span>);</div></pre></td></tr></table></figure>
 <h3 id="GetRank"><a href="#GetRank" class="headerlink" title="GetRank"></a>GetRank</h3><p>获取<code>element</code>的排名 , 有序集成员按照Score<code>从小到大</code>排序。如果返回-1则表示没有找到元素。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> rank = sortset.GetRank(<span class="string">"this is element"</span>);</div></pre></td></tr></table></figure>

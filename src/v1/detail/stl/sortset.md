@@ -108,7 +108,7 @@ var list = sortset.GetElementRangeByScore(100,200);
 
 ### GetScore
 
-返回有序集中`element`的分数，如果`element`不存在则返回`default(TScore)`。
+返回有序集中`element`的分数，如果`element`不存在则引发`KeyNotFoundException`。
 
 ``` csharp
 var score = sortset.GetScore("this is element");
