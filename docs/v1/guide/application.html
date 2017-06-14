@@ -194,7 +194,7 @@
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="CatLib核心"><a href="#CatLib核心" class="headerlink" title="CatLib核心"></a>CatLib核心</h2><p>应用程序是CatLib程序的核心，也是所谓的程序入口。应用程序通过引导来加载服务提供者和其他一些必须的资源。应用程序在一般情况下只允许启动一个，且只能在主线程中启动。</p>
+    <h2 id="CatLib核心"><a href="#CatLib核心" class="headerlink" title="CatLib核心"></a>CatLib核心</h2><p><code>Application</code>是CatLib程序的核心，也是所谓的程序入口。应用程序通过引导来加载服务提供者和其他一些必须的资源。应用程序在一般情况下只允许启动一个，且只能在主线程中启动。</p>
 <h3 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h3><p><code>启动引导</code> -&gt; <code>初始化</code> -&gt; <code>完成</code></p>
 <p>启动引导一般用于加载服务提供者或者一些其他资源，在引导过程中请不要通过框架生成任何服务，否则您可以使用到一个未经注册的服务。</p>
 <h3 id="从零开始"><a href="#从零开始" class="headerlink" title="从零开始"></a>从零开始</h3><p>现在我们将从零开始引导catlib框架启动以便于您能了解框架启动原理，事实上在真实项目中我们已经帮您写好了引导程序。</p>
@@ -225,6 +225,11 @@
 </blockquote>
 <h3 id="协同"><a href="#协同" class="headerlink" title="协同"></a>协同</h3><p>CatLib允许非继承自<code>MonoBehaviour</code>的类通过这个接口来启动一个协同程序。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Instance.StartCoroutine(<span class="comment">/* todo: 你的协同函数 */</span>);</div></pre></td></tr></table></figure>
+<h3 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h3><p>CatLib所有的增强接口都支持优先级特性。您可以使用<code>[Priority()]</code>来定义优先级。</p>
+<p>定义：在CatLib中优先级值越小越优先。</p>
+<blockquote>
+<p>如果其他组件也使用了优先级那么她们的也遵循CatLib优先级的定义。</p>
+</blockquote>
 <h3 id="全局事件"><a href="#全局事件" class="headerlink" title="全局事件"></a>全局事件</h3><p>CatLib核心提供的全局事件系统，您只需要通过简单的API就可以调用。</p>
 <h4 id="触发全局事件"><a href="#触发全局事件" class="headerlink" title="触发全局事件"></a><strong>触发全局事件</strong></h4><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Instance.Trigger(<span class="string">"event"</span>);</div></pre></td></tr></table></figure>
 <h4 id="监听全局事件"><a href="#监听全局事件" class="headerlink" title="监听全局事件"></a><strong>监听全局事件</strong></h4><p>监听全局事件时允许您传入触发次数，如果您没有传入则表示事件一直有效，反正如果达到触发，则事件自动被撤销。</p>

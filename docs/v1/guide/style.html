@@ -204,14 +204,14 @@
 </blockquote>
 <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ul>
 <li><code>代码</code>必须使用<code>4个空格</code>缩进，而不要使用制表符(tab)</li>
-<li>使用<code>using XXX</code>，而不是new XXX.xxx()</li>
+<li>使用<code>using XXX</code>，而不是<code>new XXX.xxx()</code></li>
 <li><p><code>{}</code>必须换行,且内部代码<code>顶格书写</code></p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span>(<span class="literal">true</span>)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">var</span> tf = <span class="literal">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>使用<code>///</code>对<code>代码</code>进行注释</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> 这里对代码进行了注释</span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></div><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> VariableName = <span class="string">"VariableName"</span>;</div></pre></td></tr></table></figure>
 </li>
-<li><p>对于容易<code>产生歧义的表达式</code>您应该使用<code>括号</code>包括</p>
+<li><p>对于容易<code>产生歧义的表达式</code>您应该使用<code>括号</code>包裹</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span>(variable1 + (++variable2) &gt; <span class="number">0</span>)</div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>模板</code>必须为<code>TStudlyCaps</code>（驼峰式大写）以<code>T开头</code></p>

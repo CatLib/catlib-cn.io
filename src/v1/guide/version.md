@@ -6,7 +6,7 @@ order: 2
 
 ## 版本说明
 
-> CatLib的版本规范是采用：[Semver语义化版本标准](http://semver.org/lang/zh-CN/)
+> CatLib的版本标准是采用：[Semver语义化版本标准](http://semver.org/lang/zh-CN/)
 
 ### V1.0
 

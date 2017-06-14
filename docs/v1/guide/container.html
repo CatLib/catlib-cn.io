@@ -194,18 +194,19 @@
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="服务容器"><a href="#服务容器" class="headerlink" title="服务容器"></a>服务容器</h2><p>Container 服务容器是一个用于管理类的依赖和执行依赖注入的强大工具。其实质是通过反射来对构造函数或者标记为<code>[Inject]</code>特性的属性选择器进行注入(将服务实现依赖注入到类中)。</p>
-<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>几乎所有的服务绑定都是在服务提供者中完成。如果一个服务或类没有基于任何接口或者别名那么就没有必要将其绑定到容器。</p>
-<p>容器并不需要被告知如何构建对象，因为它会使用反射服务自动解析出具体的对象。在一个服务提供者中，可以通过<code>App</code>变量访问容器，然后使用<code>Bind()</code>方法注册一个服务或类的绑定。</p>
+    <h2 id="服务容器"><a href="#服务容器" class="headerlink" title="服务容器"></a>服务容器</h2><p>Container 服务容器是一个用于管理<code>类的依赖</code>和<code>执行依赖注入</code>的强大工具。其实质是通过反射来对<code>构造函数</code>或者标记为<code>[Inject]</code>特性的属性选择器进行注入(将服务实现依赖注入到类中)。</p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>几乎所有的服务绑定都是在服务提供者中完成。如果一个<code>服务</code>或<code>类</code>没有基于任何接口或者别名那么就没有必要将其绑定到容器。</p>
+<p>容器并不需要被告知如何构建对象，因为它会使用反射服务自动解析出具体的对象。在一个服务提供者中，可以通过<code>App</code>变量访问容器，然后使用<code>Bind()</code>方法注册一个<code>服务</code>或<code>类</code>的绑定。</p>
 <blockquote>
 <p>下面文档中所使用的代码均是局部代码。您需要根据使用场景酌情调整。</p>
 </blockquote>
 <h3 id="构建服务容器"><a href="#构建服务容器" class="headerlink" title="构建服务容器"></a>构建服务容器</h3><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> container = <span class="keyword">new</span> Container();</div></pre></td></tr></table></figure>
 <p>CatLib核心(<code>Application</code>)继承服务容器，她拥有服务容器的全部功能，所以下面的演示例子用到的都是这种上下文环境。</p>
-<h3 id="依赖注入标记"><a href="#依赖注入标记" class="headerlink" title="依赖注入标记"></a>依赖注入标记</h3><p>CatLib容器采用标记特性的方法来识别哪些属性是允许被注入的。</p>
+<h3 id="依赖注入标记"><a href="#依赖注入标记" class="headerlink" title="依赖注入标记"></a>依赖注入标记</h3><p>CatLib容器采用特性标记的方法来识别哪些属性是允许被注入的。</p>
 <ul>
 <li>任何需要被进行依赖注入的属性选择器需要标记<code>[Inject]</code>特性，同时其<code>Setter</code>的访问级别必须为<code>public</code>。</li>
 <li>任意构造函数的参数会自动完成注入</li>
+<li>依赖注入标记可以作用在构造函数的参数上以提供别名和约束的功能。</li>
 </ul>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Service</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Inject</span>]</div><div class="line">    <span class="keyword">public</span> IFileSystem LocalFileSystem &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Service</span>(<span class="params">IFileSystem fileSystem</span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">//fileSystem 和 LocalFileSystem 都会被自动注入</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <blockquote>
@@ -217,7 +218,7 @@
 <p>上述代码进行了一次简单的绑定，实现的作用是将<code>ConfigManager</code>绑定到容器，并且给定了<code>IConfigManager</code>(接口别名)和<code>config.manager</code>(字符串别名)的别名。</p>
 <p>随后您就可以使用别名来构建服务了:</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> manager1 = App.Instance.Make&lt;IConfigManager&gt;();</div><div class="line"><span class="keyword">var</span> manager2 = App.Instance.Make(<span class="string">"config.manager"</span>) <span class="keyword">as</span> IConfigManager;</div></pre></td></tr></table></figure>
-<h3 id="绑定服务-单例"><a href="#绑定服务-单例" class="headerlink" title="绑定服务(单例)"></a>绑定服务(单例)</h3><p>在上面的绑定中我们会发现<code>manager1</code>和<code>manager2</code>是不相等的，这是由于使用常规绑定所导致的，常规绑定服务后，每次<code>Make()</code>都会生成新的服务实例。</p>
+<h3 id="绑定服务-单例"><a href="#绑定服务-单例" class="headerlink" title="绑定服务(单例)"></a>绑定服务(单例)</h3><p>在上面的绑定中我们会发现<code>manager1</code>和<code>manager2</code>的内存地址是不相等的，这是由于使用常规绑定所导致的，常规绑定服务后，每次<code>Make()</code>都会生成新的服务实例。</p>
 <p>下面我们将使用单例绑定来对服务进行绑定:</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Instance.Singleton&lt;ConfigManager&gt;().Alias&lt;IConfigManager&gt;().Alias(<span class="string">"config.manager"</span>);</div></pre></td></tr></table></figure>
 <h3 id="绑定实例"><a href="#绑定实例" class="headerlink" title="绑定实例"></a>绑定实例</h3><p>CatLib还允许您对自己构建的实例进行绑定，随后对容器该实例的调用总是返回给定的实例。</p>

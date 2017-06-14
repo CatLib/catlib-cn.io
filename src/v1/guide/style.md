@@ -16,7 +16,7 @@ order: 4
 ### 概述
 
 - `代码`必须使用`4个空格`缩进，而不要使用制表符(tab)
-- 使用`using XXX`，而不是new XXX.xxx()
+- 使用`using XXX`，而不是`new XXX.xxx()`
 - `{}`必须换行,且内部代码`顶格书写`
 ``` csharp
 if(true)
@@ -33,7 +33,7 @@ if(true)
 public string VariableName = "VariableName";
 ```
 
-- 对于容易`产生歧义的表达式`您应该使用`括号`包括
+- 对于容易`产生歧义的表达式`您应该使用`括号`包裹
 ``` csharp
 if(variable1 + (++variable2) > 0)
 {
