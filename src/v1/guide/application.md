@@ -14,6 +14,14 @@ order: 102
 
 启动引导一般用于加载服务提供者，初始配置或者一些其他资源，在引导过程中请不要通过框架生成任何服务（除非您非常熟悉框架的启动流程），否则您可以使用到一个未经注册的服务。
 
+### 配置相关
+
+CatLib配置分为`初始配置`和`常规配置`。
+
+`初始配置`为服务提供者启动时所需要的配置,初始配置必须在框架启动前完成。
+
+`常规配置`为用户使用服务提供者所提供的功能时需要提供的配置。
+
 ### 初始配置
 
 初始配置必须在框架初始化前完成配置，下面是CatLib核心需要的初始配置：
@@ -65,13 +73,21 @@ public class Program : MonoBehaviour
 
 CatLib.Unity默认的用户代码入口在`Main.cs`文件中，当然你也可以同过路由标记来指定启动入口(这需要您删除Main.cs文件,事实上Main.cs的入口也是通过路由完成的)。
 
-通过路由来标记启动入口,入口的uri固定为`bootstrap://main`：
+通过路由来标记常规配置入口，常规配置的uri固定为`bootstrap://config`
+通过路由来标记启动入口,入口的uri固定为`bootstrap://start`：
 
 ``` csharp
 [Routed]
 public class Main
 {
-    [Routed("bootstrap://main")]
+    [Routed("bootstrap://config")]
+    public void Config()
+    {
+        //todo: config code here
+        Debug.Log("config code here!");
+    }
+
+    [Routed("bootstrap://start")]
     public void Bootstrap()
     {
         //todo: user code here
@@ -212,13 +228,15 @@ var env = App.Instance.Make<IEnv>();
 
 您可以通过`SetAssetPath`来设定资源路径，注意资源路径必须可以被写入。
 
+- 如果传入的值为`null`或者`空字符串`则不视作开发者手动设定。
+
 ``` csharp
 env.SetAssetPath(UnityEngine.Application.PersistentDataPath);
 ```
 
 #### **AssetPath**
 
-获取被设定的资源路径。默认情况下为：
+获取被设定的资源路径。`默认情况`下为：
 
 在编辑器模式下：
 
