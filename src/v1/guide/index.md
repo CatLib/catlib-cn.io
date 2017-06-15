@@ -41,3 +41,15 @@ CatLib 是一套`渐进式`的`服务提供者框架`。框架为客户端提供
 ### 第一次使用
 
 CatLib是易于上手的。你只需要有良好的 C# 基础。你就可以非常快速地通过阅读这份 指南 投入开发。
+
+### 相关项目友链
+
+#### **UI框架**
+
+- [FairyGUI](http://www.fairygui.com/) 编辑器操作简单，使用习惯与Adobe系列软件保持一致，策划和美术设计师可以轻松上手。在编辑器即可组合各种复杂UI组件，以及为UI设计动画效果，无需编写任何代码。可一键导出到Unity，Starling，Egret， LayaAir，Flash等多个主流应用和游戏平台。
+
+#### **热更新方案**
+
+- [ILRuntime](https://github.com/Ourpalm/ILRuntime)项目为基于C#的平台（例如Unity）提供了一个纯C#实现的，快速、方便并且可靠的IL运行时，使得能够在不支持JIT的硬件环境（如iOS）能够实现代码的热更新
+
+- [XLua](https://github.com/Tencent/xLua)为Unity、 .Net、 Mono等C#环境增加Lua脚本编程的能力，借助xLua，这些Lua代码可以方便的和C#相互调用。
