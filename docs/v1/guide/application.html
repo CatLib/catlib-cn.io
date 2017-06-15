@@ -196,7 +196,29 @@
     <article class="clearfix">
     <h2 id="CatLib核心"><a href="#CatLib核心" class="headerlink" title="CatLib核心"></a>CatLib核心</h2><p><code>Application</code>是CatLib程序的核心，也是所谓的程序入口。应用程序通过引导来加载服务提供者和其他一些必须的资源。应用程序在一般情况下只允许启动一个，且只能在主线程中启动。</p>
 <h3 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h3><p><code>启动引导</code> -&gt; <code>初始化</code> -&gt; <code>完成</code></p>
-<p>启动引导一般用于加载服务提供者或者一些其他资源，在引导过程中请不要通过框架生成任何服务，否则您可以使用到一个未经注册的服务。</p>
+<p>启动引导一般用于加载服务提供者，初始配置或者一些其他资源，在引导过程中请不要通过框架生成任何服务（除非您非常熟悉框架的启动流程），否则您可以使用到一个未经注册的服务。</p>
+<h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><p>初始配置必须在框架初始化前完成配置，下面是CatLib核心需要的初始配置：</p>
+<table>
+<thead>
+<tr>
+<th>配置名</th>
+<th style="text-align:center">是否必须</th>
+<th style="text-align:center">配置描述(可以点击查看详细)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>env.debug</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center"><a href="#环境">框架调试等级</a></td>
+</tr>
+<tr>
+<td><code>env.asset.path</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center"><a href="#环境">资源文件路径</a></td>
+</tr>
+</tbody>
+</table>
 <h3 id="从零开始"><a href="#从零开始" class="headerlink" title="从零开始"></a>从零开始</h3><p>现在我们将从零开始引导catlib框架启动以便于您能了解框架启动原理，事实上在真实项目中我们已经帮您写好了引导程序。</p>
 <p>首先我们需要定义个一个引导程序，引导程序必须继承自<code>IBootstrap</code>接口，我们可以在引导程序中对服务提供者进行注册或者，执行其他引导业务。一般情况下我们建议优先完成服务提供者的注册。注意您只有在初始化之前能注册服务提供者，一旦框架初始化那么调用<code>Register()</code>将会导致一个异常。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">GameBootstrap</span> : <span class="title">IBootstrap</span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Bootstrap</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        App.Instance.Register(<span class="keyword">typeof</span>(CoreProvider));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
