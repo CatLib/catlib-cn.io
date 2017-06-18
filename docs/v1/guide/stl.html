@@ -199,15 +199,15 @@
 <p>标准库组件不能通过容器进行生成，您需要手动<code>new</code>出标准库组件。</p>
 </blockquote>
 <h3 id="服务容器"><a href="#服务容器" class="headerlink" title="服务容器"></a>服务容器</h3><p>CatLib服务容器属于Stl的一部分，关于服务容器相关介绍请参考：<a href="container.html">服务容器</a></p>
-<h3 id="有序集"><a href="#有序集" class="headerlink" title="有序集"></a>有序集</h3><p>有序集合和集合一样也是元素的集合,且不允许重复的成员。不同的是每个元素都会关联一个可以被排序的分数。</p>
+<h3 id="有序集-SortSet"><a href="#有序集-SortSet" class="headerlink" title="有序集(SortSet)"></a>有序集(SortSet)</h3><p>有序集合和集合一样也是元素的集合,且不允许重复的成员。不同的是每个元素都会关联一个可以被排序的分数。</p>
 <p>有序集合是通过分数来为集合中的成员进行从小到大的排序。有序集合的成员是唯一的,但分数却可以重复。</p>
 <p>关于有序集的详细文档请参考：<a href="/v1/detail/stl/sortset.html">有序集</a></p>
-<h3 id="快速列表"><a href="#快速列表" class="headerlink" title="快速列表"></a>快速列表</h3><p>快速列表按照插入顺序排序。你可以添加一个元素导列表的头部（左边）或者尾部（右边）。</p>
+<h3 id="快速列表-QuickList"><a href="#快速列表-QuickList" class="headerlink" title="快速列表(QuickList)"></a>快速列表(QuickList)</h3><p>快速列表按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）。</p>
 <p>快速列表宏观上是一个双向链表，微观为数组。相对于传统列表，避免了修改造成的大规模的数据迁移。</p>
 <p>关于快速列表的详细文档请参考：<a href="/v1/detail/stl/quicklist.html">快速列表</a></p>
-<h3 id="近期最少使用缓存"><a href="#近期最少使用缓存" class="headerlink" title="近期最少使用缓存"></a>近期最少使用缓存</h3><p>近期最少使用缓存根据数据的历史访问记录来进行淘汰数据。当链表满的时候，将链表尾部的数据丢弃。</p>
+<h3 id="近期最少使用缓存-LruCache"><a href="#近期最少使用缓存-LruCache" class="headerlink" title="近期最少使用缓存(LruCache)"></a>近期最少使用缓存(LruCache)</h3><p>近期最少使用缓存根据数据的历史访问记录来进行淘汰数据。当链表满的时候，将链表尾部的数据丢弃。</p>
 <p>关于近期最少使用缓存的详细文档请参考：<a href="/v1/detail/stl/lrucache.html">近期最少使用缓存</a></p>
-<h3 id="过滤器链"><a href="#过滤器链" class="headerlink" title="过滤器链"></a>过滤器链</h3><p>过滤器链就是将会数据传递到一个任务序列中，过滤器链扮演者流水线的角色，数据在这里被处理然后传递到下一个步骤。</p>
+<h3 id="过滤器链-FilterChain"><a href="#过滤器链-FilterChain" class="headerlink" title="过滤器链(FilterChain)"></a>过滤器链(FilterChain)</h3><p>过滤器链就是将会数据传递到一个任务序列中，过滤器链扮演者流水线的角色，数据在这里被处理然后传递到下一个步骤。</p>
 <p>过滤器链可以将复杂的流程分解成多个独立的子任务。每个独立的任务都是可复用的，因此这些任务可以被组合成复杂的流程。</p>
 <p>关于过滤器链的详细文档请参考：<a href="/v1/detail/stl/filterchain.html">过滤器链</a></p>
 
