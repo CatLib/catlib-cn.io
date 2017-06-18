@@ -224,6 +224,13 @@
 </tr>
 </tbody>
 </table>
+<h3 id="合法的URI"><a href="#合法的URI" class="headerlink" title="合法的URI"></a>合法的URI</h3><p>符合下面RFC定义的URI均是合法的URI，都可以被CatLib路由系统解析：</p>
+<ul>
+<li><a href="https://www.ietf.org/rfc/rfc1808.txt" target="_blank" rel="external">RFC1808</a></li>
+<li><a href="https://www.ietf.org/rfc/rfc1738.txt" target="_blank" rel="external">RFC1738</a></li>
+<li><a href="https://www.ietf.org/rfc/rfc2396.txt" target="_blank" rel="external">RFC2396</a></li>
+<li><a href="https://www.ietf.org/rfc/rfc2732.txt" target="_blank" rel="external">RFC2732</a></li>
+</ul>
 <h3 id="基础注册"><a href="#基础注册" class="headerlink" title="基础注册"></a>基础注册</h3><p>注册一个基本路由只需要一个<code>url</code>与一个<code>lambda</code>, 如果您没有定义uri的<code>scheme</code>那么将会使用默认值:</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">Router.Instance.Reg(<span class="string">"main"</span>, (request, response) =&gt;</div><div class="line">&#123;</div><div class="line">    response.SetContext(<span class="string">"hello world"</span>);</div><div class="line">&#125;);</div><div class="line">Router.Instance.Dispatch(<span class="string">"catlib://main"</span>);</div></pre></td></tr></table></figure>
 <h3 id="特性路由注册"><a href="#特性路由注册" class="headerlink" title="特性路由注册"></a>特性路由注册</h3><p>CatLib还允许您为类添加路由标记<code>[Routed]</code>来进行特性路由,注意被路由的类必须标记为<code>[Routed]</code>,且需要在路由方法上也标记<code>[Routed]</code>,同时保证方法访问级别为<code>public</code>：</p>

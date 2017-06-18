@@ -42,6 +42,15 @@ CatLib路由系统由`路由器`，`特性路由`，`路由条目`，`路由编�
 | -------------------------------- |:------:|:--------------------------------------:|
 | `routing.stripping.reserved`     | 否      | [路由编译时参与编译的程序集](#路由编译剥离)  |
 
+### 合法的URI
+
+符合下面RFC定义的URI均是合法的URI，都可以被CatLib路由系统解析：
+
+- [RFC1808](https://www.ietf.org/rfc/rfc1808.txt)
+- [RFC1738](https://www.ietf.org/rfc/rfc1738.txt)
+- [RFC2396](https://www.ietf.org/rfc/rfc2396.txt)
+- [RFC2732](https://www.ietf.org/rfc/rfc2732.txt)
+
 ### 基础注册
 
 注册一个基本路由只需要一个`url`与一个`lambda`, 如果您没有定义uri的`scheme`那么将会使用默认值:
