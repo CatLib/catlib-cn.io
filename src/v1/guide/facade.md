@@ -23,8 +23,8 @@ public sealed class Router : Facade<IRouter>
 这个例子中，这里我们设定了路由系统的门面。
 
 ``` csharp
-Router.Instance.Dispatch("bootstrap://main");
-App.Instance.Make<IRouter>().Dispatch("bootstrap://main");
+Router.Instance.Dispatch("bootstrap://start");
+App.Instance.Make<IRouter>().Dispatch("bootstrap://start");
 // 以上2条语句等价
 ```
 

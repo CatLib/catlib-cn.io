@@ -19,7 +19,7 @@
             <nav class="nav">
     <div class="border">
         <img src="/images/logo.png" />
-        <button class="hiden-in-phone">V1.0</button>
+        <button class="hiden-in-phone">V0.8</button>
         <button id="btn-menu" class="hiden-in-pc">菜单</button>
         <ul class="nav-link hiden-in-phone">
             <!--li>
@@ -205,7 +205,7 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">IConfigManager manager = App.Instance.Make&lt;IConfigManager&gt;();</div><div class="line">IConfig config = manager.Default;</div></pre></td></tr></table></figure>
 <h3 id="默认配置容器"><a href="#默认配置容器" class="headerlink" title="默认配置容器"></a>默认配置容器</h3><p>CatLib的默认配置容器，自动挂载了：代码配置定位器(用于获取从代码中设定的配置)。</p>
 <p>您新拓展的配置容器，不会挂载任何的配置定位器，需要您手动挂载。</p>
-<h3 id="获取配置"><a href="#获取配置" class="headerlink" title="获取配置"></a>获取配置</h3><p>如果您需要从配置中获取配置，您可以通过<code>Get</code>方法来获取。第一个参数为<code>配置名</code>，第二个参数为<code>默认值</code>。当配置不存在的时候会使用默认值来填充缺失的配置。</p>
+<h3 id="获取配置"><a href="#获取配置" class="headerlink" title="获取配置"></a>获取配置</h3><p>如果您需要从配置组件中获取配置，您可以通过<code>Get</code>方法来获取。第一个参数为<code>配置名</code>，第二个参数为<code>默认值</code>。当配置不存在的时候会使用默认值来填充缺失的配置。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">string</span> val = config.Get(<span class="string">"config.name"</span>, <span class="keyword">string</span>.Empty);</div></pre></td></tr></table></figure>
 <h3 id="设定与保存配置"><a href="#设定与保存配置" class="headerlink" title="设定与保存配置"></a>设定与保存配置</h3><p>您可以通过<code>Set</code>方法来设定配置数据，第一个参数为<code>配置名</code>，第二个参数为<code>配置值</code>。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">config.Set(<span class="string">"config.name"</span>, <span class="string">"hello world"</span>);</div></pre></td></tr></table></figure>

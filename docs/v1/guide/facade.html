@@ -19,7 +19,7 @@
             <nav class="nav">
     <div class="border">
         <img src="/images/logo.png" />
-        <button class="hiden-in-phone">V1.0</button>
+        <button class="hiden-in-phone">V0.8</button>
         <button id="btn-menu" class="hiden-in-pc">菜单</button>
         <ul class="nav-link hiden-in-phone">
             <!--li>
@@ -199,7 +199,7 @@
 <h3 id="门面的原理"><a href="#门面的原理" class="headerlink" title="门面的原理"></a>门面的原理</h3><p>门面就是一个为容器中对象提供访问方式的类。该机制原理由<code>Facade</code>类实现。您需要继承自<code>Facade</code>类然后设定所需求的模板，这样门面就可以通过容器来获取服务。</p>
 <figure class="highlight"><table><tr><td class="code"><pre><div class="line">public sealed class Router : Facade&lt;IRouter&gt;</div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这个例子中，这里我们设定了路由系统的门面。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">Router.Instance.Dispatch(<span class="string">"bootstrap://main"</span>);</div><div class="line">App.Instance.Make&lt;IRouter&gt;().Dispatch(<span class="string">"bootstrap://main"</span>);</div><div class="line"><span class="comment">// 以上2条语句等价</span></div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">Router.Instance.Dispatch(<span class="string">"bootstrap://start"</span>);</div><div class="line">App.Instance.Make&lt;IRouter&gt;().Dispatch(<span class="string">"bootstrap://start"</span>);</div><div class="line"><span class="comment">// 以上2条语句等价</span></div></pre></td></tr></table></figure>
 <h3 id="门面类列表"><a href="#门面类列表" class="headerlink" title="门面类列表"></a>门面类列表</h3><table>
 <thead>
 <tr>

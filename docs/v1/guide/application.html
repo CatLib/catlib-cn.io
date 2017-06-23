@@ -19,7 +19,7 @@
             <nav class="nav">
     <div class="border">
         <img src="/images/logo.png" />
-        <button class="hiden-in-phone">V1.0</button>
+        <button class="hiden-in-phone">V0.8</button>
         <button id="btn-menu" class="hiden-in-pc">菜单</button>
         <ul class="nav-link hiden-in-phone">
             <!--li>
@@ -196,7 +196,32 @@
     <article class="clearfix">
     <h2 id="CatLib核心"><a href="#CatLib核心" class="headerlink" title="CatLib核心"></a>CatLib核心</h2><p><code>Application</code>是CatLib程序的核心，也是所谓的程序入口。应用程序通过引导来加载服务提供者和其他一些必须的资源。应用程序在一般情况下只允许启动一个，且只能在主线程中启动。</p>
 <h3 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h3><p><code>启动引导</code> -&gt; <code>初始化</code> -&gt; <code>完成</code></p>
-<p>启动引导一般用于加载服务提供者或者一些其他资源，在引导过程中请不要通过框架生成任何服务，否则您可以使用到一个未经注册的服务。</p>
+<p>启动引导一般用于加载服务提供者，初始配置或者一些其他资源，在引导过程中请不要通过框架生成任何服务（除非您非常熟悉框架的启动流程），否则您可以使用到一个未经注册的服务。</p>
+<h3 id="配置相关"><a href="#配置相关" class="headerlink" title="配置相关"></a>配置相关</h3><p>CatLib配置分为<code>初始配置</code>和<code>常规配置</code>。</p>
+<p><code>初始配置</code>为服务提供者启动时所需要的配置,初始配置必须在框架启动前完成。</p>
+<p><code>常规配置</code>为用户使用服务提供者所提供的功能时需要提供的配置。</p>
+<h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><p>初始配置必须在框架初始化前完成配置，下面是CatLib核心需要的初始配置：</p>
+<table>
+<thead>
+<tr>
+<th>配置名</th>
+<th style="text-align:center">是否必须</th>
+<th style="text-align:center">配置描述(可以点击查看详细)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>env.debug</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center"><a href="#环境">框架调试等级</a></td>
+</tr>
+<tr>
+<td><code>env.asset.path</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center"><a href="#环境">资源文件路径</a></td>
+</tr>
+</tbody>
+</table>
 <h3 id="从零开始"><a href="#从零开始" class="headerlink" title="从零开始"></a>从零开始</h3><p>现在我们将从零开始引导catlib框架启动以便于您能了解框架启动原理，事实上在真实项目中我们已经帮您写好了引导程序。</p>
 <p>首先我们需要定义个一个引导程序，引导程序必须继承自<code>IBootstrap</code>接口，我们可以在引导程序中对服务提供者进行注册或者，执行其他引导业务。一般情况下我们建议优先完成服务提供者的注册。注意您只有在初始化之前能注册服务提供者，一旦框架初始化那么调用<code>Register()</code>将会导致一个异常。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">GameBootstrap</span> : <span class="title">IBootstrap</span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Bootstrap</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        App.Instance.Register(<span class="keyword">typeof</span>(CoreProvider));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -207,8 +232,8 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Program</span> : <span class="title">MonoBehaviour</span> </div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Awake</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">var</span> application = <span class="keyword">new</span> Application(<span class="keyword">this</span>);</div><div class="line">        application.OnFindType((t) =&gt; Type.GetType(t));</div><div class="line">        application.Bootstrap(<span class="keyword">new</span> Type[]&#123; <span class="keyword">typeof</span>(GameBootstrap) &#125;);</div><div class="line">        application.Init(()=&gt;</div><div class="line">        &#123;</div><div class="line">            <span class="comment">// 框架启动完成</span></div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="从CatLib-Unity开始"><a href="#从CatLib-Unity开始" class="headerlink" title="从CatLib.Unity开始"></a>从CatLib.Unity开始</h3><p>除去上文描述的方案外，CatLib已经为开发者准备好了引导程序，在CatLib.Unity项目中您可以通过配置<code>Providers.cs</code>文件来设定框架的服务提供者。</p>
 <p>CatLib.Unity默认的用户代码入口在<code>Main.cs</code>文件中，当然你也可以同过路由标记来指定启动入口(这需要您删除Main.cs文件,事实上Main.cs的入口也是通过路由完成的)。</p>
-<p>通过路由来标记启动入口,入口的uri固定为<code>bootstrap://main</code>：</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">[<span class="meta">Routed</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Main</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Routed(<span class="meta-string">"bootstrap://main"</span>)</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Bootstrap</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">//todo: user code here</span></div><div class="line">        Debug.Log(<span class="string">"hello world! user code here!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>通过路由来标记常规配置入口，常规配置的uri固定为<code>bootstrap://config</code><br>通过路由来标记启动入口,入口的uri固定为<code>bootstrap://start</code>：</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">[<span class="meta">Routed</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Main</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Routed(<span class="meta-string">"bootstrap://config"</span>)</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Config</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">//todo: config code here</span></div><div class="line">        Debug.Log(<span class="string">"config code here!"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [<span class="meta">Routed(<span class="meta-string">"bootstrap://start"</span>)</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Bootstrap</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">//todo: user code here</span></div><div class="line">        Debug.Log(<span class="string">"hello world! user code here!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="主线程调用"><a href="#主线程调用" class="headerlink" title="主线程调用"></a>主线程调用</h3><p>CatLib核心提供了子线程代码块调度到主线程执行的能力。这在游戏系统中是非常常用的。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Instance.MainThread(()=&gt;</div><div class="line">&#123;</div><div class="line">    <span class="comment">//主线程中执行的代码块</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p>当然您可也可以通过<code>IsMainThread</code>来判断是否处于主线程中。</p>
@@ -243,8 +268,11 @@
 <h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p>您可以通过<code>IEnv</code>获取环境信息。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> env = App.Instance.Make&lt;IEnv&gt;();</div></pre></td></tr></table></figure>
 <h4 id="SetAssetPath"><a href="#SetAssetPath" class="headerlink" title="SetAssetPath"></a><strong>SetAssetPath</strong></h4><p>您可以通过<code>SetAssetPath</code>来设定资源路径，注意资源路径必须可以被写入。</p>
+<ul>
+<li>如果传入的值为<code>null</code>或者<code>空字符串</code>则不视作开发者手动设定。</li>
+</ul>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">env.SetAssetPath(UnityEngine.Application.PersistentDataPath);</div></pre></td></tr></table></figure>
-<h4 id="AssetPath"><a href="#AssetPath" class="headerlink" title="AssetPath"></a><strong>AssetPath</strong></h4><p>获取被设定的资源路径。默认情况下为：</p>
+<h4 id="AssetPath"><a href="#AssetPath" class="headerlink" title="AssetPath"></a><strong>AssetPath</strong></h4><p>获取被设定的资源路径。<code>默认情况</code>下为：</p>
 <p>在编辑器模式下：</p>
 <ul>
 <li><code>生产环境</code>为：<code>UnityEngine.Application.PersistentDataPath</code></li>

@@ -8,9 +8,9 @@ order: 2
 
 > CatLib的版本标准是采用：[Semver语义化版本标准](http://semver.org/lang/zh-CN/)
 
-### V1.0
+### V0.8 Beta
 
-> 本版本为 CatLib 第一个正式版本
+> 本版本为 CatLib 预发行Beta版。
 
 - 新增CatLib核心
 - 新增标准库 - 容器
