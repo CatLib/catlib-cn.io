@@ -253,7 +253,7 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Instance.OnFindType((finder)=&gt; Type.GetType(finder) , <span class="number">200</span>);</div><div class="line">App.Instance.OnFindType((finder)=&gt; MyType.GetType(finder) , <span class="number">100</span>);</div></pre></td></tr></table></figure>
 <p><code>OnFindType()</code> 允许传入一个优先级，优先级高的会被优先调用。</p>
 <blockquote>
-<p>注意，当生成的服务依赖于<code>OnFindType()</code>来推测服务时，服务构建将会使用c#的反射服务，这一过程对性能的损耗非常严重。所以您应该尽可能使用静态绑定而不是依赖推测来动态生成。</p><p></p>
+<p>注意，当生成的服务依赖于<code>OnFindType()</code>来推测服务时，服务构建将会使用c#的反射服务，这一过程对性能的损耗非常严重。所以您应该尽可能使用静态绑定而不是依赖推测来动态生成。</p>
 </blockquote>
 <h3 id="当服务解决-构建-时"><a href="#当服务解决-构建-时" class="headerlink" title="当服务解决(构建)时"></a>当服务解决(构建)时</h3><p>服务容器在每一次新解析对象时都会触发服务解决的事件，可以使用<code>OnResolving()</code>方法监听该事件。</p>
 <p>使用场景往往用于对于解决服务的修饰(初始化，监控等)，从而允许你在对象被传递给消费者之前为其设置额外属性。</p>
