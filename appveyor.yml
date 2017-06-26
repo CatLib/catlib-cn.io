@@ -10,5 +10,9 @@ test_script:
   - node --version
   - npm --version
 
-build: 
-  - hexo g
+build_script: 
+  - ps: hexo g
+  
+on_success:
+  - ps: git-config user.name appveyor
+  - ps: git-config user.email support@catlib.io
