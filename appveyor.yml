@@ -1,5 +1,7 @@
 environment:
   nodejs_version: "6"
+  git_token:
+    secure: 7pbe0TYPGE6wFfyLZwchNJELWGZDdntH6p7rsyzFRr4y/P8BX16AU/XYLVMRva65
 
 install:
   - ps: Install-Product node $env:nodejs_version
@@ -12,11 +14,7 @@ test_script:
 
 build_script: 
   - ps: hexo g
-
-environment:
-  git_token:
-    secure: 7pbe0TYPGE6wFfyLZwchNJELWGZDdntH6p7rsyzFRr4y/P8BX16AU/XYLVMRva65
-
+  
 on_success:
   - ps: git config --global user.name appveyor
   - ps: git config --global user.email support@catlib.io
