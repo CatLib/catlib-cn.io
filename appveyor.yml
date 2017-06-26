@@ -23,5 +23,4 @@ on_success:
   - ps: pwd
   - ps: ls
   - ps: git add .
-  - ps: git commit -am "gen docs"
-  - ps: git push
+  - ps: git commit -am "gen docs" | git push
