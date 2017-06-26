@@ -21,7 +21,7 @@ on_success:
   - ps: git config --global github.user catlibci
   - ps: git config --global github.token $env:git_token
   - ps: pwd
-  - ps: ls -l
+  - ps: ls
   - ps: git add .
   - ps: git commit -am "gen docs"
   - ps: git push
