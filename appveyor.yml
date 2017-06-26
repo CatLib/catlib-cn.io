@@ -14,12 +14,14 @@ test_script:
 
 build_script: 
   - ps: hexo g
-  
+
 on_success:
   - ps: git config --global user.name appveyor
   - ps: git config --global user.email support@catlib.io
   - ps: git config --global github.user catlibci
   - ps: git config --global github.token $env:git_token
+  - ps: pwd
+  - ps: ls -l
   - ps: git add .
   - ps: git commit -am "gen docs"
   - ps: git push
