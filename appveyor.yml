@@ -1,5 +1,5 @@
 environment:
-  nodejs_version: "8"
+  nodejs_version: "6"
 
 install:
   - ps: Install-Product node $env:nodejs_version
@@ -12,7 +12,7 @@ test_script:
 
 build_script: 
   - ps: hexo g
-  
+
 on_success:
   - ps: git-config user.name appveyor
   - ps: git-config user.email support@catlib.io
