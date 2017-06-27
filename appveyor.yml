@@ -23,3 +23,4 @@ on_success:
   - ps: git add .
   - ps: $result = git commit -am "gen docs"
   - ps: if($result){ git push origin master }
+  - ps: return 0
