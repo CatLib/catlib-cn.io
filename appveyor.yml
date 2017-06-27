@@ -17,10 +17,9 @@ build_script:
 
 on_success:
   - git config --global credential.helper store
+  - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com"
   - git config --global user.name appveyor
   - git config --global user.email support@catlib.io
   - git add .
   - git commit -am "gen docs"
-  - git remote rm origin
-  - git remote add origin 'git@github.com:catlib.io/catlib.io.git'
   - git push origin master
