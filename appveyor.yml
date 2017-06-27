@@ -21,6 +21,5 @@ on_success:
   - ps: git config --global github.user catlibci
   - ps: git config --global github.token $env:git_token
   - ps: git add .
-  - ps: $result = git commit -am "gen docs"
-  - ps: if($result){ git push origin master }
-  - ps: return 0
+  - ps: git commit -am "gen docs"
+  - ps: git push origin master
