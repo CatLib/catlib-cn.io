@@ -20,7 +20,6 @@ on_success:
   - ps: git config --global user.email support@catlib.io
   - ps: git config --global github.user catlibci
   - ps: git config --global github.token $env:git_token
-  - ps: pwd
-  - ps: ls
   - ps: git add .
-  - ps: git commit -am "gen docs" | git push origin master
+  - ps: $result = git commit -am "gen docs"
+  - ps: $result -and git push origin master
