@@ -31,6 +31,10 @@ CatLib容器采用特性标记的方法来识别哪些属性是允许被注入�
 - 依赖注入标记可以作用在构造函数的参数上以提供别名和约束的功能。
 
 ``` csharp
+class Adaptor : ClassInheritanceTest , ICrossBindingAdaptorType
+{
+    public string name = "test";
+}
 public class Service
 {
     [Inject]
