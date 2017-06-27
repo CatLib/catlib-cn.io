@@ -1,6 +1,6 @@
 environment:
   nodejs_version: "6"
-  git_token:
+  access_token:
     secure: 7pbe0TYPGE6wFfyLZwchNJELWGZDdntH6p7rsyzFRr4y/P8BX16AU/XYLVMRva65
 
 install:
@@ -16,10 +16,9 @@ build_script:
   - ps: hexo g
 
 on_success:
-  - ps: git config --global user.name appveyor
-  - ps: git config --global user.email support@catlib.io
-  - ps: git config --global github.user catlibci
-  - ps: git config --global github.token $env:git_token
-  - ps: git add .
-  - ps: git commit -am "gen docs"
-  - ps: git push origin master
+  - git config --global credential.helper store
+  - git config --global user.name appveyor
+  - git config --global user.email support@catlib.io
+  - git add .
+  - git commit -am "gen docs"
+  - git push origin master
