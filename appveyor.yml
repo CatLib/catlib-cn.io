@@ -18,7 +18,7 @@ build_script:
 
 on_success:
   - git config --global credential.helper store
-  - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com"
+  - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com\\n"
   - git config --global user.name "appveyor"
   - git config --global user.email "support@catlib.io"
   - git add .
