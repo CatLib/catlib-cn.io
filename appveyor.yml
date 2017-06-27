@@ -22,4 +22,4 @@ on_success:
   - ps: git config --global github.token $env:git_token
   - ps: git add .
   - ps: $result = git commit -am "gen docs"
-  - ps: $result -and git push origin master
+  - ps: if($result){ git push origin master }
