@@ -8,9 +8,20 @@ order: 2
 
 > CatLib的版本标准是采用：[Semver语义化版本标准](http://semver.org/lang/zh-CN/)
 
-### V0.8 Beta
+### V0.8.2 Beta
 
-> 本版本为 CatLib 预发行Beta版。
+- 修复了由于 `FileSystemManager` 门面模型的配置错误引发的bug
+
+### V0.8.1 Beta
+
+- 修复了版本名不一致的问题
+- 修复了遗漏注册的文件服务提供者
+- 修复了一个bug，这个bug会导致在路径`/`和`\`混用时无法正确定位
+- 修复了一个bug，这个bug导致在没有给定`AssetPath`时不能返回默认的路径
+
+### V0.8.0 Beta
+
+> 本版本为 CatLib 预发行Beta版
 
 - 新增CatLib核心
 - 新增标准库 - 容器
