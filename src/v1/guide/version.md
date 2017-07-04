@@ -8,6 +8,11 @@ order: 2
 
 > CatLib的版本标准是采用：[Semver语义化版本标准](http://semver.org/lang/zh-CN/)
 
+### V0.8.3 Beta
+
+- 修复了 `UnitySettingLocator` 无法正确存储及访问的问题
+- 修复了 `Application.Version` 不一致的问题
+
 ### V0.8.2 Beta
 
 - 修复了由于 `FileSystemManager` 门面模型的配置错误引发的bug

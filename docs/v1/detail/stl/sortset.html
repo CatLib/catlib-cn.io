@@ -220,50 +220,72 @@
 <li><a href="#ToArray">ToArray</a></li>
 </ul>
 <h3 id="Add"><a href="#Add" class="headerlink" title="Add"></a>Add</h3><p>添加一个<code>element</code>到有序集合，或者如果它已经存在则更新其分数，并排序到正确的位置上。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">sortset.Add(<span class="string">"this is element"</span> , <span class="number">10</span>);</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp">sortset<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">"this is element"</span> <span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h3 id="Clear"><a href="#Clear" class="headerlink" title="Clear"></a>Clear</h3><p>清空有序集中的所有元素。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">sortset.Clear();</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp">sortset<span class="token punctuation">.</span><span class="token function">Clear</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h3 id="Count"><a href="#Count" class="headerlink" title="Count"></a>Count</h3><p>获取有序集的<code>element</code>数量。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> num = sortset.Count;</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> num <span class="token operator">=</span> sortset<span class="token punctuation">.</span>Count<span class="token punctuation">;</span>
+</code></pre>
 <h3 id="Contains"><a href="#Contains" class="headerlink" title="Contains"></a>Contains</h3><p>判断有序集中是否存在<code>element</code>。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> isExists = sortset.Contains(<span class="string">"this is element"</span>);</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> isExists <span class="token operator">=</span> sortset<span class="token punctuation">.</span><span class="token function">Contains</span><span class="token punctuation">(</span><span class="token string">"this is element"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h3 id="First"><a href="#First" class="headerlink" title="First"></a>First</h3><p>获取有序集中的第一个元素。如果有序集为空则引发<code>InvalidOperationException</code>异常。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> element = sortset.First();</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> element <span class="token operator">=</span> sortset<span class="token punctuation">.</span><span class="token function">First</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h3 id="GetElementByRank"><a href="#GetElementByRank" class="headerlink" title="GetElementByRank"></a>GetElementByRank</h3><p>根据排名获取元素 (有序集成员按照Score从小到大排序)</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> element = sortset.GetElementByRank(<span class="number">10</span>);</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> element <span class="token operator">=</span> sortset<span class="token punctuation">.</span><span class="token function">GetElementByRank</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h3 id="GetElementByRevRank"><a href="#GetElementByRevRank" class="headerlink" title="GetElementByRevRank"></a>GetElementByRevRank</h3><p>根据排名获取元素 (有序集成员按照Score从大到小排序)</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> element = sortset.GetElementByRevRank(<span class="number">10</span>);</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> element <span class="token operator">=</span> sortset<span class="token punctuation">.</span><span class="token function">GetElementByRevRank</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h3 id="GetElementRangeByRank"><a href="#GetElementRangeByRank" class="headerlink" title="GetElementRangeByRank"></a>GetElementRangeByRank</h3><p>根据<code>排名</code>获取范围内的元素列表，排序按照排名从小到大。(默认包括等于<code>min</code>或<code>max</code>)</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> list = sortset.GetElementRangeByRank(<span class="number">10</span>,<span class="number">20</span>);</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> list <span class="token operator">=</span> sortset<span class="token punctuation">.</span><span class="token function">GetElementRangeByRank</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h3 id="GetElementRangeByScore"><a href="#GetElementRangeByScore" class="headerlink" title="GetElementRangeByScore"></a>GetElementRangeByScore</h3><p>根据<code>分数</code>获取范围内的元素列表,排序按照分数从小到大。(默认包括等于<code>min</code>或<code>max</code>)</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> list = sortset.GetElementRangeByScore(<span class="number">100</span>,<span class="number">200</span>);</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> list <span class="token operator">=</span> sortset<span class="token punctuation">.</span><span class="token function">GetElementRangeByScore</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">,</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h3 id="GetScore"><a href="#GetScore" class="headerlink" title="GetScore"></a>GetScore</h3><p>返回有序集中<code>element</code>的分数，如果<code>element</code>不存在则引发<code>KeyNotFoundException</code>。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> score = sortset.GetScore(<span class="string">"this is element"</span>);</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> score <span class="token operator">=</span> sortset<span class="token punctuation">.</span><span class="token function">GetScore</span><span class="token punctuation">(</span><span class="token string">"this is element"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h3 id="GetRank"><a href="#GetRank" class="headerlink" title="GetRank"></a>GetRank</h3><p>获取<code>element</code>的排名 , 有序集成员按照Score<code>从小到大</code>排序。如果返回-1则表示没有找到元素。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> rank = sortset.GetRank(<span class="string">"this is element"</span>);</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> rank <span class="token operator">=</span> sortset<span class="token punctuation">.</span><span class="token function">GetRank</span><span class="token punctuation">(</span><span class="token string">"this is element"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h3 id="GetRevRank"><a href="#GetRevRank" class="headerlink" title="GetRevRank"></a>GetRevRank</h3><p>获取<code>element</code>的排名 , 有序集成员按照Score<code>从大到小</code>排序。如果返回-1则表示没有找到元素。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> rank = sortset.GetRevRank(<span class="string">"this is element"</span>);</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> rank <span class="token operator">=</span> sortset<span class="token punctuation">.</span><span class="token function">GetRevRank</span><span class="token punctuation">(</span><span class="token string">"this is element"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h3 id="GetRangeCount"><a href="#GetRangeCount" class="headerlink" title="GetRangeCount"></a>GetRangeCount</h3><p>获取分数区间内的元素数量。(默认包括等于<code>min</code>或<code>max</code>)</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> num = sortset.GetRangeCount(<span class="number">10</span>,<span class="number">100</span>);</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> num <span class="token operator">=</span> sortset<span class="token punctuation">.</span><span class="token function">GetRangeCount</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h3 id="Last"><a href="#Last" class="headerlink" title="Last"></a>Last</h3><p>获取有序集中的最后一个元素。如果有序集为空则引发<code>InvalidOperationException</code>异常。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> element = sortset.Last();</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> element <span class="token operator">=</span> sortset<span class="token punctuation">.</span><span class="token function">Last</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h3 id="Pop"><a href="#Pop" class="headerlink" title="Pop"></a>Pop</h3><p>移除并返回有序集尾部的元素。如果有序集为空则引发<code>InvalidOperationException</code>异常。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> element = sortset.Pop();</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> element <span class="token operator">=</span> sortset<span class="token punctuation">.</span><span class="token function">Pop</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h3 id="Remove"><a href="#Remove" class="headerlink" title="Remove"></a>Remove</h3><p>移除有序集合中的指定的<code>element</code>，如果移除失败则返回<code>false</code>。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> isSuccess = sortset.Remove(<span class="string">"this is element"</span>);</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> isSuccess <span class="token operator">=</span> sortset<span class="token punctuation">.</span><span class="token function">Remove</span><span class="token punctuation">(</span><span class="token string">"this is element"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h3 id="RemoveRangeByRank"><a href="#RemoveRangeByRank" class="headerlink" title="RemoveRangeByRank"></a>RemoveRangeByRank</h3><p>根据指定的<code>排名范围</code>移除范围内的所有<code>element</code>，并返回移除元素的数量。(默认包括等于<code>min</code>或<code>max</code>)</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">int</span> <span class="keyword">remove</span> = sortset.RemoveRangeByRank(<span class="number">10</span>，<span class="number">20</span>);</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">int</span> <span class="token keyword">remove</span> <span class="token operator">=</span> sortset<span class="token punctuation">.</span><span class="token function">RemoveRangeByRank</span><span class="token punctuation">(</span><span class="token number">10</span>，<span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h3 id="RemoveRangeByScore"><a href="#RemoveRangeByScore" class="headerlink" title="RemoveRangeByScore"></a>RemoveRangeByScore</h3><p>根据指定的<code>分数范围</code>移除范围内的所有<code>element</code>，并返回移除元素的数量。(默认包括等于<code>min</code>或<code>max</code>)</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">int</span> <span class="keyword">remove</span> = sortset.RemoveRangeByScore(<span class="number">100</span>，<span class="number">200</span>);</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">int</span> <span class="token keyword">remove</span> <span class="token operator">=</span> sortset<span class="token punctuation">.</span><span class="token function">RemoveRangeByScore</span><span class="token punctuation">(</span><span class="token number">100</span>，<span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h3 id="ReverseIterator"><a href="#ReverseIterator" class="headerlink" title="ReverseIterator"></a>ReverseIterator</h3><p>反转迭代器迭代顺序。</p>
 <blockquote>
 <p>注意，这并不是真正意义反转整个有序集，只是反转了迭代顺序。</p>
 </blockquote>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">sortset.ReverseIterator();</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp">sortset<span class="token punctuation">.</span><span class="token function">ReverseIterator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h3 id="Shift"><a href="#Shift" class="headerlink" title="Shift"></a>Shift</h3><p>移除并返回有序集头部的元素。如果有序集为空则引发<code>InvalidOperationException</code>异常。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> element = sortset.Shift();</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> element <span class="token operator">=</span> sortset<span class="token punctuation">.</span><span class="token function">Shift</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
 <h3 id="ToArray"><a href="#ToArray" class="headerlink" title="ToArray"></a>ToArray</h3><p>将有序集转为数组。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> array = sortset.ToArray();</div></pre></td></tr></table></figure>
+<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> array <span class="token operator">=</span> sortset<span class="token punctuation">.</span><span class="token function">ToArray</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre>
+
     <div class="footer">
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/detail/stl/sortset.md" target="_blank">
