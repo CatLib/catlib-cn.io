@@ -178,7 +178,7 @@ article h5 {
   margin-top: 2.125rem;
 }
 article p {
-  font-size: 1rem;
+  font-size: 0.95rem;
   margin-bottom: 1.25rem;
   margin-top: 0.625rem;
   line-height: 1.8;
@@ -191,8 +191,9 @@ article ul {
   font-size: 0.9rem;
 }
 article ul li {
-  padding-top: 0.25rem;
+  padding-bottom: 0.4rem;
   color: #525252;
+  line-height: 1.5rem;
 }
 article table {
   width: 100%;
@@ -487,6 +488,7 @@ nav img {
 }
 nav .nav-link li {
   float: right;
+  font-size: 0.95rem;
   padding: 1.75rem 1rem;
 }
 nav .nav-link li a {
@@ -535,6 +537,7 @@ article {
   padding-left: 0.5rem;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-size: 0.95rem;
 }
 .sub-nav dl dd.select {
   border-left: 0.125rem #f4645f solid;
