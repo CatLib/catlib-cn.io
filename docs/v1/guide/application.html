@@ -194,7 +194,10 @@
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="CatLib核心"><a href="#CatLib核心" class="headerlink" title="CatLib核心"></a>CatLib核心</h2><figcaption><h3 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h3><p><code>启动引导</code> -&gt; <code>初始化</code> -&gt; <code>完成</code></p></figcaption><pre class=" language-Application</code>是CatLib程序的核心，也是所谓的程序入口。应用程序通过引导来加载服务提供者和其他一些必须的资源。应用程序在一般情况下只允许启动一个，且只能在主线程中启动。</p>"><code class="language-Application</code>是CatLib程序的核心，也是所谓的程序入口。应用程序通过引导来加载服务提供者和其他一些必须的资源。应用程序在一般情况下只允许启动一个，且只能在主线程中启动。</p>"><p>启动引导一般用于加载服务提供者，初始配置或者一些其他资源，在引导过程中请不要通过框架生成任何服务（除非您非常熟悉框架的启动流程），否则您可以使用到一个未经注册的服务。</p>
+    <h2 id="CatLib核心"><a href="#CatLib核心" class="headerlink" title="CatLib核心"></a>CatLib核心</h2><p><code>Application</code>是CatLib程序的核心，也是所谓的程序入口。应用程序通过引导来加载服务提供者和其他一些必须的资源。应用程序在一般情况下只允许启动一个，且只能在主线程中启动。</p>
+<h3 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h3><p><code>启动引导</code> -&gt; <code>初始化</code> -&gt; <code>完成</code></p>
+<p>启动引导一般用于加载服务提供者，初始配置或者一些其他资源，在引导过程中请不要通过框架生成任何服务（除非您非常熟悉框架的启动流程），否则您可以使用到一个未经注册的服务。</p>
+<h3 id="生命周期图"><a href="#生命周期图" class="headerlink" title="生命周期图"></a>生命周期图</h3><p><img src="images/life-cycle.png" alt=""></p>
 <h3 id="配置相关"><a href="#配置相关" class="headerlink" title="配置相关"></a>配置相关</h3><p>CatLib配置分为<code>初始配置</code>和<code>常规配置</code>。</p>
 <p><code>初始配置</code>为服务提供者启动时所需要的配置,初始配置必须在框架启动前完成。</p>
 <p><code>常规配置</code>为用户使用服务提供者所提供的功能时需要提供的配置。</p>
@@ -222,125 +225,54 @@
 </table>
 <h3 id="从零开始"><a href="#从零开始" class="headerlink" title="从零开始"></a>从零开始</h3><p>现在我们将从零开始引导catlib框架启动以便于您能了解框架启动原理，事实上在真实项目中我们已经帮您写好了引导程序。</p>
 <p>首先我们需要定义个一个引导程序，引导程序必须继承自<code>IBootstrap</code>接口，我们可以在引导程序中对服务提供者进行注册或者，执行其他引导业务。一般情况下我们建议优先完成服务提供者的注册。注意您只有在初始化之前能注册服务提供者，一旦框架初始化那么调用<code>Register()</code>将会导致一个异常。</p>
-<pre><code class="csharp">public class GameBootstrap : IBootstrap
-{
-    public void Bootstrap()
-    {
-        App.Instance.Register(typeof(CoreProvider));
-    }
-}
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">GameBootstrap</span> : <span class="title">IBootstrap</span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Bootstrap</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        App.Instance.Register(<span class="keyword">typeof</span>(CoreProvider));</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>随后我们需要一个入口程序，用于被Unity挂载并触发启动流程。在入口程序中，我们只需要实例一个CatLib应用程序，并设定对应引导程序（引导程序会根据设置顺序加载）.最后再执行初始化。</p>
 <blockquote>
 <p>注意如果您的使用的是<code>CatLib.dll</code>会存在构建跨程序集问题，所以您需要提供<code>OnFindType()</code>方法来帮助框架获取当前程序集的类型。</p>
 </blockquote>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Program</span> <span class="token punctuation">:</span> MonoBehaviour 
-<span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">Awake</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token keyword">var</span> application <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Application</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        application<span class="token punctuation">.</span><span class="token function">OnFindType</span><span class="token punctuation">(</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span> <span class="token operator">=</span><span class="token operator">></span> Type<span class="token punctuation">.</span><span class="token function">GetType</span><span class="token punctuation">(</span>t<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        application<span class="token punctuation">.</span><span class="token function">Bootstrap</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Type</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">{</span> <span class="token keyword">typeof</span><span class="token punctuation">(</span>GameBootstrap<span class="token punctuation">)</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        application<span class="token punctuation">.</span><span class="token function">Init</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span>
-        <span class="token punctuation">{</span>
-            <span class="token comment" spellcheck="true">// 框架启动完成</span>
-        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Program</span> : <span class="title">MonoBehaviour</span> </div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Awake</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">var</span> application = <span class="keyword">new</span> Application(<span class="keyword">this</span>);</div><div class="line">        application.OnFindType((t) =&gt; Type.GetType(t));</div><div class="line">        application.Bootstrap(<span class="keyword">new</span> Type[]&#123; <span class="keyword">typeof</span>(GameBootstrap) &#125;);</div><div class="line">        application.Init(()=&gt;</div><div class="line">        &#123;</div><div class="line">            <span class="comment">// 框架启动完成</span></div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="从CatLib-Unity开始"><a href="#从CatLib-Unity开始" class="headerlink" title="从CatLib.Unity开始"></a>从CatLib.Unity开始</h3><p>除去上文描述的方案外，CatLib已经为开发者准备好了引导程序，在CatLib.Unity项目中您可以通过配置<code>Providers.cs</code>文件来设定框架的服务提供者。</p>
 <p>CatLib.Unity默认的用户代码入口在<code>Main.cs</code>文件中，当然你也可以同过路由标记来指定启动入口(这需要您删除Main.cs文件,事实上Main.cs的入口也是通过路由完成的)。</p>
 <p>通过路由来标记常规配置入口，常规配置的uri固定为<code>bootstrap://config</code><br>通过路由来标记启动入口,入口的uri固定为<code>bootstrap://start</code>：</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token punctuation">[</span>Routed<span class="token punctuation">]</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Main</span>
-<span class="token punctuation">{</span>
-    <span class="token punctuation">[</span><span class="token function">Routed</span><span class="token punctuation">(</span><span class="token string">"bootstrap://config"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">Config</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">//todo: config code here</span>
-        Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"config code here!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token punctuation">[</span><span class="token function">Routed</span><span class="token punctuation">(</span><span class="token string">"bootstrap://start"</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">Bootstrap</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">//todo: user code here</span>
-        Debug<span class="token punctuation">.</span><span class="token function">Log</span><span class="token punctuation">(</span><span class="token string">"hello world! user code here!"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">[<span class="meta">Routed</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Main</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Routed(<span class="meta-string">"bootstrap://config"</span>)</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Config</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">//todo: config code here</span></div><div class="line">        Debug.Log(<span class="string">"config code here!"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [<span class="meta">Routed(<span class="meta-string">"bootstrap://start"</span>)</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Bootstrap</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">//todo: user code here</span></div><div class="line">        Debug.Log(<span class="string">"hello world! user code here!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="主线程调用"><a href="#主线程调用" class="headerlink" title="主线程调用"></a>主线程调用</h3><p>CatLib核心提供了子线程代码块调度到主线程执行的能力。这在游戏系统中是非常常用的。</p>
-<pre class=" language-csharp"><code class="language-csharp">App<span class="token punctuation">.</span>Instance<span class="token punctuation">.</span><span class="token function">MainThread</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span>
-<span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">//主线程中执行的代码块</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Instance.MainThread(()=&gt;</div><div class="line">&#123;</div><div class="line">    <span class="comment">//主线程中执行的代码块</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <p>当然您可也可以通过<code>IsMainThread</code>来判断是否处于主线程中。</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> isMainThread <span class="token operator">=</span> App<span class="token punctuation">.</span>Instance<span class="token punctuation">.</span>IsMainThread<span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> isMainThread = App.Instance.IsMainThread;</div></pre></td></tr></table></figure>
 <h3 id="挂载执行"><a href="#挂载执行" class="headerlink" title="挂载执行"></a>挂载执行</h3><p>挂载执行允许您非继承自<code>MonoBehaviour</code>的类拥有<code>MonoBehaviour</code>的一部分能力</p>
-<p>您需要实现任意一个增强接口才能进行挂载，可以被实现的增强接口有:<code>IUpdate</code>,<code>ILateUpdate</code>,<code>IDestroy</code></pre>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Element</span> <span class="token punctuation">:</span> IUpdate
-<span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">Update</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">//todo</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> ele <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Element</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-App<span class="token punctuation">.</span>Instance<span class="token punctuation">.</span><span class="token function">Attach</span><span class="token punctuation">(</span>ele<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<p>您需要实现任意一个增强接口才能进行挂载，可以被实现的增强接口有:<code>IUpdate</code>,<code>ILateUpdate</code>,<code>IDestroy</code></p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Element</span> : <span class="title">IUpdate</span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Update</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">//todo</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> ele = <span class="keyword">new</span> Element();</div><div class="line">App.Instance.Attach(ele);</div></pre></td></tr></table></figure>
 <p>一个对象只能被挂载一次，但您可以通过卸载来卸载挂载的对象：</p>
-<pre class=" language-csharp"><code class="language-csharp">App<span class="token punctuation">.</span>Instance<span class="token punctuation">.</span><span class="token function">Detach</span><span class="token punctuation">(</span>ele<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Instance.Detach(ele);</div></pre></td></tr></table></figure>
 <p>除了手动挂载外，如果您已经将服务绑定到容器，且绑定类型为单例绑定，那么一旦您实现了增强接口，那么框架会自动帮您挂载执行，同理当您释放的时候也会自动进行卸载。</p>
 <blockquote>
 <p>注意，只有当您的服务是单例的，实现了增强接口，且是通过容器进行生成，才会自动挂载（如果您自己<code>new</code>的对象可不会自动挂载哦）</p>
 </blockquote>
 <h3 id="协同"><a href="#协同" class="headerlink" title="协同"></a>协同</h3><p>CatLib允许非继承自<code>MonoBehaviour</code>的类通过这个接口来启动一个协同程序。</p>
-<pre class=" language-csharp"><code class="language-csharp">App<span class="token punctuation">.</span>Instance<span class="token punctuation">.</span><span class="token function">StartCoroutine</span><span class="token punctuation">(</span><span class="token comment" spellcheck="true">/* todo: 你的协同函数 */</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Instance.StartCoroutine(<span class="comment">/* todo: 你的协同函数 */</span>);</div></pre></td></tr></table></figure>
 <h3 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h3><p>CatLib所有的增强接口都支持优先级特性。您可以使用<code>[Priority()]</code>来定义优先级。</p>
 <p>定义：在CatLib中优先级值越小越优先。</p>
 <blockquote>
 <p>如果其他组件也使用了优先级那么她们的也遵循CatLib优先级的定义。</p>
 </blockquote>
 <h3 id="全局事件"><a href="#全局事件" class="headerlink" title="全局事件"></a>全局事件</h3><p>CatLib核心提供的全局事件系统，您只需要通过简单的API就可以调用。</p>
-<h4 id="触发全局事件"><a href="#触发全局事件" class="headerlink" title="触发全局事件"></a><strong>触发全局事件</strong></h4><pre class=" language-csharp"><code class="language-csharp">App<span class="token punctuation">.</span>Instance<span class="token punctuation">.</span><span class="token function">Trigger</span><span class="token punctuation">(</span><span class="token string">"event"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<h4 id="触发全局事件"><a href="#触发全局事件" class="headerlink" title="触发全局事件"></a><strong>触发全局事件</strong></h4><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Instance.Trigger(<span class="string">"event"</span>);</div></pre></td></tr></table></figure>
 <h4 id="监听全局事件"><a href="#监听全局事件" class="headerlink" title="监听全局事件"></a><strong>监听全局事件</strong></h4><p>监听全局事件时允许您传入触发次数，如果您没有传入则表示事件一直有效，反正如果达到触发，则事件自动被撤销。</p>
-<pre class=" language-csharp"><code class="language-csharp">App<span class="token punctuation">.</span>Instance<span class="token punctuation">.</span><span class="token function">On</span><span class="token punctuation">(</span><span class="token string">"event"</span> <span class="token punctuation">,</span> <span class="token punctuation">(</span>sender <span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span>
-<span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// 接受到事件</span>
-<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token number">10</span><span class="token punctuation">)</span>
-</code></pre>
-<h4 id="撤销监听全局事件"><a href="#撤销监听全局事件" class="headerlink" title="撤销监听全局事件"></a><strong>撤销监听全局事件</strong></h4><pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> handler <span class="token operator">=</span> App<span class="token punctuation">.</span>Instance<span class="token punctuation">.</span><span class="token function">On</span><span class="token punctuation">(</span><span class="token string">"event"</span> <span class="token punctuation">,</span> <span class="token punctuation">(</span>sender <span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span>
-<span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// 接受到事件</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-handler<span class="token punctuation">.</span><span class="token function">Cancel</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-<h4 id="监听一次全局事件"><a href="#监听一次全局事件" class="headerlink" title="监听一次全局事件"></a><strong>监听一次全局事件</strong></h4><pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> handler <span class="token operator">=</span> App<span class="token punctuation">.</span>Instance<span class="token punctuation">.</span><span class="token function">One</span><span class="token punctuation">(</span><span class="token string">"event"</span> <span class="token punctuation">,</span> <span class="token punctuation">(</span>sender <span class="token punctuation">,</span> e<span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span>
-<span class="token punctuation">{</span>
-    <span class="token comment" spellcheck="true">// 接受到事件</span>
-<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Instance.On(<span class="string">"event"</span> , (sender , e)=&gt;</div><div class="line">&#123;</div><div class="line">    <span class="comment">// 接受到事件</span></div><div class="line">&#125;, <span class="number">10</span>)</div></pre></td></tr></table></figure>
+<h4 id="撤销监听全局事件"><a href="#撤销监听全局事件" class="headerlink" title="撤销监听全局事件"></a><strong>撤销监听全局事件</strong></h4><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> handler = App.Instance.On(<span class="string">"event"</span> , (sender , e)=&gt;</div><div class="line">&#123;</div><div class="line">    <span class="comment">// 接受到事件</span></div><div class="line">&#125;);</div><div class="line">handler.Cancel();</div></pre></td></tr></table></figure>
+<h4 id="监听一次全局事件"><a href="#监听一次全局事件" class="headerlink" title="监听一次全局事件"></a><strong>监听一次全局事件</strong></h4><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> handler = App.Instance.One(<span class="string">"event"</span> , (sender , e)=&gt;</div><div class="line">&#123;</div><div class="line">    <span class="comment">// 接受到事件</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <h3 id="程序内GUID"><a href="#程序内GUID" class="headerlink" title="程序内GUID"></a>程序内GUID</h3><p>CatLib核心提供了获取当前核心实例内的唯一GUID。</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> guid <span class="token operator">=</span> App<span class="token punctuation">.</span>Instance<span class="token punctuation">.</span><span class="token function">GetGuid</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> guid = App.Instance.GetGuid();</div></pre></td></tr></table></figure>
 <h3 id="获取CatLib版本号"><a href="#获取CatLib版本号" class="headerlink" title="获取CatLib版本号"></a>获取CatLib版本号</h3><p>您可以通过<code>Version</code>获取当前CatLib核心版本号。</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> version <span class="token operator">=</span> App<span class="token punctuation">.</span>Instance<span class="token punctuation">.</span>Version<span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> version = App.Instance.Version;</div></pre></td></tr></table></figure>
 <h3 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h3><p>您可以通过<code>IEnv</code>获取环境信息。</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> env <span class="token operator">=</span> App<span class="token punctuation">.</span>Instance<span class="token punctuation">.</span><span class="token generic-method function">Make<span class="token punctuation">&lt;</span>IEnv<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> env = App.Instance.Make&lt;IEnv&gt;();</div></pre></td></tr></table></figure>
 <h4 id="SetAssetPath"><a href="#SetAssetPath" class="headerlink" title="SetAssetPath"></a><strong>SetAssetPath</strong></h4><p>您可以通过<code>SetAssetPath</code>来设定资源路径，注意资源路径必须可以被写入。</p>
 <ul>
 <li>如果传入的值为<code>null</code>或者<code>空字符串</code>则不视作开发者手动设定。</li>
 </ul>
-<pre class=" language-csharp"><code class="language-csharp">env<span class="token punctuation">.</span><span class="token function">SetAssetPath</span><span class="token punctuation">(</span>UnityEngine<span class="token punctuation">.</span>Application<span class="token punctuation">.</span>PersistentDataPath<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">env.SetAssetPath(UnityEngine.Application.PersistentDataPath);</div></pre></td></tr></table></figure>
 <h4 id="AssetPath"><a href="#AssetPath" class="headerlink" title="AssetPath"></a><strong>AssetPath</strong></h4><p>获取被设定的资源路径。<code>默认情况</code>下为：</p>
 <p>在编辑器模式下：</p>
 <ul>
@@ -353,8 +285,7 @@ handler<span class="token punctuation">.</span><span class="token function">Canc
 <li>自动设定为：<code>UnityEngine.Application.PersistentDataPath</code></li>
 </ul>
 <p>不论在任何模式下，如果开发者手动设定了<code>SetAssetPath</code>。那么始终返回开发者设定的，<code>AssetPath</code>。</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> assetPath <span class="token operator">=</span> env<span class="token punctuation">.</span>AssetPath<span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> assetPath = env.AssetPath;</div></pre></td></tr></table></figure>
 <h4 id="SetDebugLevel"><a href="#SetDebugLevel" class="headerlink" title="SetDebugLevel"></a><strong>SetDebugLevel</strong></h4><p>设定CatLib的调试等级。CatLib的调试等级分为：</p>
 <ul>
 <li><code>Prod</code>生产环境</li>
@@ -362,12 +293,9 @@ handler<span class="token punctuation">.</span><span class="token function">Canc
 <li><code>Dev</code>开发者模式</li>
 <li><code>Auto</code>自动模式，在Unity编辑器下为开发者模式，发布后为生产环境。</li>
 </ul>
-<pre class=" language-csharp"><code class="language-csharp">env<span class="token punctuation">.</span><span class="token function">SetDebugLevel</span><span class="token punctuation">(</span>DebugLevels<span class="token punctuation">.</span>Prod<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">env.SetDebugLevel(DebugLevels.Prod);</div></pre></td></tr></table></figure>
 <h4 id="DebugLevel"><a href="#DebugLevel" class="headerlink" title="DebugLevel"></a><strong>DebugLevel</strong></h4><p>获取调试等级。</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> debugLevel <span class="token operator">=</span> env<span class="token punctuation">.</span>DebugLevel<span class="token punctuation">;</span>
-</code></pre>
-
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> debugLevel = env.DebugLevel;</div></pre></td></tr></table></figure>
     <div class="footer">
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/application.md" target="_blank">

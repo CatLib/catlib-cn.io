@@ -10,6 +10,11 @@ order: 100
 
 > 服务提供者是CatLib核心提供的功能，如果您需要将CatLib的组件移植到其他框架使用，那么您需要移除服务提供者。
 
+
+### CatLib架构图
+
+<img src="../../images/architecture-diagram.png" width="100%"/>
+
 ### 实现服务提供者
 
 您的服务提供者类必须继承自`CatLib.ServiceProvider`类 , 大部分服务提供者都包含两个方法：`Register()`和`Init()`，其中`Register()`是必须要实现的。
