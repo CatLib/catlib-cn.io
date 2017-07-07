@@ -202,25 +202,18 @@
 <p>请注意，所有的CatLib组件都会从<code>默认</code>的配置定位器中获取数据</p>
 </blockquote>
 <h3 id="文档上下文说明"><a href="#文档上下文说明" class="headerlink" title="文档上下文说明"></a>文档上下文说明</h3><p>文档中演示的片段代码如果没有特殊说明均是使用下面所示的上下文关系和默认的配置容器:</p>
-<pre class=" language-csharp"><code class="language-csharp">IConfigManager manager <span class="token operator">=</span> App<span class="token punctuation">.</span>Instance<span class="token punctuation">.</span><span class="token generic-method function">Make<span class="token punctuation">&lt;</span>IConfigManager<span class="token punctuation">></span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-IConfig config <span class="token operator">=</span> manager<span class="token punctuation">.</span>Default<span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">IConfigManager manager = App.Instance.Make&lt;IConfigManager&gt;();</div><div class="line">IConfig config = manager.Default;</div></pre></td></tr></table></figure>
 <h3 id="默认配置容器"><a href="#默认配置容器" class="headerlink" title="默认配置容器"></a>默认配置容器</h3><p>CatLib的默认配置容器，自动挂载了：代码配置定位器(用于获取从代码中设定的配置)。</p>
 <p>您新拓展的配置容器，不会挂载任何的配置定位器，需要您手动挂载。</p>
 <h3 id="获取配置"><a href="#获取配置" class="headerlink" title="获取配置"></a>获取配置</h3><p>如果您需要从配置组件中获取配置，您可以通过<code>Get</code>方法来获取。第一个参数为<code>配置名</code>，第二个参数为<code>默认值</code>。当配置不存在的时候会使用默认值来填充缺失的配置。</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">string</span> val <span class="token operator">=</span> config<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"config.name"</span><span class="token punctuation">,</span> <span class="token keyword">string</span><span class="token punctuation">.</span>Empty<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">string</span> val = config.Get(<span class="string">"config.name"</span>, <span class="keyword">string</span>.Empty);</div></pre></td></tr></table></figure>
 <h3 id="设定与保存配置"><a href="#设定与保存配置" class="headerlink" title="设定与保存配置"></a>设定与保存配置</h3><p>您可以通过<code>Set</code>方法来设定配置数据，第一个参数为<code>配置名</code>，第二个参数为<code>配置值</code>。</p>
-<pre class=" language-csharp"><code class="language-csharp">config<span class="token punctuation">.</span><span class="token function">Set</span><span class="token punctuation">(</span><span class="token string">"config.name"</span><span class="token punctuation">,</span> <span class="token string">"hello world"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">config.Set(<span class="string">"config.name"</span>, <span class="string">"hello world"</span>);</div></pre></td></tr></table></figure>
 <p>单纯的<code>Set</code>并不会保存数据，您还需要调用<code>Save</code>来储存数据。</p>
 <p>注意，并不是所有的配置定位器都支持保存数据的，例如：代码配置定位器就不会保存数据，但也不会引发异常。</p>
-<pre class=" language-csharp"><code class="language-csharp">config<span class="token punctuation">.</span><span class="token function">Save</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">config.Save();</div></pre></td></tr></table></figure>
 <h3 id="增加定位器"><a href="#增加定位器" class="headerlink" title="增加定位器"></a>增加定位器</h3><p>增加额外的配置定位器能够为配置系统提供访问不同区域数据的能力。</p>
-<pre class=" language-csharp"><code class="language-csharp">config<span class="token punctuation">.</span><span class="token function">AddLocator</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">UnitySettingLocator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-config<span class="token punctuation">.</span><span class="token function">AddLocator</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">CodeConfigLocator</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">config.AddLocator(<span class="keyword">new</span> UnitySettingLocator(), <span class="number">100</span>);</div><div class="line">config.AddLocator(<span class="keyword">new</span> CodeConfigLocator(), <span class="number">200</span>);</div></pre></td></tr></table></figure>
 <p>配置定位器允许传入<code>优先级</code>来决定哪个配置定位器被优先使用，优先返回被最先匹配到的配置数据。</p>
 <blockquote>
 <p>注意，当设定配置时，会按照优先级依次遍历配置定位器，如果发现了对应配置定位器中存在配置，那么则会覆盖配置，并终止迭代。如果遍历完所有配置定位器都没有发现有匹配的配置，那么则会将设定配置写入最后一个配置定位器。</p>
@@ -245,20 +238,8 @@ config<span class="token punctuation">.</span><span class="token function">AddLo
 </tbody>
 </table>
 <h3 id="增加转换器"><a href="#增加转换器" class="headerlink" title="增加转换器"></a>增加转换器</h3><p>CatLib的配置系统允许从配置获取任意类型，您只需要实现类型对应的转换器即可。</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">internal</span> <span class="token keyword">sealed</span> <span class="token keyword">class</span> <span class="token class-name">BoolStringConverter</span> <span class="token punctuation">:</span> ITypeStringConverter
-<span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">string</span> <span class="token function">ConvertToString</span><span class="token punctuation">(</span><span class="token keyword">object</span> <span class="token keyword">value</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">// 实现转换</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">public</span> <span class="token keyword">object</span> <span class="token function">ConvertFromString</span><span class="token punctuation">(</span><span class="token keyword">string</span> <span class="token keyword">value</span><span class="token punctuation">,</span> Type to<span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">// 实现转换</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
-<pre class=" language-csharp"><code class="language-csharp">config<span class="token punctuation">.</span><span class="token function">AddConverter</span><span class="token punctuation">(</span><span class="token keyword">typeof</span><span class="token punctuation">(</span>Bool<span class="token punctuation">)</span> <span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">BoolStringConverter</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">internal</span> <span class="keyword">sealed</span> <span class="keyword">class</span> <span class="title">BoolStringConverter</span> : <span class="title">ITypeStringConverter</span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">string</span> <span class="title">ConvertToString</span>(<span class="params"><span class="keyword">object</span> <span class="keyword">value</span></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// 实现转换</span></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">object</span> <span class="title">ConvertFromString</span>(<span class="params"><span class="keyword">string</span> <span class="keyword">value</span>, Type to</span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// 实现转换</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">config.AddConverter(<span class="keyword">typeof</span>(Bool) , <span class="keyword">new</span> BoolStringConverter());</div></pre></td></tr></table></figure>
 <h3 id="默认支持的转换"><a href="#默认支持的转换" class="headerlink" title="默认支持的转换"></a>默认支持的转换</h3><p>CatLib默认的配置容器都默认支持如下转换类型:</p>
 <table>
 <thead>
@@ -338,24 +319,14 @@ config<span class="token punctuation">.</span><span class="token function">AddLo
 <blockquote>
 <p>如果您要使用自定义的配置容器请实现<code>IConfig</code>接口。</p>
 </blockquote>
-<pre class=" language-csharp"><code class="language-csharp">manager<span class="token punctuation">.</span><span class="token function">Extend</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">=</span><span class="token operator">></span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">return</span> <span class="token keyword">new</span> <span class="token class-name">Config</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-<span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token string">"new"</span><span class="token punctuation">)</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">manager.Extend(()=&gt;</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Config();</div><div class="line">&#125;, <span class="string">"new"</span>)</div></pre></td></tr></table></figure>
 <p>如果需要获得刚刚扩展的配置容器，只需要使用<code>Get()</code>进行访问。</p>
-<pre class=" language-csharp"><code class="language-csharp">IConfig extendConfig1 <span class="token operator">=</span> manager<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"new"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-IConfig extendConfig2 <span class="token operator">=</span> manager<span class="token punctuation">[</span><span class="token string">"new"</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
-<span class="token comment" spellcheck="true">// extendConfig1 == extendConfig2</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">IConfig extendConfig1 = manager.Get(<span class="string">"new"</span>);</div><div class="line">IConfig extendConfig2 = manager[<span class="string">"new"</span>];</div><div class="line"><span class="comment">// extendConfig1 == extendConfig2</span></div></pre></td></tr></table></figure>
 <h3 id="修改默认配置容器"><a href="#修改默认配置容器" class="headerlink" title="修改默认配置容器"></a>修改默认配置容器</h3><p>您可以使用自定义的配置容器来代替默认的配置容器。修改后<code>Default</code>使用的配置容器将是您替换的配置容器。</p>
 <blockquote>
 <p>注意! 由于CatLib的组件配置使用默认的配置容器，所以在没有了解组件的配置使用情况前，谨慎修改。</p>
 </blockquote>
-<pre class=" language-csharp"><code class="language-csharp">manager<span class="token punctuation">.</span><span class="token function">SetDefault</span><span class="token punctuation">(</span><span class="token string">"new.default"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-IConfig config <span class="token operator">=</span> manager<span class="token punctuation">.</span>Default<span class="token punctuation">;</span>
-</code></pre>
-
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">manager.SetDefault(<span class="string">"new.default"</span>);</div><div class="line">IConfig config = manager.Default;</div></pre></td></tr></table></figure>
     <div class="footer">
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/config.md" target="_blank">

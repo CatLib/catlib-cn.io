@@ -201,58 +201,17 @@
 <h3 id="实现服务提供者"><a href="#实现服务提供者" class="headerlink" title="实现服务提供者"></a>实现服务提供者</h3><p>您的服务提供者类必须继承自<code>CatLib.ServiceProvider</code>类 , 大部分服务提供者都包含两个方法：<code>Register()</code>和<code>Init()</code>，其中<code>Register()</code>是必须要实现的。</p>
 <p>在<code>Register()</code>方法中，你<code>唯一</code>要做的事情就是<code>绑定服务实现</code>到服务容器，不要尝试在其中执行任何其它功能。因为很有可能你就使用了一个没有被注册的服务。</p>
 <p>当服务提供者的<code>Init()</code>方法被触发时，就意味着框架所有的服务提供者的<code>Register()</code>都已经被执行，也就是说我们可以在<code>Init()</code>中访问其他服务提供者所提供的服务，只有当所有服务提供者的<code>Init()</code>执行完成后才会触发框架启动完成的事件。</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">using</span> CatLib<span class="token punctuation">;</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConfigProvider</span> <span class="token punctuation">:</span> ServiceProvide
-<span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">override</span> IEnumerator <span class="token function">Init</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token keyword">yield</span> <span class="token keyword">return</span> <span class="token keyword">base</span><span class="token punctuation">.</span><span class="token function">Init</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Register</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">// 注册服务</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">using</span> CatLib;</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ConfigProvider</span> : <span class="title">ServiceProvide</span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> IEnumerator <span class="title">Init</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">yield</span> <span class="keyword">return</span> <span class="keyword">base</span>.Init();</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Register</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// 注册服务</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="注册服务提供者"><a href="#注册服务提供者" class="headerlink" title="注册服务提供者"></a>注册服务提供者</h3><blockquote>
 <p>注册了服务提供者并不意味着服务都会被立即实例化，通常情况下很多是延迟实例化的，只有真的用到它们的时候才会实例化。</p>
 </blockquote>
 <p>如果框架使用者想要使用某个服务，那么必须先对这个服务进行注册，您只有在框架<code>Application.Init()</code>触发之前才能注册服务提供者:</p>
-<pre class=" language-csharp"><code class="language-csharp">App<span class="token punctuation">.</span>Instance<span class="token punctuation">.</span><span class="token function">Register</span><span class="token punctuation">(</span><span class="token keyword">typeof</span><span class="token punctuation">(</span>ConfigProvider<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Instance.Register(<span class="keyword">typeof</span>(ConfigProvider));</div></pre></td></tr></table></figure>
 <p>服务提供者的注册一般情况下都应该在<code>Application</code>的引导流程(Bootstrap)中进行。</p>
 <p>除了标准注册外，CatLib.Unity项目为开发者提供了快捷的注册方案，以便于您不需要书写标准的注册代码来注册服务提供者（如果您没有从CatLib.Unity开始您需要自行处理这部分功能），您可以通过<code>Game/Providers.cs</code>文件来配置服务提供者，您只需要配置<code>ServiceProviders</code>字段的返回值就能完成服务提供者配置。</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Providers</span>
-<span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> Type<span class="token punctuation">[</span><span class="token punctuation">]</span> ServiceProviders
-    <span class="token punctuation">{</span>
-        <span class="token keyword">get</span>
-        <span class="token punctuation">{</span>
-            <span class="token keyword">return</span> <span class="token keyword">new</span><span class="token punctuation">[</span><span class="token punctuation">]</span>
-            <span class="token punctuation">{</span>
-                <span class="token keyword">typeof</span><span class="token punctuation">(</span>ConfigProvider<span class="token punctuation">)</span><span class="token punctuation">,</span>
-            <span class="token punctuation">}</span><span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Providers</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> Type[] ServiceProviders</div><div class="line">    &#123;</div><div class="line">        <span class="keyword">get</span></div><div class="line">        &#123;</div><div class="line">            <span class="keyword">return</span> <span class="keyword">new</span>[]</div><div class="line">            &#123;</div><div class="line">                <span class="keyword">typeof</span>(ConfigProvider),</div><div class="line">            &#125;;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="初始化优先级"><a href="#初始化优先级" class="headerlink" title="初始化优先级"></a>初始化优先级</h3><p>您可以通过配置启动优先级来调整服务提供者启动流程的启动顺序，注意CatLib中的所有的优先级特性都是采用就近原则的。即为函数标记的优先级特性将会优先于类的优先级特性。</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">using</span> CatLib<span class="token punctuation">;</span>
-<span class="token punctuation">[</span><span class="token function">Priority</span><span class="token punctuation">(</span><span class="token number">200</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">ConfigProvider</span> <span class="token punctuation">:</span> ServiceProvide
-<span class="token punctuation">{</span>
-    <span class="token punctuation">[</span><span class="token function">Priority</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
-    <span class="token keyword">public</span> <span class="token keyword">virtual</span> IEnumerator <span class="token function">Init</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">// Init 的启动优先级会使用100而不是200 ， 由于就近原则</span>
-        <span class="token keyword">yield</span> <span class="token keyword">break</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-    <span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">void</span> <span class="token function">Register</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-    <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">// 注册服务</span>
-    <span class="token punctuation">}</span>
-<span class="token punctuation">}</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">using</span> CatLib;</div><div class="line">[<span class="meta">Priority(200)</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ConfigProvider</span> : <span class="title">ServiceProvide</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Priority(100)</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">virtual</span> IEnumerator <span class="title">Init</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// Init 的启动优先级会使用100而不是200 ， 由于就近原则</span></div><div class="line">        <span class="keyword">yield</span> <span class="keyword">break</span>;</div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Register</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// 注册服务</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>关于更多优先级相关资料，请参考：<a href="application.html#优先级">优先级</a></p>
 <h3 id="启动顺序"><a href="#启动顺序" class="headerlink" title="启动顺序"></a>启动顺序</h3><p>除了<code>Init()</code>可以指定具体的服务提供者之间的启动优先级外<code>Register()</code>是无序执行的。</p>
 <p>他们的流程是这样的：所有注册服务提供者执行<code>Register()</code> -&gt; 按照优先级依次执行<code>Init()</code> -&gt; 框架启动完成。</p>
