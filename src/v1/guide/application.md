@@ -16,7 +16,7 @@ order: 102
 
 ### CatLib生命周期图
 
-<img src="../../images/life-cycle.png" width="100%"/>
+<img src="../../images/life-cycle.svg" width="100%"/>
 
 ### 配置相关
 

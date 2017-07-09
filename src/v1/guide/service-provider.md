@@ -13,7 +13,7 @@ order: 100
 
 ### CatLib架构图
 
-<img src="../../images/architecture-diagram.png" width="100%"/>
+<img src="../../images/architecture-diagram.svg" width="100%"/>
 
 ### 实现服务提供者
 
