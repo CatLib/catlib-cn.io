@@ -198,7 +198,7 @@
 <blockquote>
 <p>服务提供者是CatLib核心提供的功能，如果您需要将CatLib的组件移植到其他框架使用，那么您需要移除服务提供者。</p>
 </blockquote>
-<h3 id="CatLib架构图"><a href="#CatLib架构图" class="headerlink" title="CatLib架构图"></a>CatLib架构图</h3><p><img src="../../images/architecture-diagram.png" width="100%"></p>
+<h3 id="CatLib架构图"><a href="#CatLib架构图" class="headerlink" title="CatLib架构图"></a>CatLib架构图</h3><p><img src="../../images/architecture-diagram.svg" width="100%"></p>
 <h3 id="实现服务提供者"><a href="#实现服务提供者" class="headerlink" title="实现服务提供者"></a>实现服务提供者</h3><p>您的服务提供者类必须继承自<code>CatLib.ServiceProvider</code>类 , 大部分服务提供者都包含两个方法：<code>Register()</code>和<code>Init()</code>，其中<code>Register()</code>是必须要实现的。</p>
 <p>在<code>Register()</code>方法中，你<code>唯一</code>要做的事情就是<code>绑定服务实现</code>到服务容器，不要尝试在其中执行任何其它功能。因为很有可能你就使用了一个没有被注册的服务。</p>
 <p>当服务提供者的<code>Init()</code>方法被触发时，就意味着框架所有的服务提供者的<code>Register()</code>都已经被执行，也就是说我们可以在<code>Init()</code>中访问其他服务提供者所提供的服务，只有当所有服务提供者的<code>Init()</code>执行完成后才会触发框架启动完成的事件。</p>

@@ -197,7 +197,7 @@
     <h2 id="CatLib核心"><a href="#CatLib核心" class="headerlink" title="CatLib核心"></a>CatLib核心</h2><p><code>Application</code>是CatLib程序的核心，也是所谓的程序入口。应用程序通过引导来加载服务提供者和其他一些必须的资源。应用程序在一般情况下只允许启动一个，且只能在主线程中启动。</p>
 <h3 id="启动流程"><a href="#启动流程" class="headerlink" title="启动流程"></a>启动流程</h3><p><code>启动引导</code> -&gt; <code>初始化</code> -&gt; <code>完成</code></p>
 <p>启动引导一般用于加载服务提供者，初始配置或者一些其他资源，在引导过程中请不要通过框架生成任何服务（除非您非常熟悉框架的启动流程），否则您可以使用到一个未经注册的服务。</p>
-<h3 id="CatLib生命周期图"><a href="#CatLib生命周期图" class="headerlink" title="CatLib生命周期图"></a>CatLib生命周期图</h3><p><img src="../../images/life-cycle.png" width="100%"></p>
+<h3 id="CatLib生命周期图"><a href="#CatLib生命周期图" class="headerlink" title="CatLib生命周期图"></a>CatLib生命周期图</h3><p><img src="../../images/life-cycle.svg" width="100%"></p>
 <h3 id="配置相关"><a href="#配置相关" class="headerlink" title="配置相关"></a>配置相关</h3><p>CatLib配置分为<code>初始配置</code>和<code>常规配置</code>。</p>
 <p><code>初始配置</code>为服务提供者启动时所需要的配置,初始配置必须在框架启动前完成。</p>
 <p><code>常规配置</code>为用户使用服务提供者所提供的功能时需要提供的配置。</p>
