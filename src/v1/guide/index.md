@@ -52,3 +52,8 @@ CatLib是易于上手的。你只需要有良好的 C# 基础。你就可以非�
 
 - [ILRuntime](https://github.com/Ourpalm/ILRuntime) 项目为基于C#的平台（例如Unity）提供了一个纯C#实现的，快速、方便并且可靠的IL运行时，使得能够在不支持JIT的硬件环境（如iOS）能够实现代码的热更新
 - [XLua](https://github.com/Tencent/xLua) 为Unity、 .Net、 Mono等C#环境增加Lua脚本编程的能力，借助xLua，这些Lua代码可以方便的和C#相互调用。
+
+#### **同样优秀的近似框架**
+
+- [GameFramework](https://github.com/EllanJiang/GameFramework)
+- [KSFramework](https://github.com/mr-kelly/KSFramework)
