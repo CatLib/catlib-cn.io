@@ -53,7 +53,8 @@ public class Service
 
 ### 如何使用
 
-您可以为属性选择器标注`[Inject]`或者在类的`构造函数`中定义变量类型为接口类型。
+您可以为属性选择器标注`[Inject]`或者在类的`构造函数`中定义的变量类型，容器在构建服务的时候都会自动注入依赖。
+
 
 ``` csharp
 public class Service

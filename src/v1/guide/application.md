@@ -20,11 +20,9 @@ order: 102
 
 ### 配置相关
 
-CatLib配置分为`初始配置`和`常规配置`。
+为服务提供者启动时所需要的`初始配置`配置,必须在框架启动前完成,这些配置用于在初始化过程中提供数据。
 
-`初始配置`为服务提供者启动时所需要的配置,初始配置必须在框架启动前完成。
-
-`常规配置`为用户使用服务提供者所提供的功能时需要提供的配置。
+如果您的服务提供者是使用Unity可视化组件构建的，那么您的初始配置可以直接在组件中完成。
 
 ### 从零开始
 
@@ -42,7 +40,7 @@ public class GameBootstrap : IBootstrap
 }
 ```
 
-随后我们需要一个入口程序，用于被Unity挂载并触发启动流程。在入口程序中，我们只需要实例一个CatLib应用程序，并设定对应引导程序（引导程序会根据设置顺序加载）.最后再执行初始化。
+随后我们需要一个入口程序，用于被Unity挂载并触发启动流程。在入口程序中，我们只需要实例一个CatLib应用程序，并设定对应引导程序（引导程序会根据设置顺序加载）.最后再执行初始化：
 
 > 注意如果您的使用的是`CatLib.dll`会存在构建跨程序集问题，所以您需要提供`OnFindType()`方法来帮助框架获取当前程序集的类型。
 
@@ -53,7 +51,7 @@ public class Program : MonoBehaviour
     {
         var application = new Application(this);
         application.OnFindType((t) => Type.GetType(t));
-        application.Bootstrap(new Type[]{ typeof(GameBootstrap) });
+        application.Bootstrap(new GameBootstrap());
         application.Init();
     }
 }
@@ -61,7 +59,7 @@ public class Program : MonoBehaviour
 
 ### 从CatLib.Unity开始
 
-除去上文描述的方案外，CatLib已经为开发者准备好了引导程序，在CatLib.Unity项目中您可以通过配置`Providers.cs`文件来设定框架的服务提供者。
+除去上文描述的方案外，CatLib已经为开发者准备好了引导程序，在CatLib.Unity项目中您可以通过配置`Providers.cs`文件来设定框架的服务提供者，通过`Configs.cs`文件可以设定初始配置，通过`Assemblys.cs`文件可以设定需要跨域构建的程序集。
 
 CatLib.Unity默认的用户代码入口在`Main.cs`文件中，当然你也可以同过路由标记来指定启动入口(这需要您删除Main.cs文件,事实上Main.cs的入口也是通过路由完成的)。
 
@@ -98,7 +96,7 @@ App.IsMainThread;
 
 ### 优先级
 
-CatLib基础支持库提供了优先级特性。您可以使用`[Priority()]`特性来定义优先级。通过`App.GetPriorities()`方法来获取您定义的优先级
+CatLib基础支持库提供了优先级特性。您可以使用`[Priority()]`特性来定义优先级。通过`App.GetPriorities()`方法来获取您为类，函数定义的优先级。
 
 > 在CatLib中优先级值越小越优先。
 
@@ -145,7 +143,7 @@ var guid = App.GetGuid();
 
 ### 获取CatLib版本号
 
-您可以通过`Version`获取当前CatLib核心版本号。
+您可以通过`Version`获取当前CatLib核心版本号，CatLib的版本号遵循[Semver](http://semver.org)规范。
 
 ``` csharp
 var version = App.Version;
