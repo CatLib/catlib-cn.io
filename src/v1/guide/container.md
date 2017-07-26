@@ -60,7 +60,7 @@ public class Service
 ### 绑定服务
 
 ``` csharp
-App.Instance.Bind<ConfigManager>().Alias<IConfigManager>().Alias("config.manager");
+App.Bind<ConfigManager>().Alias<IConfigManager>().Alias("config.manager");
 ```
 
 上述代码进行了一次简单的绑定，实现的作用是将`ConfigManager`绑定到容器，并且给定了`IConfigManager`(接口别名)和`config.manager`(字符串别名)的别名。
@@ -68,8 +68,8 @@ App.Instance.Bind<ConfigManager>().Alias<IConfigManager>().Alias("config.manager
 随后您就可以使用别名来构建服务了:
 
 ``` csharp
-var manager1 = App.Instance.Make<IConfigManager>();
-var manager2 = App.Instance.Make("config.manager") as IConfigManager;
+var manager1 = App.Make<IConfigManager>();
+var manager2 = App.Make("config.manager") as IConfigManager;
 ```
 
 ### 绑定服务(单例)
@@ -79,7 +79,7 @@ var manager2 = App.Instance.Make("config.manager") as IConfigManager;
 下面我们将使用单例绑定来对服务进行绑定:
 
 ``` csharp
-App.Instance.Singleton<ConfigManager>().Alias<IConfigManager>().Alias("config.manager");
+App.Singleton<ConfigManager>().Alias<IConfigManager>().Alias("config.manager");
 ```
 
 ### 绑定实例
@@ -87,7 +87,7 @@ App.Instance.Singleton<ConfigManager>().Alias<IConfigManager>().Alias("config.ma
 CatLib还允许您对自己构建的实例进行绑定，随后对容器该实例的调用总是返回给定的实例。
 
 ``` csharp
-App.Instance.Instance("config.manager" , new ConfigManager());
+App.Instance("config.manager" , new ConfigManager());
 ```
 需要注意的是在以下几种情况将不能绑定:
 
@@ -98,7 +98,7 @@ App.Instance.Instance("config.manager" , new ConfigManager());
 别名是服务容器非常重要的一项功能，它可以提供：接口绑定指定实现的能力。
 
 ``` csharp
-App.Instance.Singleton<ConfigManager>().Alias<IConfigManager>().Alias("config.manager");
+App.Singleton<ConfigManager>().Alias<IConfigManager>().Alias("config.manager");
 ```
 
 在高层使用时只需要使用别名就能获得ConfigManager的服务，而无需关注底层实现，从而可以实现无感知替换。
@@ -108,8 +108,8 @@ App.Instance.Singleton<ConfigManager>().Alias<IConfigManager>().Alias("config.ma
 有时侯我们可能有两个类使用同一个接口，但我们希望在每个类中注入不同实现,我们可以通过如下代码为它来指定实现。
 
 ``` csharp
-App.Instance.Singleton<FileLog>().Alias("log.file");
-App.Instance.Singleton<DatabaseLog>().Alias("log.database");
+App.Singleton<FileLog>().Alias("log.file");
+App.Singleton<DatabaseLog>().Alias("log.database");
 ```
 
 (`FileLog`和`DatabaseLog`均实现了`ILog`接口)
@@ -139,8 +139,8 @@ public class LogService
 您可以通过`Make()`方法来生成服务，服务名可以为接口或别名。如果通过容器去生成一个没有被绑定的服务，那么容器会尝试解决需要被生成的服务，如果尝试解决失败，那么将会返回一个`null`。
 
 ``` csharp
-var manager = App.Instance.Make<IConfigManager>();
-manager = App.Instance.Make("config.manager") as IConfigManager;
+var manager = App.Make<IConfigManager>();
+manager = App.Make("config.manager") as IConfigManager;
 ```
 
 ### 函数注入调用
@@ -150,7 +150,7 @@ manager = App.Instance.Make("config.manager") as IConfigManager;
 ``` csharp
 var instance = new DemoService();
 // DemoService 类中存在一个叫 FuncName 的方法
-var result = App.Instance.Call(instance , "FuncName");
+var result = App.Call(instance , "FuncName");
 ```
 
 ### 服务编组
@@ -158,10 +158,10 @@ var result = App.Instance.Call(instance , "FuncName");
 您可以为多个服务进行编组，编组后将允许您一次生成多个服务。这在一些场景中是非常有用的比如：日志将会被记录到文件日志服务和网络日志服务。
 
 ``` csharp
-App.Instance.Singleton<FileLog>().Alias("log.file");
-App.Instance.Singleton<NetworkLog>().Alias("log.network");
-App.Instance.Tag("log" , "log.file" , "log.network");
-var logServices = App.Instance.Tagged("log");
+App.Singleton<FileLog>().Alias("log.file");
+App.Singleton<NetworkLog>().Alias("log.network");
+App.Tag("log" , "log.file" , "log.network");
+var logServices = App.Tagged("log");
 ```
 
 ### 释放静态服务
@@ -171,7 +171,7 @@ var logServices = App.Instance.Tagged("log");
 您可以通过服务名或者别名来对静态实例进行释放：
 
 ``` csharp
-App.Instance.Release("config.manager");
+App.Release("config.manager");
 ```
 
 ### 解除绑定
@@ -180,7 +180,7 @@ App.Instance.Release("config.manager");
 
 
 ``` csharp
-var binder = App.Instance.Singleton<ConfigManager>().Alias("config.manager");
+var binder = App.Singleton<ConfigManager>().Alias("config.manager");
 binder.UnBind();
 ```
 
@@ -191,8 +191,8 @@ binder.UnBind();
 一般情况下，这种使用场景多数用于跨程序集的Type查找。
 
 ``` csharp
-App.Instance.OnFindType((finder)=> Type.GetType(finder) , 200);
-App.Instance.OnFindType((finder)=> MyType.GetType(finder) , 100);
+App.OnFindType((finder)=> Type.GetType(finder) , 200);
+App.OnFindType((finder)=> MyType.GetType(finder) , 100);
 ```
 
 `OnFindType()` 允许传入一个优先级，优先级高的会被优先调用。
@@ -212,7 +212,7 @@ App.Instance.OnFindType((finder)=> MyType.GetType(finder) , 100);
 
 ``` csharp
 // 基于服务的解决事件
-App.Instance.Singleton<ConfigManager>().OnResolving((binder, obj) =>
+App.Singleton<ConfigManager>().OnResolving((binder, obj) =>
 {
     //todo: 对于ConfigManager这个类型的实例进行修饰
     return obj;
@@ -221,7 +221,7 @@ App.Instance.Singleton<ConfigManager>().OnResolving((binder, obj) =>
 
 ``` csharp
 // 基于全局的解决事件
-App.Instance.OnResolving((binder, obj) =>
+App.OnResolving((binder, obj) =>
 {
     //todo: 对于解决所有服务或者进行绑定的实例进行修饰
     return obj;
@@ -239,7 +239,7 @@ App.Instance.OnResolving((binder, obj) =>
 
 ``` csharp
 // 基于服务的静态实例释放事件
-App.Instance.Singleton<ConfigManager>().OnRelease((binder, obj) =>
+App.Singleton<ConfigManager>().OnRelease((binder, obj) =>
 {
     //todo: 对于ConfigManager这个类型的静态实例释放时
     return obj;
@@ -248,7 +248,7 @@ App.Instance.Singleton<ConfigManager>().OnRelease((binder, obj) =>
 
 ``` csharp
 // 基于全局的静态实例释放事件
-App.Instance.OnRelease((binder, obj) =>
+App.OnRelease((binder, obj) =>
 {
     //todo: 对于解决所有服务或者进行绑定的静态实例释放时
     return obj;
@@ -262,13 +262,13 @@ App.Instance.OnRelease((binder, obj) =>
 下面的代码将进行静态绑定：
 
 ``` csharp
-App.Instance.Singleton<ConfigManager>((binder, param)=> new ConfigManager()).Alias("config.manager");
+App.Singleton<ConfigManager>((binder, param)=> new ConfigManager()).Alias("config.manager");
 ```
 
 下面的代码将进行动态绑定：
 
 ``` csharp
-App.Instance.Singleton<ConfigManager>().Alias("config.manager");
+App.Singleton<ConfigManager>().Alias("config.manager");
 ```
 
 除了进行静态绑定外，我们还需要尽可能将服务设置为单例绑定，服务容器对于单例服务的优化要优于实例服务。

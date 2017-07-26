@@ -15,7 +15,7 @@ CatLib文件系统已经集成了处理本地文件系统的简单驱动。
 如果没有特殊的说明，本文中的示例项目都是基于下述上下文环境，默认使用本地文件驱动：
 
 ``` csharp
-var fileSystemManager = App.Instance.Make<IFileSystemManager>();
+var fileSystemManager = App.Make<IFileSystemManager>();
 ```
 
 您可以通过`IFileSystemManager`的`Disk()`方法来获取文件系统的磁盘实例。

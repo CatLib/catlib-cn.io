@@ -67,16 +67,3 @@ public class Service
     }
 }
 ```
-
-### 接口列表
-
-下面列出了Catlib核心中可以被直接`Application.Make()`的接口列表(适用于CatLib.Unity):
-
-| 接口名                | 接口描述      |
-| -------------------- |:------------:|
-| `IConfigManager`     | 全局配置     |
-| `IEnv`               | 环境        |
-| `IFileSystemManager` | 文件系统     |
-| `IRouter`            | 路由        |
-| `ITimeManager`       | 时间        |
-| `ITimerManager`      | 计时器      |

@@ -24,7 +24,7 @@ public sealed class Router : Facade<IRouter>
 
 ``` csharp
 Router.Instance.Dispatch("bootstrap://start");
-App.Instance.Make<IRouter>().Dispatch("bootstrap://start");
+App.Make<IRouter>().Dispatch("bootstrap://start");
 // 以上2条语句等价
 ```
 

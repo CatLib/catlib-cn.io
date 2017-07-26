@@ -11,7 +11,7 @@ order: 250
 ### 获取计时器管理器
 
 ``` csharp
-var timerManager = App.Instance.Make<ITimerManager>();
+var timerManager = App.Make<ITimerManager>();
 ```
 
 ### 创建一个定时器
