@@ -133,12 +133,12 @@ var handler = App.On("event" , (payload)=>
 handler.Cancel();
 ```
 
-### 程序内GUID
+### 获取程序内运行时唯一Id
 
-CatLib核心提供了获取当前核心实例内的唯一GUID。
+您可以从CatLib核心中申请一个运行时Id，这个Id将在CatLib生命周期内唯一。
 
 ``` csharp
-var guid = App.GetGuid();
+App.GetRuntimeId();
 ```
 
 ### 获取CatLib版本号
@@ -146,5 +146,5 @@ var guid = App.GetGuid();
 您可以通过`Version`获取当前CatLib核心版本号，CatLib的版本号遵循[Semver](http://semver.org)规范。
 
 ``` csharp
-var version = App.Version;
+App.Version;
 ```
