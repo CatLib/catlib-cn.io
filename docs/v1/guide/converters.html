@@ -3,7 +3,7 @@
 <html lang="zh-cn">
     <head>
 
-    <title>标准库 — CatLib</title>
+    <title>转换器 — CatLib</title>
     <meta charset="utf-8">
     <meta name="description" content="CatLib Unity Framework.">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -19,7 +19,7 @@
             <nav class="nav">
     <div class="border">
         <img src="/images/logo.png" />
-        <button class="hiden-in-phone">V0.8</button>
+        <!--button class="hiden-in-phone">v1</button!-->
         <button id="btn-menu" class="hiden-in-pc">菜单</button>
         <ul class="nav-link hiden-in-phone">
             <!--li>
@@ -156,6 +156,14 @@
             
             
             <li>
+                <p><a href="/v1/guide/env.html" class="sidebar-link">环境</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
                 <p><a href="/v1/guide/routing.html" class="sidebar-link">路由</a></p>
             </li>
         
@@ -164,7 +172,47 @@
             
             
             <li>
-                <p><a href="/v1/guide/stl.html" class="sidebar-link current">标准库</a></p>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link current">转换器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">调试控制台</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/mono-driver.html" class="sidebar-link">Mono Driver</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/support.html" class="sidebar-link">支持库</a></p>
             </li>
         
             
@@ -191,29 +239,100 @@
                 <p><a href="/v1/guide/timer.html" class="sidebar-link">计时器</a></p>
             </li>
         
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/translation.html" class="sidebar-link">国际化(I18N)</a></p>
+            </li>
+        
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="标准库"><a href="#标准库" class="headerlink" title="标准库"></a>标准库</h2><p>CatLib标准模版库提供了常用的组件集合，她们是C#标准库的补充。她们被分为：容器，算法，迭代器等。</p>
-<blockquote>
-<p>标准库组件不能通过容器进行生成，您需要手动<code>new</code>出标准库组件。</p>
-</blockquote>
-<h3 id="服务容器-Container"><a href="#服务容器-Container" class="headerlink" title="服务容器(Container)"></a>服务容器(Container)</h3><p>CatLib服务容器属于Stl的一部分，关于服务容器相关介绍请参考：<a href="container.html">服务容器</a></p>
-<h3 id="有序集-SortSet"><a href="#有序集-SortSet" class="headerlink" title="有序集(SortSet)"></a>有序集(SortSet)</h3><p>有序集合和集合一样也是元素的集合,且不允许重复的成员。不同的是每个元素都会关联一个可以被排序的分数。</p>
-<p>有序集合是通过分数来为集合中的成员进行从小到大的排序。有序集合的成员是唯一的,但分数却可以重复。</p>
-<p>关于有序集的详细文档请参考：<a href="/v1/detail/stl/sortset.html">有序集</a></p>
-<h3 id="快速列表-QuickList"><a href="#快速列表-QuickList" class="headerlink" title="快速列表(QuickList)"></a>快速列表(QuickList)</h3><p>快速列表按照插入顺序排序。你可以添加一个元素到列表的头部（左边）或者尾部（右边）。</p>
-<p>快速列表宏观上是一个双向链表，微观为数组。相对于传统列表，避免了修改造成的大规模的数据迁移。</p>
-<p>关于快速列表的详细文档请参考：<a href="/v1/detail/stl/quicklist.html">快速列表</a></p>
-<h3 id="近期最少使用缓存-LruCache"><a href="#近期最少使用缓存-LruCache" class="headerlink" title="近期最少使用缓存(LruCache)"></a>近期最少使用缓存(LruCache)</h3><p>近期最少使用缓存根据数据的历史访问记录来进行淘汰数据。当链表满的时候，将链表尾部的数据丢弃。</p>
-<p>关于近期最少使用缓存的详细文档请参考：<a href="/v1/detail/stl/lrucache.html">近期最少使用缓存</a></p>
-<h3 id="过滤器链-FilterChain"><a href="#过滤器链-FilterChain" class="headerlink" title="过滤器链(FilterChain)"></a>过滤器链(FilterChain)</h3><p>过滤器链就是将会数据传递到一个任务序列中，过滤器链扮演者流水线的角色，数据在这里被处理然后传递到下一个步骤。</p>
-<p>过滤器链可以将复杂的流程分解成多个独立的子任务。每个独立的任务都是可复用的，因此这些任务可以被组合成复杂的流程。</p>
-<p>关于过滤器链的详细文档请参考：<a href="/v1/detail/stl/filterchain.html">过滤器链</a></p>
+    <h2 id="转换器"><a href="#转换器" class="headerlink" title="转换器"></a>转换器</h2><p>转换器提供了类型转换统一定义的空间，您可以通过转换器安全的转换类型。</p>
+<h3 id="默认支持的转换"><a href="#默认支持的转换" class="headerlink" title="默认支持的转换"></a>默认支持的转换</h3><p>CatLib默认的配置容器都默认支持如下转换类型:</p>
+<table>
+<thead>
+<tr>
+<th>支持类型</th>
+<th style="text-align:center">转换处理类</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Bool</code></td>
+<td style="text-align:center">BoolStringConverter</td>
+</tr>
+<tr>
+<td><code>Byte</code></td>
+<td style="text-align:center">ByteStringConverter</td>
+</tr>
+<tr>
+<td><code>Char</code></td>
+<td style="text-align:center">CharStringConverter</td>
+</tr>
+<tr>
+<td><code>DateTime</code></td>
+<td style="text-align:center">DateTimeStringConverter</td>
+</tr>
+<tr>
+<td><code>Decimal</code></td>
+<td style="text-align:center">DecimalStringConverter</td>
+</tr>
+<tr>
+<td><code>Double</code></td>
+<td style="text-align:center">DoubleStringConverter</td>
+</tr>
+<tr>
+<td><code>Enum</code></td>
+<td style="text-align:center">EnumStringConverter</td>
+</tr>
+<tr>
+<td><code>Int16</code></td>
+<td style="text-align:center">Int16StringConverter</td>
+</tr>
+<tr>
+<td><code>Int32</code></td>
+<td style="text-align:center">Int32StringConverter</td>
+</tr>
+<tr>
+<td><code>Int64</code></td>
+<td style="text-align:center">Int64StringConverter</td>
+</tr>
+<tr>
+<td><code>SByte</code></td>
+<td style="text-align:center">SByteStringConverter</td>
+</tr>
+<tr>
+<td><code>Single</code></td>
+<td style="text-align:center">SingleStringConverter</td>
+</tr>
+<tr>
+<td><code>String</code></td>
+<td style="text-align:center">StringStringConverter</td>
+</tr>
+<tr>
+<td><code>UInt16</code></td>
+<td style="text-align:center">UInt16StringConverter</td>
+</tr>
+<tr>
+<td><code>UInt32</code></td>
+<td style="text-align:center">UInt32StringConverter</td>
+</tr>
+<tr>
+<td><code>UInt64</code></td>
+<td style="text-align:center">UInt64StringConverter</td>
+</tr>
+</tbody>
+</table>
+<h3 id="实现一个转换处理器"><a href="#实现一个转换处理器" class="headerlink" title="实现一个转换处理器"></a>实现一个转换处理器</h3><p>实现一个自定义的转换处理器需要实现<code>ITypeConverter</code>接口。</p>
+<h3 id="增加转换到转换器"><a href="#增加转换到转换器" class="headerlink" title="增加转换到转换器"></a>增加转换到转换器</h3><p>通过 <code>AddConverter</code> 方法您可以增加一个转换处理器</p>
+<h3 id="转换目标类型"><a href="#转换目标类型" class="headerlink" title="转换目标类型"></a>转换目标类型</h3><p>通过 <code>Convert</code> 和 <code>TryConvert</code> 方法您可以将一个类型通过转换器转化为另一个类型</p>
 
     <div class="footer">
         发现错误？想参与编辑？ 
-        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/stl.md" target="_blank">
+        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/converters.md" target="_blank">
             在 Github 上编辑此页！
         </a>
     </div>

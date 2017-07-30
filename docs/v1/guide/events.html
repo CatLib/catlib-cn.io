@@ -3,7 +3,7 @@
 <html lang="zh-cn">
     <head>
 
-    <title>时间 — CatLib</title>
+    <title>事件系统 — CatLib</title>
     <meta charset="utf-8">
     <meta name="description" content="CatLib Unity Framework.">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -188,7 +188,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
+                <p><a href="/v1/guide/events.html" class="sidebar-link current">事件系统</a></p>
             </li>
         
             
@@ -228,7 +228,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/time.html" class="sidebar-link current">时间</a></p>
+                <p><a href="/v1/guide/time.html" class="sidebar-link">时间</a></p>
             </li>
         
             
@@ -250,46 +250,30 @@
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h2><p>CatLib时间组件允许建立自己独立的时间体系。</p>
-<h3 id="默认的时间"><a href="#默认的时间" class="headerlink" title="默认的时间"></a>默认的时间</h3><p>默认的时间是基于Unity的时间的简单包装。</p>
-<h3 id="时间API"><a href="#时间API" class="headerlink" title="时间API"></a>时间API</h3><p>下述内容的描述是基于<code>默认时间</code>的，如果使用了<code>扩展时间</code>，其意义可能发生变化。</p>
-<h4 id="Time"><a href="#Time" class="headerlink" title="Time"></a><strong>Time</strong></h4><p>从游戏开始到现在所用的时间(秒)</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> time = timeManager.Default.Time;</div></pre></td></tr></table></figure>
-<h4 id="DeltaTime"><a href="#DeltaTime" class="headerlink" title="DeltaTime"></a><strong>DeltaTime</strong></h4><p>上一帧到当前帧的时间(秒)</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> deltaTime = timeManager.Default.DeltaTime;</div></pre></td></tr></table></figure>
-<h4 id="FixedTime"><a href="#FixedTime" class="headerlink" title="FixedTime"></a><strong>FixedTime</strong></h4><p>游戏开始到现在的时间（秒）</p>
-<p>通过固定时间更新</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> fixedTime = timeManager.Default.FixedTime;</div></pre></td></tr></table></figure>
-<h4 id="TimeSinceLevelLoad"><a href="#TimeSinceLevelLoad" class="headerlink" title="TimeSinceLevelLoad"></a><strong>TimeSinceLevelLoad</strong></h4><p>从当前场景开始到目前为止的时间（秒）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> timeSinceLevelLoad = timeManager.Default.TimeSinceLevelLoad;</div></pre></td></tr></table></figure>
-<h4 id="FixedDeltaTime"><a href="#FixedDeltaTime" class="headerlink" title="FixedDeltaTime"></a><strong>FixedDeltaTime</strong></h4><p>固定帧的更新时间</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> fixedDeltaTime = timeManager.Default.FixedDeltaTime;</div></pre></td></tr></table></figure>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">timeManager.Default.FixedDeltaTime = <span class="number">0.2</span>f;</div></pre></td></tr></table></figure>
-<h4 id="MaximumDeltaTime"><a href="#MaximumDeltaTime" class="headerlink" title="MaximumDeltaTime"></a><strong>MaximumDeltaTime</strong></h4><p>能获取的最大帧与帧之间的更新时间</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> maximumDeltaTime = timeManager.Default.MaximumDeltaTime;</div></pre></td></tr></table></figure>
-<h4 id="SmoothDeltaTime"><a href="#SmoothDeltaTime" class="headerlink" title="SmoothDeltaTime"></a><strong>SmoothDeltaTime</strong></h4><p>平稳的更新时间，根据前N帧的加权平均值</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> smoothDeltaTime = timeManager.Default.SmoothDeltaTime;</div></pre></td></tr></table></figure>
-<h4 id="TimeScale"><a href="#TimeScale" class="headerlink" title="TimeScale"></a><strong>TimeScale</strong></h4><p>时间缩放系数</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> timeScale = timeManager.Default.TimeScale;</div></pre></td></tr></table></figure>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">timeManager.Default.TimeScale = <span class="number">0.5</span>f;</div></pre></td></tr></table></figure>
-<h4 id="FrameCount"><a href="#FrameCount" class="headerlink" title="FrameCount"></a><strong>FrameCount</strong></h4><p>从游戏开始到目前为止的总帧数</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> frameCount = timeManager.Default.FrameCount;</div></pre></td></tr></table></figure>
-<h4 id="RealtimeSinceStartup"><a href="#RealtimeSinceStartup" class="headerlink" title="RealtimeSinceStartup"></a><strong>RealtimeSinceStartup</strong></h4><p>从游戏开始到目前为止的总时间（哪怕时间缩放系数为0也会增长）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> realtimeSinceStartup = timeManager.Default.RealtimeSinceStartup;</div></pre></td></tr></table></figure>
-<h4 id="CaptureFramerate"><a href="#CaptureFramerate" class="headerlink" title="CaptureFramerate"></a><strong>CaptureFramerate</strong></h4><p>每秒的帧率</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> captureFramerate = timeManager.Default.CaptureFramerate;</div></pre></td></tr></table></figure>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">timeManager.Default.CaptureFramerate = <span class="number">30</span>;</div></pre></td></tr></table></figure>
-<h4 id="UnscaledDeltaTime"><a href="#UnscaledDeltaTime" class="headerlink" title="UnscaledDeltaTime"></a><strong>UnscaledDeltaTime</strong></h4><p>不计算时间缩放系数的帧与帧之间的更新时间。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> unscaledDeltaTime = timeManager.Default.UnscaledDeltaTime;</div></pre></td></tr></table></figure>
-<h4 id="UnscaledTime"><a href="#UnscaledTime" class="headerlink" title="UnscaledTime"></a><strong>UnscaledTime</strong></h4><p>不考虑时间缩放系数，从游戏开始到目前为止的总时间</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> unscaledTime = timeManager.Default.UnscaledTime;</div></pre></td></tr></table></figure>
-<h3 id="扩展时间"><a href="#扩展时间" class="headerlink" title="扩展时间"></a>扩展时间</h3><p>您可以通过<code>Extend()</code>方法拓展出新的时间。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">timeManager.Extend(()=&gt;</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> UnityTime();</div><div class="line">&#125;,<span class="string">"NewTime"</span>);</div></pre></td></tr></table></figure>
-<p>通过<code>Get()</code>可以获得您拓展的时间。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> timeSystem = timeManager.Get(<span class="string">"NewTime"</span>);</div></pre></td></tr></table></figure>
+    <h2 id="事件系统"><a href="#事件系统" class="headerlink" title="事件系统"></a>事件系统</h2><p>事件机制是一种很好的应用解耦方式。CatLib事件系统让我们可以订阅和监听程序中出现的各种事件。</p>
+<h3 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h3><ul>
+<li><code>载荷</code>是指程序调用所附带的上下文信息。不同的调用者所提供的上下文信息各不相同。</li>
+</ul>
+<h3 id="注册事件和监听器"><a href="#注册事件和监听器" class="headerlink" title="注册事件和监听器"></a>注册事件和监听器</h3><p>通过 <code>App.On</code> 命令您可以注册一个事件的监听器，监听器接受一个参数<code>载荷</code>。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.On(<span class="string">"event.name"</span> , (payload)=&gt;&#123;</div><div class="line">    <span class="comment">//todo</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="通配符事件监听器"><a href="#通配符事件监听器" class="headerlink" title="通配符事件监听器"></a><strong>通配符事件监听器</strong></h4><p>CatLib事件系统允许使用通配符<code>*</code>对事件进行匹配。它让你在一个监听器中可以监听到多个事件。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.On(<span class="string">"event.*"</span> , (payload)=&gt;&#123;</div><div class="line">    <span class="comment">//todo</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="返回事件的处理结果"><a href="#返回事件的处理结果" class="headerlink" title="返回事件的处理结果"></a><strong>返回事件的处理结果</strong></h4><p>您可以通过<code>return</code>一个具体的结果，来告知事件的调用者。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.On(<span class="string">"event.*"</span> , (payload)=&gt;&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">"call complete"</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="终止事件继续传递"><a href="#终止事件继续传递" class="headerlink" title="终止事件继续传递"></a><strong>终止事件继续传递</strong></h4><p>CatLib事件系统支持返回一个false来终止事件的传递。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.On(<span class="string">"event.*"</span> , (payload)=&gt;&#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<h4 id="设定事件的生命"><a href="#设定事件的生命" class="headerlink" title="设定事件的生命"></a><strong>设定事件的生命</strong></h4><p>您可以通过设定一个生命，来决定事件能够被触发的次数,<code>On</code>函数的第三个参数为生命，默认情况下，事件将会永久有效。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.On(<span class="string">"event.*"</span> , (payload)=&gt;&#123; <span class="keyword">return</span> <span class="literal">false</span>; &#125;, <span class="number">10</span>);</div></pre></td></tr></table></figure>
+<h3 id="触发事件"><a href="#触发事件" class="headerlink" title="触发事件"></a>触发事件</h3><p>如果要触发事件，您可以通过<code>App.Trigger</code>来触发事件。这个函数将会把事件分发到它所有已经注册的监听器上。因为 App 是全局可访问的，所以你可以在项目中的任何地方调用它：</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Trigger(<span class="string">"event.name"</span>, <span class="literal">null</span>);</div></pre></td></tr></table></figure>
+<h4 id="执行到第一次有效结果后终止"><a href="#执行到第一次有效结果后终止" class="headerlink" title="执行到第一次有效结果后终止"></a><strong>执行到第一次有效结果后终止</strong></h4><p>通过<code>TriggerHalf</code>您可以限定这次事件的触发只要监听器返回了处理结果那么就自动终止事件传递。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.TriigerHalf(<span class="string">"event.name"</span>);</div></pre></td></tr></table></figure>
+<h4 id="得到事件的处理结果"><a href="#得到事件的处理结果" class="headerlink" title="得到事件的处理结果"></a><strong>得到事件的处理结果</strong></h4><p>事件触发后您可以获取触发的返回值来获取事件监听器的对这次触发事件的处理结果。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">object</span>[] result = App.Trigger(<span class="string">"event.name"</span>, <span class="literal">null</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">object</span> result = App.TriggerHalf(<span class="string">"event.name"</span>, <span class="literal">null</span>);</div></pre></td></tr></table></figure>
     <div class="footer">
         发现错误？想参与编辑？ 
-        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/time.md" target="_blank">
+        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/events.md" target="_blank">
             在 Github 上编辑此页！
         </a>
     </div>

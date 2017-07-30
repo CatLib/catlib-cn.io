@@ -19,7 +19,7 @@
             <nav class="nav">
     <div class="border">
         <img src="/images/logo.png" />
-        <button class="hiden-in-phone">V0.8</button>
+        <!--button class="hiden-in-phone">v1</button!-->
         <button id="btn-menu" class="hiden-in-pc">菜单</button>
         <ul class="nav-link hiden-in-phone">
             <!--li>
@@ -156,6 +156,14 @@
             
             
             <li>
+                <p><a href="/v1/guide/env.html" class="sidebar-link">环境</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
                 <p><a href="/v1/guide/routing.html" class="sidebar-link">路由</a></p>
             </li>
         
@@ -164,7 +172,47 @@
             
             
             <li>
-                <p><a href="/v1/guide/stl.html" class="sidebar-link">标准库</a></p>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link">转换器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">调试控制台</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/mono-driver.html" class="sidebar-link">Mono Driver</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/support.html" class="sidebar-link">支持库</a></p>
             </li>
         
             
@@ -191,6 +239,14 @@
                 <p><a href="/v1/guide/timer.html" class="sidebar-link">计时器</a></p>
             </li>
         
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/translation.html" class="sidebar-link">国际化(I18N)</a></p>
+            </li>
+        
     </ul>
 </section>
     <article class="clearfix">
@@ -206,44 +262,8 @@
 <p>现在代码就不与任何特定提供者耦合，甚至与 CatLib 都是无关的。由于API不包含任何实现和依赖，你可以轻松的为给定接口编写可替换的实现代码，你可以随意替换文件服务实现而不用去修改任何高层消费代码。</p>
 <h4 id="简明"><a href="#简明" class="headerlink" title="简明"></a><strong>简明</strong></h4><p>此外，基于简单接口，代码也更容易理解和维护。</p>
 <p>在一个庞大而复杂的类中，与其追踪哪些方法是有效的，不如转向简单、干净的接口。</p>
-<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>您可以为属性选择器标注<code>[Inject]</code>或者在类的<code>构造函数</code>中定义变量类型为接口类型。</p>
+<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>您可以为属性选择器标注<code>[Inject]</code>或者在类的<code>构造函数</code>中定义的变量类型，容器在构建服务的时候都会自动注入依赖。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Service</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Inject</span>]</div><div class="line">    <span class="keyword">public</span> IFileSystem LocalFileSystem &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Service</span>(<span class="params">IFileSystem fileSystem</span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">//构造函数 和 属性选择器 都可以被注入</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="接口列表"><a href="#接口列表" class="headerlink" title="接口列表"></a>接口列表</h3><p>下面列出了Catlib核心中可以被直接<code>Application.Make()</code>的接口列表(适用于CatLib.Unity):</p>
-<table>
-<thead>
-<tr>
-<th>接口名</th>
-<th style="text-align:center">接口描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>IConfigManager</code></td>
-<td style="text-align:center">全局配置</td>
-</tr>
-<tr>
-<td><code>IEnv</code></td>
-<td style="text-align:center">环境</td>
-</tr>
-<tr>
-<td><code>IFileSystemManager</code></td>
-<td style="text-align:center">文件系统</td>
-</tr>
-<tr>
-<td><code>IRouter</code></td>
-<td style="text-align:center">路由</td>
-</tr>
-<tr>
-<td><code>ITimeManager</code></td>
-<td style="text-align:center">时间</td>
-</tr>
-<tr>
-<td><code>ITimerManager</code></td>
-<td style="text-align:center">计时器</td>
-</tr>
-</tbody>
-</table>
-
     <div class="footer">
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/api.md" target="_blank">

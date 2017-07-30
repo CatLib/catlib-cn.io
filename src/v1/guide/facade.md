@@ -32,9 +32,12 @@ App.Make<IRouter>().Dispatch("bootstrap://start");
 
 | 门面名                | 门面描述      |
 | -------------------- |:------------:|
-| `ConfigManager`      | 配置管理器     |
-| `FileSystemManager`  | 文件系统管理器 |
-| `Router`             | 路由系统      |
-| `TimeManager`        | 时间管理器     |
-| `TimerManager`       | 计时器管理器   |
+| `Config`             | 配置管理器     |
 | `Env`                | 环境信息      |
+| `FileSystem`         | 文件系统管理器 |
+| `Logger`             | 日志系统      |
+| `Router`             | 路由系统      |
+| `Time`               | 时间管理器     |
+| `Timer`              | 计时器管理器   |
+| `Json`               | Json工具      |
+| `I18N`               | 国际化        |

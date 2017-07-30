@@ -19,7 +19,7 @@
             <nav class="nav">
     <div class="border">
         <img src="/images/logo.png" />
-        <button class="hiden-in-phone">V0.8</button>
+        <!--button class="hiden-in-phone">v1</button!-->
         <button id="btn-menu" class="hiden-in-pc">菜单</button>
         <ul class="nav-link hiden-in-phone">
             <!--li>
@@ -156,6 +156,14 @@
             
             
             <li>
+                <p><a href="/v1/guide/env.html" class="sidebar-link">环境</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
                 <p><a href="/v1/guide/routing.html" class="sidebar-link">路由</a></p>
             </li>
         
@@ -164,7 +172,47 @@
             
             
             <li>
-                <p><a href="/v1/guide/stl.html" class="sidebar-link">标准库</a></p>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link">转换器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">调试控制台</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/mono-driver.html" class="sidebar-link">Mono Driver</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/support.html" class="sidebar-link">支持库</a></p>
             </li>
         
             
@@ -191,12 +239,68 @@
                 <p><a href="/v1/guide/timer.html" class="sidebar-link">计时器</a></p>
             </li>
         
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/translation.html" class="sidebar-link">国际化(I18N)</a></p>
+            </li>
+        
     </ul>
 </section>
     <article class="clearfix">
     <h2 id="版本说明"><a href="#版本说明" class="headerlink" title="版本说明"></a>版本说明</h2><blockquote>
 <p>CatLib的版本标准是采用：<a href="http://semver.org/lang/zh-CN/" target="_blank" rel="external">Semver语义化版本标准</a></p>
 </blockquote>
+<h3 id="V1-0-Beta"><a href="#V1-0-Beta" class="headerlink" title="V1.0 Beta"></a>V1.0 Beta</h3><h4 id="新增组件"><a href="#新增组件" class="headerlink" title="新增组件"></a><strong>新增组件</strong></h4><ul>
+<li><code>MonoDriver</code> 组件用于模拟Monobehavior驱动行为</li>
+<li><code>Events</code> 为事件系统。</li>
+<li><code>Debugger</code> 为调试控制器组件</li>
+<li><code>Json</code> 解析Json的类库</li>
+<li><code>Translation</code> 国际化翻译组件</li>
+<li><code>Env</code> 环境组件</li>
+<li><code>Converters</code> 转换器组件</li>
+</ul>
+<h4 id="新增的特性"><a href="#新增的特性" class="headerlink" title="新增的特性"></a><strong>新增的特性</strong></h4><ul>
+<li><code>Application.Register</code> 在完成初始化后可以继续注册</li>
+<li>新增 <code>Container.Flush</code> 函数用于清空容器</li>
+<li><code>Container</code> 允许自定义注入标记</li>
+<li>可以以Unity组件的方式来书写服务提供者了</li>
+<li>新增版本对比接口<code>Application.Compare</code></li>
+<li><code>Config</code>新增<code>Watch</code>函数支持，用于观察配置的变化</li>
+<li>对其他框架开发者更加友好 </li>
+<li><code>路由系统</code> 的 <code>Dispatcher</code>增加了多线程调用安全支持</li>
+<li><code>Container</code> 增加了<code>Type2Service</code>来更加明确Type到服务名的转化</li>
+</ul>
+<h4 id="新增全局接口"><a href="#新增全局接口" class="headerlink" title="新增全局接口"></a><strong>新增全局接口</strong></h4><ul>
+<li><code>IAwait</code> 用于等待异步加载的服务</li>
+<li><code>IServiceProvider</code> 服务提供者接口</li>
+</ul>
+<h4 id="行为变化的函数"><a href="#行为变化的函数" class="headerlink" title="行为变化的函数"></a><strong>行为变化的函数</strong></h4><ul>
+<li><code>ServiceProvider.Init</code> 由异步逻辑变更为同步逻辑。如果服务需要异步等待请使用<code>IAWait</code></li>
+<li><code>Container.Make</code> 第二个参数拆分至 <code>Container.MakeWith</code></li>
+<li><code>Application.Register</code> 要求传入的是一个具体实例而不是一个Type</li>
+<li><code>Application.Bootstrap</code> 要求传入的是一个具体实例而不是一个Type</li>
+</ul>
+<h4 id="函数迁移"><a href="#函数迁移" class="headerlink" title="函数迁移"></a><strong>函数迁移</strong></h4><ul>
+<li><code>Application.Attach</code> 函数迁移至 <code>MonoDriver</code> 组件</li>
+<li><code>Application.Detach</code> 函数迁移至 <code>MonoDriver</code> 组件</li>
+</ul>
+<h4 id="函数-事件更名"><a href="#函数-事件更名" class="headerlink" title="函数/事件更名"></a><strong>函数/事件更名</strong></h4><ul>
+<li><code>Application.GetPriorities</code> 更名为 <code>Application.GetPriority</code></li>
+<li><code>Application.GetGuid</code> 更名为 <code>Application.GetRuntimeId</code></li>
+<li><code>App.Instance</code> 更名为 <code>App.Handler</code></li>
+<li><code>Timer.OnComplete</code> 更名为 <code>Timer.OnCompleted</code></li>
+<li>事件 <code>Application.OnStartComplete</code> 更名为 <code>Application.OnStartCompleted</code></li>
+</ul>
+<h4 id="组件-函数移除"><a href="#组件-函数移除" class="headerlink" title="组件/函数移除"></a><strong>组件/函数移除</strong></h4><ul>
+<li>移除了 <code>ServiceProvider</code> 抽象类</li>
+<li>移除了 <code>Container.ReleaseAll</code>接口</li>
+<li>移除了旧的事件系统</li>
+<li>移除了<code>Config.AddLocator</code>函数</li>
+<li>移除了<code>IStart</code>增强接口</li>
+</ul>
 <h3 id="V0-8-3-Beta"><a href="#V0-8-3-Beta" class="headerlink" title="V0.8.3 Beta"></a>V0.8.3 Beta</h3><ul>
 <li>修复了 <code>UnitySettingLocator</code> 无法正确存储及访问的问题</li>
 <li>修复了 <code>Application.Version</code> 不一致的问题</li>

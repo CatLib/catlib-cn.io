@@ -19,7 +19,7 @@
             <nav class="nav">
     <div class="border">
         <img src="/images/logo.png" />
-        <button class="hiden-in-phone">V0.8</button>
+        <!--button class="hiden-in-phone">v1</button!-->
         <button id="btn-menu" class="hiden-in-pc">菜单</button>
         <ul class="nav-link hiden-in-phone">
             <!--li>
@@ -156,6 +156,14 @@
             
             
             <li>
+                <p><a href="/v1/guide/env.html" class="sidebar-link">环境</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
                 <p><a href="/v1/guide/routing.html" class="sidebar-link">路由</a></p>
             </li>
         
@@ -164,7 +172,47 @@
             
             
             <li>
-                <p><a href="/v1/guide/stl.html" class="sidebar-link">标准库</a></p>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link">转换器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">调试控制台</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/mono-driver.html" class="sidebar-link">Mono Driver</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/support.html" class="sidebar-link">支持库</a></p>
             </li>
         
             
@@ -191,12 +239,37 @@
                 <p><a href="/v1/guide/timer.html" class="sidebar-link">计时器</a></p>
             </li>
         
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/translation.html" class="sidebar-link">国际化(I18N)</a></p>
+            </li>
+        
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="升级指南"><a href="#升级指南" class="headerlink" title="升级指南"></a>升级指南</h2><blockquote>
-<p>这是 CatLib 预发行Beta版。无需升级。</p>
-</blockquote>
+    <h2 id="升级指南"><a href="#升级指南" class="headerlink" title="升级指南"></a>升级指南</h2><p><a href="https://www.ietf.org/rfc/rfc2199.txt" target="_blank" rel="external">RFC 2119</a> 中的必须(MUST)，不可(MUST NOT)，建议(SHOULD)，不建议(SHOULD NOT)，可以/可能(MAY)等关键词将在本节用来做一些解释性的描述。</p>
+<h3 id="从0-8-升级至-1-0"><a href="#从0-8-升级至-1-0" class="headerlink" title="从0.8 升级至 1.0"></a>从0.8 升级至 1.0</h3><p>这是一个主版本变化，意味着出现了不向下兼容的更新，我们尽可能保证升级的平滑，但是不可避免将会出现一些改动。</p>
+<ul>
+<li>移除了 <code>ServiceProvider</code> 抽象类 ，您<code>必须</code>使用<code>IServiceProvider</code>代替</li>
+<li>移除了 <code>Container.ReleaseAll</code>接口 , 您<code>可能</code>使用 <code>Flush</code> 代替（注意与ReleaseAll不同的是Flush将会清空一切绑定关系）</li>
+<li>移除了旧的事件系统 , 这意味着您<code>必须</code>重新适配新的事件系统接口</li>
+<li>移除了<code>Config.AddLocator</code>函数 ，您<code>必须</code>使用<code>Config.SetLocator</code>代替 ，由于移除了多数据源的支持，所以您<code>不可</code>重复的<code>SetLocator</code></li>
+<li>移除了<code>IStart</code>增强接口 , 您<code>不可</code>再使用这个接口。</li>
+<li><code>Application.GetPriorities</code> 更名为 <code>Application.GetPriority</code></li>
+<li><code>Application.GetGuid</code> 更名为 <code>Application.GetRuntimeId</code></li>
+<li><code>App.Instance</code> 更名为 <code>App.Handler</code></li>
+<li><code>Timer.OnComplete</code> 更名为 <code>Timer.OnCompleted</code></li>
+<li>事件 <code>Application.OnStartComplete</code> 更名为 <code>Application.OnStartCompleted</code></li>
+<li><code>Application.Attach</code> 函数迁移至 <code>MonoDriver</code> 组件 ， 您<code>不可</code>再使用<code>App.Instance.Attach</code></li>
+<li><code>Application.Detach</code> 函数迁移至 <code>MonoDriver</code> 组件 ， 您<code>不可</code>再使用<code>App.Instance.Detach</code></li>
+<li><code>ServiceProvider.Init</code> 由异步逻辑变更为同步逻辑。如果服务需要异步等待请使用<code>IAWait</code></li>
+<li><code>Container.Make</code> 第二个参数拆分至 <code>Container.MakeWith</code> , 如果您的代码对容器构建有传参操作，您<code>必须</code>切换至<code>Container.MakeWith</code></li>
+<li><code>Application.Register</code> 要求传入的是一个具体实例而不是一个Type</li>
+<li><code>Application.Bootstrap</code> 要求传入的是一个具体实例而不是一个Type</li>
+</ul>
 
     <div class="footer">
         发现错误？想参与编辑？ 

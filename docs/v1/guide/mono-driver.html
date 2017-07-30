@@ -3,7 +3,7 @@
 <html lang="zh-cn">
     <head>
 
-    <title>时间 — CatLib</title>
+    <title>Mono Driver — CatLib</title>
     <meta charset="utf-8">
     <meta name="description" content="CatLib Unity Framework.">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -204,7 +204,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/mono-driver.html" class="sidebar-link">Mono Driver</a></p>
+                <p><a href="/v1/guide/mono-driver.html" class="sidebar-link current">Mono Driver</a></p>
             </li>
         
             
@@ -228,7 +228,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/time.html" class="sidebar-link current">时间</a></p>
+                <p><a href="/v1/guide/time.html" class="sidebar-link">时间</a></p>
             </li>
         
             
@@ -250,46 +250,61 @@
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h2><p>CatLib时间组件允许建立自己独立的时间体系。</p>
-<h3 id="默认的时间"><a href="#默认的时间" class="headerlink" title="默认的时间"></a>默认的时间</h3><p>默认的时间是基于Unity的时间的简单包装。</p>
-<h3 id="时间API"><a href="#时间API" class="headerlink" title="时间API"></a>时间API</h3><p>下述内容的描述是基于<code>默认时间</code>的，如果使用了<code>扩展时间</code>，其意义可能发生变化。</p>
-<h4 id="Time"><a href="#Time" class="headerlink" title="Time"></a><strong>Time</strong></h4><p>从游戏开始到现在所用的时间(秒)</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> time = timeManager.Default.Time;</div></pre></td></tr></table></figure>
-<h4 id="DeltaTime"><a href="#DeltaTime" class="headerlink" title="DeltaTime"></a><strong>DeltaTime</strong></h4><p>上一帧到当前帧的时间(秒)</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> deltaTime = timeManager.Default.DeltaTime;</div></pre></td></tr></table></figure>
-<h4 id="FixedTime"><a href="#FixedTime" class="headerlink" title="FixedTime"></a><strong>FixedTime</strong></h4><p>游戏开始到现在的时间（秒）</p>
-<p>通过固定时间更新</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> fixedTime = timeManager.Default.FixedTime;</div></pre></td></tr></table></figure>
-<h4 id="TimeSinceLevelLoad"><a href="#TimeSinceLevelLoad" class="headerlink" title="TimeSinceLevelLoad"></a><strong>TimeSinceLevelLoad</strong></h4><p>从当前场景开始到目前为止的时间（秒）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> timeSinceLevelLoad = timeManager.Default.TimeSinceLevelLoad;</div></pre></td></tr></table></figure>
-<h4 id="FixedDeltaTime"><a href="#FixedDeltaTime" class="headerlink" title="FixedDeltaTime"></a><strong>FixedDeltaTime</strong></h4><p>固定帧的更新时间</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> fixedDeltaTime = timeManager.Default.FixedDeltaTime;</div></pre></td></tr></table></figure>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">timeManager.Default.FixedDeltaTime = <span class="number">0.2</span>f;</div></pre></td></tr></table></figure>
-<h4 id="MaximumDeltaTime"><a href="#MaximumDeltaTime" class="headerlink" title="MaximumDeltaTime"></a><strong>MaximumDeltaTime</strong></h4><p>能获取的最大帧与帧之间的更新时间</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> maximumDeltaTime = timeManager.Default.MaximumDeltaTime;</div></pre></td></tr></table></figure>
-<h4 id="SmoothDeltaTime"><a href="#SmoothDeltaTime" class="headerlink" title="SmoothDeltaTime"></a><strong>SmoothDeltaTime</strong></h4><p>平稳的更新时间，根据前N帧的加权平均值</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> smoothDeltaTime = timeManager.Default.SmoothDeltaTime;</div></pre></td></tr></table></figure>
-<h4 id="TimeScale"><a href="#TimeScale" class="headerlink" title="TimeScale"></a><strong>TimeScale</strong></h4><p>时间缩放系数</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> timeScale = timeManager.Default.TimeScale;</div></pre></td></tr></table></figure>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">timeManager.Default.TimeScale = <span class="number">0.5</span>f;</div></pre></td></tr></table></figure>
-<h4 id="FrameCount"><a href="#FrameCount" class="headerlink" title="FrameCount"></a><strong>FrameCount</strong></h4><p>从游戏开始到目前为止的总帧数</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> frameCount = timeManager.Default.FrameCount;</div></pre></td></tr></table></figure>
-<h4 id="RealtimeSinceStartup"><a href="#RealtimeSinceStartup" class="headerlink" title="RealtimeSinceStartup"></a><strong>RealtimeSinceStartup</strong></h4><p>从游戏开始到目前为止的总时间（哪怕时间缩放系数为0也会增长）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> realtimeSinceStartup = timeManager.Default.RealtimeSinceStartup;</div></pre></td></tr></table></figure>
-<h4 id="CaptureFramerate"><a href="#CaptureFramerate" class="headerlink" title="CaptureFramerate"></a><strong>CaptureFramerate</strong></h4><p>每秒的帧率</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> captureFramerate = timeManager.Default.CaptureFramerate;</div></pre></td></tr></table></figure>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">timeManager.Default.CaptureFramerate = <span class="number">30</span>;</div></pre></td></tr></table></figure>
-<h4 id="UnscaledDeltaTime"><a href="#UnscaledDeltaTime" class="headerlink" title="UnscaledDeltaTime"></a><strong>UnscaledDeltaTime</strong></h4><p>不计算时间缩放系数的帧与帧之间的更新时间。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> unscaledDeltaTime = timeManager.Default.UnscaledDeltaTime;</div></pre></td></tr></table></figure>
-<h4 id="UnscaledTime"><a href="#UnscaledTime" class="headerlink" title="UnscaledTime"></a><strong>UnscaledTime</strong></h4><p>不考虑时间缩放系数，从游戏开始到目前为止的总时间</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> unscaledTime = timeManager.Default.UnscaledTime;</div></pre></td></tr></table></figure>
-<h3 id="扩展时间"><a href="#扩展时间" class="headerlink" title="扩展时间"></a>扩展时间</h3><p>您可以通过<code>Extend()</code>方法拓展出新的时间。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">timeManager.Extend(()=&gt;</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> UnityTime();</div><div class="line">&#125;,<span class="string">"NewTime"</span>);</div></pre></td></tr></table></figure>
-<p>通过<code>Get()</code>可以获得您拓展的时间。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> timeSystem = timeManager.Get(<span class="string">"NewTime"</span>);</div></pre></td></tr></table></figure>
+    <h2 id="Mono-Driver"><a href="#Mono-Driver" class="headerlink" title="Mono Driver"></a>Mono Driver</h2><p>Mono Driver 为非继承自MonoBehavior的类提供类模拟MonoBehavior的行为。</p>
+<blockquote>
+<p>所有的Mono Driver增强接口都支持<a href="application.html#优先级">优先级</a>特性</p>
+</blockquote>
+<h3 id="自动被驱动的条件"><a href="#自动被驱动的条件" class="headerlink" title="自动被驱动的条件"></a>自动被驱动的条件</h3><p>您定义的类需要满足下面条件才会被自动被MonoDriver挂载执行。</p>
+<ul>
+<li>类必须通过<code>Container</code>进行<code>Make</code></li>
+<li>类在<code>Container</code>必须以单例进行绑定</li>
+<li>类必须实现必须的MonoDriver提供的增强接口</li>
+</ul>
+<h4 id="手动挂载"><a href="#手动挂载" class="headerlink" title="手动挂载"></a><strong>手动挂载</strong></h4><p>对于非单例，自己手动New出的对象，如果需要挂在到MonoDriver执行，那么必须手动使用Attach接口进行挂载。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> driver = App.Make&lt;IMonoDriver&gt;();</div><div class="line">driver.Attach(<span class="comment">/*you object*/</span>);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>注意，如果您使用了手动挂载，您必须自己管理卸载。使用<code>Detach</code>可以卸载挂载的对象。</p>
+</blockquote>
+<h3 id="增强接口"><a href="#增强接口" class="headerlink" title="增强接口"></a>增强接口</h3><p>下表描述了MonoDriver可以被实现的增强接口以及对应Unity Monobehavior的关系。</p>
+<table>
+<thead>
+<tr>
+<th>增强接口</th>
+<th style="text-align:center">对应MonoBehavior行为</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>IUpdate</code></td>
+<td style="text-align:center"><code>Update</code></td>
+</tr>
+<tr>
+<td><code>ILateUpdate</code></td>
+<td style="text-align:center"><code>LateUpdate</code></td>
+</tr>
+<tr>
+<td><code>IFixedUpdate</code></td>
+<td style="text-align:center"><code>FixedUpdate</code></td>
+</tr>
+<tr>
+<td><code>IOnGUI</code></td>
+<td style="text-align:center"><code>OnGUI</code></td>
+</tr>
+<tr>
+<td><code>IOnDestroy</code></td>
+<td style="text-align:center"><code>OnDestroy</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="在主线程中运行"><a href="#在主线程中运行" class="headerlink" title="在主线程中运行"></a>在主线程中运行</h3><p>您可以通过<code>MainThread</code>将一个执行调度到主线程执行。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> driver = App.Make&lt;IMonoDriver&gt;();</div><div class="line">driver.MainThread(()=&gt;&#123;&#125;);</div></pre></td></tr></table></figure>
+<h3 id="协同执行"><a href="#协同执行" class="headerlink" title="协同执行"></a>协同执行</h3><p>MonoDriver 允许开发者定义的组件使用Unity提供的协同调度服务。通过<code>StartCoroutine</code>您可以执行一个协同程序</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> driver = App.Make&lt;IMonoDriver&gt;();</div><div class="line">driver.StartCoroutine(()=&gt;&#123; <span class="keyword">yield</span> <span class="keyword">return</span> <span class="literal">null</span>; &#125;);</div></pre></td></tr></table></figure>
+<p>同理，通过<code>StopCoroutine</code>来终止一个协同。</p>
+
     <div class="footer">
         发现错误？想参与编辑？ 
-        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/time.md" target="_blank">
+        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/mono-driver.md" target="_blank">
             在 Github 上编辑此页！
         </a>
     </div>

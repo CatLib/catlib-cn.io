@@ -19,7 +19,7 @@
             <nav class="nav">
     <div class="border">
         <img src="/images/logo.png" />
-        <button class="hiden-in-phone">V0.8</button>
+        <!--button class="hiden-in-phone">v1</button!-->
         <button id="btn-menu" class="hiden-in-pc">菜单</button>
         <ul class="nav-link hiden-in-phone">
             <!--li>
@@ -156,6 +156,14 @@
             
             
             <li>
+                <p><a href="/v1/guide/env.html" class="sidebar-link">环境</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
                 <p><a href="/v1/guide/routing.html" class="sidebar-link">路由</a></p>
             </li>
         
@@ -164,7 +172,47 @@
             
             
             <li>
-                <p><a href="/v1/guide/stl.html" class="sidebar-link">标准库</a></p>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link">转换器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">调试控制台</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/mono-driver.html" class="sidebar-link">Mono Driver</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/support.html" class="sidebar-link">支持库</a></p>
             </li>
         
             
@@ -191,6 +239,14 @@
                 <p><a href="/v1/guide/timer.html" class="sidebar-link">计时器</a></p>
             </li>
         
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/translation.html" class="sidebar-link">国际化(I18N)</a></p>
+            </li>
+        
     </ul>
 </section>
     <article class="clearfix">
@@ -202,7 +258,7 @@
 <p>请注意，所有的CatLib组件都会从<code>默认</code>的配置定位器中获取数据</p>
 </blockquote>
 <h3 id="文档上下文说明"><a href="#文档上下文说明" class="headerlink" title="文档上下文说明"></a>文档上下文说明</h3><p>文档中演示的片段代码如果没有特殊说明均是使用下面所示的上下文关系和默认的配置容器:</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">IConfigManager manager = App.Instance.Make&lt;IConfigManager&gt;();</div><div class="line">IConfig config = manager.Default;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> manager = App.Make&lt;IConfigManager&gt;();</div><div class="line">IConfig config = manager.Default;</div></pre></td></tr></table></figure>
 <h3 id="默认配置容器"><a href="#默认配置容器" class="headerlink" title="默认配置容器"></a>默认配置容器</h3><p>CatLib的默认配置容器，自动挂载了：代码配置定位器(用于获取从代码中设定的配置)。</p>
 <p>您新拓展的配置容器，不会挂载任何的配置定位器，需要您手动挂载。</p>
 <h3 id="获取配置"><a href="#获取配置" class="headerlink" title="获取配置"></a>获取配置</h3><p>如果您需要从配置组件中获取配置，您可以通过<code>Get</code>方法来获取。第一个参数为<code>配置名</code>，第二个参数为<code>默认值</code>。当配置不存在的时候会使用默认值来填充缺失的配置。</p>
@@ -212,12 +268,8 @@
 <p>单纯的<code>Set</code>并不会保存数据，您还需要调用<code>Save</code>来储存数据。</p>
 <p>注意，并不是所有的配置定位器都支持保存数据的，例如：代码配置定位器就不会保存数据，但也不会引发异常。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">config.Save();</div></pre></td></tr></table></figure>
-<h3 id="增加定位器"><a href="#增加定位器" class="headerlink" title="增加定位器"></a>增加定位器</h3><p>增加额外的配置定位器能够为配置系统提供访问不同区域数据的能力。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">config.AddLocator(<span class="keyword">new</span> UnitySettingLocator(), <span class="number">100</span>);</div><div class="line">config.AddLocator(<span class="keyword">new</span> CodeConfigLocator(), <span class="number">200</span>);</div></pre></td></tr></table></figure>
-<p>配置定位器允许传入<code>优先级</code>来决定哪个配置定位器被优先使用，优先返回被最先匹配到的配置数据。</p>
-<blockquote>
-<p>注意，当设定配置时，会按照优先级依次遍历配置定位器，如果发现了对应配置定位器中存在配置，那么则会覆盖配置，并终止迭代。如果遍历完所有配置定位器都没有发现有匹配的配置，那么则会将设定配置写入最后一个配置定位器。</p>
-</blockquote>
+<h3 id="设定定位器"><a href="#设定定位器" class="headerlink" title="设定定位器"></a>设定定位器</h3><p>设定配置定位器能够为配置系统提供访问不同区域数据的能力。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">config.SetLocator(<span class="keyword">new</span> UnitySettingLocator());</div></pre></td></tr></table></figure>
 <h3 id="提供的定位器"><a href="#提供的定位器" class="headerlink" title="提供的定位器"></a>提供的定位器</h3><p>CatLib为您提供了以下2种配置定位器，您可以根据场景来选择。</p>
 <table>
 <thead>
@@ -237,84 +289,7 @@
 </tr>
 </tbody>
 </table>
-<h3 id="增加转换器"><a href="#增加转换器" class="headerlink" title="增加转换器"></a>增加转换器</h3><p>CatLib的配置系统允许从配置获取任意类型，您只需要实现类型对应的转换器即可。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">internal</span> <span class="keyword">sealed</span> <span class="keyword">class</span> <span class="title">BoolStringConverter</span> : <span class="title">ITypeStringConverter</span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">string</span> <span class="title">ConvertToString</span>(<span class="params"><span class="keyword">object</span> <span class="keyword">value</span></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// 实现转换</span></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">object</span> <span class="title">ConvertFromString</span>(<span class="params"><span class="keyword">string</span> <span class="keyword">value</span>, Type to</span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// 实现转换</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">config.AddConverter(<span class="keyword">typeof</span>(Bool) , <span class="keyword">new</span> BoolStringConverter());</div></pre></td></tr></table></figure>
-<h3 id="默认支持的转换"><a href="#默认支持的转换" class="headerlink" title="默认支持的转换"></a>默认支持的转换</h3><p>CatLib默认的配置容器都默认支持如下转换类型:</p>
-<table>
-<thead>
-<tr>
-<th>支持类型</th>
-<th style="text-align:center">转换处理类</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>Bool</code></td>
-<td style="text-align:center">BoolStringConverter</td>
-</tr>
-<tr>
-<td><code>Byte</code></td>
-<td style="text-align:center">ByteStringConverter</td>
-</tr>
-<tr>
-<td><code>Char</code></td>
-<td style="text-align:center">CharStringConverter</td>
-</tr>
-<tr>
-<td><code>DateTime</code></td>
-<td style="text-align:center">DateTimeStringConverter</td>
-</tr>
-<tr>
-<td><code>Decimal</code></td>
-<td style="text-align:center">DecimalStringConverter</td>
-</tr>
-<tr>
-<td><code>Double</code></td>
-<td style="text-align:center">DoubleStringConverter</td>
-</tr>
-<tr>
-<td><code>Enum</code></td>
-<td style="text-align:center">EnumStringConverter</td>
-</tr>
-<tr>
-<td><code>Int16</code></td>
-<td style="text-align:center">Int16StringConverter</td>
-</tr>
-<tr>
-<td><code>Int32</code></td>
-<td style="text-align:center">Int32StringConverter</td>
-</tr>
-<tr>
-<td><code>Int64</code></td>
-<td style="text-align:center">Int64StringConverter</td>
-</tr>
-<tr>
-<td><code>SByte</code></td>
-<td style="text-align:center">SByteStringConverter</td>
-</tr>
-<tr>
-<td><code>Single</code></td>
-<td style="text-align:center">SingleStringConverter</td>
-</tr>
-<tr>
-<td><code>String</code></td>
-<td style="text-align:center">StringStringConverter</td>
-</tr>
-<tr>
-<td><code>UInt16</code></td>
-<td style="text-align:center">UInt16StringConverter</td>
-</tr>
-<tr>
-<td><code>UInt32</code></td>
-<td style="text-align:center">UInt32StringConverter</td>
-</tr>
-<tr>
-<td><code>UInt64</code></td>
-<td style="text-align:center">UInt64StringConverter</td>
-</tr>
-</tbody>
-</table>
+<h3 id="转换机制"><a href="#转换机制" class="headerlink" title="转换机制"></a>转换机制</h3><p>CatLib的配置系统使用CatLib转换组件来对数据进行转换，转换相关内容请参考<a href="converters.md">转换器</a></p>
 <h3 id="拓展配置容器"><a href="#拓展配置容器" class="headerlink" title="拓展配置容器"></a>拓展配置容器</h3><p>CatLib允许您扩展配置容器，您可以通过扩展方法来定义额外的配置容器。</p>
 <blockquote>
 <p>如果您要使用自定义的配置容器请实现<code>IConfig</code>接口。</p>
@@ -324,7 +299,7 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">IConfig extendConfig1 = manager.Get(<span class="string">"new"</span>);</div><div class="line">IConfig extendConfig2 = manager[<span class="string">"new"</span>];</div><div class="line"><span class="comment">// extendConfig1 == extendConfig2</span></div></pre></td></tr></table></figure>
 <h3 id="修改默认配置容器"><a href="#修改默认配置容器" class="headerlink" title="修改默认配置容器"></a>修改默认配置容器</h3><p>您可以使用自定义的配置容器来代替默认的配置容器。修改后<code>Default</code>使用的配置容器将是您替换的配置容器。</p>
 <blockquote>
-<p>注意! 由于CatLib的组件配置使用默认的配置容器，所以在没有了解组件的配置使用情况前，谨慎修改。</p>
+<p>注意! 由于CatLib提供的组件配置使用默认的配置容器，所以在没有了解组件的配置使用情况前，谨慎修改。</p>
 </blockquote>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">manager.SetDefault(<span class="string">"new.default"</span>);</div><div class="line">IConfig config = manager.Default;</div></pre></td></tr></table></figure>
     <div class="footer">

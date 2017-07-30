@@ -19,7 +19,7 @@
             <nav class="nav">
     <div class="border">
         <img src="/images/logo.png" />
-        <button class="hiden-in-phone">V0.8</button>
+        <!--button class="hiden-in-phone">v1</button!-->
         <button id="btn-menu" class="hiden-in-pc">菜单</button>
         <ul class="nav-link hiden-in-phone">
             <!--li>
@@ -156,6 +156,14 @@
             
             
             <li>
+                <p><a href="/v1/guide/env.html" class="sidebar-link">环境</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
                 <p><a href="/v1/guide/routing.html" class="sidebar-link">路由</a></p>
             </li>
         
@@ -164,7 +172,47 @@
             
             
             <li>
-                <p><a href="/v1/guide/stl.html" class="sidebar-link">标准库</a></p>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link">转换器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">调试控制台</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/mono-driver.html" class="sidebar-link">Mono Driver</a></p>
+            </li>
+        
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/support.html" class="sidebar-link">支持库</a></p>
             </li>
         
             
@@ -191,6 +239,14 @@
                 <p><a href="/v1/guide/timer.html" class="sidebar-link">计时器</a></p>
             </li>
         
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/translation.html" class="sidebar-link">国际化(I18N)</a></p>
+            </li>
+        
     </ul>
 </section>
     <article class="clearfix">
@@ -199,7 +255,7 @@
 <h3 id="门面的原理"><a href="#门面的原理" class="headerlink" title="门面的原理"></a>门面的原理</h3><p>门面就是一个为容器中对象提供访问方式的类。该机制原理由<code>Facade</code>类实现。您需要继承自<code>Facade</code>类然后设定所需求的模板，这样门面就可以通过容器来获取服务。</p>
 <figure class="highlight"><table><tr><td class="code"><pre><div class="line">public sealed class Router : Facade&lt;IRouter&gt;</div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这个例子中，这里我们设定了路由系统的门面。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">Router.Instance.Dispatch(<span class="string">"bootstrap://start"</span>);</div><div class="line">App.Instance.Make&lt;IRouter&gt;().Dispatch(<span class="string">"bootstrap://start"</span>);</div><div class="line"><span class="comment">// 以上2条语句等价</span></div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">Router.Instance.Dispatch(<span class="string">"bootstrap://start"</span>);</div><div class="line">App.Make&lt;IRouter&gt;().Dispatch(<span class="string">"bootstrap://start"</span>);</div><div class="line"><span class="comment">// 以上2条语句等价</span></div></pre></td></tr></table></figure>
 <h3 id="门面类列表"><a href="#门面类列表" class="headerlink" title="门面类列表"></a>门面类列表</h3><table>
 <thead>
 <tr>
@@ -209,28 +265,40 @@
 </thead>
 <tbody>
 <tr>
-<td><code>ConfigManager</code></td>
+<td><code>Config</code></td>
 <td style="text-align:center">配置管理器</td>
 </tr>
 <tr>
-<td><code>FileSystemManager</code></td>
+<td><code>Env</code></td>
+<td style="text-align:center">环境信息</td>
+</tr>
+<tr>
+<td><code>FileSystem</code></td>
 <td style="text-align:center">文件系统管理器</td>
+</tr>
+<tr>
+<td><code>Logger</code></td>
+<td style="text-align:center">日志系统</td>
 </tr>
 <tr>
 <td><code>Router</code></td>
 <td style="text-align:center">路由系统</td>
 </tr>
 <tr>
-<td><code>TimeManager</code></td>
+<td><code>Time</code></td>
 <td style="text-align:center">时间管理器</td>
 </tr>
 <tr>
-<td><code>TimerManager</code></td>
+<td><code>Timer</code></td>
 <td style="text-align:center">计时器管理器</td>
 </tr>
 <tr>
-<td><code>Env</code></td>
-<td style="text-align:center">环境信息</td>
+<td><code>Json</code></td>
+<td style="text-align:center">Json工具</td>
+</tr>
+<tr>
+<td><code>I18N</code></td>
+<td style="text-align:center">国际化</td>
 </tr>
 </tbody>
 </table>

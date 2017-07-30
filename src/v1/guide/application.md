@@ -35,7 +35,7 @@ public class GameBootstrap : IBootstrap
 {
     public void Bootstrap()
     {
-        App.Register(typeof(EventsProvider));
+        App.Register(new EventsProvider());
     }
 }
 ```
@@ -114,7 +114,7 @@ App.Trigger("event");
 
 监听全局事件时允许您传入触发次数，如果您没有传入则表示事件一直有效，反正如果达到触发，则事件自动被撤销。
 
-> 更多CatLib事件系统特性请参考[事件系统](events.md)
+> 更多CatLib事件系统特性请参考[事件系统](events.html)
 
 ``` csharp
 App.On("event" , (payload)=>

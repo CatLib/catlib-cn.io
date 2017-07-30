@@ -3,7 +3,7 @@
 <html lang="zh-cn">
     <head>
 
-    <title>时间 — CatLib</title>
+    <title>国际化(I18N) — CatLib</title>
     <meta charset="utf-8">
     <meta name="description" content="CatLib Unity Framework.">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
@@ -228,7 +228,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/time.html" class="sidebar-link current">时间</a></p>
+                <p><a href="/v1/guide/time.html" class="sidebar-link">时间</a></p>
             </li>
         
             
@@ -244,52 +244,63 @@
             
             
             <li>
-                <p><a href="/v1/guide/translation.html" class="sidebar-link">国际化(I18N)</a></p>
+                <p><a href="/v1/guide/translation.html" class="sidebar-link current">国际化(I18N)</a></p>
             </li>
         
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="时间"><a href="#时间" class="headerlink" title="时间"></a>时间</h2><p>CatLib时间组件允许建立自己独立的时间体系。</p>
-<h3 id="默认的时间"><a href="#默认的时间" class="headerlink" title="默认的时间"></a>默认的时间</h3><p>默认的时间是基于Unity的时间的简单包装。</p>
-<h3 id="时间API"><a href="#时间API" class="headerlink" title="时间API"></a>时间API</h3><p>下述内容的描述是基于<code>默认时间</code>的，如果使用了<code>扩展时间</code>，其意义可能发生变化。</p>
-<h4 id="Time"><a href="#Time" class="headerlink" title="Time"></a><strong>Time</strong></h4><p>从游戏开始到现在所用的时间(秒)</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> time = timeManager.Default.Time;</div></pre></td></tr></table></figure>
-<h4 id="DeltaTime"><a href="#DeltaTime" class="headerlink" title="DeltaTime"></a><strong>DeltaTime</strong></h4><p>上一帧到当前帧的时间(秒)</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> deltaTime = timeManager.Default.DeltaTime;</div></pre></td></tr></table></figure>
-<h4 id="FixedTime"><a href="#FixedTime" class="headerlink" title="FixedTime"></a><strong>FixedTime</strong></h4><p>游戏开始到现在的时间（秒）</p>
-<p>通过固定时间更新</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> fixedTime = timeManager.Default.FixedTime;</div></pre></td></tr></table></figure>
-<h4 id="TimeSinceLevelLoad"><a href="#TimeSinceLevelLoad" class="headerlink" title="TimeSinceLevelLoad"></a><strong>TimeSinceLevelLoad</strong></h4><p>从当前场景开始到目前为止的时间（秒）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> timeSinceLevelLoad = timeManager.Default.TimeSinceLevelLoad;</div></pre></td></tr></table></figure>
-<h4 id="FixedDeltaTime"><a href="#FixedDeltaTime" class="headerlink" title="FixedDeltaTime"></a><strong>FixedDeltaTime</strong></h4><p>固定帧的更新时间</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> fixedDeltaTime = timeManager.Default.FixedDeltaTime;</div></pre></td></tr></table></figure>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">timeManager.Default.FixedDeltaTime = <span class="number">0.2</span>f;</div></pre></td></tr></table></figure>
-<h4 id="MaximumDeltaTime"><a href="#MaximumDeltaTime" class="headerlink" title="MaximumDeltaTime"></a><strong>MaximumDeltaTime</strong></h4><p>能获取的最大帧与帧之间的更新时间</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> maximumDeltaTime = timeManager.Default.MaximumDeltaTime;</div></pre></td></tr></table></figure>
-<h4 id="SmoothDeltaTime"><a href="#SmoothDeltaTime" class="headerlink" title="SmoothDeltaTime"></a><strong>SmoothDeltaTime</strong></h4><p>平稳的更新时间，根据前N帧的加权平均值</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> smoothDeltaTime = timeManager.Default.SmoothDeltaTime;</div></pre></td></tr></table></figure>
-<h4 id="TimeScale"><a href="#TimeScale" class="headerlink" title="TimeScale"></a><strong>TimeScale</strong></h4><p>时间缩放系数</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> timeScale = timeManager.Default.TimeScale;</div></pre></td></tr></table></figure>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">timeManager.Default.TimeScale = <span class="number">0.5</span>f;</div></pre></td></tr></table></figure>
-<h4 id="FrameCount"><a href="#FrameCount" class="headerlink" title="FrameCount"></a><strong>FrameCount</strong></h4><p>从游戏开始到目前为止的总帧数</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> frameCount = timeManager.Default.FrameCount;</div></pre></td></tr></table></figure>
-<h4 id="RealtimeSinceStartup"><a href="#RealtimeSinceStartup" class="headerlink" title="RealtimeSinceStartup"></a><strong>RealtimeSinceStartup</strong></h4><p>从游戏开始到目前为止的总时间（哪怕时间缩放系数为0也会增长）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> realtimeSinceStartup = timeManager.Default.RealtimeSinceStartup;</div></pre></td></tr></table></figure>
-<h4 id="CaptureFramerate"><a href="#CaptureFramerate" class="headerlink" title="CaptureFramerate"></a><strong>CaptureFramerate</strong></h4><p>每秒的帧率</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> captureFramerate = timeManager.Default.CaptureFramerate;</div></pre></td></tr></table></figure>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">timeManager.Default.CaptureFramerate = <span class="number">30</span>;</div></pre></td></tr></table></figure>
-<h4 id="UnscaledDeltaTime"><a href="#UnscaledDeltaTime" class="headerlink" title="UnscaledDeltaTime"></a><strong>UnscaledDeltaTime</strong></h4><p>不计算时间缩放系数的帧与帧之间的更新时间。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> unscaledDeltaTime = timeManager.Default.UnscaledDeltaTime;</div></pre></td></tr></table></figure>
-<h4 id="UnscaledTime"><a href="#UnscaledTime" class="headerlink" title="UnscaledTime"></a><strong>UnscaledTime</strong></h4><p>不考虑时间缩放系数，从游戏开始到目前为止的总时间</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> unscaledTime = timeManager.Default.UnscaledTime;</div></pre></td></tr></table></figure>
-<h3 id="扩展时间"><a href="#扩展时间" class="headerlink" title="扩展时间"></a>扩展时间</h3><p>您可以通过<code>Extend()</code>方法拓展出新的时间。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">timeManager.Extend(()=&gt;</div><div class="line">&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> UnityTime();</div><div class="line">&#125;,<span class="string">"NewTime"</span>);</div></pre></td></tr></table></figure>
-<p>通过<code>Get()</code>可以获得您拓展的时间。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> timeSystem = timeManager.Get(<span class="string">"NewTime"</span>);</div></pre></td></tr></table></figure>
+    <h2 id="国际化-I18N"><a href="#国际化-I18N" class="headerlink" title="国际化(I18N)"></a>国际化(I18N)</h2><p>CatLib国际化功能提供方便的方法来获取多语言的字符串，让你的游戏可以简单的支持多语言。</p>
+<p>CatLib的语言代码遵循ISO 639, ISO 639-1, ISO 639-2, ISO 639-3</p>
+<h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><p>初始配置必须在框架初始化前完成配置，下面是国际化组件需要的初始配置：</p>
+<table>
+<thead>
+<tr>
+<th>配置名</th>
+<th style="text-align:center">是否必须</th>
+<th style="text-align:center">配置描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>translation.default</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">默认的语言</td>
+</tr>
+<tr>
+<td><code>translation.fallback</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">备选的语言</td>
+</tr>
+</tbody>
+</table>
+<h3 id="设定翻译资源"><a href="#设定翻译资源" class="headerlink" title="设定翻译资源"></a>设定翻译资源</h3><p>您可以通过 <code>SetResources</code> 接口来设定翻译资源，国际化工具本身不提供如何获取翻译字符串。您需要给定翻译资源国际化才能对其进行选择。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> translator = App.Make&lt;ITranslator&gt;();</div><div class="line">translator.SetResources(<span class="comment">/*you resources*/</span>);</div></pre></td></tr></table></figure>
+<h3 id="设定当前语言"><a href="#设定当前语言" class="headerlink" title="设定当前语言"></a>设定当前语言</h3><p>您可以通过<code>SetLocale</code>来设定当前语言。设定的语言需要遵循<code>ISO639</code>语言规范。我们已经为您提供了<code>Languages</code>类来辅助您定义语言。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> translator = App.Make&lt;ITranslator&gt;();</div><div class="line">translator.SetLocale(Languages.Chinese);</div></pre></td></tr></table></figure>
+<h3 id="设定备选语言"><a href="#设定备选语言" class="headerlink" title="设定备选语言"></a>设定备选语言</h3><p>备选语言则主语言无法获取时会使用备选语言（如果备选语言也不存在那么会将返回一个空字符串）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> translator = App.Make&lt;ITranslator&gt;();</div><div class="line">translator.SetFallback(Languages.Chinese);</div></pre></td></tr></table></figure>
+<h3 id="获取翻译语句"><a href="#获取翻译语句" class="headerlink" title="获取翻译语句"></a>获取翻译语句</h3><p>您可以通过<code>Get</code>方法来获取翻译语句。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> translator = App.Make&lt;ITranslator&gt;();</div><div class="line">translator.Get(<span class="string">"msg.title"</span>);</div></pre></td></tr></table></figure>
+<h4 id="翻译语句中的参数替换"><a href="#翻译语句中的参数替换" class="headerlink" title="翻译语句中的参数替换"></a><strong>翻译语句中的参数替换</strong></h4><p>如果需要，你也可以在翻译语句中定义占位符。所有的占位符都使用的 <code>:</code> 开头。</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><div class="line">&#123; <span class="attr">"msg.title"</span> : <span class="string">"你好:name"</span> &#125;</div></pre></td></tr></table></figure>
+<p>你可以在 <code>Get</code> 方法中传递一个数组作为第二个参数，它会将数组的值替换到语言内容的占位符中：</p>
+<p>数组的第0个元素是键，第1个元素是对应的值，以此类推。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">translator.Get(<span class="string">"msg.title"</span> ,<span class="string">"name"</span> ,<span class="string">"catlib"</span>); <span class="comment">//output: 你好catlib</span></div></pre></td></tr></table></figure>
+<p>除此之外您还可以使用另外一种格式:</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">translator.Get(<span class="string">"msg.title"</span> ,<span class="string">"name:catlib"</span>); <span class="comment">//output: 你好catlib</span></div></pre></td></tr></table></figure>
+<p>如果你的占位符中包含了<code>首字母大写</code>或者<code>全体大写</code>，翻译过来的内容也会相应的做相应的处理：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><div class="line">&#123; "msg.title" : "你好:Name" &#125; //output: 你好Catlib</div><div class="line">&#123; "msg.title" : "你好:NAME" &#125; //output: 你好CATLIB</div></pre></td></tr></table></figure>
+<h3 id="复数形式"><a href="#复数形式" class="headerlink" title="复数形式"></a>复数形式</h3><p>复数是个复杂的问题，不同语言对于复数有不同的规则，对此我们采用了成熟的复数形式方案，CatLib使用的复数形式方案来自于：<a href="https://framework.zend.com/" target="_blank" rel="external">ZendFramework</a></p>
+<h4 id="简单的区分"><a href="#简单的区分" class="headerlink" title="简单的区分"></a><strong>简单的区分</strong></h4><p>使用管道符 <code>|</code> ，可以区分单复数字符串格式：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><div class="line">&#123; <span class="attr">"msg.apple"</span> : <span class="string">"这里只有一个苹果|这里有好多苹果"</span> &#125;</div></pre></td></tr></table></figure>
+<h4 id="复杂的区分"><a href="#复杂的区分" class="headerlink" title="复杂的区分"></a><strong>复杂的区分</strong></h4><p>你可以创建使用更复杂的复数规则，例如根据数量的范围不同来指定不同翻译语句：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><div class="line">&#123; <span class="attr">"msg.apple"</span> : <span class="string">"这里只有一个苹果|[1,19]这里有好多苹果|[20,*]天那成堆的苹果"</span> &#125;</div></pre></td></tr></table></figure>
+<p>当你定义完复数语句条件的时候，你可以使用 Get 方法来设置 <code>总数</code> 以获取符合对应条件的复数翻译语句。例如，在这个例子中，设置 <code>总数</code> 为 10 ，符合数量范围 1 至 19，所以会得到 <code>这里有好多苹果</code> 这条复数语句。</p>
+
     <div class="footer">
         发现错误？想参与编辑？ 
-        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/time.md" target="_blank">
+        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/translation.md" target="_blank">
             在 Github 上编辑此页！
         </a>
     </div>
