@@ -47,10 +47,12 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/index.html" class="sidebar-link">介绍</a></p>
             </li>
         
+            
             
             
             
@@ -63,10 +65,12 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/version.html" class="sidebar-link">版本说明</a></p>
             </li>
         
+            
             
             
             
@@ -79,6 +83,7 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/style.html" class="sidebar-link">命名规范</a></p>
             </li>
@@ -87,10 +92,12 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/contribution.html" class="sidebar-link">贡献指南</a></p>
             </li>
         
+            
             
             
             
@@ -105,10 +112,12 @@
                 <li><h3>系统架构</h3></li>
             
             
+            
             <li>
                 <p><a href="/v1/guide/service-provider.html" class="sidebar-link">服务提供者</a></p>
             </li>
         
+            
             
             
             
@@ -121,6 +130,7 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/application.html" class="sidebar-link">CatLib核心</a></p>
             </li>
@@ -129,10 +139,12 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/api.html" class="sidebar-link">服务接口</a></p>
             </li>
         
+            
             
             
             
@@ -147,10 +159,12 @@
             
                 <li><h3>核心组件</h3></li>
             
+            
             <li>
                 <p><a href="/v1/guide/config.html" class="sidebar-link">配置</a></p>
             </li>
         
+            
             
             
             
@@ -163,18 +177,12 @@
             
             
             
+            
             <li>
-                <p><a href="/v1/guide/env.html" class="sidebar-link">环境</a></p>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
             </li>
         
             
-            
-            
-            
-            <li>
-                <p><a href="/v1/guide/converters.html" class="sidebar-link">转换器</a></p>
-            </li>
-        
             
             
             
@@ -187,10 +195,12 @@
             
             
             
+            
             <li>
-                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link">转换器</a></p>
             </li>
         
+            
             
             
             
@@ -203,18 +213,12 @@
             
             
             
-            <li>
-                <p><a href="/v1/guide/mono-driver.html" class="sidebar-link">Mono Driver</a></p>
-            </li>
-        
-            
-            
-            
             
             <li>
                 <p><a href="/v1/guide/support.html" class="sidebar-link">支持库</a></p>
             </li>
         
+            
             
             
             
@@ -227,6 +231,36 @@
             
             
             
+            
+            <li>
+                <p><a href="/v1/guide/translation.html" class="sidebar-link">国际化(I18N)</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+                <li><h3>Unity组件</h3></li>
+            
+            <li>
+                <p><a href="/v1/guide/mono-driver.html" class="sidebar-link">Mono Driver</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/env.html" class="sidebar-link">环境</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
             <li>
                 <p><a href="/v1/guide/time.html" class="sidebar-link">时间</a></p>
             </li>
@@ -235,16 +269,9 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/timer.html" class="sidebar-link">计时器</a></p>
-            </li>
-        
-            
-            
-            
-            
-            <li>
-                <p><a href="/v1/guide/translation.html" class="sidebar-link">国际化(I18N)</a></p>
             </li>
         
     </ul>
@@ -253,7 +280,7 @@
     <h2 id="服务门面"><a href="#服务门面" class="headerlink" title="服务门面"></a>服务门面</h2><p>门面为服务容器内绑定的服务提供了<code>静态</code>的访问接口。相对于直接使用容器生成服务来使用，门面能在维护时能够提供更加易于测试、灵活、简明的特性。</p>
 <p>CatLib所有的内置门面都放置于<code>Facade</code>组件中。如果您要使用门面请引用<code>CatLib.Facade</code>命名空间。</p>
 <h3 id="门面的原理"><a href="#门面的原理" class="headerlink" title="门面的原理"></a>门面的原理</h3><p>门面就是一个为容器中对象提供访问方式的类。该机制原理由<code>Facade</code>类实现。您需要继承自<code>Facade</code>类然后设定所需求的模板，这样门面就可以通过容器来获取服务。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">public sealed class Router : Facade&lt;IRouter&gt;</div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight"><table><tr><td class="code"><pre><div class="line">public sealed class Router : Facade&lt;IRouter&gt;</div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>这个例子中，这里我们设定了路由系统的门面。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">Router.Instance.Dispatch(<span class="string">"bootstrap://start"</span>);</div><div class="line">App.Make&lt;IRouter&gt;().Dispatch(<span class="string">"bootstrap://start"</span>);</div><div class="line"><span class="comment">// 以上2条语句等价</span></div></pre></td></tr></table></figure>
 <h3 id="门面类列表"><a href="#门面类列表" class="headerlink" title="门面类列表"></a>门面类列表</h3><table>
