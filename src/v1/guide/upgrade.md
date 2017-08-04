@@ -28,3 +28,4 @@ order: 1
 - `Container.Make` 第二个参数拆分至 `Container.MakeWith` , 如果您的代码对容器构建有传参操作，您`必须`切换至`Container.MakeWith`
 - `Application.Register` 要求传入的是一个具体实例而不是一个Type
 - `Application.Bootstrap` 要求传入的是一个具体实例而不是一个Type
+- 配置名已经被统一调整,涉及到的组件有[调试控制台](console.html),[环境](env.html),[路由](routing.html),[国际化](translation.html)
