@@ -6,6 +6,8 @@
     <title>CatLib核心 — CatLib</title>
     <meta charset="utf-8">
     <meta name="description" content="CatLib Unity Framework.">
+    <meta name="keywords" content="CatLib,CatLib中文网,CatLib教程,CatLib官网"/>
+    <meta name="description" content="CatLib Unity Framework" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <link rel="stylesheet" href="/css/page.css">
@@ -179,15 +181,6 @@
             
             
             <li>
-                <p><a href="/v1/guide/console.html" class="sidebar-link">调试控制台</a></p>
-            </li>
-        
-            
-            
-            
-            
-            
-            <li>
                 <p><a href="/v1/guide/converters.html" class="sidebar-link">转换器</a></p>
             </li>
         
@@ -207,6 +200,15 @@
             
             <li>
                 <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">调试控制台</a></p>
             </li>
         
             
@@ -285,16 +287,16 @@
 <p>如果您的服务提供者是使用Unity可视化组件构建的，那么您的初始配置可以直接在组件中完成。</p>
 <h3 id="从零开始"><a href="#从零开始" class="headerlink" title="从零开始"></a>从零开始</h3><p>现在我们将从零开始引导catlib框架启动以便于您能了解框架启动原理，一般情况下完整的CatLib Framework中我们已经帮您写好了引导程序。</p>
 <p>首先我们需要定义个一个引导程序，引导程序必须继承自<code>IBootstrap</code>接口，我们可以在引导程序中对服务提供者进行注册或者执行其他引导业务。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">GameBootstrap</span> : <span class="title">IBootstrap</span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Bootstrap</span>(<span class="params"></span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        App.Register(<span class="keyword">new</span> EventsProvider());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">GameBootstrap</span> : <span class="title">IBootstrap</span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Bootstrap</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        App.Register(<span class="keyword">new</span> EventsProvider());</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>随后我们需要一个入口程序，用于被Unity挂载并触发启动流程。在入口程序中，我们只需要实例一个CatLib应用程序，并设定对应引导程序（引导程序会根据设置顺序加载）.最后再执行初始化：</p>
 <blockquote>
 <p>注意如果您的使用的是<code>CatLib.dll</code>会存在构建跨程序集问题，所以您需要提供<code>OnFindType()</code>方法来帮助框架获取当前程序集的类型。</p>
 </blockquote>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Program</span> : <span class="title">MonoBehaviour</span> </div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Awake</span>(<span class="params"></span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="keyword">var</span> application = <span class="keyword">new</span> Application(<span class="keyword">this</span>);</div><div class="line">        application.OnFindType((t) =&gt; Type.GetType(t));</div><div class="line">        application.Bootstrap(<span class="keyword">new</span> GameBootstrap());</div><div class="line">        application.Init();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Program</span> : <span class="title">MonoBehaviour</span> </div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Awake</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="keyword">var</span> application = <span class="keyword">new</span> Application(<span class="keyword">this</span>);</div><div class="line">        application.OnFindType((t) =&gt; Type.GetType(t));</div><div class="line">        application.Bootstrap(<span class="keyword">new</span> GameBootstrap());</div><div class="line">        application.Init();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="从CatLib-Unity开始"><a href="#从CatLib-Unity开始" class="headerlink" title="从CatLib.Unity开始"></a>从CatLib.Unity开始</h3><p>除去上文描述的方案外，CatLib已经为开发者准备好了引导程序，在CatLib.Unity项目中您可以通过配置<code>Providers.cs</code>文件来设定框架的服务提供者，通过<code>Configs.cs</code>文件可以设定初始配置，通过<code>Assemblys.cs</code>文件可以设定需要跨域构建的程序集。</p>
 <p>CatLib.Unity默认的用户代码入口在<code>Main.cs</code>文件中，当然你也可以同过路由标记来指定启动入口(这需要您删除Main.cs文件,事实上Main.cs的入口也是通过路由完成的)。</p>
 <p>通过路由来标记常规配置入口，常规配置的uri固定为<code>bootstrap://config</code><br>通过路由来标记启动入口,入口的uri固定为<code>bootstrap://start</code>：</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">[<span class="meta">Routed</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Main</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Routed(<span class="meta-string">"bootstrap://config"</span>)</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Config</span>(<span class="params"></span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="comment">//todo: config code here</span></div><div class="line">        Debug.Log(<span class="string">"config code here!"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [<span class="meta">Routed(<span class="meta-string">"bootstrap://start"</span>)</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Bootstrap</span>(<span class="params"></span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="comment">//todo: user code here</span></div><div class="line">        Debug.Log(<span class="string">"hello world! user code here!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">[<span class="meta">Routed</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Main</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Routed(<span class="meta-string">"bootstrap://config"</span>)</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Config</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">//todo: config code here</span></div><div class="line">        Debug.Log(<span class="string">"config code here!"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [<span class="meta">Routed(<span class="meta-string">"bootstrap://start"</span>)</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Bootstrap</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">//todo: user code here</span></div><div class="line">        Debug.Log(<span class="string">"hello world! user code here!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="判断当前线程是否在主线程中"><a href="#判断当前线程是否在主线程中" class="headerlink" title="判断当前线程是否在主线程中"></a>判断当前线程是否在主线程中</h3><p>您可以通过<code>IsMainThread</code>来判断是否处于主线程中。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.IsMainThread;</div></pre></td></tr></table></figure>
 <h3 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h3><p>CatLib基础支持库提供了优先级特性。您可以使用<code>[Priority()]</code>特性来定义优先级。通过<code>App.GetPriorities()</code>方法来获取您为类，函数定义的优先级。</p>
