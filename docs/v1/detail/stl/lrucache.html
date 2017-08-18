@@ -179,16 +179,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/converters.html" class="sidebar-link">转换器</a></p>
-            </li>
-        
-            
-            
-            
-            
-            
-            <li>
-                <p><a href="/v1/guide/console.html" class="sidebar-link">调试控制台</a></p>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
             </li>
         
             
@@ -206,7 +197,16 @@
             
             
             <li>
-                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link">转换器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">调试控制台</a></p>
             </li>
         
             
@@ -288,18 +288,13 @@
 <li><a href="#Remove">Remove</a></li>
 </ul>
 <h3 id="Add"><a href="#Add" class="headerlink" title="Add"></a>Add</h3><p>添加一个<code>element</code>到近期最少使用缓存，或者如果它已经存在则将其移动到缓存头部。</p>
-<pre class=" language-csharp"><code class="language-csharp">lruCache<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token string">"key"</span> <span class="token punctuation">,</span> <span class="token string">"val"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">lruCache.Add(<span class="string">"key"</span> , <span class="string">"val"</span>);</div></pre></td></tr></table></figure>
 <h3 id="Count"><a href="#Count" class="headerlink" title="Count"></a>Count</h3><p>获取Lru缓存中的<code>element</code>数量。</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> num <span class="token operator">=</span> lruCache<span class="token punctuation">.</span>Count<span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> num = lruCache.Count;</div></pre></td></tr></table></figure>
 <h3 id="Get"><a href="#Get" class="headerlink" title="Get"></a>Get</h3><p>根据<code>key</code>获取<code>element</code>，如果被淘汰则返回传入的<code>默认值</code>。</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">var</span> element <span class="token operator">=</span> lruCache<span class="token punctuation">.</span><span class="token function">Get</span><span class="token punctuation">(</span><span class="token string">"key"</span> <span class="token punctuation">,</span> <span class="token string">"default val"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> element = lruCache.Get(<span class="string">"key"</span> , <span class="string">"default val"</span>);</div></pre></td></tr></table></figure>
 <h3 id="Remove"><a href="#Remove" class="headerlink" title="Remove"></a>Remove</h3><p>根据<code>key</code>移除<code>element</code>。</p>
-<pre class=" language-csharp"><code class="language-csharp">lruCache<span class="token punctuation">.</span><span class="token function">Remove</span><span class="token punctuation">(</span><span class="token string">"key"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre>
-
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">lruCache.Remove(<span class="string">"key"</span>);</div></pre></td></tr></table></figure>
     <div class="footer">
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/detail/stl/lrucache.md" target="_blank">

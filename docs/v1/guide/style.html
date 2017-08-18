@@ -179,16 +179,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/converters.html" class="sidebar-link">转换器</a></p>
-            </li>
-        
-            
-            
-            
-            
-            
-            <li>
-                <p><a href="/v1/guide/console.html" class="sidebar-link">调试控制台</a></p>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
             </li>
         
             
@@ -206,7 +197,16 @@
             
             
             <li>
-                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link">转换器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">调试控制台</a></p>
             </li>
         
             
@@ -288,109 +288,61 @@
 <h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ul>
 <li><code>代码</code>必须使用<code>4个空格</code>缩进，而不要使用制表符(tab)</li>
 <li>使用<code>using XXX</code>，而不是<code>new XXX.xxx()</code></li>
-<li><figcaption><pre class=" language-csharp">if(true)</figcaption><pre><code class="{}</code>必须换行,且内部代码<code>顶格书写</code></p>"><code class="language-csharp">if(true)</figcaption><pre><code class="{}</code>必须换行,且内部代码<code>顶格书写</code></p>">{
-  var tf = true;
-}
-</code></pre>
+<li><p><code>{}</code>必须换行,且内部代码<code>顶格书写</code></p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span>(<span class="literal">true</span>)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">var</span> tf = <span class="literal">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>使用<code>///</code>对<code>代码</code>进行注释</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token comment" spellcheck="true">/// &lt;summary></span>
-<span class="token comment" spellcheck="true">/// 这里对代码进行了注释</span>
-<span class="token comment" spellcheck="true">/// &lt;/summary></span>
-<span class="token keyword">public</span> <span class="token keyword">string</span> VariableName <span class="token operator">=</span> <span class="token string">"VariableName"</span><span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> 这里对代码进行了注释</span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></div><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> VariableName = <span class="string">"VariableName"</span>;</div></pre></td></tr></table></figure>
 </li>
 <li><p>对于容易<code>产生歧义的表达式</code>您应该使用<code>括号</code>包裹</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">if</span><span class="token punctuation">(</span>variable1 <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token operator">++</span>variable2<span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-<span class="token punctuation">}</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span>(variable1 + (++variable2) &gt; <span class="number">0</span>)</div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>模板</code>必须为<code>TStudlyCaps</code>（驼峰式大写）以<code>T开头</code></p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Bootstrap</span><span class="token operator">&lt;</span>TType<span class="token operator">></span>
-<span class="token punctuation">{</span>
-<span class="token punctuation">}</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">public class Bootstrap&lt;TType&gt;</div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
-<li><p><code>接口</code>必须为<code>IStudlyCaps</code>（驼峰式大写）以<code>I开头</code></pre>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">interface</span> <span class="token class-name">IBootstrap</span> 
-<span class="token punctuation">{</span> 
-<span class="token punctuation">}</span>
-</code></pre>
+<li><p><code>接口</code>必须为<code>IStudlyCaps</code>（驼峰式大写）以<code>I开头</code></p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IBootstrap</span> </div><div class="line">&#123; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="类名及函数"><a href="#类名及函数" class="headerlink" title="类名及函数"></a>类名及函数</h3><ul>
 <li><p><code>类名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Bootstrap</span>
-<span class="token punctuation">{</span> 
-<span class="token punctuation">}</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Bootstrap</span></div><div class="line">&#123; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>函数名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">MyFunc</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-<span class="token punctuation">}</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">MyFunc</span>(<span class="params"></span>)</span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="变量-常量及属性"><a href="#变量-常量及属性" class="headerlink" title="变量,常量及属性"></a>变量,常量及属性</h3><ul>
 <li><p>类<code>公共变量名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">string</span> VariableName <span class="token operator">=</span> <span class="token string">"hello"</span><span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
 </li>
 <li><p>类<code>受保护变量名</code>必须为<code>camelCase</code>（驼峰式小写）</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">internal</span> <span class="token keyword">string</span> variableName <span class="token operator">=</span> <span class="token string">"hello"</span><span class="token punctuation">;</span>
-<span class="token keyword">protected</span> <span class="token keyword">string</span> variableName <span class="token operator">=</span> <span class="token string">"hello"</span><span class="token punctuation">;</span>
-<span class="token keyword">protected</span> <span class="token keyword">internal</span> <span class="token keyword">string</span> variableName <span class="token operator">=</span> <span class="token string">"hello"</span><span class="token punctuation">;</span>
-<span class="token keyword">private</span> <span class="token keyword">string</span> variableName <span class="token operator">=</span> <span class="token string">"hello"</span><span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">internal</span> <span class="keyword">string</span> variableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">protected</span> <span class="keyword">string</span> variableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">protected</span> <span class="keyword">internal</span> <span class="keyword">string</span> variableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">string</span> variableName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
 </li>
 <li><p>类<code>属性名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">string</span> VariableName<span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> VariableName&#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>静态变量</code>和<code>常量</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">const</span> <span class="token keyword">string</span> VariableName <span class="token operator">=</span> <span class="token string">"hello"</span><span class="token punctuation">;</span>
-<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">readonly</span> <span class="token keyword">string</span> VariableName <span class="token operator">=</span> <span class="token string">"hello"</span><span class="token punctuation">;</span>
-<span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">string</span> VariableName <span class="token operator">=</span> <span class="token string">"hello"</span><span class="token punctuation">;</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">const</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>参数</code>必须为<code>camelCase</code>（驼峰式小写）</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">FunctionName</span><span class="token punctuation">(</span>Action callFunction<span class="token punctuation">)</span>
-<span class="token punctuation">{</span>
-  <span class="token keyword">var</span> localVariable <span class="token operator">=</span> callFunction<span class="token punctuation">;</span>
-<span class="token punctuation">}</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">FunctionName</span>(<span class="params">Action callFunction</span>)</span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">var</span> localVariable = callFunction;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><ul>
 <li><p><code>枚举名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">enum</span> ApplicationEvents
-<span class="token punctuation">{</span> 
-<span class="token punctuation">}</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> ApplicationEvents</div><div class="line">&#123; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>枚举元素名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">public</span> <span class="token keyword">enum</span> ApplicationEvents
-<span class="token punctuation">{</span>
-  OnStart  <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">,</span>
-  OnInited <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">,</span>
-<span class="token punctuation">}</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> ApplicationEvents</div><div class="line">&#123;</div><div class="line">    OnStart  = <span class="number">1</span>,</div><div class="line">    OnInited = <span class="number">2</span>,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h3><ul>
 <li><p><code>代码</code>必须在<code>项目名</code>的根命名空间中</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">namespace</span> CatLib
-<span class="token punctuation">{</span>
-<span class="token punctuation">}</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">namespace</span> <span class="title">CatLib</span></div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p>组件<code>代码</code>必须在<code>项目名.组件名</code>的命名空间中</p>
-<pre class=" language-csharp"><code class="language-csharp"><span class="token keyword">namespace</span> CatLib<span class="token punctuation">.</span>Routing
-<span class="token punctuation">{</span>
-<span class="token punctuation">}</span>
-</code></pre>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">namespace</span> <span class="title">CatLib.Routing</span></div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h3><ul>
