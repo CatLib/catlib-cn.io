@@ -16,7 +16,7 @@
 
     <body>
         <% if(isIndex){ %>
-            <script>window.location.href='http://catlib.io/v1/guide/index.html';</script>
+            <%- partial('index') %>
         <% }else{ %>
             <%- partial('page') %>
         <% } %>
