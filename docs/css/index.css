@@ -147,6 +147,7 @@ html {
   padding-bottom: 30px;
 }
 #banner h1 blockquote {
+  font-family: "Hiragino Sans GB", "Segoe UI", "MS Sans Serif";
   position: relative;
   top: -50px;
   font-size: 24px;
@@ -257,7 +258,7 @@ html {
   }
   #banner h1 {
     margin-top: 75px;
-    font-size: 48px;
+    font-size: 54px;
   }
   #banner h1 blockquote {
     top: -30px;
