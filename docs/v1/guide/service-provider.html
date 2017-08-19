@@ -7,7 +7,6 @@
     <meta charset="utf-8">
     <meta name="description" content="CatLib Unity Framework.">
     <meta name="keywords" content="CatLib,CatLib中文网,CatLib教程,CatLib官网"/>
-    <meta name="description" content="CatLib Unity Framework" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <link rel="stylesheet" href="/css/page.css">
@@ -21,7 +20,7 @@
             <nav class="nav">
     <div class="border">
         <img src="/images/logo.png" />
-        <!--button class="hiden-in-phone">v1</button!-->
+        <!--button class="hiden-in-phone">v1.0</button!-->
         <button id="btn-menu" class="hiden-in-pc">菜单</button>
         <ul class="nav-link hiden-in-phone">
             <!--li>
@@ -181,7 +180,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
             </li>
         
             
@@ -190,7 +189,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
             </li>
         
             
@@ -208,7 +207,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console.html" class="sidebar-link">调试控制台</a></p>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
             </li>
         
             
@@ -255,7 +254,16 @@
             
             
             <li>
-                <p><a href="/v1/guide/env.html" class="sidebar-link">环境</a></p>
+                <p><a href="/v1/guide/env.html" class="sidebar-link">游戏环境</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</a></p>
             </li>
         
             
@@ -288,14 +296,14 @@
 <h3 id="实现服务提供者"><a href="#实现服务提供者" class="headerlink" title="实现服务提供者"></a>实现服务提供者</h3><p>您的服务提供者类必须继承自<code>CatLib.IServiceProvider</code>类 , 所有的服务提供者包含 <code>Register()</code>和<code>Init()</code> 2个方法。</p>
 <p>在<code>Register()</code>方法中，你<code>唯一</code>要做的事情就是<code>绑定服务实现</code>到服务容器，不要尝试在其中执行任何其它功能。因为很有可能你就使用了一个没有被注册的服务。</p>
 <p>当服务提供者的<code>Init()</code>方法被触发时，就意味着框架所有的服务提供者的<code>Register()</code>都已经被执行，也就是说我们可以在<code>Init()</code>中访问其他服务提供者所提供的服务。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">using</span> CatLib;</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ConfigProvider</span> : <span class="title">IServiceProvide</span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Init</span>(<span class="params"></span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="comment">// 初始化</span></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Register</span>(<span class="params"></span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="comment">// 注册服务</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">using</span> CatLib;</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ConfigProvider</span> : <span class="title">IServiceProvide</span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Init</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// 初始化</span></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Register</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// 注册服务</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="注册服务提供者"><a href="#注册服务提供者" class="headerlink" title="注册服务提供者"></a>注册服务提供者</h3><blockquote>
 <p>注册了服务提供者并不意味着服务都会被立即实例化，通常情况下很多是延迟实例化的，只有真的用到它们的时候才会实例化。</p>
 </blockquote>
 <p>如果框架使用者想要使用某个服务，那么必须先对这个服务进行注册。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Register(<span class="keyword">new</span> ConfigProvider());</div></pre></td></tr></table></figure>
 <h3 id="初始化优先级"><a href="#初始化优先级" class="headerlink" title="初始化优先级"></a>初始化优先级</h3><p>您可以通过配置启动优先级来调整服务提供者启动流程的启动顺序，注意CatLib中的所有的优先级特性都是采用就近原则的。即为函数标记的优先级特性将会优先于类的优先级特性。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">using</span> CatLib;</div><div class="line">[<span class="meta">Priority(200)</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ConfigProvider</span> : <span class="title">IServiceProvide</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Priority(100)</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Init</span>(<span class="params"></span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="comment">// Init 的启动优先级会使用100而不是200 ， 由于就近原则</span></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Register</span>(<span class="params"></span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="comment">// 注册服务</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">using</span> CatLib;</div><div class="line">[<span class="meta">Priority(200)</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ConfigProvider</span> : <span class="title">IServiceProvide</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Priority(100)</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Init</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// Init 的启动优先级会使用100而不是200 ， 由于就近原则</span></div><div class="line">    &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Register</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">// 注册服务</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>关于更多优先级相关资料，请参考：<a href="application.html#优先级">优先级</a></p>
 
     <div class="footer">

@@ -7,7 +7,6 @@
     <meta charset="utf-8">
     <meta name="description" content="CatLib Unity Framework.">
     <meta name="keywords" content="CatLib,CatLib中文网,CatLib教程,CatLib官网"/>
-    <meta name="description" content="CatLib Unity Framework" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <link rel="stylesheet" href="/css/page.css">
@@ -21,7 +20,7 @@
             <nav class="nav">
     <div class="border">
         <img src="/images/logo.png" />
-        <!--button class="hiden-in-phone">v1</button!-->
+        <!--button class="hiden-in-phone">v1.0</button!-->
         <button id="btn-menu" class="hiden-in-pc">菜单</button>
         <ul class="nav-link hiden-in-phone">
             <!--li>
@@ -181,7 +180,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
             </li>
         
             
@@ -190,7 +189,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
             </li>
         
             
@@ -208,7 +207,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console.html" class="sidebar-link">调试控制台</a></p>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
             </li>
         
             
@@ -255,7 +254,16 @@
             
             
             <li>
-                <p><a href="/v1/guide/env.html" class="sidebar-link">环境</a></p>
+                <p><a href="/v1/guide/env.html" class="sidebar-link">游戏环境</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</a></p>
             </li>
         
             
@@ -326,7 +334,7 @@
 <h3 id="基础注册"><a href="#基础注册" class="headerlink" title="基础注册"></a>基础注册</h3><p>注册一个基本路由只需要一个<code>url</code>与一个<code>lambda</code>, 如果您没有定义uri的<code>scheme</code>那么将会使用默认值:</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">Router.Instance.Reg(<span class="string">"main"</span>, (request, response) =&gt;</div><div class="line">&#123;</div><div class="line">    response.SetContext(<span class="string">"hello world"</span>);</div><div class="line">&#125;);</div><div class="line">Router.Instance.Dispatch(<span class="string">"catlib://main"</span>);</div></pre></td></tr></table></figure>
 <h3 id="特性路由注册"><a href="#特性路由注册" class="headerlink" title="特性路由注册"></a>特性路由注册</h3><p>CatLib还允许您为类添加路由标记<code>[Routed]</code>来进行特性路由,注意被路由的类必须标记为<code>[Routed]</code>,且需要在路由方法上也标记<code>[Routed]</code>,同时保证方法访问级别为<code>public</code>：</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">[<span class="meta">Routed</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AttrRouting</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Routed</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call</span>(<span class="params">IRequest request, IResponse response</span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">[<span class="meta">Routed</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AttrRouting</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Routed</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call</span>(<span class="params">IRequest request, IResponse response</span>)</span></div><div class="line">    &#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">Router.Instance.Dispatch(<span class="string">"catlib://attr-routing/call"</span>);</div></pre></td></tr></table></figure>
 <h3 id="必选路由参数"><a href="#必选路由参数" class="headerlink" title="必选路由参数"></a>必选路由参数</h3><p>有时，我们需要在路由中捕获一些<code>url</code>的片段。例如，如果我们需要从url中捕获访问<code>道具详细界面</code>时的<code>道具id</code>,我们可以这样定义路由参数：</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">Router.Instance.Reg(<span class="string">"props-detail/&#123;id&#125;"</span>, (request, response) =&gt;</div><div class="line">&#123;</div><div class="line">    response.SetContext(<span class="string">"props id:"</span> + request[<span class="string">"id"</span>]);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
@@ -371,12 +379,12 @@
 </li>
 </ul>
 <h3 id="特性路由配置"><a href="#特性路由配置" class="headerlink" title="特性路由配置"></a>特性路由配置</h3><p>如果您使用特性路由，如果想要在特性路由中表达路由的特性，那么可以这么做：</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">[<span class="meta">Routed(Defaults=<span class="meta-string">"type=&gt;1,tag=&gt;2"</span>,Where=<span class="meta-string">"type=&gt;[0-9]+,tag=&gt;[0-9]+"</span>)</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AttrRouting</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Routed(Defaults=<span class="meta-string">"type=&gt;0"</span>)</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call</span>(<span class="params">IRequest request, IResponse response</span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [<span class="meta">Routed</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Func</span>(<span class="params">IRequest request, IResponse response</span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">[<span class="meta">Routed(Defaults=<span class="meta-string">"type=&gt;1,tag=&gt;2"</span>,Where=<span class="meta-string">"type=&gt;[0-9]+,tag=&gt;[0-9]+"</span>)</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AttrRouting</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Routed(Defaults=<span class="meta-string">"type=&gt;0"</span>)</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call</span>(<span class="params">IRequest request, IResponse response</span>)</span></div><div class="line">    &#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [<span class="meta">Routed</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Func</span>(<span class="params">IRequest request, IResponse response</span>)</span></div><div class="line">    &#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>特性路由的配置是使用<code>=&gt;</code>和<code>,</code>进行区分的。<code>参数1名=&gt;参数1值,参数2名=&gt;参数2值</code>。 </p>
 <p>上述我们为<code>AttrRouting</code>这个类下的所有特性路由定义了2个默认值：<code>type</code> 和 <code>tag</code>，其值分别为<code>1</code>和<code>2</code>。同时也定义了参数正则约束。</p>
 <p>在方法<code>Call</code>中我们定义了方法的特性路由默认值<code>type</code>。根据<code>特性路由编译过程</code>所以最终生效的默认值的将是<code>0</code>。</p>
 <h3 id="特性路由Scheme"><a href="#特性路由Scheme" class="headerlink" title="特性路由Scheme"></a>特性路由Scheme</h3><p>特性路由可以通过给定绝对地址的方式来定义Scheme</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">[<span class="meta">Routed(<span class="meta-string">"ui://main"</span>)</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AttrRouting</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Routed(<span class="meta-string">"call"</span>)</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call</span>(<span class="params">IRequest request, IResponse response</span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [<span class="meta">Routed(<span class="meta-string">"ui2://func"</span>)</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Func</span>(<span class="params">IRequest request, IResponse response</span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">[<span class="meta">Routed(<span class="meta-string">"ui://main"</span>)</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AttrRouting</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Routed(<span class="meta-string">"call"</span>)</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call</span>(<span class="params">IRequest request, IResponse response</span>)</span></div><div class="line">    &#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [<span class="meta">Routed(<span class="meta-string">"ui2://func"</span>)</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Func</span>(<span class="params">IRequest request, IResponse response</span>)</span></div><div class="line">    &#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">Router.Instance.Dispatch(<span class="string">"ui://main/call"</span>);</div><div class="line">Router.Instance.Dispatch(<span class="string">"ui2://func"</span>);</div></pre></td></tr></table></figure>
 <p>上述代码以绝对地址的形式定义了特性路由，这样编译时将不会使用默认的<code>Scheme</code>。</p>
 <h3 id="什么是路由中间件"><a href="#什么是路由中间件" class="headerlink" title="什么是路由中间件"></a>什么是路由中间件</h3><p>路由中间件允许拦截，修改路由请求及响应，中间件将会按照顺序依次执行。</p>
@@ -393,7 +401,7 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">Router.Instance.Group(()=&gt;</div><div class="line">&#123;</div><div class="line">  <span class="comment">// 注册路由条目  </span></div><div class="line">&#125;).Middleware((request,response,next)=&gt;</div><div class="line">&#123;</div><div class="line">    <span class="comment">// 中间件逻辑</span></div><div class="line">    <span class="keyword">return</span> next(request,response);</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <h3 id="类中间件"><a href="#类中间件" class="headerlink" title="类中间件"></a>类中间件</h3><p>类中间件属于<code>类中间件</code>的过滤器链池。</p>
 <p>通过特性路由的方式和类注册方式，将允许您设定类的中间件接口：<code>IMiddleware</code>;</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">[<span class="meta">Routed</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AttrRouting</span> : <span class="title">IMiddleware</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> IFilterChain&lt;IRequest, IResponse&gt; Middleware </div><div class="line">    &#123;</div><div class="line">        <span class="keyword">get</span></div><div class="line">        &#123;</div><div class="line">            <span class="comment">// 过滤器链</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    [<span class="meta">Routed</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call</span>(<span class="params">IRequest request, IResponse response</span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">[<span class="meta">Routed</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AttrRouting</span> : <span class="title">IMiddleware</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">public</span> IFilterChain&lt;IRequest, IResponse&gt; Middleware </div><div class="line">    &#123;</div><div class="line">        <span class="keyword">get</span></div><div class="line">        &#123;</div><div class="line">            <span class="comment">// 过滤器链</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    [<span class="meta">Routed</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call</span>(<span class="params">IRequest request, IResponse response</span>)</span></div><div class="line">    &#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>如果您的路由标记类中设定了中间件接口，那么在调度到当前类下的路由方法时将会经过设定的中间件。</p>
 <h3 id="全局中间件"><a href="#全局中间件" class="headerlink" title="全局中间件"></a>全局中间件</h3><p>全局中间件属于<code>全局中间件</code>的过滤器链池。</p>
 <p>全局中间件会对所有调度的路由条目进行处理。</p>
@@ -431,12 +439,12 @@
 </ul>
 <p>您可以通过配置:<code>routing.stripping.reserved</code>来填写不要被剥离的程序集，使用<code>;</code>分隔程序集。</p>
 <h3 id="路由自动命名"><a href="#路由自动命名" class="headerlink" title="路由自动命名"></a>路由自动命名</h3><p>使用特性路由时，如果您没有给定路由<code>uri</code>那么将会使用路由自动命名机制。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">[<span class="meta">Routed</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AttrRouting</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Routed</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call</span>(<span class="params"></span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line">    [<span class="meta">Routed</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">CallNPC</span>(<span class="params"></span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">[<span class="meta">Routed</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AttrRouting</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Routed</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line">    [<span class="meta">Routed</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">CallNPC</span>(<span class="params"></span>)</span></div><div class="line">    &#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>自动命名的规则是：根据类名或函数名转为全小写，单词之间用<code>-</code>进行分割的字符串,连续的大写视为一个单词。</p>
 <p>上述路由将会被转化为：<code>catlib://attr-routing/call</code>和<code>catlib://attr-routing/call-npc</code>。</p>
 <h3 id="自动路由注入"><a href="#自动路由注入" class="headerlink" title="自动路由注入"></a>自动路由注入</h3><p>使用特性路由时您可以使用自动参数注入来获取需要的参数。CatLib容器会自动解析并注入需求参数。</p>
 <p>其中<code>IRequest</code>和 <code>IResponse</code>类型为<code>当前路由</code>的请求和响应。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">[<span class="meta">Routed</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AttrRouting</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Routed</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call</span>(<span class="params">IRequest request, IResponse response</span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [<span class="meta">Routed</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call2</span>(<span class="params">IResponse response, IApplication App , IRouter router</span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">[<span class="meta">Routed</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AttrRouting</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Routed</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call</span>(<span class="params">IRequest request, IResponse response</span>)</span></div><div class="line">    &#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [<span class="meta">Routed</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call2</span>(<span class="params">IResponse response, IApplication App , IRouter router</span>)</span></div><div class="line">    &#123;</div><div class="line">        res.SetContext(<span class="string">"hello world"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="性能优化相关"><a href="#性能优化相关" class="headerlink" title="性能优化相关"></a>性能优化相关</h3><p>CatLib 路由系统是一个复杂的系统，您不应该使用在高性能需求的地方或者频繁调用。</p>
 <p>我们给出了下面几种优化方案：</p>
 <ul>
