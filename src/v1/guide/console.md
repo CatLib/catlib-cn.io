@@ -18,21 +18,21 @@ CatLib的日志工具使用了 [RFC 5424](https://www.ietf.org/rfc/rfc5424.txt) 
 
 | 配置名                            | 是否必须 | 配置描述(可以点击查看详细)                 |
 | -------------------------------- |:------:|:--------------------------------------:|
-| `debugger.webconsole.enable`     | 否      | 是否启用Web控制台  |
-| `debugger.logger.handler.unity`  | 否      | 是否启用Unity Log  |
-| `debugger.logger.handler.console`| 否      | 是否启用控制台输出  |
-| `debugger.webconsole.host`       | 否      | Web控制台监听地址  |
-| `debugger.webconsole.port`       | 否      | Web控制台监听端口(默认:9478)  |
-| `debugger.monitor.performance`   | 否      | 是否启动性能监控  |
-| `debugger.monitor.screen`        | 否      | 是否启动屏幕监控  |
-| `debugger.monitor.scene`         | 否      | 是否启动场景监控  |
-| `debugger.monitor.systeminfo`    | 否      | 是否启动系统信息监控  |
-| `debugger.monitor.path`          | 否      | 是否启动路径监控  |
-| `debugger.monitor.input`         | 否      | 是否启动输入监控  |
-| `debugger.monitor.input.location`| 否      | 是否启动定位监控  |
-| `debugger.monitor.input.gyro`    | 否      | 是否启动陀螺仪监控  |
-| `debugger.monitor.input.compass` | 否      | 是否启动罗盘监控  |
-| `debugger.monitor.graphics`      | 否      | 是否启动显卡监控  |
+| `DebuggerProvider.WebConsoleEnable`     | 否      | 是否启用Web控制台  |
+| `UnityDebuggerProvider.UnityConsoleLoggerHandler`  | 否      | 是否启用Unity Log  |
+| `DebuggerProvider.ConsoleLoggerHandler`| 否      | 是否启用控制台输出  |
+| `DebuggerProvider.WebConsoleHost`       | 否      | Web控制台监听地址  |
+| `DebuggerProvider.WebConsolePort`       | 否      | Web控制台监听端口(默认:9478)  |
+| `UnityDebuggerProvider.MonitorPerformance`   | 否      | 是否启动性能监控  |
+| `UnityDebuggerProvider.MonitorScreen`        | 否      | 是否启动屏幕监控  |
+| `UnityDebuggerProvider.MonitorScene`         | 否      | 是否启动场景监控  |
+| `UnityDebuggerProvider.MonitorSystemInfo`    | 否      | 是否启动系统信息监控  |
+| `UnityDebuggerProvider.MonitorPath`          | 否      | 是否启动路径监控  |
+| `UnityDebuggerProvider.MonitorInput`         | 否      | 是否启动输入监控  |
+| `UnityDebuggerProvider.MonitorInputLocation`| 否      | 是否启动定位监控  |
+| `UnityDebuggerProvider.MonitorInputGyroscope`    | 否      | 是否启动陀螺仪监控  |
+| `UnityDebuggerProvider.MonitorInputCompass` | 否      | 是否启动罗盘监控  |
+| `UnityDebuggerProvider.MonitorGraphics`      | 否      | 是否启动显卡监控  |
 
 ### 公共的控制台服务器
 

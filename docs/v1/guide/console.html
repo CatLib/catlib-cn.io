@@ -6,6 +6,8 @@
     <title>调试控制台 — CatLib</title>
     <meta charset="utf-8">
     <meta name="description" content="CatLib Unity Framework.">
+    <meta name="keywords" content="CatLib,CatLib中文网,CatLib教程,CatLib官网"/>
+    <meta name="description" content="CatLib Unity Framework" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <link rel="stylesheet" href="/css/page.css">
@@ -179,16 +181,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console.html" class="sidebar-link current">调试控制台</a></p>
-            </li>
-        
-            
-            
-            
-            
-            
-            <li>
-                <p><a href="/v1/guide/converters.html" class="sidebar-link">转换器</a></p>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
             </li>
         
             
@@ -206,7 +199,16 @@
             
             
             <li>
-                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link">转换器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link current">调试控制台</a></p>
             </li>
         
             
@@ -291,77 +293,77 @@
 </thead>
 <tbody>
 <tr>
-<td><code>debugger.webconsole.enable</code></td>
+<td><code>DebuggerProvider.WebConsoleEnable</code></td>
 <td style="text-align:center">否</td>
 <td style="text-align:center">是否启用Web控制台</td>
 </tr>
 <tr>
-<td><code>debugger.logger.handler.unity</code></td>
+<td><code>UnityDebuggerProvider.UnityConsoleLoggerHandler</code></td>
 <td style="text-align:center">否</td>
 <td style="text-align:center">是否启用Unity Log</td>
 </tr>
 <tr>
-<td><code>debugger.logger.handler.console</code></td>
+<td><code>DebuggerProvider.ConsoleLoggerHandler</code></td>
 <td style="text-align:center">否</td>
 <td style="text-align:center">是否启用控制台输出</td>
 </tr>
 <tr>
-<td><code>debugger.webconsole.host</code></td>
+<td><code>DebuggerProvider.WebConsoleHost</code></td>
 <td style="text-align:center">否</td>
 <td style="text-align:center">Web控制台监听地址</td>
 </tr>
 <tr>
-<td><code>debugger.webconsole.port</code></td>
+<td><code>DebuggerProvider.WebConsolePort</code></td>
 <td style="text-align:center">否</td>
 <td style="text-align:center">Web控制台监听端口(默认:9478)</td>
 </tr>
 <tr>
-<td><code>debugger.monitor.performance</code></td>
+<td><code>UnityDebuggerProvider.MonitorPerformance</code></td>
 <td style="text-align:center">否</td>
 <td style="text-align:center">是否启动性能监控</td>
 </tr>
 <tr>
-<td><code>debugger.monitor.screen</code></td>
+<td><code>UnityDebuggerProvider.MonitorScreen</code></td>
 <td style="text-align:center">否</td>
 <td style="text-align:center">是否启动屏幕监控</td>
 </tr>
 <tr>
-<td><code>debugger.monitor.scene</code></td>
+<td><code>UnityDebuggerProvider.MonitorScene</code></td>
 <td style="text-align:center">否</td>
 <td style="text-align:center">是否启动场景监控</td>
 </tr>
 <tr>
-<td><code>debugger.monitor.systeminfo</code></td>
+<td><code>UnityDebuggerProvider.MonitorSystemInfo</code></td>
 <td style="text-align:center">否</td>
 <td style="text-align:center">是否启动系统信息监控</td>
 </tr>
 <tr>
-<td><code>debugger.monitor.path</code></td>
+<td><code>UnityDebuggerProvider.MonitorPath</code></td>
 <td style="text-align:center">否</td>
 <td style="text-align:center">是否启动路径监控</td>
 </tr>
 <tr>
-<td><code>debugger.monitor.input</code></td>
+<td><code>UnityDebuggerProvider.MonitorInput</code></td>
 <td style="text-align:center">否</td>
 <td style="text-align:center">是否启动输入监控</td>
 </tr>
 <tr>
-<td><code>debugger.monitor.input.location</code></td>
+<td><code>UnityDebuggerProvider.MonitorInputLocation</code></td>
 <td style="text-align:center">否</td>
 <td style="text-align:center">是否启动定位监控</td>
 </tr>
 <tr>
-<td><code>debugger.monitor.input.gyro</code></td>
+<td><code>UnityDebuggerProvider.MonitorInputGyroscope</code></td>
 <td style="text-align:center">否</td>
 <td style="text-align:center">是否启动陀螺仪监控</td>
 </tr>
 <tr>
-<td><code>debugger.monitor.input.compass</code></td>
+<td><code>UnityDebuggerProvider.MonitorInputCompass</code></td>
 <td style="text-align:center">否</td>
 <td style="text-align:center">是否启动罗盘监控</td>
 </tr>
 <tr>
-<td><code>debugger.monitor.graphics</code></td>
+<td><code>UnityDebuggerProvider.MonitorGraphics</code></td>
 <td style="text-align:center">否</td>
 <td style="text-align:center">是否启动显卡监控</td>
 </tr>

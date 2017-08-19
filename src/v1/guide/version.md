@@ -49,13 +49,14 @@ order: 2
 - `Application.Attach` 函数迁移至 `MonoDriver` 组件
 - `Application.Detach` 函数迁移至 `MonoDriver` 组件
 
-#### **函数/事件更名**
+#### **函数/事件/配置更名**
 
 - `Application.GetPriorities` 更名为 `Application.GetPriority`
 - `Application.GetGuid` 更名为 `Application.GetRuntimeId`
 - `App.Instance` 更名为 `App.Handler`
 - `Timer.OnComplete` 更名为 `Timer.OnCompleted`
 - 事件 `Application.OnStartComplete` 更名为 `Application.OnStartCompleted`
+- 配置名已经被统一调整,涉及到的组件有[调试控制台](console.html),[环境](env.html),[路由](routing.html),[国际化](translation.html)
 
 #### **组件/函数移除**
 

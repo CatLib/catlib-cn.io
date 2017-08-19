@@ -6,6 +6,8 @@
     <title>事件系统 — CatLib</title>
     <meta charset="utf-8">
     <meta name="description" content="CatLib Unity Framework.">
+    <meta name="keywords" content="CatLib,CatLib中文网,CatLib教程,CatLib官网"/>
+    <meta name="description" content="CatLib Unity Framework" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
     <link rel="stylesheet" href="/css/page.css">
@@ -179,16 +181,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console.html" class="sidebar-link">调试控制台</a></p>
-            </li>
-        
-            
-            
-            
-            
-            
-            <li>
-                <p><a href="/v1/guide/converters.html" class="sidebar-link">转换器</a></p>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
             </li>
         
             
@@ -206,7 +199,16 @@
             
             
             <li>
-                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link">转换器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">调试控制台</a></p>
             </li>
         
             
@@ -286,11 +288,11 @@
 <h4 id="通配符事件监听器"><a href="#通配符事件监听器" class="headerlink" title="通配符事件监听器"></a><strong>通配符事件监听器</strong></h4><p>CatLib事件系统允许使用通配符<code>*</code>对事件进行匹配。它让你在一个监听器中可以监听到多个事件。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.On(<span class="string">"event.*"</span> , (payload)=&gt;&#123;</div><div class="line">    <span class="comment">//todo</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <h4 id="返回事件的处理结果"><a href="#返回事件的处理结果" class="headerlink" title="返回事件的处理结果"></a><strong>返回事件的处理结果</strong></h4><p>您可以通过<code>return</code>一个具体的结果，来告知事件的调用者。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.On(<span class="string">"event.*"</span> , (payload)=&gt;&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">"call complete"</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Listen(<span class="string">"event.*"</span> , (payload)=&gt;&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">"call complete"</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <h4 id="终止事件继续传递"><a href="#终止事件继续传递" class="headerlink" title="终止事件继续传递"></a><strong>终止事件继续传递</strong></h4><p>CatLib事件系统支持返回一个false来终止事件的传递。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.On(<span class="string">"event.*"</span> , (payload)=&gt;&#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Listen(<span class="string">"event.*"</span> , (payload)=&gt;&#123;</div><div class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <h4 id="设定事件的生命"><a href="#设定事件的生命" class="headerlink" title="设定事件的生命"></a><strong>设定事件的生命</strong></h4><p>您可以通过设定一个生命，来决定事件能够被触发的次数,<code>On</code>函数的第三个参数为生命，默认情况下，事件将会永久有效。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.On(<span class="string">"event.*"</span> , (payload)=&gt;&#123; <span class="keyword">return</span> <span class="literal">false</span>; &#125;, <span class="number">10</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Listen(<span class="string">"event.*"</span> , (payload)=&gt;&#123; <span class="keyword">return</span> <span class="literal">false</span>; &#125;, <span class="number">10</span>);</div></pre></td></tr></table></figure>
 <h3 id="触发事件"><a href="#触发事件" class="headerlink" title="触发事件"></a>触发事件</h3><p>如果要触发事件，您可以通过<code>App.Trigger</code>来触发事件。这个函数将会把事件分发到它所有已经注册的监听器上。因为 App 是全局可访问的，所以你可以在项目中的任何地方调用它：</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Trigger(<span class="string">"event.name"</span>, <span class="literal">null</span>);</div></pre></td></tr></table></figure>
 <h4 id="执行到第一次有效结果后终止"><a href="#执行到第一次有效结果后终止" class="headerlink" title="执行到第一次有效结果后终止"></a><strong>执行到第一次有效结果后终止</strong></h4><p>通过<code>TriggerHalf</code>您可以限定这次事件的触发只要监听器返回了处理结果那么就自动终止事件传递。</p>

@@ -37,7 +37,7 @@ App.On("event.*" , (payload)=>{
 您可以通过`return`一个具体的结果，来告知事件的调用者。
 
 ``` csharp
-App.On("event.*" , (payload)=>{
+App.Listen("event.*" , (payload)=>{
     return "call complete";
 });
 ```
@@ -47,7 +47,7 @@ App.On("event.*" , (payload)=>{
 CatLib事件系统支持返回一个false来终止事件的传递。
 
 ``` csharp
-App.On("event.*" , (payload)=>{
+App.Listen("event.*" , (payload)=>{
     return false;
 });
 ```
@@ -57,7 +57,7 @@ App.On("event.*" , (payload)=>{
 您可以通过设定一个生命，来决定事件能够被触发的次数,`On`函数的第三个参数为生命，默认情况下，事件将会永久有效。
 
 ``` csharp
-App.On("event.*" , (payload)=>{ return false; }, 10);
+App.Listen("event.*" , (payload)=>{ return false; }, 10);
 ```
 
 ### 触发事件

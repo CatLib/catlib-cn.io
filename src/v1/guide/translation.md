@@ -16,8 +16,8 @@ CatLib的语言代码遵循ISO 639, ISO 639-1, ISO 639-2, ISO 639-3
 
 | 配置名                     | 是否必须 | 配置描述    |
 | -------------------------- |:------:|:-----------:|
-| `translation.default`      | 否      | 默认的语言  |
-| `translation.fallback`     | 否      | 备选的语言  |
+| `TranslationProvider.DefaultLanguage`      | 否      | 默认的语言  |
+| `TranslationProvider.FallbackLanguage`     | 否      | 备选的语言  |
 
 ### 设定翻译资源
 
