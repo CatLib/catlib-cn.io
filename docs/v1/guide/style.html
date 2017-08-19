@@ -180,7 +180,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
             </li>
         
             
@@ -207,7 +207,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
+                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
             </li>
         
             
@@ -308,7 +308,7 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span>(variable1 + (++variable2) &gt; <span class="number">0</span>)</div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>模板</code>必须为<code>TStudlyCaps</code>（驼峰式大写）以<code>T开头</code></p>
-<figure class="highlight"><table><tr><td class="code"><pre><div class="line">public class Bootstrap&lt;TType&gt;</div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">public class Bootstrap&lt;TType&gt;</div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>接口</code>必须为<code>IStudlyCaps</code>（驼峰式大写）以<code>I开头</code></p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IBootstrap</span> </div><div class="line">&#123; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -319,7 +319,7 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Bootstrap</span></div><div class="line">&#123; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>函数名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">MyFunc</span>(<span class="params"></span>)</span></div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">MyFunc</span>(<span class="params"></span>)</span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="变量-常量及属性"><a href="#变量-常量及属性" class="headerlink" title="变量,常量及属性"></a>变量,常量及属性</h3><ul>
@@ -336,7 +336,7 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">const</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>参数</code>必须为<code>camelCase</code>（驼峰式小写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">FunctionName</span>(<span class="params">Action callFunction</span>)</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">var</span> localVariable = callFunction;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">FunctionName</span>(<span class="params">Action callFunction</span>)</span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">var</span> localVariable = callFunction;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><ul>

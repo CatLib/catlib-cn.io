@@ -50,7 +50,7 @@ legend,
 th,
 td {
   outline: none;
-  font: 1em "Helvetica Neue", "Helvetica", "Lucida Grande", "Arial", "Hiragino Sans GB", "Microsoft Yahei", "WenQuanYi Micro Hei", "sans-serif", arial, sans-serif;
+  font: 1em "Hiragino Sans GB", "Segoe UI", "MS Sans Serif";
   text-align: left;
   color: #f66;
 }
