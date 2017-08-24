@@ -109,3 +109,39 @@ IConfig extendConfig2 = manager["new"];
 manager.SetDefault("new.default");
 IConfig config = manager.Default;
 ```
+
+### 为类注入配置
+
+您可以通过配置管理器的`Config`函数对类进行配置注入，需要注入的属性(get;set;)必须标记`ConfigAttribute`特性，且必须为`public`。
+
+函数接受2个参数，第一个参数为需要注入类的实例，第二个参数为所选择的配置容器。
+
+`ConfigAttribute`属性接受2个参数，第一个参数作为默认值，第二个参数作为定义的配置名（从这个名字的配置中获取配置参数）
+
+如果您没有为`ConfigAttribute`定义名字那么将会使用默认命名，默认命名为`类名`+`属性名` ,例如下面的示例就是：`TestConfig.Name`
+
+``` csharp
+public class TestConfig
+{
+    [Config]
+    public string Name { get; set; }
+
+    [Config("cat","NewName")]
+    public string NameDefault { get; set; }
+}
+```
+
+``` csharp
+// 假定配置中已有如下参数：
+// TestConfig.Name : Hello world 
+// NewName : This is new name
+var configManager = App.Make<IConfigManager>();
+var obj = new TestConfig();
+configManager.Config(obj);
+obj.Name // Hello world
+obj.NewName // This is new name
+```
+
+**给定配置的优先级**
+
+`配置容器中的配置值` > `ConfigAttribute提供默认值(不为null)` > `属性中的值`

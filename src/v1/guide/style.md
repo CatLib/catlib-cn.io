@@ -77,11 +77,15 @@ public void MyFunc()
 public string VariableName = "hello";
 ```
 
-- 类`受保护变量名`必须为`camelCase`（驼峰式小写）
+- 类`受保护变量名`必须为`StudlyCaps`（驼峰式大写）
 ``` csharp
-internal string variableName = "hello";
-protected string variableName = "hello";
-protected internal string variableName = "hello";
+internal string VariableName = "hello";
+protected string VariableName = "hello";
+protected internal string VariableName = "hello";
+```
+
+- 类`私有变量名`必须为`camelCase`（驼峰式小写）
+``` csharp
 private string variableName = "hello";
 ```
 
@@ -95,6 +99,9 @@ public string VariableName{ get; set; }
 public const string VariableName = "hello";
 public static readonly string VariableName = "hello";
 public static string VariableName = "hello";
+internal const string VariableName = "hello";
+protected const string VariableName = "hello";
+private const string VariableName = "hello";
 ```
 
 - `参数`必须为`camelCase`（驼峰式小写）
