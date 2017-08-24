@@ -180,24 +180,6 @@
             
             
             <li>
-                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
-            </li>
-        
-            
-            
-            
-            
-            
-            <li>
-                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
-            </li>
-        
-            
-            
-            
-            
-            
-            <li>
                 <p><a href="/v1/guide/converters.html" class="sidebar-link">转换器</a></p>
             </li>
         
@@ -207,7 +189,25 @@
             
             
             <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
                 <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
             </li>
         
             
@@ -226,6 +226,24 @@
             
             <li>
                 <p><a href="/v1/guide/file-system.html" class="sidebar-link">文件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/hashing.html" class="sidebar-link">哈希</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/encryption.html" class="sidebar-link">加解密</a></p>
             </li>
         
             
@@ -255,6 +273,15 @@
             
             <li>
                 <p><a href="/v1/guide/env.html" class="sidebar-link">游戏环境</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</a></p>
             </li>
         
             
@@ -339,6 +366,15 @@
 <p>注意! 由于CatLib提供的组件配置使用默认的配置容器，所以在没有了解组件的配置使用情况前，谨慎修改。</p>
 </blockquote>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">manager.SetDefault(<span class="string">"new.default"</span>);</div><div class="line">IConfig config = manager.Default;</div></pre></td></tr></table></figure>
+<h3 id="为类注入配置"><a href="#为类注入配置" class="headerlink" title="为类注入配置"></a>为类注入配置</h3><p>您可以通过配置管理器的<code>Config</code>函数对类进行配置注入，需要注入的属性(get;set;)必须标记<code>ConfigAttribute</code>特性，且必须为<code>public</code>。</p>
+<p>函数接受2个参数，第一个参数为需要注入类的实例，第二个参数为所选择的配置容器。</p>
+<p><code>ConfigAttribute</code>属性接受2个参数，第一个参数作为默认值，第二个参数作为定义的配置名（从这个名字的配置中获取配置参数）</p>
+<p>如果您没有为<code>ConfigAttribute</code>定义名字那么将会使用默认命名，默认命名为<code>类名</code>+<code>属性名</code> ,例如下面的示例就是：<code>TestConfig.Name</code></p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">TestConfig</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Config</span>]</div><div class="line">    <span class="keyword">public</span> <span class="keyword">string</span> Name &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line"></div><div class="line">    [<span class="meta">Config(<span class="meta-string">"cat"</span>,<span class="meta-string">"NewName"</span>)</span>]</div><div class="line">    <span class="keyword">public</span> <span class="keyword">string</span> NameDefault &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 假定配置中已有如下参数：</span></div><div class="line"><span class="comment">// TestConfig.Name : Hello world </span></div><div class="line"><span class="comment">// NewName : This is new name</span></div><div class="line"><span class="keyword">var</span> configManager = App.Make&lt;IConfigManager&gt;();</div><div class="line"><span class="keyword">var</span> obj = <span class="keyword">new</span> TestConfig();</div><div class="line">configManager.Config(obj);</div><div class="line">obj.Name <span class="comment">// Hello world</span></div><div class="line">obj.NewName <span class="comment">// This is new name</span></div></pre></td></tr></table></figure>
+<p><strong>给定配置的优先级</strong></p>
+<p><code>配置容器中的配置值</code> &gt; <code>ConfigAttribute提供默认值(不为null)</code> &gt; <code>属性中的值</code></p>
+
     <div class="footer">
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/config.md" target="_blank">

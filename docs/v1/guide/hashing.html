@@ -3,7 +3,7 @@
 <html lang="zh-cn">
     <head>
 
-    <title>游戏环境 — CatLib</title>
+    <title>哈希 — CatLib</title>
     <meta charset="utf-8">
     <meta name="description" content="CatLib Unity Framework.">
     <meta name="keywords" content="CatLib,CatLib中文网,CatLib教程,CatLib官网">
@@ -234,7 +234,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/hashing.html" class="sidebar-link">哈希</a></p>
+                <p><a href="/v1/guide/hashing.html" class="sidebar-link current">哈希</a></p>
             </li>
         
             
@@ -272,7 +272,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/env.html" class="sidebar-link current">游戏环境</a></p>
+                <p><a href="/v1/guide/env.html" class="sidebar-link">游戏环境</a></p>
             </li>
         
             
@@ -314,63 +314,27 @@
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="游戏环境"><a href="#游戏环境" class="headerlink" title="游戏环境"></a>游戏环境</h2><p>游戏环境组件维护了游戏运行时所必须的环境数据。</p>
-<h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><p>初始配置必须在框架初始化前完成配置，下面是环境组件需要的初始配置：</p>
-<table>
-<thead>
-<tr>
-<th>配置名</th>
-<th style="text-align:center">是否必须</th>
-<th style="text-align:center">配置描述(可以点击查看详细)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>EnvironmentProvider.DebugLevel</code></td>
-<td style="text-align:center">否</td>
-<td style="text-align:center"><a href="#环境">框架调试等级</a></td>
-</tr>
-<tr>
-<td><code>EnvironmentProvider.AssetPath</code></td>
-<td style="text-align:center">否</td>
-<td style="text-align:center"><a href="#环境">资源文件路径</a></td>
-</tr>
-</tbody>
-</table>
-<p>您可以通过<code>IEnv</code>获取环境信息。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> env = App.Make&lt;IEnv&gt;();</div></pre></td></tr></table></figure>
-<h4 id="SetAssetPath"><a href="#SetAssetPath" class="headerlink" title="SetAssetPath"></a><strong>SetAssetPath</strong></h4><p>您可以通过<code>SetAssetPath</code>来设定资源路径，注意资源路径必须可以被写入。</p>
-<ul>
-<li>如果传入的值为<code>null</code>或者<code>空字符串</code>则不视作开发者手动设定。</li>
+    <h2 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a>哈希</h2><p>哈希库为您提供了一些常用的哈希函数。您可以通过这些函数安全的加密用户的密码，验证文件的有效性等。</p>
+<h3 id="支持的哈希"><a href="#支持的哈希" class="headerlink" title="支持的哈希"></a>支持的哈希</h3><ul>
+<li><p>一致性哈希<br>– <code>Adler32</code><br>– <code>Crc32</code></p>
+</li>
+<li><p>加密哈希<br>– <code>BCrypt</code></p>
+</li>
+<li><p>分布式哈希<br>– <code>Murmur Hash 3</code><br>– <code>Djb Hash</code></p>
+</li>
 </ul>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">env.SetAssetPath(UnityEngine.Application.PersistentDataPath);</div></pre></td></tr></table></figure>
-<h4 id="AssetPath"><a href="#AssetPath" class="headerlink" title="AssetPath"></a><strong>AssetPath</strong></h4><p>获取被设定的资源路径。<code>默认情况</code>下为：</p>
-<p>在编辑器模式下：</p>
-<ul>
-<li><code>生产环境</code>为：<code>UnityEngine.Application.PersistentDataPath</code></li>
-<li><code>仿真环境</code>为：<code>StreamingAssets</code>文件夹</li>
-<li><code>开发者模式</code>为：<code>UnityEngine.Application.dataPath</code></li>
-</ul>
-<p>脱离编辑器模式：</p>
-<ul>
-<li>自动设定为：<code>UnityEngine.Application.PersistentDataPath</code></li>
-</ul>
-<p>不论在任何模式下，如果开发者手动设定了<code>SetAssetPath</code>。那么始终返回开发者设定的，<code>AssetPath</code>。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> assetPath = env.AssetPath;</div></pre></td></tr></table></figure>
-<h4 id="SetDebugLevel"><a href="#SetDebugLevel" class="headerlink" title="SetDebugLevel"></a><strong>SetDebugLevel</strong></h4><p>设定CatLib的调试等级。CatLib的调试等级分为：</p>
-<ul>
-<li><code>Prod</code>生产环境</li>
-<li><code>Staging</code>仿真环境</li>
-<li><code>Dev</code>开发者模式</li>
-<li><code>Auto</code>自动模式，在Unity编辑器下为开发者模式，发布后为生产环境。</li>
-</ul>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">env.SetDebugLevel(DebugLevels.Prod);</div></pre></td></tr></table></figure>
-<h4 id="DebugLevel"><a href="#DebugLevel" class="headerlink" title="DebugLevel"></a><strong>DebugLevel</strong></h4><p>获取调试等级。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> debugLevel = env.DebugLevel;</div></pre></td></tr></table></figure>
-
+<h3 id="使用一致性哈希"><a href="#使用一致性哈希" class="headerlink" title="使用一致性哈希"></a>使用一致性哈希</h3><p>您可以通过<code>Checksum</code>方法来调用一致性哈希，方法接收2个参数，一个参数为输入值，第二个参数为使用的一致性哈希算法。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> hashing = App.Make&lt;IHashing&gt;();</div><div class="line"><span class="keyword">byte</span>[] data; <span class="comment">// 假定需要加密的数据</span></div><div class="line"><span class="keyword">long</span> hashCode = hashing.Checksum(data , Checksums.Crc32);</div></pre></td></tr></table></figure>
+<h3 id="使用加密哈希"><a href="#使用加密哈希" class="headerlink" title="使用加密哈希"></a>使用加密哈希</h3><p>通过<code>HashPassword</code>方法您可以调用加密哈希，加密哈希接受2个参数，第一个参数为输入值，第二个参数为加密因子，加密因子默认为10，值越大则运行越慢，但越安全。加密Hash可以有效的保护您的密码。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> hashing = App.Make&lt;IHashing&gt;();</div><div class="line"><span class="keyword">string</span> data; <span class="comment">// 假定需要加密的数据</span></div><div class="line"><span class="keyword">long</span> hashCode = hashing.HashPassword(data , <span class="number">10</span>);</div></pre></td></tr></table></figure>
+<p><strong>验证加密哈希和输入值是否匹配</strong></p>
+<p>您可以通过<code>CheckPassword</code>来验证加密哈希和输入值是否匹配。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> hashing = App.Make&lt;IHashing&gt;();</div><div class="line"><span class="keyword">bool</span> isMatch = hashing.HashPassword(<span class="string">"输入值"</span> , <span class="string">"加密的哈希"</span>);</div></pre></td></tr></table></figure>
+<h3 id="使用分布式哈希"><a href="#使用分布式哈希" class="headerlink" title="使用分布式哈希"></a>使用分布式哈希</h3><p>您可以通过<code>HashString</code>方法和<code>HashByte</code>方法来进行分布式哈希。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> hashing = App.Make&lt;IHashing&gt;();</div><div class="line"><span class="keyword">uint</span> hashCode = hashing.HashString(<span class="string">"输入值"</span> , Hashes.MurmurHash);</div></pre></td></tr></table></figure>
     <div class="footer">
         发现错误？想参与编辑？ 
-        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/env.md" target="_blank">
+        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/hashing.md" target="_blank">
             在 Github 上编辑此页！
         </a>
     </div>

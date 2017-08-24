@@ -3,7 +3,7 @@
 <html lang="zh-cn">
     <head>
 
-    <title>游戏环境 — CatLib</title>
+    <title>加解密 — CatLib</title>
     <meta charset="utf-8">
     <meta name="description" content="CatLib Unity Framework.">
     <meta name="keywords" content="CatLib,CatLib中文网,CatLib教程,CatLib官网">
@@ -243,7 +243,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/encryption.html" class="sidebar-link">加解密</a></p>
+                <p><a href="/v1/guide/encryption.html" class="sidebar-link current">加解密</a></p>
             </li>
         
             
@@ -272,7 +272,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/env.html" class="sidebar-link current">游戏环境</a></p>
+                <p><a href="/v1/guide/env.html" class="sidebar-link">游戏环境</a></p>
             </li>
         
             
@@ -314,8 +314,9 @@
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="游戏环境"><a href="#游戏环境" class="headerlink" title="游戏环境"></a>游戏环境</h2><p>游戏环境组件维护了游戏运行时所必须的环境数据。</p>
-<h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><p>初始配置必须在框架初始化前完成配置，下面是环境组件需要的初始配置：</p>
+    <h2 id="加解密"><a href="#加解密" class="headerlink" title="加解密"></a>加解密</h2><p>CatLib加解密组件使用<code>AES-256</code>和<code>AES-128</code>加密，强烈建议您使用由CatLib加解密组件所提供的加密服务，而不要使用自己的加解密算法。</p>
+<p>所有加密信息在底层都会进行<code>HMac</code>签名，以保证加密值不能被更改。</p>
+<h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><p>在使用CatLib加解密组件之前您必须对组件进行配置，您可以通过初始配置来配置：</p>
 <table>
 <thead>
 <tr>
@@ -326,51 +327,27 @@
 </thead>
 <tbody>
 <tr>
-<td><code>EnvironmentProvider.DebugLevel</code></td>
-<td style="text-align:center">否</td>
-<td style="text-align:center"><a href="#环境">框架调试等级</a></td>
+<td><code>EncryptionProvider.Key</code></td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">密钥（AES-128需要16位长度, AES-256需要32位长度）</td>
 </tr>
 <tr>
-<td><code>EnvironmentProvider.AssetPath</code></td>
+<td><code>EncryptionProvider.Cipher</code></td>
 <td style="text-align:center">否</td>
-<td style="text-align:center"><a href="#环境">资源文件路径</a></td>
+<td style="text-align:center">加密类型（<code>AES-128-CBC</code> 和 <code>AES-256-CBC</code>）</td>
 </tr>
 </tbody>
 </table>
-<p>您可以通过<code>IEnv</code>获取环境信息。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> env = App.Make&lt;IEnv&gt;();</div></pre></td></tr></table></figure>
-<h4 id="SetAssetPath"><a href="#SetAssetPath" class="headerlink" title="SetAssetPath"></a><strong>SetAssetPath</strong></h4><p>您可以通过<code>SetAssetPath</code>来设定资源路径，注意资源路径必须可以被写入。</p>
-<ul>
-<li>如果传入的值为<code>null</code>或者<code>空字符串</code>则不视作开发者手动设定。</li>
-</ul>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">env.SetAssetPath(UnityEngine.Application.PersistentDataPath);</div></pre></td></tr></table></figure>
-<h4 id="AssetPath"><a href="#AssetPath" class="headerlink" title="AssetPath"></a><strong>AssetPath</strong></h4><p>获取被设定的资源路径。<code>默认情况</code>下为：</p>
-<p>在编辑器模式下：</p>
-<ul>
-<li><code>生产环境</code>为：<code>UnityEngine.Application.PersistentDataPath</code></li>
-<li><code>仿真环境</code>为：<code>StreamingAssets</code>文件夹</li>
-<li><code>开发者模式</code>为：<code>UnityEngine.Application.dataPath</code></li>
-</ul>
-<p>脱离编辑器模式：</p>
-<ul>
-<li>自动设定为：<code>UnityEngine.Application.PersistentDataPath</code></li>
-</ul>
-<p>不论在任何模式下，如果开发者手动设定了<code>SetAssetPath</code>。那么始终返回开发者设定的，<code>AssetPath</code>。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> assetPath = env.AssetPath;</div></pre></td></tr></table></figure>
-<h4 id="SetDebugLevel"><a href="#SetDebugLevel" class="headerlink" title="SetDebugLevel"></a><strong>SetDebugLevel</strong></h4><p>设定CatLib的调试等级。CatLib的调试等级分为：</p>
-<ul>
-<li><code>Prod</code>生产环境</li>
-<li><code>Staging</code>仿真环境</li>
-<li><code>Dev</code>开发者模式</li>
-<li><code>Auto</code>自动模式，在Unity编辑器下为开发者模式，发布后为生产环境。</li>
-</ul>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">env.SetDebugLevel(DebugLevels.Prod);</div></pre></td></tr></table></figure>
-<h4 id="DebugLevel"><a href="#DebugLevel" class="headerlink" title="DebugLevel"></a><strong>DebugLevel</strong></h4><p>获取调试等级。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> debugLevel = env.DebugLevel;</div></pre></td></tr></table></figure>
+<h3 id="使用加解密组件"><a href="#使用加解密组件" class="headerlink" title="使用加解密组件"></a>使用加解密组件</h3><p><strong>加密一个值</strong></p>
+<p>您可以通过<code>Encrypt</code>方法来对值进行加密，所有的值一经加密则不能修改。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> encrypter = App.Make&lt;IEncrypter&gt;();</div><div class="line"><span class="keyword">byte</span>[] data;</div><div class="line"><span class="keyword">string</span> encryptStr = encrypter.Encrypt(data);</div></pre></td></tr></table></figure>
+<p><strong>解密被加密的内容</strong></p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> encrypter = App.Make&lt;IEncrypter&gt;();</div><div class="line"><span class="keyword">byte</span>[] str = encrypter.Decrypt(encryptStr);</div></pre></td></tr></table></figure>
+<p>如果解密失败，例如：HMac验证失败，那么将会抛出一个<code>EncryptionException</code>异常。</p>
 
     <div class="footer">
         发现错误？想参与编辑？ 
-        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/env.md" target="_blank">
+        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/encryption.md" target="_blank">
             在 Github 上编辑此页！
         </a>
     </div>

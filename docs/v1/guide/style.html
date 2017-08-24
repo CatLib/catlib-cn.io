@@ -180,24 +180,6 @@
             
             
             <li>
-                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
-            </li>
-        
-            
-            
-            
-            
-            
-            <li>
-                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
-            </li>
-        
-            
-            
-            
-            
-            
-            <li>
                 <p><a href="/v1/guide/converters.html" class="sidebar-link">转换器</a></p>
             </li>
         
@@ -207,7 +189,25 @@
             
             
             <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
                 <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
             </li>
         
             
@@ -226,6 +226,24 @@
             
             <li>
                 <p><a href="/v1/guide/file-system.html" class="sidebar-link">文件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/hashing.html" class="sidebar-link">哈希</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/encryption.html" class="sidebar-link">加解密</a></p>
             </li>
         
             
@@ -255,6 +273,15 @@
             
             <li>
                 <p><a href="/v1/guide/env.html" class="sidebar-link">游戏环境</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</a></p>
             </li>
         
             
@@ -326,14 +353,17 @@
 <li><p>类<code>公共变量名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
 </li>
-<li><p>类<code>受保护变量名</code>必须为<code>camelCase</code>（驼峰式小写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">internal</span> <span class="keyword">string</span> variableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">protected</span> <span class="keyword">string</span> variableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">protected</span> <span class="keyword">internal</span> <span class="keyword">string</span> variableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">string</span> variableName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
+<li><p>类<code>受保护变量名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">internal</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">protected</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">protected</span> <span class="keyword">internal</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
+</li>
+<li><p>类<code>私有变量名</code>必须为<code>camelCase</code>（驼峰式小写）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">string</span> variableName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
 </li>
 <li><p>类<code>属性名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> VariableName&#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>静态变量</code>和<code>常量</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">const</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">const</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">internal</span> <span class="keyword">const</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">protected</span> <span class="keyword">const</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">const</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
 </li>
 <li><p><code>参数</code>必须为<code>camelCase</code>（驼峰式小写）</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">FunctionName</span>(<span class="params">Action callFunction</span>)</span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">var</span> localVariable = callFunction;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
