@@ -3,7 +3,7 @@
 <html lang="zh-cn">
     <head>
 
-    <title>加解密 — CatLib</title>
+    <title>初始化优先级 — CatLib</title>
     <meta charset="utf-8">
     <meta name="description" content="CatLib Unity Framework.">
     <meta name="keywords" content="CatLib,CatLib中文网,CatLib教程,CatLib官网">
@@ -160,7 +160,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/service-priority.html" class="sidebar-link">初始化优先级</a></p>
+                <p><a href="/v1/guide/service-priority.html" class="sidebar-link current">初始化优先级</a></p>
             </li>
         
             
@@ -252,7 +252,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/encryption.html" class="sidebar-link current">加解密</a></p>
+                <p><a href="/v1/guide/encryption.html" class="sidebar-link">加解密</a></p>
             </li>
         
             
@@ -332,40 +332,96 @@
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="加解密"><a href="#加解密" class="headerlink" title="加解密"></a>加解密</h2><p>CatLib加解密组件使用<code>AES-256</code>和<code>AES-128</code>加密，强烈建议您使用由CatLib加解密组件所提供的加密服务，而不要使用自己的加解密算法。</p>
-<p>所有加密信息在底层都会进行<code>HMac</code>签名，以保证加密值不能被更改。</p>
-<h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><p>在使用CatLib加解密组件之前您必须对组件进行配置，您可以通过初始配置来配置：</p>
+    <h2 id="初始化优先级"><a href="#初始化优先级" class="headerlink" title="初始化优先级"></a>初始化优先级</h2><p>下表中列出了CatLib提供的核心服务初始化优先级。服务初始化将会严格按照优先级顺序执行。</p>
+<blockquote>
+<p>优先级规则中0为最优先，值越大越落后，优先级相同则根据注册顺序触发。</p>
+</blockquote>
 <table>
 <thead>
 <tr>
-<th>配置名</th>
-<th style="text-align:center">是否必须</th>
-<th style="text-align:center">配置描述(可以点击查看详细)</th>
+<th>服务名</th>
+<th style="text-align:center">优先级</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>EncryptionProvider.Key</code></td>
-<td style="text-align:center">是</td>
-<td style="text-align:center">密钥（AES-128需要16位长度, AES-256需要32位长度）</td>
+<td><code>ConfigProvider</code></td>
+<td style="text-align:center">1</td>
 </tr>
 <tr>
-<td><code>EncryptionProvider.Cipher</code></td>
-<td style="text-align:center">否</td>
-<td style="text-align:center">加密类型（<code>AES-128-CBC</code> 和 <code>AES-256-CBC</code>）</td>
+<td><code>FileSystemProvider</code></td>
+<td style="text-align:center">10</td>
+</tr>
+<tr>
+<td><code>MonoDriverProvider</code></td>
+<td style="text-align:center">10</td>
+</tr>
+<tr>
+<td><code>DebuggerProvider</code></td>
+<td style="text-align:center">20</td>
+</tr>
+<tr>
+<td><code>UnityDebuggerProvider</code></td>
+<td style="text-align:center">20</td>
+</tr>
+<tr>
+<td><code>ConvertersProvider</code></td>
+<td style="text-align:center">2147483647</td>
+</tr>
+<tr>
+<td><code>CompressProvider</code></td>
+<td style="text-align:center">2147483647</td>
+</tr>
+<tr>
+<td><code>EncryptionProvider</code></td>
+<td style="text-align:center">2147483647</td>
+</tr>
+<tr>
+<td><code>EnvironmentProvider</code></td>
+<td style="text-align:center">2147483647</td>
+</tr>
+<tr>
+<td><code>EventsProvider</code></td>
+<td style="text-align:center">2147483647</td>
+</tr>
+<tr>
+<td><code>HashingProvider</code></td>
+<td style="text-align:center">2147483647</td>
+</tr>
+<tr>
+<td><code>JsonProvider</code></td>
+<td style="text-align:center">2147483647</td>
+</tr>
+<tr>
+<td><code>RoutingProvider</code></td>
+<td style="text-align:center">2147483647</td>
+</tr>
+<tr>
+<td><code>UnityRoutingProvider</code></td>
+<td style="text-align:center">2147483647</td>
+</tr>
+<tr>
+<td><code>TimeProvider</code></td>
+<td style="text-align:center">2147483647</td>
+</tr>
+<tr>
+<td><code>UnityTimeProvider</code></td>
+<td style="text-align:center">2147483647</td>
+</tr>
+<tr>
+<td><code>TimerProvider</code></td>
+<td style="text-align:center">2147483647</td>
+</tr>
+<tr>
+<td><code>TranslationProvider</code></td>
+<td style="text-align:center">2147483647</td>
 </tr>
 </tbody>
 </table>
-<h3 id="使用加解密组件"><a href="#使用加解密组件" class="headerlink" title="使用加解密组件"></a>使用加解密组件</h3><p><strong>加密一个值</strong></p>
-<p>您可以通过<code>Encrypt</code>方法来对值进行加密，所有的值一经加密则不能修改。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> encrypter = App.Make&lt;IEncrypter&gt;();</div><div class="line"><span class="keyword">byte</span>[] data;</div><div class="line"><span class="keyword">string</span> encryptStr = encrypter.Encrypt(data);</div></pre></td></tr></table></figure>
-<p><strong>解密被加密的内容</strong></p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> encrypter = App.Make&lt;IEncrypter&gt;();</div><div class="line"><span class="keyword">byte</span>[] str = encrypter.Decrypt(encryptStr);</div></pre></td></tr></table></figure>
-<p>如果解密失败，例如：HMac验证失败，那么将会抛出一个<code>EncryptionException</code>异常。</p>
 
     <div class="footer">
         发现错误？想参与编辑？ 
-        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/encryption.md" target="_blank">
+        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/service-priority.md" target="_blank">
             在 Github 上编辑此页！
         </a>
     </div>
