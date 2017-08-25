@@ -86,6 +86,16 @@ public class Main
 }
 ```
 
+### 推荐注册的基础服务提供者
+
+基础服务提供者为框架提供了必须的基础服务，如果您不注册那么框架功能将会被自动降级。
+
+（为Unity提供的项目我们已经注册了常用的组件）。
+
+- `ConfigProvider`
+- `EventsProvider`
+- `ConvertersProvider`
+
 ### 判断当前线程是否在主线程中
 
 您可以通过`IsMainThread`来判断是否处于主线程中。
