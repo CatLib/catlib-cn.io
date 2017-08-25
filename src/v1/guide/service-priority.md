@@ -20,7 +20,6 @@ order: 105
 | `ConvertersProvider`    | 2147483647  |
 | `CompressProvider`      | 2147483647  |
 | `EncryptionProvider`    | 2147483647  |
-| `EnvironmentProvider`   | 2147483647  |
 | `EventsProvider`        | 2147483647  |
 | `HashingProvider`       | 2147483647  |
 | `JsonProvider`          | 2147483647  |
