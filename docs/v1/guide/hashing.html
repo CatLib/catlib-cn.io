@@ -325,11 +325,9 @@
     <article class="clearfix">
     <h2 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a>哈希</h2><p>哈希库为您提供了一些常用的哈希函数。您可以通过这些函数安全的加密用户的密码，验证文件的有效性等。</p>
 <h3 id="支持的哈希"><a href="#支持的哈希" class="headerlink" title="支持的哈希"></a>支持的哈希</h3><ul>
-<li><p>一致性哈希<br>– <code>Adler32</code><br>– <code>Crc32</code></p>
+<li><p>非加密性哈希<br>– <code>Adler32</code><br>– <code>Crc32</code><br>– <code>Murmur Hash 3</code><br>– <code>Djb Hash</code></p>
 </li>
-<li><p>加密哈希<br>– <code>BCrypt</code></p>
-</li>
-<li><p>分布式哈希<br>– <code>Murmur Hash 3</code><br>– <code>Djb Hash</code></p>
+<li><p>加密性哈希<br>– <code>BCrypt</code></p>
 </li>
 </ul>
 <h3 id="使用一致性哈希"><a href="#使用一致性哈希" class="headerlink" title="使用一致性哈希"></a>使用一致性哈希</h3><p>您可以通过<code>Checksum</code>方法来调用一致性哈希，方法接收2个参数，一个参数为输入值，第二个参数为使用的一致性哈希算法。</p>

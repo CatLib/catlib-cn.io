@@ -341,6 +341,13 @@
 <p>CatLib.Unity默认的用户代码入口在<code>Main.cs</code>文件中，当然你也可以同过路由标记来指定启动入口(这需要您删除Main.cs文件,事实上Main.cs的入口也是通过路由完成的)。</p>
 <p>通过路由来标记常规配置入口，常规配置的uri固定为<code>bootstrap://config</code><br>通过路由来标记启动入口,入口的uri固定为<code>bootstrap://start</code>：</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">[<span class="meta">Routed</span>]</div><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Main</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Routed(<span class="meta-string">"bootstrap://config"</span>)</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Config</span>(<span class="params"></span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="comment">//todo: config code here</span></div><div class="line">        Debug.Log(<span class="string">"config code here!"</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    [<span class="meta">Routed(<span class="meta-string">"bootstrap://start"</span>)</span>]</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Bootstrap</span>(<span class="params"></span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="comment">//todo: user code here</span></div><div class="line">        Debug.Log(<span class="string">"hello world! user code here!"</span>);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="推荐注册的基础服务提供者"><a href="#推荐注册的基础服务提供者" class="headerlink" title="推荐注册的基础服务提供者"></a>推荐注册的基础服务提供者</h3><p>基础服务提供者为框架提供了必须的基础服务，如果您不注册那么框架功能将会被自动降级。</p>
+<p>（为Unity提供的项目我们已经注册了常用的组件）。</p>
+<ul>
+<li><code>ConfigProvider</code></li>
+<li><code>EventsProvider</code></li>
+<li><code>ConvertersProvider</code></li>
+</ul>
 <h3 id="判断当前线程是否在主线程中"><a href="#判断当前线程是否在主线程中" class="headerlink" title="判断当前线程是否在主线程中"></a>判断当前线程是否在主线程中</h3><p>您可以通过<code>IsMainThread</code>来判断是否处于主线程中。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.IsMainThread;</div></pre></td></tr></table></figure>
 <h3 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h3><p>CatLib基础支持库提供了优先级特性。您可以使用<code>[Priority()]</code>特性来定义优先级。通过<code>App.GetPriorities()</code>方法来获取您为类，函数定义的优先级。</p>
