@@ -3,7 +3,7 @@
 <html lang="zh-cn">
     <head>
 
-    <title>服务接口 — CatLib</title>
+    <title>压缩解压缩 — CatLib</title>
     <meta charset="utf-8">
     <meta name="description" content="CatLib Unity Framework.">
     <meta name="keywords" content="CatLib,CatLib中文网,CatLib教程,CatLib官网">
@@ -142,7 +142,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/api.html" class="sidebar-link current">服务接口</a></p>
+                <p><a href="/v1/guide/api.html" class="sidebar-link">服务接口</a></p>
             </li>
         
             
@@ -252,7 +252,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/compress.html" class="sidebar-link">压缩解压缩</a></p>
+                <p><a href="/v1/guide/compress.html" class="sidebar-link current">压缩解压缩</a></p>
             </li>
         
             
@@ -323,23 +323,52 @@
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="服务接口"><a href="#服务接口" class="headerlink" title="服务接口"></a>服务接口</h2><p>服务接口是指框架提供的一系列定义核心组件服务的接口(下面简称:服务)。如：<code>IRouter</code> 接口定义了路由服务可以被使用的方法。</p>
-<p>每一个接口框架都有提供相应实现。例如，CatLib为文件系统提供了多种驱动实现。</p>
-<p>所有的CatLib服务都在简单的接口中定义，很容易来判断给定服务所提供功能，程序接口也可以充当框架特性的简明文档。</p>
-<p>CatLib所有核心接口全部放于<code>CatLib.API</code>命名空间下。</p>
-<h3 id="何时使用"><a href="#何时使用" class="headerlink" title="何时使用"></a>何时使用</h3><h4 id="松耦合"><a href="#松耦合" class="headerlink" title="松耦合"></a><strong>松耦合</strong></h4><p>在这个类中，代码和给定文件系统实现紧密耦合（这是一个<code>反面例子</code>），由于我们需求一个具体实现类，如果组件的API变了，那么相应的，我们的代码必须做修改。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Service</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">private</span> FileSystem localFileSystem;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Service</span>(<span class="params"></span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        localFileSystem = <span class="keyword">new</span> FileSystem();</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>类似的，如果我们想要替换底层的文件服务为别的技术实现，我们将再一次不得不修改我们的代码来适应新的文件服务。</p>
-<p>所以为了避免上述情况，我们可以基于一种简单的、与提供者无关的接口来优化我们的代码，从而替代上述那种实现：</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Service</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Inject</span>]</div><div class="line">    <span class="keyword">public</span> IFileSystem LocalFileSystem &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>现在代码就不与任何特定提供者耦合，甚至与 CatLib 都是无关的。由于API不包含任何实现和依赖，你可以轻松的为给定接口编写可替换的实现代码，你可以随意替换文件服务实现而不用去修改任何高层消费代码。</p>
-<h4 id="简明"><a href="#简明" class="headerlink" title="简明"></a><strong>简明</strong></h4><p>此外，基于简单接口，代码也更容易理解和维护。</p>
-<p>在一个庞大而复杂的类中，与其追踪哪些方法是有效的，不如转向简单、干净的接口。</p>
-<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>您可以为属性选择器标注<code>[Inject]</code>或者在类的<code>构造函数</code>中定义的变量类型，容器在构建服务的时候都会自动注入依赖。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Service</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Inject</span>]</div><div class="line">    <span class="keyword">public</span> IFileSystem LocalFileSystem &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Service</span>(<span class="params">IFileSystem fileSystem</span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="comment">//构造函数 和 属性选择器 都可以被注入</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+    <h2 id="压缩解压缩"><a href="#压缩解压缩" class="headerlink" title="压缩解压缩"></a>压缩解压缩</h2><p>CatLib 为开发者内置了<code>GZip</code>,<code>LZMA</code>的压缩和解压缩支持。您可以通过简单的接口调用即可完成对数据的压缩解压缩。</p>
+<h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><p>您可以通过初始配置来配置初始参数，您可以通过初始配置来配置：</p>
+<table>
+<thead>
+<tr>
+<th>配置名</th>
+<th style="text-align:center">是否必须</th>
+<th style="text-align:center">配置描述(可以点击查看详细)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>CompressProvider.DefaultLevel</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">压缩等级（如果适用的话）（默认值6）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="预制的解压缩器"><a href="#预制的解压缩器" class="headerlink" title="预制的解压缩器"></a>预制的解压缩器</h3><table>
+<thead>
+<tr>
+<th>解压缩格式</th>
+<th style="text-align:center">名字</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GZip</code></td>
+<td style="text-align:center"><code>默认名字(null)</code></td>
+</tr>
+<tr>
+<td><code>LZMA</code></td>
+<td style="text-align:center"><code>lzma</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><p><strong>对数据进行压缩</strong></p>
+<p>您可以通过<code>Compress</code>方法来对数据进行压缩。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> manager = App.Make&lt;ICompressManager&gt;();</div><div class="line"><span class="keyword">byte</span>[] compressData = manager.Compress(data);</div></pre></td></tr></table></figure>
+<p><strong>对数据进行解压缩</strong></p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> manager = App.Make&lt;ICompressManager&gt;();</div><div class="line"><span class="keyword">byte</span>[] data = manager.Decompress(compressData);</div></pre></td></tr></table></figure>
+<h3 id="扩展一个解压缩器"><a href="#扩展一个解压缩器" class="headerlink" title="扩展一个解压缩器"></a>扩展一个解压缩器</h3><p>您可以通过<code>Extend</code>方法来对解压缩器进行扩展</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> manager = App.Make&lt;ICompressManager&gt;();</div><div class="line">manager.Extend(() =&gt; <span class="keyword">new</span> LzmaAdapter() , <span class="string">"lzma"</span>);</div></pre></td></tr></table></figure>
     <div class="footer">
         发现错误？想参与编辑？ 
-        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/api.md" target="_blank">
+        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/compress.md" target="_blank">
             在 Github 上编辑此页！
         </a>
     </div>
