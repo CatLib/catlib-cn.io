@@ -34,7 +34,6 @@ App.Make<IRouter>().Dispatch("bootstrap://start");
 | -------------------- |:------------:|
 | `Config`             | 配置管理器     |
 | `FileSystem`         | 文件系统管理器 |
-| `Logger`             | 日志系统      |
 | `Router`             | 路由系统      |
 | `Json`               | Json工具      |
 | `I18N`               | 国际化        |
