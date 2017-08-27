@@ -347,7 +347,7 @@
 <li><a href="#Reduce">Reduce</a></li>
 <li><a href="#Slice">Slice</a></li>
 <li><a href="#Shift">Shift</a></li>
-<li><a href="#UnShift">UnShift</a></li>
+<li><a href="#Unshift">Unshift</a></li>
 <li><a href="#Reverse">Reverse</a></li>
 </ul>
 <h3 id="Merge"><a href="#Merge" class="headerlink" title="Merge"></a>Merge</h3><p>将多个数组合并成一个数组。</p>
@@ -376,8 +376,8 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> result = Arr.Slice(<span class="keyword">new</span> []&#123;<span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>,<span class="string">"4"</span>,<span class="string">"5"</span>&#125;,<span class="number">1</span>,<span class="number">3</span>);</div><div class="line"><span class="comment">// result : ["2","3","4"]</span></div></pre></td></tr></table></figure>
 <h3 id="Shift"><a href="#Shift" class="headerlink" title="Shift"></a>Shift</h3><p>删除数组中第一个元素，并返回被删除元素的值</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> data = <span class="keyword">new</span> []&#123;<span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>&#125;;</div><div class="line"><span class="keyword">var</span> result = Arr.Shift(<span class="keyword">ref</span> data);</div><div class="line"><span class="comment">// result : "1"</span></div><div class="line"><span class="comment">// data.Length : 2</span></div></pre></td></tr></table></figure>
-<h3 id="UnShift"><a href="#UnShift" class="headerlink" title="UnShift"></a>UnShift</h3><p>向数组插入新元素。新数组的值将被插入到数组的开头。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> data = <span class="keyword">new</span> []&#123;<span class="string">"2"</span>,<span class="string">"3"</span>&#125;;</div><div class="line"><span class="keyword">var</span> count = Arr.UnShift(<span class="keyword">ref</span> data , <span class="string">"0"</span> , <span class="string">"1"</span>);</div><div class="line"><span class="comment">// count : 4</span></div><div class="line"><span class="comment">// data ["0" , "1" , "2" , "3"]</span></div></pre></td></tr></table></figure>
+<h3 id="Unshift"><a href="#Unshift" class="headerlink" title="Unshift"></a>Unshift</h3><p>向数组插入新元素。新数组的值将被插入到数组的开头。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> data = <span class="keyword">new</span> []&#123;<span class="string">"2"</span>,<span class="string">"3"</span>&#125;;</div><div class="line"><span class="keyword">var</span> count = Arr.Unshift(<span class="keyword">ref</span> data , <span class="string">"0"</span> , <span class="string">"1"</span>);</div><div class="line"><span class="comment">// count : 4</span></div><div class="line"><span class="comment">// data ["0" , "1" , "2" , "3"]</span></div></pre></td></tr></table></figure>
 <h3 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h3><p>以相反的顺序返回数组。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> result = Arr.Reverse(<span class="keyword">new</span> []&#123;<span class="string">"1"</span> , <span class="string">"2"</span> ,<span class="string">"3"</span>&#125;);</div><div class="line"><span class="comment">// result : ["3" , "2" , "1"]</span></div></pre></td></tr></table></figure>
     <div class="footer">
