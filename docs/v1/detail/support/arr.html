@@ -1,0 +1,464 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head>
+
+    <title>数组(Arr) — CatLib</title>
+    <meta charset="utf-8">
+    <meta name="description" content="CatLib Unity Framework.">
+    <meta name="keywords" content="CatLib,CatLib中文网,CatLib教程,CatLib官网">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="/css/page.css">
+
+    <script src="/js/vue.js"></script>
+    <script src="/js/jquery.js"></script>
+    </head>
+
+    <body>
+        
+            <nav class="nav">
+    <div class="border">
+        <img src="/images/logo.png" />
+        <!--button class="hiden-in-phone">v1.0</button!-->
+        <button id="btn-menu" class="hiden-in-pc">菜单</button>
+        <ul class="nav-link hiden-in-phone">
+            <!--li>
+                <form id="search-form">
+                    <input type="text" id="search-query" class="search-query">
+                </form>
+            </li!-->
+            <li><a href="https://github.com/catlib/catlib" class="nav-link-li">下载框架</a></li>
+            <li><a href="/v1/guide/use.html" class="nav-link-li">使用案例</a></li>
+            <li><a href="/v1/guide/version.html" class="nav-link-li">版本说明</a></li>
+            <li><a href="/v1/guide/contribution.html" class="nav-link-li">贡献指南</a></li>
+            <li><a href="/v1/guide/index.html" class="nav-link-li">介绍</a></li>
+            <li><a href="/" class="nav-link-li current">首页</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div id="container" class="container clear">
+    <section class="sidebar clearfix">
+    <ul>
+        
+            
+            
+                <li><h3>基础</h3></li>
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/index.html" class="sidebar-link">介绍</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/upgrade.html" class="sidebar-link">升级指南</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/version.html" class="sidebar-link">版本说明</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/error.html" class="sidebar-link">常见错误</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/style.html" class="sidebar-link">命名规范</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/contribution.html" class="sidebar-link">贡献指南</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/use.html" class="sidebar-link">使用案例</a></p>
+            </li>
+        
+            
+            
+            
+                <li><h3>系统架构</h3></li>
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/service-provider.html" class="sidebar-link">服务提供者</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/container.html" class="sidebar-link">服务容器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/application.html" class="sidebar-link">CatLib核心</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/api.html" class="sidebar-link">服务接口</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/facade.html" class="sidebar-link">服务门面</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/service-priority.html" class="sidebar-link">初始化优先级</a></p>
+            </li>
+        
+            
+            
+            
+            
+                <li><h3>核心组件</h3></li>
+            
+            
+            <li>
+                <p><a href="/v1/guide/config.html" class="sidebar-link">配置</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/routing.html" class="sidebar-link">路由</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link">转换器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/support.html" class="sidebar-link">支持库</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/file-system.html" class="sidebar-link">文件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/hashing.html" class="sidebar-link">哈希</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/encryption.html" class="sidebar-link">加解密</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/compress.html" class="sidebar-link">压缩解压缩</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/translation.html" class="sidebar-link">国际化(I18N)</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+                <li><h3>Unity组件</h3></li>
+            
+            <li>
+                <p><a href="/v1/guide/mono-driver.html" class="sidebar-link">Mono Driver</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/env.html" class="sidebar-link">游戏环境</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/time.html" class="sidebar-link">时间</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/timer.html" class="sidebar-link">计时器</a></p>
+            </li>
+        
+    </ul>
+</section>
+    <article class="clearfix">
+    <h2 id="数组-Arr"><a href="#数组-Arr" class="headerlink" title="数组(Arr)"></a>数组(Arr)</h2><p>数组方法库允许您通过简单的方式访问和操作数组。</p>
+<h3 id="可用方法"><a href="#可用方法" class="headerlink" title="可用方法"></a>可用方法</h3><ul>
+<li><a href="#Merge">Merge</a></li>
+<li><a href="#Rand">Rand</a></li>
+<li><a href="#Shuffle">Shuffle</a></li>
+<li><a href="#Splice">Splice</a></li>
+<li><a href="#Chunk">Chunk</a></li>
+<li><a href="#Fill">Fill</a></li>
+<li><a href="#Filter">Filter</a></li>
+<li><a href="#Map">Map</a></li>
+<li><a href="#Pop">Pop</a></li>
+<li><a href="#Push">Push</a></li>
+<li><a href="#Reduce">Reduce</a></li>
+<li><a href="#Slice">Slice</a></li>
+<li><a href="#Shift">Shift</a></li>
+<li><a href="#UnShift">UnShift</a></li>
+<li><a href="#Reverse">Reverse</a></li>
+</ul>
+<h3 id="Merge"><a href="#Merge" class="headerlink" title="Merge"></a>Merge</h3><p>将多个数组合并成一个数组。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">Arr.Merge(<span class="keyword">new</span> []&#123;<span class="string">"1"</span>,<span class="string">"2"</span>&#125; , <span class="keyword">new</span> []&#123;<span class="string">"3"</span>&#125;); <span class="comment">// ["1" , "2" , "3"]</span></div></pre></td></tr></table></figure>
+<h3 id="Rand"><a href="#Rand" class="headerlink" title="Rand"></a>Rand</h3><p>从规定数组中获取一个或者指定数量的随机值。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> result = Arr.Rand(<span class="keyword">new</span> []&#123;<span class="string">"1"</span>, <span class="string">"2"</span> , <span class="string">"3"</span>&#125;);</div></pre></td></tr></table></figure>
+<h3 id="Shuffle"><a href="#Shuffle" class="headerlink" title="Shuffle"></a>Shuffle</h3><p>将规定数组中的元素打乱。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> result = Arr.Shuffle(<span class="keyword">new</span> []&#123;<span class="string">"1"</span> , <span class="string">"2"</span> , <span class="string">"3"</span>&#125;);</div></pre></td></tr></table></figure>
+<h3 id="Splice"><a href="#Splice" class="headerlink" title="Splice"></a>Splice</h3><p>从数组中移除指定长度的元素，如果给定了替换数组参数，那么替换数组中的元素将会从起始位置开始插入。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> data = <span class="keyword">new</span> []&#123;<span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>&#125;;</div><div class="line"><span class="keyword">var</span> count = Arr.Splice(<span class="keyword">ref</span> data , <span class="number">1</span> , <span class="number">1</span>,<span class="keyword">new</span> []&#123;<span class="string">"4"</span> , <span class="string">"5"</span>&#125;);</div><div class="line"><span class="comment">// data : ["1" , "4" , "5" , "3"]</span></div><div class="line"><span class="comment">// count : 4</span></div></pre></td></tr></table></figure>
+<h3 id="Chunk"><a href="#Chunk" class="headerlink" title="Chunk"></a>Chunk</h3><p>将数组分为新的数组块,其中每个数组的单元数目由大小参数决定。最后一个数组的单元数目可能会少几个。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> result = Arr.Chunk(<span class="keyword">new</span> []&#123;<span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>&#125; , <span class="number">2</span>);</div><div class="line"><span class="comment">// result : [["1","2"],["3"]]</span></div></pre></td></tr></table></figure>
+<h3 id="Fill"><a href="#Fill" class="headerlink" title="Fill"></a>Fill</h3><p>对数组进行填充，如果传入了规定数组，那么会在规定数组的基础上进行填充</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> result = Arr.Fill(<span class="number">2</span>,<span class="number">3</span>,<span class="string">"100"</span>,<span class="keyword">new</span> []&#123;<span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>&#125;);</div><div class="line"><span class="comment">// result : ["1","2","100","100","100","3"]</span></div></pre></td></tr></table></figure>
+<h3 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h3><p>输入数组中的每个值传给回调函数,如果回调函数返回 true，则把输入数组中的当前值加入结果数组中。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> result = Arr.Filter(<span class="keyword">new</span>[]&#123;<span class="string">"1"</span>, <span class="string">"2"</span> , <span class="string">"3"</span> , <span class="string">"4"</span> , <span class="string">"5"</span>&#125;,(v) =&gt; (v % <span class="number">2</span>) == <span class="number">0</span>);</div><div class="line"><span class="comment">// result : ["2" , "4"]</span></div></pre></td></tr></table></figure>
+<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><p>将数组值传入用户自定义函数，自定义函数返回的值作为新的数组值。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> result = Arr.Map(<span class="keyword">new</span>[]&#123;<span class="number">1</span> , <span class="number">2</span> , <span class="number">3</span>&#125; , (v) =&gt; v * <span class="number">2</span>);</div><div class="line"><span class="comment">// result : [2 , 4 , 6]</span></div></pre></td></tr></table></figure>
+<h3 id="Pop"><a href="#Pop" class="headerlink" title="Pop"></a>Pop</h3><p>删除数组中的最后一个元素，并将删除的元素作为返回值返回</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> data = <span class="keyword">new</span> []&#123;<span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>&#125;;</div><div class="line"><span class="keyword">var</span> result = Arr.Pop(<span class="keyword">ref</span> data);</div><div class="line"><span class="comment">// result : "3"</span></div><div class="line"><span class="comment">// data.Length : 2</span></div></pre></td></tr></table></figure>
+<h3 id="Push"><a href="#Push" class="headerlink" title="Push"></a>Push</h3><p>将一个或多个元素加入数组尾端。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> data = <span class="keyword">new</span> []&#123;<span class="string">"1"</span>,<span class="string">"2"</span>&#125;;</div><div class="line"><span class="keyword">var</span> count = Arr.Push(<span class="keyword">ref</span> data, <span class="string">"3"</span>,<span class="string">"4"</span>,<span class="string">"5"</span>);</div><div class="line"><span class="comment">// data : ["1","2","3","4" ,"5"]</span></div><div class="line"><span class="comment">// count : 5</span></div></pre></td></tr></table></figure>
+<h3 id="Reduce"><a href="#Reduce" class="headerlink" title="Reduce"></a>Reduce</h3><p>向用户自定义函数发送数组中的值，并返回一个字符串。<br>如果数组是空的且未传递初始化参数，该函数返回 null。<br>如果指定了初始化参数，则该参数将被当成是数组中的第一个值来处理，如果数组为空的话就作为最终返回值(string)。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> result = Arr.Reduce(<span class="keyword">new</span> []&#123;<span class="string">"1"</span> , <span class="string">"2"</span> , <span class="string">"3"</span>&#125;,(v1,v2)=&gt; v1+<span class="string">"-"</span>+v2,<span class="string">"0"</span>);</div><div class="line"><span class="comment">// result : 0-1-2-3</span></div></pre></td></tr></table></figure>
+<h3 id="Slice"><a href="#Slice" class="headerlink" title="Slice"></a>Slice</h3><p>在数组中根据条件取出一段值，并返回。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> result = Arr.Slice(<span class="keyword">new</span> []&#123;<span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>,<span class="string">"4"</span>,<span class="string">"5"</span>&#125;,<span class="number">1</span>,<span class="number">3</span>);</div><div class="line"><span class="comment">// result : ["2","3","4"]</span></div></pre></td></tr></table></figure>
+<h3 id="Shift"><a href="#Shift" class="headerlink" title="Shift"></a>Shift</h3><p>删除数组中第一个元素，并返回被删除元素的值</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> data = <span class="keyword">new</span> []&#123;<span class="string">"1"</span>,<span class="string">"2"</span>,<span class="string">"3"</span>&#125;;</div><div class="line"><span class="keyword">var</span> result = Arr.Shift(<span class="keyword">ref</span> data);</div><div class="line"><span class="comment">// result : "1"</span></div><div class="line"><span class="comment">// data.Length : 2</span></div></pre></td></tr></table></figure>
+<h3 id="UnShift"><a href="#UnShift" class="headerlink" title="UnShift"></a>UnShift</h3><p>向数组插入新元素。新数组的值将被插入到数组的开头。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> data = <span class="keyword">new</span> []&#123;<span class="string">"2"</span>,<span class="string">"3"</span>&#125;;</div><div class="line"><span class="keyword">var</span> count = Arr.UnShift(<span class="keyword">ref</span> data , <span class="string">"0"</span> , <span class="string">"1"</span>);</div><div class="line"><span class="comment">// count : 4</span></div><div class="line"><span class="comment">// data ["0" , "1" , "2" , "3"]</span></div></pre></td></tr></table></figure>
+<h3 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h3><p>以相反的顺序返回数组。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> result = Arr.Reverse(<span class="keyword">new</span> []&#123;<span class="string">"1"</span> , <span class="string">"2"</span> ,<span class="string">"3"</span>&#125;);</div><div class="line"><span class="comment">// result : ["3" , "2" , "1"]</span></div></pre></td></tr></table></figure>
+    <div class="footer">
+        发现错误？想参与编辑？ 
+        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/detail/support/arr.md" target="_blank">
+            在 Github 上编辑此页！
+        </a>
+    </div>
+</article>
+
+<div class="sub-nav hiden-in-phone">
+    <dl id="sub-nav">
+        <dt>本文内容</dt>
+        <dd v-for="(ele, index) in sub_nav">
+           <a v-bind:href="ele.href">{{ ele.name }}</a>
+        </dd>
+    </dl>
+</div> 
+</div>
+
+<footer>
+    <div>
+        <p>© Copyright 2017 catlib.io All Rights Reserved</p>
+        <p>喵喵喵，快来一起玩喵~</p>
+    </div>
+</footer>
+
+
+<script>
+var vm = new Vue({
+    el : '#container',
+    data: {
+        sub_nav : [ ]
+    },
+    created:function(){
+        var obj = [];
+        $("article h3").each(function(){
+            obj.push({name :  $(this).find("a").attr("title") , href : "#"+$(this).attr("id") });
+        });
+
+        this.sub_nav = obj;       
+    }
+});
+
+var isShow = false;
+$("nav").on("click","#btn-menu" , function(){
+
+    if(!isShow){
+        
+        if($(document).scrollTop() > $(".sidebar").height() - 100){
+
+            $('html, body').animate({scrollTop:0} , 300, "swing",function(){
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+            });
+        }else{
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+
+        }
+
+    }else{
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+    }
+    isShow = !isShow;
+
+});
+
+$(".container").on("click" , "article" , function(){
+
+    if(isShow){
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+        isShow = false;    
+    }
+
+});
+</script>
+        
+    </body>
+</html>
