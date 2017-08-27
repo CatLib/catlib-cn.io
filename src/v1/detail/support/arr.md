@@ -23,7 +23,7 @@ order: 101
 - [Reduce](#Reduce)
 - [Slice](#Slice)
 - [Shift](#Shift)
-- [UnShift](#UnShift)
+- [Unshift](#Unshift)
 - [Reverse](#Reverse)
 
 ### Merge
@@ -150,13 +150,13 @@ var result = Arr.Shift(ref data);
 // data.Length : 2
 ```
 
-### UnShift
+### Unshift
 
 向数组插入新元素。新数组的值将被插入到数组的开头。
 
 ```csharp
 var data = new []{"2","3"};
-var count = Arr.UnShift(ref data , "0" , "1");
+var count = Arr.Unshift(ref data , "0" , "1");
 // count : 4
 // data ["0" , "1" , "2" , "3"]
 ```
