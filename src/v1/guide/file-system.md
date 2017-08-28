@@ -33,10 +33,6 @@ var fileSystemManager = App.Make<IFileSystemManager>();
 var disk = fileSystemManager.Disk();
 ```
 
-### 默认的磁盘
-
-CatLib默认的磁盘会被定位到`Env.AssetPath`。详情请参考[CatLib核心 / 环境](application.html#环境)
-
 ### 文件系统API
 
 #### **Read**
