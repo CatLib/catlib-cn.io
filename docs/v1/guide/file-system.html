@@ -189,7 +189,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
             </li>
         
             
@@ -216,7 +216,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
+                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
             </li>
         
             
@@ -290,15 +290,6 @@
             
             
             <li>
-                <p><a href="/v1/guide/env.html" class="sidebar-link">游戏环境</a></p>
-            </li>
-        
-            
-            
-            
-            
-            
-            <li>
                 <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</a></p>
             </li>
         
@@ -309,6 +300,15 @@
             
             <li>
                 <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/file-system-unity.html" class="sidebar-link">文件系统扩展</a></p>
             </li>
         
             
@@ -334,6 +334,28 @@
     <article class="clearfix">
     <h2 id="文件系统"><a href="#文件系统" class="headerlink" title="文件系统"></a>文件系统</h2><p>CatLib提供的文件系统抽象允许使用一个API来对多个本地(云存储)的文件存储系统进行操作。</p>
 <p>CatLib文件系统已经集成了处理本地文件系统的简单驱动。</p>
+<h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><p>在使用CatLib文件组件之前您必须对组件进行配置，您可以通过初始配置来配置：</p>
+<table>
+<thead>
+<tr>
+<th>配置名</th>
+<th style="text-align:center">是否必须</th>
+<th style="text-align:center">配置描述(可以点击查看详细)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>FileSystemProvider.DefaultPath</code></td>
+<td style="text-align:center">是</td>
+<td style="text-align:center">默认驱动定位的路径</td>
+</tr>
+<tr>
+<td><code>FileSystemProvider.DefaultDevice</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">默认驱动的名字</td>
+</tr>
+</tbody>
+</table>
 <h3 id="上下文环境"><a href="#上下文环境" class="headerlink" title="上下文环境"></a>上下文环境</h3><p>如果没有特殊的说明，本文中的示例项目都是基于下述上下文环境，默认使用本地文件驱动：</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> fileSystemManager = App.Make&lt;IFileSystemManager&gt;();</div></pre></td></tr></table></figure>
 <p>您可以通过<code>IFileSystemManager</code>的<code>Disk()</code>方法来获取文件系统的磁盘实例。</p>
