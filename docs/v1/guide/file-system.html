@@ -360,7 +360,6 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> fileSystemManager = App.Make&lt;IFileSystemManager&gt;();</div></pre></td></tr></table></figure>
 <p>您可以通过<code>IFileSystemManager</code>的<code>Disk()</code>方法来获取文件系统的磁盘实例。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> disk = fileSystemManager.Disk();</div></pre></td></tr></table></figure>
-<h3 id="默认的磁盘"><a href="#默认的磁盘" class="headerlink" title="默认的磁盘"></a>默认的磁盘</h3><p>CatLib默认的磁盘会被定位到<code>Env.AssetPath</code>。详情请参考<a href="application.html#环境">CatLib核心 / 环境</a></p>
 <h3 id="文件系统API"><a href="#文件系统API" class="headerlink" title="文件系统API"></a>文件系统API</h3><h4 id="Read"><a href="#Read" class="headerlink" title="Read"></a><strong>Read</strong></h4><p>通过<code>Read()</code>方法可以读取文件的字节流。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">byte</span>[] data = disk.Read(<span class="string">"helloworld.txt"</span>);</div></pre></td></tr></table></figure>
 <h4 id="Exists"><a href="#Exists" class="headerlink" title="Exists"></a><strong>Exists</strong></h4><p>通过<code>Exists()</code>可以判断文件是否存在。</p>
