@@ -339,15 +339,20 @@
 <li><p>加密性哈希<br>– <code>BCrypt</code></p>
 </li>
 </ul>
-<h3 id="使用一致性哈希"><a href="#使用一致性哈希" class="headerlink" title="使用一致性哈希"></a>使用一致性哈希</h3><p>您可以通过<code>Checksum</code>方法来调用一致性哈希，方法接收2个参数，一个参数为输入值，第二个参数为使用的一致性哈希算法。</p>
+<h3 id="非加密性哈希"><a href="#非加密性哈希" class="headerlink" title="非加密性哈希"></a>非加密性哈希</h3><p><strong>一致性计算</strong></p>
+<p>您可以通过<code>Checksum</code>方法来进行一致性检查，方法接收2个参数，一个参数为输入值，第二个参数为使用的哈希算法。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> hashing = App.Make&lt;IHashing&gt;();</div><div class="line"><span class="keyword">byte</span>[] data; <span class="comment">// 假定需要加密的数据</span></div><div class="line"><span class="keyword">long</span> hashCode = hashing.Checksum(data , Checksums.Crc32);</div></pre></td></tr></table></figure>
+<p><strong>分布计算</strong></p>
+<p>您可以通过<code>HashString</code>方法和<code>HashByte</code>方法来进行分布式哈希，方法接收2个参数，一个参数为输入值，第二个参数为使用的哈希算法。。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> hashing = App.Make&lt;IHashing&gt;();</div><div class="line"><span class="keyword">uint</span> hashCode = hashing.HashString(<span class="string">"输入值"</span> , Hashes.MurmurHash);</div></pre></td></tr></table></figure>
 <h3 id="使用加密哈希"><a href="#使用加密哈希" class="headerlink" title="使用加密哈希"></a>使用加密哈希</h3><p>通过<code>HashPassword</code>方法您可以调用加密哈希，加密哈希接受2个参数，第一个参数为输入值，第二个参数为加密因子，加密因子默认为10，值越大则运行越慢，但越安全。加密Hash可以有效的保护您的密码。</p>
+<blockquote>
+<p>使用的慢哈希算法为：<code>BCrypt</code></p>
+</blockquote>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> hashing = App.Make&lt;IHashing&gt;();</div><div class="line"><span class="keyword">string</span> data; <span class="comment">// 假定需要加密的数据</span></div><div class="line"><span class="keyword">long</span> hashCode = hashing.HashPassword(data , <span class="number">10</span>);</div></pre></td></tr></table></figure>
 <p><strong>验证加密哈希和输入值是否匹配</strong></p>
 <p>您可以通过<code>CheckPassword</code>来验证加密哈希和输入值是否匹配。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> hashing = App.Make&lt;IHashing&gt;();</div><div class="line"><span class="keyword">bool</span> isMatch = hashing.HashPassword(<span class="string">"输入值"</span> , <span class="string">"加密的哈希"</span>);</div></pre></td></tr></table></figure>
-<h3 id="使用分布式哈希"><a href="#使用分布式哈希" class="headerlink" title="使用分布式哈希"></a>使用分布式哈希</h3><p>您可以通过<code>HashString</code>方法和<code>HashByte</code>方法来进行分布式哈希。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> hashing = App.Make&lt;IHashing&gt;();</div><div class="line"><span class="keyword">uint</span> hashCode = hashing.HashString(<span class="string">"输入值"</span> , Hashes.MurmurHash);</div></pre></td></tr></table></figure>
     <div class="footer">
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/hashing.md" target="_blank">
