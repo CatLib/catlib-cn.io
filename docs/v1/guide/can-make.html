@@ -3,7 +3,7 @@
 <html lang="zh-cn">
     <head>
 
-    <title>游戏环境 — CatLib</title>
+    <title>服务表 — CatLib</title>
     <meta charset="utf-8">
     <meta name="description" content="CatLib Unity Framework.">
     <meta name="keywords" content="CatLib,CatLib中文网,CatLib教程,CatLib官网">
@@ -49,10 +49,12 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/index.html" class="sidebar-link">介绍</a></p>
             </li>
         
+            
             
             
             
@@ -67,10 +69,12 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/version.html" class="sidebar-link">版本说明</a></p>
             </li>
         
+            
             
             
             
@@ -85,6 +89,7 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/style.html" class="sidebar-link">命名规范</a></p>
             </li>
@@ -94,10 +99,12 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/contribution.html" class="sidebar-link">贡献指南</a></p>
             </li>
         
+            
             
             
             
@@ -114,10 +121,12 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/service-provider.html" class="sidebar-link">服务提供者</a></p>
             </li>
         
+            
             
             
             
@@ -132,10 +141,12 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/application.html" class="sidebar-link">CatLib核心</a></p>
             </li>
         
+            
             
             
             
@@ -150,10 +161,12 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/facade.html" class="sidebar-link">服务门面</a></p>
             </li>
         
+            
             
             
             
@@ -170,10 +183,12 @@
                 <li><h3>核心组件</h3></li>
             
             
+            
             <li>
                 <p><a href="/v1/guide/config.html" class="sidebar-link">配置</a></p>
             </li>
         
+            
             
             
             
@@ -188,10 +203,12 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
             </li>
         
+            
             
             
             
@@ -206,19 +223,22 @@
             
             
             
-            <li>
-                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
-            </li>
-        
-            
-            
-            
-            
             
             <li>
                 <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
             </li>
         
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+            </li>
+        
+            
             
             
             
@@ -233,10 +253,12 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/file-system.html" class="sidebar-link">文件系统</a></p>
             </li>
         
+            
             
             
             
@@ -251,6 +273,7 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/encryption.html" class="sidebar-link">加解密</a></p>
             </li>
@@ -260,10 +283,12 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/compress.html" class="sidebar-link">压缩解压缩</a></p>
             </li>
         
+            
             
             
             
@@ -280,19 +305,12 @@
             
                 <li><h3>Unity组件</h3></li>
             
+            
             <li>
                 <p><a href="/v1/guide/mono-driver.html" class="sidebar-link">Mono Driver</a></p>
             </li>
         
             
-            
-            
-            
-            
-            <li>
-                <p><a href="/v1/guide/env.html" class="sidebar-link current">游戏环境</a></p>
-            </li>
-        
             
             
             
@@ -307,10 +325,22 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</a></p>
             </li>
         
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/file-system-unity.html" class="sidebar-link">文件系统扩展</a></p>
+            </li>
+        
+            
             
             
             
@@ -325,70 +355,136 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/timer.html" class="sidebar-link">计时器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+                <li><h3>其他</h3></li>
+            
+            <li>
+                <p><a href="/v1/guide/can-make.html" class="sidebar-link current">服务表</a></p>
             </li>
         
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="游戏环境"><a href="#游戏环境" class="headerlink" title="游戏环境"></a>游戏环境</h2><p>游戏环境组件维护了游戏运行时所必须的环境数据。</p>
-<h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><p>初始配置必须在框架初始化前完成配置，下面是环境组件需要的初始配置：</p>
+    <h2 id="服务表"><a href="#服务表" class="headerlink" title="服务表"></a>服务表</h2><p>本表中列出了CatLib框架所有内置组件可以通过<code>Make</code>方法构建的服务，<code>接口名</code>和<code>别名</code>均可用于构建服务。</p>
+<ul>
+<li>所有的<code>(默认)</code>等价与使用<code>管理器</code>调用<code>Default</code>方法得到的内容。</li>
+</ul>
 <table>
 <thead>
 <tr>
-<th>配置名</th>
-<th style="text-align:center">是否必须</th>
-<th style="text-align:center">配置描述(可以点击查看详细)</th>
+<th>描述</th>
+<th style="text-align:center">接口名</th>
+<th style="text-align:center">别名</th>
+<th style="text-align:center">所属组件</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>EnvironmentProvider.DebugLevel</code></td>
-<td style="text-align:center">否</td>
-<td style="text-align:center"><a href="#环境">框架调试等级</a></td>
+<td>压缩解压缩管理器</td>
+<td style="text-align:center"><code>ICompressManager</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="compress.html">压缩解压缩</a></td>
 </tr>
 <tr>
-<td><code>EnvironmentProvider.AssetPath</code></td>
-<td style="text-align:center">否</td>
-<td style="text-align:center"><a href="#环境">资源文件路径</a></td>
+<td>压缩解压缩(默认)</td>
+<td style="text-align:center"><code>ICompress</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="compress.html">压缩解压缩</a></td>
+</tr>
+<tr>
+<td>配置管理器</td>
+<td style="text-align:center"><code>IConfigManager</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="config.html">配置</a></td>
+</tr>
+<tr>
+<td>转换器管理器</td>
+<td style="text-align:center"><code>IConvertersManager</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="converters.html">转换器管理器</a></td>
+</tr>
+<tr>
+<td>转换器(默认)</td>
+<td style="text-align:center"><code>IConverters</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="converters.html">转换器管理器</a></td>
+</tr>
+<tr>
+<td>日志工具</td>
+<td style="text-align:center"><code>ILogger</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="console.html">控制台</a></td>
+</tr>
+<tr>
+<td>数据监控</td>
+<td style="text-align:center"><code>IMonitor</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="console.html">控制台</a></td>
+</tr>
+<tr>
+<td>加解密工具</td>
+<td style="text-align:center"><code>IEncrypter</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="encryption.html">加解密</a></td>
+</tr>
+<tr>
+<td>全局事件</td>
+<td style="text-align:center"><code>IDispatcher</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="events.html">事件</a></td>
+</tr>
+<tr>
+<td>文件系统管理器</td>
+<td style="text-align:center"><code>IFileSystemManager</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="file-system.html">文件系统</a></td>
+</tr>
+<tr>
+<td>文件系统(默认)</td>
+<td style="text-align:center"><code>IFileSystem</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="file-system.html">文件系统</a></td>
+</tr>
+<tr>
+<td>哈希库</td>
+<td style="text-align:center"><code>IHashing</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="hashing.html">哈希</a></td>
+</tr>
+<tr>
+<td>Json库</td>
+<td style="text-align:center"><code>IJson</code>, <code>IJsonAware</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="json.html">Json</a></td>
+</tr>
+<tr>
+<td>路由系统</td>
+<td style="text-align:center"><code>IRouter</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="routing.html">路由系统</a></td>
+</tr>
+<tr>
+<td>国际化(I18N)</td>
+<td style="text-align:center"><code>ITranslator</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="translation.html">国际化(I18N)</a></td>
 </tr>
 </tbody>
 </table>
-<p>您可以通过<code>IEnv</code>获取环境信息。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> env = App.Make&lt;IEnv&gt;();</div></pre></td></tr></table></figure>
-<h4 id="SetAssetPath"><a href="#SetAssetPath" class="headerlink" title="SetAssetPath"></a><strong>SetAssetPath</strong></h4><p>您可以通过<code>SetAssetPath</code>来设定资源路径，注意资源路径必须可以被写入。</p>
-<ul>
-<li>如果传入的值为<code>null</code>或者<code>空字符串</code>则不视作开发者手动设定。</li>
-</ul>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">env.SetAssetPath(UnityEngine.Application.PersistentDataPath);</div></pre></td></tr></table></figure>
-<h4 id="AssetPath"><a href="#AssetPath" class="headerlink" title="AssetPath"></a><strong>AssetPath</strong></h4><p>获取被设定的资源路径。<code>默认情况</code>下为：</p>
-<p>在编辑器模式下：</p>
-<ul>
-<li><code>生产环境</code>为：<code>UnityEngine.Application.PersistentDataPath</code></li>
-<li><code>仿真环境</code>为：<code>StreamingAssets</code>文件夹</li>
-<li><code>开发者模式</code>为：<code>UnityEngine.Application.dataPath</code></li>
-</ul>
-<p>脱离编辑器模式：</p>
-<ul>
-<li>自动设定为：<code>UnityEngine.Application.PersistentDataPath</code></li>
-</ul>
-<p>不论在任何模式下，如果开发者手动设定了<code>SetAssetPath</code>。那么始终返回开发者设定的，<code>AssetPath</code>。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> assetPath = env.AssetPath;</div></pre></td></tr></table></figure>
-<h4 id="SetDebugLevel"><a href="#SetDebugLevel" class="headerlink" title="SetDebugLevel"></a><strong>SetDebugLevel</strong></h4><p>设定CatLib的调试等级。CatLib的调试等级分为：</p>
-<ul>
-<li><code>Prod</code>生产环境</li>
-<li><code>Staging</code>仿真环境</li>
-<li><code>Dev</code>开发者模式</li>
-<li><code>Auto</code>自动模式，在Unity编辑器下为开发者模式，发布后为生产环境。</li>
-</ul>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">env.SetDebugLevel(DebugLevels.Prod);</div></pre></td></tr></table></figure>
-<h4 id="DebugLevel"><a href="#DebugLevel" class="headerlink" title="DebugLevel"></a><strong>DebugLevel</strong></h4><p>获取调试等级。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> debugLevel = env.DebugLevel;</div></pre></td></tr></table></figure>
 
     <div class="footer">
         发现错误？想参与编辑？ 
-        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/env.md" target="_blank">
+        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/can-make.md" target="_blank">
             在 Github 上编辑此页！
         </a>
     </div>

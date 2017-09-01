@@ -49,10 +49,12 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/index.html" class="sidebar-link">介绍</a></p>
             </li>
         
+            
             
             
             
@@ -67,10 +69,12 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/version.html" class="sidebar-link">版本说明</a></p>
             </li>
         
+            
             
             
             
@@ -85,6 +89,7 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/style.html" class="sidebar-link">命名规范</a></p>
             </li>
@@ -94,10 +99,12 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/contribution.html" class="sidebar-link">贡献指南</a></p>
             </li>
         
+            
             
             
             
@@ -114,10 +121,12 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/service-provider.html" class="sidebar-link">服务提供者</a></p>
             </li>
         
+            
             
             
             
@@ -132,10 +141,12 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/application.html" class="sidebar-link">CatLib核心</a></p>
             </li>
         
+            
             
             
             
@@ -150,10 +161,12 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/facade.html" class="sidebar-link">服务门面</a></p>
             </li>
         
+            
             
             
             
@@ -170,10 +183,12 @@
                 <li><h3>核心组件</h3></li>
             
             
+            
             <li>
                 <p><a href="/v1/guide/config.html" class="sidebar-link">配置</a></p>
             </li>
         
+            
             
             
             
@@ -188,10 +203,12 @@
             
             
             
+            
             <li>
-                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
+                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
             </li>
         
+            
             
             
             
@@ -206,19 +223,22 @@
             
             
             
+            
+            <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
             <li>
                 <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
             </li>
         
             
-            
-            
-            
-            
-            <li>
-                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
-            </li>
-        
             
             
             
@@ -233,10 +253,12 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/file-system.html" class="sidebar-link">文件系统</a></p>
             </li>
         
+            
             
             
             
@@ -251,6 +273,7 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/encryption.html" class="sidebar-link">加解密</a></p>
             </li>
@@ -260,10 +283,12 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/compress.html" class="sidebar-link">压缩解压缩</a></p>
             </li>
         
+            
             
             
             
@@ -280,19 +305,12 @@
             
                 <li><h3>Unity组件</h3></li>
             
+            
             <li>
                 <p><a href="/v1/guide/mono-driver.html" class="sidebar-link">Mono Driver</a></p>
             </li>
         
             
-            
-            
-            
-            
-            <li>
-                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</a></p>
-            </li>
-        
             
             
             
@@ -307,10 +325,22 @@
             
             
             
+            
+            <li>
+                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
             <li>
                 <p><a href="/v1/guide/file-system-unity.html" class="sidebar-link">文件系统扩展</a></p>
             </li>
         
+            
             
             
             
@@ -325,8 +355,21 @@
             
             
             
+            
             <li>
                 <p><a href="/v1/guide/timer.html" class="sidebar-link">计时器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+                <li><h3>其他</h3></li>
+            
+            <li>
+                <p><a href="/v1/guide/can-make.html" class="sidebar-link">服务表</a></p>
             </li>
         
     </ul>
@@ -346,7 +389,7 @@
 <li>任意构造函数的参数会自动完成注入</li>
 <li>依赖注入标记可以作用在构造函数的参数上以提供别名和约束的功能。</li>
 </ul>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Service</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Inject</span>]</div><div class="line">    <span class="keyword">public</span> IFileSystem LocalFileSystem &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Service</span>(<span class="params">IFileSystem fileSystem</span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="comment">//fileSystem 和 LocalFileSystem 都会被自动注入</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Service</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Inject</span>]</div><div class="line">    <span class="keyword">public</span> IFileSystem LocalFileSystem &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Service</span>(<span class="params">IFileSystem fileSystem</span>)</span></div><div class="line">    &#123;</div><div class="line">        <span class="comment">//fileSystem 和 LocalFileSystem 都会被自动注入</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <blockquote>
 <p>注意，您不能在<code>构造函数</code>中访问被标记为注入的<code>属性选择器</code>，因为属性选择器的注入会在构造函数之后进行。</p>
 </blockquote>
@@ -374,7 +417,7 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Bind&lt;LogService1&gt;().Needs&lt;ILog&gt;().Given(<span class="string">"log.database"</span>);</div><div class="line">App.Bind&lt;LogService2&gt;().Needs&lt;ILog&gt;().Given(<span class="string">"log.file"</span>);</div></pre></td></tr></table></figure>
 <p>这样当生成<code>LogService1</code>服务时给定的ILog实例将会是<code>DatabaseLog</code> ，<code>LogService2</code>服务时给定的ILog实例将会是<code>FileLog</code>。</p>
 <p>除此以外我们还可以使用<code>[Inject]</code>标记来对注入实例指定实现，一般情况下CatLib的注入上下文绑定功能是使用就近原则的（除非您对别名做了额外的上下文定义，这种罕见情况不在这份基础文档的描述范围之内）。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">LogService</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Inject(<span class="meta-string">"log.database"</span>)</span>]</div><div class="line">    <span class="keyword">public</span> ILog Log &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LogService</span>(<span class="params">[Inject(<span class="string">"log.file"</span></span>)]ILog logWithFile)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">LogService</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Inject(<span class="meta-string">"log.database"</span>)</span>]</div><div class="line">    <span class="keyword">public</span> ILog Log &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LogService</span>(<span class="params">[Inject(<span class="string">"log.file"</span></span>)]ILog logWithFile)</span></div><div class="line">    &#123;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="生成服务"><a href="#生成服务" class="headerlink" title="生成服务"></a>生成服务</h3><p>您可以通过<code>Make()</code>方法来生成服务，服务名可以为接口或别名。如果通过容器去生成一个没有被绑定的服务，那么容器会尝试解决需要被生成的服务，如果尝试解决失败，那么将会返回一个<code>null</code>。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> manager = App.Make&lt;IConfigManager&gt;();</div><div class="line">manager = App.Make(<span class="string">"config.manager"</span>) <span class="keyword">as</span> IConfigManager;</div></pre></td></tr></table></figure>
 <h3 id="函数注入调用"><a href="#函数注入调用" class="headerlink" title="函数注入调用"></a>函数注入调用</h3><p>容器允许您对函数进行依赖注入调用，同服务注入一样，容器会自动识别函数所需求的参数，并使用依赖注入的方式来填充需求参数。</p>
