@@ -14,6 +14,8 @@ order: 3000
 
 | 描述                | 接口名               | 别名        | 所属组件                              |
 | -----------------  |:--------------------:|:-----------:|:------------------------------------:|
+| CatLib核心         | `IApplication`       | `无`        | [CatLib核心](application.html)       |
+| 依赖注入容器         | `IContainer`         | `无`        | [服务容器](container.html)        |
 | 压缩解压缩管理器     | `ICompressManager`   | `无`        | [压缩解压缩](compress.html)            |
 | 压缩解压缩(默认)     | `ICompress`          | `无`        | [压缩解压缩](compress.html)            |
 | 配置管理器          | `IConfigManager`      | `无`       | [配置](config.html)                   |
