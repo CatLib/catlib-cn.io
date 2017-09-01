@@ -1,7 +1,7 @@
 ---
 title: 初始化优先级
 type: guide
-order: 105
+order: 3001
 ---
 
 ## 初始化优先级
