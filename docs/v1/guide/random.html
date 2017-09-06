@@ -4,7 +4,7 @@
     <head>
 
     
-    <title>国际化(I18N) — CatLib</title>
+    <title>随机数 — CatLib</title>
       
     <meta charset="utf-8">
     
@@ -239,7 +239,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/random.html" class="sidebar-link">随机数</a></p>
+                <p><a href="/v1/guide/random.html" class="sidebar-link current">随机数</a></p>
             </li>
         
             
@@ -299,7 +299,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/translation.html" class="sidebar-link current">国际化(I18N)</a></p>
+                <p><a href="/v1/guide/translation.html" class="sidebar-link">国际化(I18N)</a></p>
             </li>
         
             
@@ -399,57 +399,42 @@
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="国际化-I18N"><a href="#国际化-I18N" class="headerlink" title="国际化(I18N)"></a>国际化(I18N)</h2><p>CatLib国际化功能提供方便的方法来获取多语言的字符串，让你的游戏可以简单的支持多语言。</p>
-<p>CatLib的语言代码遵循ISO 639, ISO 639-1, ISO 639-2, ISO 639-3</p>
-<h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><p>初始配置必须在框架初始化前完成配置，下面是国际化组件需要的初始配置：</p>
+    <h2 id="随机数"><a href="#随机数" class="headerlink" title="随机数"></a>随机数</h2><p>随机数组件为您提供了一些常用的随机算法。</p>
+<h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><p>在使用随机数组件之前您必须对组件进行配置，您可以通过初始配置来配置：</p>
 <table>
 <thead>
 <tr>
 <th>配置名</th>
 <th style="text-align:center">是否必须</th>
-<th style="text-align:center">配置描述</th>
+<th style="text-align:center">配置描述(可以点击查看详细)</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>TranslationProvider.DefaultLanguage</code></td>
+<td><code>RandomProvider.DefaultRandomType</code></td>
 <td style="text-align:center">否</td>
-<td style="text-align:center">默认的语言</td>
-</tr>
-<tr>
-<td><code>TranslationProvider.FallbackLanguage</code></td>
-<td style="text-align:center">否</td>
-<td style="text-align:center">备选的语言</td>
+<td style="text-align:center">默认的随机数发生器，允许输入以下字符串（大小写敏感）：<code>MersenneTwister</code>,<code>WH2006</code>,<code>Xorshift</code>,<code>Mrg32k3a</code></td>
 </tr>
 </tbody>
 </table>
-<h3 id="设定翻译资源"><a href="#设定翻译资源" class="headerlink" title="设定翻译资源"></a>设定翻译资源</h3><p>您可以通过 <code>SetResources</code> 接口来设定翻译资源，国际化工具本身不提供如何获取翻译字符串。您需要给定翻译资源国际化才能对其进行选择。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> translator = App.Make&lt;ITranslator&gt;();</div><div class="line">translator.SetResources(<span class="comment">/*you resources*/</span>);</div></pre></td></tr></table></figure>
-<h3 id="设定当前语言"><a href="#设定当前语言" class="headerlink" title="设定当前语言"></a>设定当前语言</h3><p>您可以通过<code>SetLocale</code>来设定当前语言。设定的语言需要遵循<code>ISO639</code>语言规范。我们已经为您提供了<code>Languages</code>类来辅助您定义语言。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> translator = App.Make&lt;ITranslator&gt;();</div><div class="line">translator.SetLocale(Languages.Chinese);</div></pre></td></tr></table></figure>
-<h3 id="设定备选语言"><a href="#设定备选语言" class="headerlink" title="设定备选语言"></a>设定备选语言</h3><p>备选语言则主语言无法获取时会使用备选语言（如果备选语言也不存在那么会将返回一个空字符串）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> translator = App.Make&lt;ITranslator&gt;();</div><div class="line">translator.SetFallback(Languages.Chinese);</div></pre></td></tr></table></figure>
-<h3 id="获取翻译语句"><a href="#获取翻译语句" class="headerlink" title="获取翻译语句"></a>获取翻译语句</h3><p>您可以通过<code>Get</code>方法来获取翻译语句。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> translator = App.Make&lt;ITranslator&gt;();</div><div class="line">translator.Get(<span class="string">"msg.title"</span>);</div></pre></td></tr></table></figure>
-<h4 id="翻译语句中的参数替换"><a href="#翻译语句中的参数替换" class="headerlink" title="翻译语句中的参数替换"></a><strong>翻译语句中的参数替换</strong></h4><p>如果需要，你也可以在翻译语句中定义占位符。所有的占位符都使用的 <code>:</code> 开头。</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><div class="line">&#123; <span class="attr">"msg.title"</span> : <span class="string">"你好:name"</span> &#125;</div></pre></td></tr></table></figure>
-<p>你可以在 <code>Get</code> 方法中传递一个数组作为第二个参数，它会将数组的值替换到语言内容的占位符中：</p>
-<p>数组的第0个元素是键，第1个元素是对应的值，以此类推。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">translator.Get(<span class="string">"msg.title"</span> ,<span class="string">"name"</span> ,<span class="string">"catlib"</span>); <span class="comment">//output: 你好catlib</span></div></pre></td></tr></table></figure>
-<p>除此之外您还可以使用另外一种格式:</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">translator.Get(<span class="string">"msg.title"</span> ,<span class="string">"name:catlib"</span>); <span class="comment">//output: 你好catlib</span></div></pre></td></tr></table></figure>
-<p>如果你的占位符中包含了<code>首字母大写</code>或者<code>全体大写</code>，翻译过来的内容也会相应的做相应的处理：</p>
-<figure class="highlight"><table><tr><td class="code"><pre><div class="line">&#123; "msg.title" : "你好:Name" &#125; //output: 你好Catlib</div><div class="line">&#123; "msg.title" : "你好:NAME" &#125; //output: 你好CATLIB</div></pre></td></tr></table></figure>
-<h3 id="复数形式"><a href="#复数形式" class="headerlink" title="复数形式"></a>复数形式</h3><p>复数是个复杂的问题，不同语言对于复数有不同的规则，对此我们采用了成熟的复数形式方案，CatLib使用的复数形式方案来自于：<a href="https://framework.zend.com/" target="_blank" rel="external">ZendFramework</a></p>
-<h4 id="简单的区分"><a href="#简单的区分" class="headerlink" title="简单的区分"></a><strong>简单的区分</strong></h4><p>使用管道符 <code>|</code> ，可以区分单复数字符串格式：</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><div class="line">&#123; <span class="attr">"msg.apple"</span> : <span class="string">"这里只有一个苹果|这里有好多苹果"</span> &#125;</div></pre></td></tr></table></figure>
-<h4 id="复杂的区分"><a href="#复杂的区分" class="headerlink" title="复杂的区分"></a><strong>复杂的区分</strong></h4><p>你可以创建使用更复杂的复数规则，例如根据数量的范围不同来指定不同翻译语句：</p>
-<figure class="highlight json"><table><tr><td class="code"><pre><div class="line">&#123; <span class="attr">"msg.apple"</span> : <span class="string">"这里只有一个苹果|[1,19]这里有好多苹果|[20,*]天那成堆的苹果"</span> &#125;</div></pre></td></tr></table></figure>
-<p>当你定义完复数语句条件的时候，你可以使用 Get 方法来设置 <code>总数</code> 以获取符合对应条件的复数翻译语句。例如，在这个例子中，设置 <code>总数</code> 为 10 ，符合数量范围 1 至 19，所以会得到 <code>这里有好多苹果</code> 这条复数语句。</p>
-
+<h3 id="提供的随机算法"><a href="#提供的随机算法" class="headerlink" title="提供的随机算法"></a>提供的随机算法</h3><ul>
+<li><code>MersenneTwister</code> 马特赛特旋转演算法是一个伪随机数发生算法,可以快速产生高质量的伪随机数。该算法随机性好，占用内存较少。</li>
+<li><code>WH2006</code> Wichman-Hill算法通过线性合并不同短周期随机数发生器的输出来产生长周期的随机数序列。Wichmann-Hill、Mersenne Twister算法性能差距不大。</li>
+<li><code>Xorshift</code> 实现的是George Marsaglia，通过线性反馈移位寄存器生成。</li>
+<li><code>Mrg32k3a</code> 使用的是素数模乘同余法，素数模乘同余发生器是提出的一个统计性质较好和周期较大的发生器,目前是使用最广的一种均匀随机数发生器，但产生速率较慢。</li>
+</ul>
+<h3 id="获取随机数发生器"><a href="#获取随机数发生器" class="headerlink" title="获取随机数发生器"></a>获取随机数发生器</h3><p><strong>通过工厂生成</strong></p>
+<p>您可以通过<code>IRandomFactory</code>接口来获取随机数工厂，该工厂通过参数可以生成不同算法的随机数发生器。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> factory = App.Make&lt;IRandomFactory&gt;();</div><div class="line"><span class="keyword">var</span> random = factory.Make(<span class="string">"WH2006"</span>); <span class="comment">// 参数允许传入一个字符串或者RandomTypes</span></div><div class="line"><span class="comment">//factory.Make(RandomTypes.WH2006); // 以上2句话是等价的</span></div></pre></td></tr></table></figure>
+<p><strong>获取默认定义的随机数发生器</strong></p>
+<p>您可以通过<code>IRandom</code>接口来获取默认定义的随机数发生器。您可以通过配置来配置这个定义。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> random = App.Make&lt;IRandom&gt;();</div></pre></td></tr></table></figure>
+<h3 id="生成一个随机数"><a href="#生成一个随机数" class="headerlink" title="生成一个随机数"></a>生成一个随机数</h3><p>通过随机数发生器的<code>Next</code>方法可以进行随机数生成。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> <span class="keyword">value</span> = random.Next();</div><div class="line"><span class="keyword">value</span> = random.Next(<span class="number">100</span>); <span class="comment">//最大值为10（不包含）</span></div><div class="line"><span class="keyword">value</span> = random.Next(<span class="number">0</span>,<span class="number">100</span>);<span class="comment">//最小值为0（包含），最大值为100（不包含）</span></div></pre></td></tr></table></figure>
+<h3 id="生成浮点随机数"><a href="#生成浮点随机数" class="headerlink" title="生成浮点随机数"></a>生成浮点随机数</h3><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> <span class="keyword">value</span> = random.NextDouble(); <span class="comment">// 0(包含)到1(不包含)之间的值</span></div></pre></td></tr></table></figure>
     <div class="footer">
         发现错误？想参与编辑？ 
-        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/translation.md" target="_blank">
+        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/random.md" target="_blank">
             在 Github 上编辑此页！
         </a>
     </div>
