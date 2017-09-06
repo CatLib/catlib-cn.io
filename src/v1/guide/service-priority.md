@@ -24,6 +24,8 @@ order: 3001
 | `EventsProvider`          | 2147483647  |
 | `HashingProvider`         | 2147483647  |
 | `JsonProvider`            | 2147483647  |
+| `RandomProvider`          | 2147483647  |
+| `UnityRandomProvider`     | 2147483647  |
 | `RoutingProvider`         | 2147483647  |
 | `UnityRoutingProvider`    | 2147483647  |
 | `TimeProvider`            | 2147483647  |

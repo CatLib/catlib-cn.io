@@ -29,6 +29,8 @@ order: 3000
 | 文件系统(默认)       | `IFileSystem`        | `无`        | [文件系统](file-system.html)          |
 | 哈希库              | `IHashing`            | `无`       | [哈希](hashing.html)                 |
 | Json库              | `IJson`, `IJsonAware` | `无`       | [Json](json.html)                   |
+| 随机数库            | `IRandomFactory`      | `无`       | [随机数](random.html)                |
+| 随机数发生器(默认)   | `IRandom`             | `无`       | [随机数](random.html)                |
 | 路由系统            | `IRouter`             | `无`       | [路由系统](routing.html)             |
 | 国际化(I18N)        | `ITranslator`         | `无`       | [国际化(I18N)](translation.html)     |
 
