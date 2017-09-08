@@ -31,8 +31,8 @@ order: 204
 
 ```csharp
 var factory = App.Make<IRandomFactory>();
-var random = factory.Make("WH2006"); // 参数允许传入一个字符串或者RandomTypes
-//factory.Make(RandomTypes.WH2006); // 以上2句话是等价的
+var random = factory.Make(RandomTypes.WH2006); // 参数允许传入一个RandomTypes或者字符串
+//factory.Make("WH2006"); // 以上2句话是等价的
 ```
 
 **获取默认定义的随机数发生器**
