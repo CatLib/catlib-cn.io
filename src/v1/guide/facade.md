@@ -42,6 +42,5 @@ App.Make<IRouter>().Dispatch("bootstrap://start");
 
 | 门面名                | 门面描述      |
 | -------------------- |:------------:|
-| `Env`                | 环境信息      |
 | `Time`               | 时间管理器     |
 | `Timer`              | 计时器管理器   |
