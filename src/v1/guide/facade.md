@@ -32,11 +32,17 @@ App.Make<IRouter>().Dispatch("bootstrap://start");
 
 | 门面名                | 门面描述      |
 | -------------------- |:------------:|
+| `Compress`           | 压缩解压缩工具  |
 | `Config`             | 配置管理器     |
-| `FileSystem`         | 文件系统管理器 |
+| `Converters`         | 转换器         |
+| `Dispatcher`         | 全局事件调度器  |
+| `Encrypter`          | 加密器         |
+| `FileSystem`         | 文件系统管理器 |
+| `Hashing`            | 哈希库        |
 | `Router`             | 路由系统      |
 | `Json`               | Json工具      |
-| `I18N`               | 国际化        |
+| `Random`             | 随机库        |
+| `I18N`               | 国际化        |
 
 ### 门面类列表(Unity)
 
