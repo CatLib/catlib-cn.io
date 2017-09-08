@@ -321,7 +321,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</a></p>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</a></p>
             </li>
         
             
@@ -331,7 +331,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</a></p>
+                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</a></p>
             </li>
         
             
@@ -400,6 +400,28 @@
 </section>
     <article class="clearfix">
     <h2 id="哈希"><a href="#哈希" class="headerlink" title="哈希"></a>哈希</h2><p>哈希库为您提供了一些常用的哈希函数。您可以通过这些函数安全的加密用户的密码，验证文件的有效性等。</p>
+<h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><p>在使用哈希组件之前您必须对组件进行配置（注意大小写敏感），您可以通过初始配置来配置：</p>
+<table>
+<thead>
+<tr>
+<th>配置名</th>
+<th style="text-align:center">是否必须</th>
+<th style="text-align:center">配置描述(可以点击查看详细)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>HashingProvider.DefaultChecksum</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">默认的校验算法(<code>Crc32</code>,<code>Adler32</code>)</td>
+</tr>
+<tr>
+<td><code>HashingProvider.DefaultHash</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">默认的哈希算法（<code>MurmurHash</code>,<code>Djb</code>）</td>
+</tr>
+</tbody>
+</table>
 <h3 id="支持的哈希"><a href="#支持的哈希" class="headerlink" title="支持的哈希"></a>支持的哈希</h3><ul>
 <li><p>非加密性哈希<br>– <code>Adler32</code><br>– <code>Crc32</code><br>– <code>Murmur Hash 3</code><br>– <code>Djb Hash</code></p>
 </li>
@@ -420,6 +442,7 @@
 <p><strong>验证加密哈希和输入值是否匹配</strong></p>
 <p>您可以通过<code>CheckPassword</code>来验证加密哈希和输入值是否匹配。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> hashing = App.Make&lt;IHashing&gt;();</div><div class="line"><span class="keyword">bool</span> isMatch = hashing.HashPassword(<span class="string">"输入值"</span> , <span class="string">"加密的哈希"</span>);</div></pre></td></tr></table></figure>
+
     <div class="footer">
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/hashing.md" target="_blank">
