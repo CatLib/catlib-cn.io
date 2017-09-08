@@ -17,8 +17,11 @@ order: 2
 - `Debugger` 为调试控制器组件
 - `Json` 解析Json的类库
 - `Translation` 国际化翻译组件
-- `Env` 环境组件
 - `Converters` 转换器组件
+- `Random` 随机库
+- `Hashing` 哈希库
+- `Encryption` 加密库
+- `Compress` 压缩库
 
 #### **新增的特性**
 
