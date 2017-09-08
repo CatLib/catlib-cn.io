@@ -42,7 +42,7 @@ timer.Delay(3.25f);
 您可以使用`DelayFrame()`来延迟指定的帧数后执行定时器的任务。
 
 ``` csharp
-timer.DelayFrame(3.25f);
+timer.DelayFrame(3);
 ```
 
 ### 循环执行
