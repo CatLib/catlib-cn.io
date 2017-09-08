@@ -87,3 +87,14 @@ object[] result = App.Trigger("event.name", null);
 ``` csharp
 object result = App.TriggerHalf("event.name", null);
 ```
+
+### 解除事件
+
+您可以通过`Off`方法来解除事件。
+
+``` csharp
+var handler = App.On("event.*" , (payload)=>{
+    //todo
+});
+handler.Off();
+```
