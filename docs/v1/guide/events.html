@@ -420,6 +420,9 @@
 <h4 id="得到事件的处理结果"><a href="#得到事件的处理结果" class="headerlink" title="得到事件的处理结果"></a><strong>得到事件的处理结果</strong></h4><p>事件触发后您可以获取触发的返回值来获取事件监听器的对这次触发事件的处理结果。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">object</span>[] result = App.Trigger(<span class="string">"event.name"</span>, <span class="literal">null</span>);</div></pre></td></tr></table></figure>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">object</span> result = App.TriggerHalf(<span class="string">"event.name"</span>, <span class="literal">null</span>);</div></pre></td></tr></table></figure>
+<h3 id="解除事件"><a href="#解除事件" class="headerlink" title="解除事件"></a>解除事件</h3><p>您可以通过<code>Off</code>方法来解除事件。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> handler = App.On(<span class="string">"event.*"</span> , (payload)=&gt;&#123;</div><div class="line">    <span class="comment">//todo</span></div><div class="line">&#125;);</div><div class="line">handler.Off();</div></pre></td></tr></table></figure>
+
     <div class="footer">
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/events.md" target="_blank">
