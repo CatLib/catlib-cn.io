@@ -57,3 +57,4 @@ CatLib是易于上手的。你只需要有良好的 C# 基础。你就可以非�
 
 - [GameFramework](https://github.com/EllanJiang/GameFramework) 是一个基于 Unity 5.3+ 引擎的游戏框架，主要对游戏开发过程中常用模块进行了封装，很大程度地规范开发过程、加快开发速度并保证产品质量。
 - [KSFramework](https://github.com/mr-kelly/KSFramework) 是一个整合KEngine、SLua的Unity 5 Asset Bundle开发框架，并为程序、美术、策划、运营提供辅助工具集。
+- [ET框架](https://github.com/egametang/Egametang) 是一个Unity3d客户端+C#分布式服务端框架。使用组件式开发，提供客户端热更，服务端热更功能，提供erlang式分布式消息机制
