@@ -70,10 +70,10 @@ App.Trigger("event.name", null);
 
 #### **执行到第一次有效结果后终止**
 
-通过`TriggerHalf`您可以限定这次事件的触发只要监听器返回了处理结果那么就自动终止事件传递。
+通过`TriggerHalt`您可以限定这次事件的触发只要监听器返回了处理结果那么就自动终止事件传递。
 
 ``` csharp
-App.TriigerHalf("event.name");
+App.TriigerHalt("event.name");
 ```
 
 #### **得到事件的处理结果**
@@ -85,7 +85,7 @@ object[] result = App.Trigger("event.name", null);
 ```
 
 ``` csharp
-object result = App.TriggerHalf("event.name", null);
+object result = App.TriggerHalt("event.name", null);
 ```
 
 ### 解除事件
