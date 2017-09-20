@@ -73,7 +73,7 @@ App.Trigger("event.name", null);
 通过`TriggerHalt`您可以限定这次事件的触发只要监听器返回了处理结果那么就自动终止事件传递。
 
 ``` csharp
-App.TriigerHalt("event.name");
+App.TriggerHalt("event.name");
 ```
 
 #### **得到事件的处理结果**
