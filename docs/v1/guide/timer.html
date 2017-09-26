@@ -199,16 +199,6 @@
             
             
             <li>
-                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
-            </li>
-        
-            
-            
-            
-            
-            
-            
-            <li>
                 <p><a href="/v1/guide/converters.html" class="sidebar-link">转换器</a></p>
             </li>
         
@@ -219,7 +209,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
             </li>
         
             
@@ -229,7 +219,17 @@
             
             
             <li>
-                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
             </li>
         
             
@@ -321,7 +321,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</a></p>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</a></p>
             </li>
         
             
@@ -331,7 +331,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</a></p>
+                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</a></p>
             </li>
         
             
@@ -417,10 +417,10 @@
 <h4 id="循环执行指定帧数"><a href="#循环执行指定帧数" class="headerlink" title="循环执行指定帧数"></a><strong>循环执行指定帧数</strong></h4><p>您可以使用<code>LoopFrame()</code>来定义一个循环执行，每帧都执行，直到到达指定帧数后停止。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">timer.LoopFrame(<span class="number">10</span>);</div></pre></td></tr></table></figure>
 <h3 id="间隔执行"><a href="#间隔执行" class="headerlink" title="间隔执行"></a>间隔执行</h3><p>如果您要取消间隔执行，那么请使用句柄来取消任务。</p>
-<h4 id="每隔指定秒数执行一次"><a href="#每隔指定秒数执行一次" class="headerlink" title="每隔指定秒数执行一次"></a><strong>每隔指定秒数执行一次</strong></h4><p>每次间隔指定秒数后执行一次定时器任务。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">timer.Interval(<span class="number">3.25</span>f);</div></pre></td></tr></table></figure>
-<h4 id="每隔指定帧数执行一次"><a href="#每隔指定帧数执行一次" class="headerlink" title="每隔指定帧数执行一次"></a><strong>每隔指定帧数执行一次</strong></h4><p>每次间隔指定帧数后执行一次定时器任务。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">timer.IntervalFrame(<span class="number">10</span>);</div></pre></td></tr></table></figure>
+<h4 id="每隔指定秒数执行一次"><a href="#每隔指定秒数执行一次" class="headerlink" title="每隔指定秒数执行一次"></a><strong>每隔指定秒数执行一次</strong></h4><p>每次间隔指定秒数后执行一次定时器任务。通过第二个参数可以指定最大执行次数。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">timer.Interval(<span class="number">3.25</span>f);</div><div class="line"><span class="comment">// timer.Interval(3.25f, 3);</span></div></pre></td></tr></table></figure>
+<h4 id="每隔指定帧数执行一次"><a href="#每隔指定帧数执行一次" class="headerlink" title="每隔指定帧数执行一次"></a><strong>每隔指定帧数执行一次</strong></h4><p>每次间隔指定帧数后执行一次定时器任务。通过第二个参数可以指定最大执行次数。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">timer.IntervalFrame(<span class="number">10</span>);</div><div class="line"><span class="comment">// timer.IntervalFrame(10, 3);</span></div></pre></td></tr></table></figure>
 <h3 id="定时器队列"><a href="#定时器队列" class="headerlink" title="定时器队列"></a>定时器队列</h3><p>定时器队列是将多个定时器串联起来依次执行。只有前一个定时器完成任务后后一个定时器才会被执行。</p>
 <p>您可以传入一个<code>优先级</code>来决定定时器队列在全局中执行的顺序。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">timerManager.MakeQueue(()=&gt;</div><div class="line">&#123;</div><div class="line">    timerManager.Make(()=&gt;</div><div class="line">    &#123;</div><div class="line">        <span class="comment">//定时器1的任务</span></div><div class="line">    &#125;).Delay(<span class="number">3</span>);</div><div class="line">    timerManager.Make(()=&gt;</div><div class="line">    &#123;</div><div class="line">        <span class="comment">//定时器2的任务</span></div><div class="line">    &#125;).Loop(<span class="number">5</span>);</div><div class="line">&#125;,<span class="number">100</span>);</div></pre></td></tr></table></figure>
