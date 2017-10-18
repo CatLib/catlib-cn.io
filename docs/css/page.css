@@ -124,6 +124,9 @@ body {
 .sidebar ul li p {
   padding-left: 1rem;
 }
+.sidebar ul li p del {
+  color: #bbb;
+}
 .sub-nav ul h3 {
   color: #525252;
   font-weight: 700;

@@ -4,7 +4,7 @@
     <head>
 
     
-    <title>版本说明 — CatLib</title>
+    <title>网络 — CatLib</title>
       
     <meta charset="utf-8">
     
@@ -34,7 +34,7 @@
             </li!-->
             <li><a href="https://github.com/catlib/framework" class="nav-link-li">下载框架</a></li>
             <li><a href="/v1/guide/use.html" class="nav-link-li">使用案例</a></li>
-            <li><a href="/v1/guide/version.html" class="nav-link-li current">版本说明</a></li>
+            <li><a href="/v1/guide/version.html" class="nav-link-li">版本说明</a></li>
             <li><a href="/v1/guide/contribution.html" class="nav-link-li">贡献指南</a></li>
             <li><a href="/v1/guide/index.html" class="nav-link-li">介绍</a></li>
             <li><a href="/" class="nav-link-li current">首页</a></li>
@@ -75,7 +75,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/version.html" class="sidebar-link current">版本说明</del></a></p>
+                <p><a href="/v1/guide/version.html" class="sidebar-link">版本说明</del></a></p>
             </li>
         
             
@@ -269,7 +269,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/network.html" class="sidebar-link">网络</del></a></p>
+                <p><a href="/v1/guide/network.html" class="sidebar-link current">网络</del></a></p>
             </li>
         
             
@@ -419,146 +419,99 @@
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="版本说明"><a href="#版本说明" class="headerlink" title="版本说明"></a>版本说明</h2><blockquote>
-<p>CatLib的版本标准是采用：<a href="http://semver.org/lang/zh-CN/" target="_blank" rel="external">Semver语义化版本标准</a></p>
+    <h2 id="网络组件"><a href="#网络组件" class="headerlink" title="网络组件"></a>网络组件</h2><p>网络组件是基于Socket组件的更高级的封装，为您提供了简单的API以实现：<code>心跳包</code>，<code>协议解包</code> 等处理。一般情况下您应该直接使用网络组件。</p>
+<h3 id="使用网络组件"><a href="#使用网络组件" class="headerlink" title="使用网络组件"></a>使用网络组件</h3><p>通过<code>INetworkManager</code>接口获取网络管理器，网络管理器可以用于管理活动的<code>网络频道</code>。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> networkManager = App.Make&lt;INetworkManager&gt;();</div></pre></td></tr></table></figure>
+<h3 id="生成一个网络频道"><a href="#生成一个网络频道" class="headerlink" title="生成一个网络频道"></a>生成一个网络频道</h3><p>通过<code>Make</code>方法可以生成一个网络频道，Make方法接受一个<code>NSP</code>(网络服务提供商)来确定使用的应用层协议和传输层协议。</p>
+<p>Network组件已经为您定义好了以下<code>NSP</code>：</p>
+<ul>
+<li>tcp://<code>{host}</code>:<code>{port}</code></li>
+<li>kcp://<code>{conv}</code>@<code>{host}</code>:<code>{port}</code></li>
+<li>text.tcp://<code>{host}</code>:<code>{port}</code></li>
+<li>text.kcp://<code>{conv}</code>@<code>{host}</code>:<code>{port}</code></li>
+<li>frame.tcp://<code>{host}</code>:<code>{port}</code></li>
+<li>frame.kcp://<code>{conv}</code>@<code>{host}</code>:<code>{port}</code></li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> channel = networkManager.Make(<span class="string">"text.tcp://127.0.0.1:7777"</span>, <span class="string">"my-connect"</span>);</div></pre></td></tr></table></figure>
+<blockquote>
+<p><code>text协议</code> : 协议格式为 <code>数据包</code>+<code>换行符(\n)</code>，即在每个数据包末尾加上一个换行符表示包的结束。</p>
+<p><code>frame协议</code> : 协议格式为 <code>总包长</code>+<code>包体</code>，其中包长(总包长+包体)为4字节网络字节序的整数，包体可以是普通文本或者二进制数据。</p>
 </blockquote>
-<h3 id="Core-更新指南"><a href="#Core-更新指南" class="headerlink" title="Core 更新指南"></a>Core 更新指南</h3><h3 id="v1-1-1-RC"><a href="#v1-1-1-RC" class="headerlink" title="v1.1.1 RC"></a>v1.1.1 RC</h3><ul>
-<li>移除了在Unity环境下单元测试的支持 - 所有的基础类库都是可靠的无需在Unity下再进行额外测试。</li>
-<li>兼容合并(直接使用Framework和Core的)源码导致的类型指定错误</li>
-<li>对容器所产生的异常提供更加明确的错误提示</li>
-</ul>
-<h3 id="V1-1-0-RC"><a href="#V1-1-0-RC" class="headerlink" title="V1.1.0 RC"></a>V1.1.0 RC</h3><p><strong>开发者体验改善</strong></p>
+<p>您还可以通过<code>Make</code>的重载来强制指定使用的<code>打包解包协议</code>：</p>
+<blockquote>
+<p>所有的打包解包协议必须实现<code>IPacker</code>接口。</p>
+</blockquote>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> channel = networkManager.Make(<span class="string">"tcp://127.0.0.1:7777"</span>, <span class="keyword">new</span> TextPacker(), <span class="string">"my-connect"</span>);</div></pre></td></tr></table></figure>
+<h3 id="网络事件"><a href="#网络事件" class="headerlink" title="网络事件"></a>网络事件</h3><p>您可以通过网络事件来跟踪网络中的数据以及状态的变化以便于即使做出处理。以下是您可以通过IChannel监听的网络事件：</p>
 <ul>
-<li>错误提示对开发者更加友好和直观</li>
-<li>Container在手动给予参数时如果转换失败辣么会抛出异常</li>
-<li>Application事件名变得更有意义</li>
-<li>鲁棒性增强</li>
+<li><code>OnConnected</code> : 当网络链接完成后会触发这个事件，事件参数为：网络频道</li>
+<li><code>OnError</code> : 当网络遇到错误时触发这个事件，事件参数为：网络频道，错误的异常</li>
+<li><code>OnMessage</code> : 当接受到完整的（被解包）的数据包后触发这个事件，事件参数为：网络频道，解包后的数据包</li>
+<li><code>OnDisconnect</code> : 当主动断开链接时触发（由于异常断开的链接不会触发），事件参数为：网络频道</li>
+<li><code>OnClosed</code> : 当链接关闭时，事件参数为：网络频道，什么异常导致的关闭（null则正常关闭）</li>
+<li><code>OnSent</code> : 当发送完成时，事件参数为：网络频道，实际发送的字节流</li>
+<li><code>OnMissHeartBeat</code> : 当丢失心跳包时，事件参数为：网络频道，丢失的次数</li>
 </ul>
-<p><strong>错误修正</strong></p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">channel.OnMessage += (<span class="keyword">from</span> , packet)=&gt;&#123;</div><div class="line">    <span class="comment">// todo:</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>全局网络事件(通过<code>INetworkManager</code>监听)除了以上事件可以被监听外还有：</p>
 <ul>
-<li>错误的函数名修正: <code>Releases</code> 修正为 <code>Release</code></li>
-</ul>
-<p><strong>新增功能</strong></p>
-<ul>
-<li>增加了启动引导完成事件: <code>OnBootstraped</code></li>
-<li><code>Arr</code> 增加 <code>IndexOf</code> 查找函数</li>
-</ul>
-<p><strong>已过时</strong></p>
-<ul>
-<li>已过时: <code>Str.RegexQuote()</code></li>
-</ul>
-<p><strong>其他改进</strong></p>
-<ul>
-<li>将事件转移至Support（所有using CatLib; 的可以无缝升级）</li>
-</ul>
-<h3 id="V1-0-0-RC"><a href="#V1-0-0-RC" class="headerlink" title="V1.0.0 RC"></a>V1.0.0 RC</h3><ul>
-<li>依赖注入容器</li>
-<li>基础事件系统</li>
-<li>标准库</li>
-</ul>
-<h3 id="Framework-更新指南"><a href="#Framework-更新指南" class="headerlink" title="Framework 更新指南"></a>Framework 更新指南</h3><h3 id="v1-1-0-Beta"><a href="#v1-1-0-Beta" class="headerlink" title="v1.1.0 Beta"></a>v1.1.0 Beta</h3><ul>
-<li>移除了在Unity环境下单元测试的支持 - 所有的基础类库都是可靠的无需在Unity下再进行额外测试。</li>
-<li>新增Network组件</li>
-<li>新增Tick组件</li>
-<li>新增了Socket组件</li>
-<li>项目文件结构调整，及程序集更名</li>
-<li>Container，依赖查找对于实现IConvertible的参数会尝试进行转换</li>
-<li>模版类增加了ContainsExtend方法，可以用于判断拓展是否存在</li>
-<li>SystemTime增加了Utc时间</li>
-<li><code>配置组件</code>和<code>转换器组件</code>从核心框架中淘汰至扩展组件库</li>
+<li><code>OnReleased</code> ：当某个网络频道被释放时，事件参数为：被释放的网络频道</li>
 </ul>
 <blockquote>
-<p>警告：1.0版本Framework使用1.1版本Core，路由机制可能出现转换失败的异常。请升级1.1版本的Framework修复这个问题</p>
+<p>全局网络事件意味着可以监听所有网络频道所产生的事件。</p>
 </blockquote>
-<h3 id="v1-0-0-Beta-2"><a href="#v1-0-0-Beta-2" class="headerlink" title="v1.0.0 Beta.2"></a>v1.0.0 Beta.2</h3><ul>
-<li>bug fixed</li>
-<li>为未覆盖断言的代码片段增加断言</li>
-</ul>
-<h3 id="V1-0-Beta"><a href="#V1-0-Beta" class="headerlink" title="V1.0 Beta"></a>V1.0 Beta</h3><h4 id="新增组件"><a href="#新增组件" class="headerlink" title="新增组件"></a><strong>新增组件</strong></h4><ul>
-<li><code>MonoDriver</code> 组件用于模拟Monobehavior驱动行为</li>
-<li><code>Events</code> 为事件系统。</li>
-<li><code>Debugger</code> 为调试控制器组件</li>
-<li><code>Json</code> 解析Json的类库</li>
-<li><code>Translation</code> 国际化翻译组件</li>
-<li><code>Converters</code> 转换器组件</li>
-<li><code>Random</code> 随机库</li>
-<li><code>Hashing</code> 哈希库</li>
-<li><code>Encryption</code> 加密库</li>
-<li><code>Compress</code> 压缩库</li>
-</ul>
-<h4 id="新增的特性"><a href="#新增的特性" class="headerlink" title="新增的特性"></a><strong>新增的特性</strong></h4><ul>
-<li><code>Application.Register</code> 在完成初始化后可以继续注册</li>
-<li>新增 <code>Container.Flush</code> 函数用于清空容器</li>
-<li><code>Container</code> 允许自定义注入标记</li>
-<li>可以以Unity组件的方式来书写服务提供者了</li>
-<li>新增版本对比接口<code>Application.Compare</code></li>
-<li><code>Config</code>新增<code>Watch</code>函数支持，用于观察配置的变化</li>
-<li>对其他框架开发者更加友好 </li>
-<li><code>路由系统</code> 的 <code>Dispatcher</code>增加了多线程调用安全支持</li>
-<li><code>Container</code> 增加了<code>Type2Service</code>来更加明确Type到服务名的转化</li>
-</ul>
-<h4 id="新增全局接口"><a href="#新增全局接口" class="headerlink" title="新增全局接口"></a><strong>新增全局接口</strong></h4><ul>
-<li><code>IAwait</code> 用于等待异步加载的服务</li>
-<li><code>IServiceProvider</code> 服务提供者接口</li>
-</ul>
-<h4 id="行为变化的函数"><a href="#行为变化的函数" class="headerlink" title="行为变化的函数"></a><strong>行为变化的函数</strong></h4><ul>
-<li><code>ServiceProvider.Init</code> 由异步逻辑变更为同步逻辑。如果服务需要异步等待请使用<code>IAWait</code></li>
-<li><code>Container.Make</code> 第二个参数拆分至 <code>Container.MakeWith</code></li>
-<li><code>Application.Register</code> 要求传入的是一个具体实例而不是一个Type</li>
-<li><code>Application.Bootstrap</code> 要求传入的是一个具体实例而不是一个Type</li>
-</ul>
-<h4 id="函数迁移"><a href="#函数迁移" class="headerlink" title="函数迁移"></a><strong>函数迁移</strong></h4><ul>
-<li><code>Application.Attach</code> 函数迁移至 <code>MonoDriver</code> 组件</li>
-<li><code>Application.Detach</code> 函数迁移至 <code>MonoDriver</code> 组件</li>
-</ul>
-<h4 id="函数-事件-配置更名"><a href="#函数-事件-配置更名" class="headerlink" title="函数/事件/配置更名"></a><strong>函数/事件/配置更名</strong></h4><ul>
-<li><code>Application.GetPriorities</code> 更名为 <code>Application.GetPriority</code></li>
-<li><code>Application.GetGuid</code> 更名为 <code>Application.GetRuntimeId</code></li>
-<li><code>App.Instance</code> 更名为 <code>App.Handler</code></li>
-<li><code>Timer.OnComplete</code> 更名为 <code>Timer.OnCompleted</code></li>
-<li>事件 <code>Application.OnStartComplete</code> 更名为 <code>Application.OnStartCompleted</code></li>
-<li>配置名已经被统一调整,涉及到的组件有<a href="console.html">调试控制台</a>,<a href="env.html">环境</a>,<a href="routing.html">路由</a>,<a href="translation.html">国际化</a></li>
-</ul>
-<h4 id="组件-函数移除"><a href="#组件-函数移除" class="headerlink" title="组件/函数移除"></a><strong>组件/函数移除</strong></h4><ul>
-<li>移除了 <code>ServiceProvider</code> 抽象类</li>
-<li>移除了 <code>Container.ReleaseAll</code>接口</li>
-<li>移除了旧的事件系统</li>
-<li>移除了<code>Config.AddLocator</code>函数</li>
-<li>移除了<code>IStart</code>增强接口</li>
-</ul>
-<h3 id="V0-8-3-Beta"><a href="#V0-8-3-Beta" class="headerlink" title="V0.8.3 Beta"></a>V0.8.3 Beta</h3><ul>
-<li>修复了 <code>UnitySettingLocator</code> 无法正确存储及访问的问题</li>
-<li>修复了 <code>Application.Version</code> 不一致的问题</li>
-</ul>
-<h3 id="V0-8-2-Beta"><a href="#V0-8-2-Beta" class="headerlink" title="V0.8.2 Beta"></a>V0.8.2 Beta</h3><ul>
-<li>修复了由于 <code>FileSystemManager</code> 门面模型的配置错误引发的bug</li>
-</ul>
-<h3 id="V0-8-1-Beta"><a href="#V0-8-1-Beta" class="headerlink" title="V0.8.1 Beta"></a>V0.8.1 Beta</h3><ul>
-<li>修复了版本名不一致的问题</li>
-<li>修复了遗漏注册的文件服务提供者</li>
-<li>修复了一个bug，这个bug会导致在路径<code>/</code>和<code>\</code>混用时无法正确定位</li>
-<li>修复了一个bug，这个bug导致在没有给定<code>AssetPath</code>时不能返回默认的路径</li>
-</ul>
-<h3 id="V0-8-0-Beta"><a href="#V0-8-0-Beta" class="headerlink" title="V0.8.0 Beta"></a>V0.8.0 Beta</h3><blockquote>
-<p>本版本为 CatLib 预发行Beta版</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">networkManager.OnClosed += (<span class="keyword">from</span> , ex)=&gt;&#123;</div><div class="line">    <span class="comment">// todo:</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h3 id="设定网络频道的心跳包"><a href="#设定网络频道的心跳包" class="headerlink" title="设定网络频道的心跳包"></a>设定网络频道的心跳包</h3><p>您可以通过网络频道的<code>SetHeartBeat</code>来设定心跳包的间隔，如果在这个间隔内没有网络通讯来往，则开始触发心跳丢失事件。</p>
+<p>函数所需求的参数为<code>检查间隔</code>，单位为：<code>毫秒(MS)</code></p>
+<blockquote>
+<p>注意触发心跳丢失事件本质上不会对链接有任何影响，您应该在应用层对这个事件做出正确的处理。</p>
 </blockquote>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">channel.SetHeartBeat(<span class="number">15000</span>);</div></pre></td></tr></table></figure>
+<h3 id="链接到服务器"><a href="#链接到服务器" class="headerlink" title="链接到服务器"></a>链接到服务器</h3><p>您可以通过<code>Connect</code>函数来链接到服务器，由于您在<code>NSP</code>中已经提供了对端服务器的地址，所以您可以直接链接。</p>
+<p>函数返回的时一个<code>标准等待接口（IAwait）</code>您可以根据这个接口来判断是否已经完成了链接。</p>
+<p>如果IAwait提供的参数 <code>IsDone</code> 和 <code>Result</code> 均为 <code>True</code> 则完成了链接，否则 <code>Result</code> 中返回异常</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> wait = channel.Connect();</div></pre></td></tr></table></figure>
+<p>如果您需要更改<code>NSP</code>所提供的初始化参数，那么您可以使用<code>Connect</code>的重载来替换服务器的地址。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> wait = channel.Connect(<span class="string">"127.0.0.1"</span> , <span class="number">8888</span>);</div></pre></td></tr></table></figure>
+<h3 id="断开服务器链接"><a href="#断开服务器链接" class="headerlink" title="断开服务器链接"></a>断开服务器链接</h3><p>您可以通过<code>Disconnect</code>来主动断开服务器链接。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">channel.Disconnect();</div></pre></td></tr></table></figure>
+<p>如果您为<code>Disconnect</code>传入一个异常那么在关闭事件中，这个异常会被附带。</p>
+<p>以异常方式断开链接会触发一些事件，事件执行顺序：</p>
 <ul>
-<li>新增CatLib核心</li>
-<li>新增标准库 - 容器</li>
-<li>新增标准库 - 有序集</li>
-<li>新增标准库 - 快速列表</li>
-<li>新增标准库 - 最少使用缓存</li>
-<li>新增标准库 - 过滤器链</li>
-<li>新增路由组件</li>
-<li>新增文件系统</li>
-<li>新增配置组件</li>
-<li>新增时间组件</li>
-<li>新增计时器组件</li>
+<li><code>OnError</code></li>
+<li><code>OnDisconnect</code></li>
+<li><code>OnClosed</code></li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">channel.Disconnect(<span class="keyword">new</span> Exception(<span class="string">"closed"</span>));</div></pre></td></tr></table></figure>
+<h3 id="发送数据到服务器"><a href="#发送数据到服务器" class="headerlink" title="发送数据到服务器"></a>发送数据到服务器</h3><p>您可以使用<code>Send</code>来发送数据包。</p>
+<blockquote>
+<p>注意如果<code>打包解包协议</code>无法打包那么会直接抛出一个异常。</p>
+</blockquote>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">channel.Send(Encoding.Default.GetBytes(<span class="string">"helloworld"</span>));</div></pre></td></tr></table></figure>
+<h3 id="获取网络频道的名字"><a href="#获取网络频道的名字" class="headerlink" title="获取网络频道的名字"></a>获取网络频道的名字</h3><p>您可以通过<code>Name</code>属性来获取网络频道的名字</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> name = channel.Name;</div></pre></td></tr></table></figure>
+<h3 id="获取基础套接字"><a href="#获取基础套接字" class="headerlink" title="获取基础套接字"></a>获取基础套接字</h3><p>您可以通过<code>Socket</code>属性来获取基础套接字。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> socket = channel.Socket;</div></pre></td></tr></table></figure>
+<h3 id="使用IPacker接口"><a href="#使用IPacker接口" class="headerlink" title="使用IPacker接口"></a>使用IPacker接口</h3><p><code>IPacker</code>为打包解包器，您可以自定义打包解包规范。接口需要3个函数：</p>
+<blockquote>
+<p><strong>int Input(byte[], out Exception)</strong><br>检查包的完整性, 如果能够得到包长，则返回包的在buffer中的长度(包含包头)，否则返回0继续等待数据。<br>如果协议有问题，则填入ex参数，当前连接会因此断开</p>
+</blockquote>
+<p><span></span></p>
+<blockquote>
+<p><strong>byte[] Encode(object, out Exception)</strong><br>序列化消息包。<br>如果协议有问题，则填入ex参数，当前连接会因此断开。<br>如果需要抛弃数据包则返回null</p>
+</blockquote>
+<p><span></span></p>
+<blockquote>
+<p><strong>object Decode(byte[], out Exception)</strong><br>反序列化消息包(包体)。<br>如果协议有问题，则填入ex参数，当前连接会因此断开<br>如果需要抛弃数据包则返回null。</p>
+</blockquote>
+<h3 id="组件依赖"><a href="#组件依赖" class="headerlink" title="组件依赖"></a>组件依赖</h3><ul>
+<li><a href="socket.html">Socket</a></li>
+<li><a href="tick.html">时钟</a></li>
 </ul>
 
     <div class="footer">
         发现错误？想参与编辑？ 
-        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/version.md" target="_blank">
+        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/network.md" target="_blank">
             在 Github 上编辑此页！
         </a>
     </div>

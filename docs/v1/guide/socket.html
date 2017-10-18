@@ -4,7 +4,7 @@
     <head>
 
     
-    <title>版本说明 — CatLib</title>
+    <title>Socket — CatLib</title>
       
     <meta charset="utf-8">
     
@@ -34,7 +34,7 @@
             </li!-->
             <li><a href="https://github.com/catlib/framework" class="nav-link-li">下载框架</a></li>
             <li><a href="/v1/guide/use.html" class="nav-link-li">使用案例</a></li>
-            <li><a href="/v1/guide/version.html" class="nav-link-li current">版本说明</a></li>
+            <li><a href="/v1/guide/version.html" class="nav-link-li">版本说明</a></li>
             <li><a href="/v1/guide/contribution.html" class="nav-link-li">贡献指南</a></li>
             <li><a href="/v1/guide/index.html" class="nav-link-li">介绍</a></li>
             <li><a href="/" class="nav-link-li current">首页</a></li>
@@ -75,7 +75,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/version.html" class="sidebar-link current">版本说明</del></a></p>
+                <p><a href="/v1/guide/version.html" class="sidebar-link">版本说明</del></a></p>
             </li>
         
             
@@ -279,7 +279,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/socket.html" class="sidebar-link">Socket</del></a></p>
+                <p><a href="/v1/guide/socket.html" class="sidebar-link current">Socket</del></a></p>
             </li>
         
             
@@ -419,146 +419,62 @@
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="版本说明"><a href="#版本说明" class="headerlink" title="版本说明"></a>版本说明</h2><blockquote>
-<p>CatLib的版本标准是采用：<a href="http://semver.org/lang/zh-CN/" target="_blank" rel="external">Semver语义化版本标准</a></p>
-</blockquote>
-<h3 id="Core-更新指南"><a href="#Core-更新指南" class="headerlink" title="Core 更新指南"></a>Core 更新指南</h3><h3 id="v1-1-1-RC"><a href="#v1-1-1-RC" class="headerlink" title="v1.1.1 RC"></a>v1.1.1 RC</h3><ul>
-<li>移除了在Unity环境下单元测试的支持 - 所有的基础类库都是可靠的无需在Unity下再进行额外测试。</li>
-<li>兼容合并(直接使用Framework和Core的)源码导致的类型指定错误</li>
-<li>对容器所产生的异常提供更加明确的错误提示</li>
-</ul>
-<h3 id="V1-1-0-RC"><a href="#V1-1-0-RC" class="headerlink" title="V1.1.0 RC"></a>V1.1.0 RC</h3><p><strong>开发者体验改善</strong></p>
-<ul>
-<li>错误提示对开发者更加友好和直观</li>
-<li>Container在手动给予参数时如果转换失败辣么会抛出异常</li>
-<li>Application事件名变得更有意义</li>
-<li>鲁棒性增强</li>
-</ul>
-<p><strong>错误修正</strong></p>
-<ul>
-<li>错误的函数名修正: <code>Releases</code> 修正为 <code>Release</code></li>
-</ul>
-<p><strong>新增功能</strong></p>
-<ul>
-<li>增加了启动引导完成事件: <code>OnBootstraped</code></li>
-<li><code>Arr</code> 增加 <code>IndexOf</code> 查找函数</li>
-</ul>
-<p><strong>已过时</strong></p>
-<ul>
-<li>已过时: <code>Str.RegexQuote()</code></li>
-</ul>
-<p><strong>其他改进</strong></p>
-<ul>
-<li>将事件转移至Support（所有using CatLib; 的可以无缝升级）</li>
-</ul>
-<h3 id="V1-0-0-RC"><a href="#V1-0-0-RC" class="headerlink" title="V1.0.0 RC"></a>V1.0.0 RC</h3><ul>
-<li>依赖注入容器</li>
-<li>基础事件系统</li>
-<li>标准库</li>
-</ul>
-<h3 id="Framework-更新指南"><a href="#Framework-更新指南" class="headerlink" title="Framework 更新指南"></a>Framework 更新指南</h3><h3 id="v1-1-0-Beta"><a href="#v1-1-0-Beta" class="headerlink" title="v1.1.0 Beta"></a>v1.1.0 Beta</h3><ul>
-<li>移除了在Unity环境下单元测试的支持 - 所有的基础类库都是可靠的无需在Unity下再进行额外测试。</li>
-<li>新增Network组件</li>
-<li>新增Tick组件</li>
-<li>新增了Socket组件</li>
-<li>项目文件结构调整，及程序集更名</li>
-<li>Container，依赖查找对于实现IConvertible的参数会尝试进行转换</li>
-<li>模版类增加了ContainsExtend方法，可以用于判断拓展是否存在</li>
-<li>SystemTime增加了Utc时间</li>
-<li><code>配置组件</code>和<code>转换器组件</code>从核心框架中淘汰至扩展组件库</li>
-</ul>
+    <h2 id="Socket"><a href="#Socket" class="headerlink" title="Socket"></a>Socket</h2><p>Socket组件为您封装了一些常用的网络连接器，如：<code>TCP</code>，<code>KCP</code>，<code>WebSocket(即将到来)</code>等。</p>
 <blockquote>
-<p>警告：1.0版本Framework使用1.1版本Core，路由机制可能出现转换失败的异常。请升级1.1版本的Framework修复这个问题</p>
+<p>这是一个底层网络组件您应该使用 <a href="network.html">网络组件</a> 来管理您的网络链接，除非您对这个组件非常的了解。</p>
 </blockquote>
-<h3 id="v1-0-0-Beta-2"><a href="#v1-0-0-Beta-2" class="headerlink" title="v1.0.0 Beta.2"></a>v1.0.0 Beta.2</h3><ul>
-<li>bug fixed</li>
-<li>为未覆盖断言的代码片段增加断言</li>
-</ul>
-<h3 id="V1-0-Beta"><a href="#V1-0-Beta" class="headerlink" title="V1.0 Beta"></a>V1.0 Beta</h3><h4 id="新增组件"><a href="#新增组件" class="headerlink" title="新增组件"></a><strong>新增组件</strong></h4><ul>
-<li><code>MonoDriver</code> 组件用于模拟Monobehavior驱动行为</li>
-<li><code>Events</code> 为事件系统。</li>
-<li><code>Debugger</code> 为调试控制器组件</li>
-<li><code>Json</code> 解析Json的类库</li>
-<li><code>Translation</code> 国际化翻译组件</li>
-<li><code>Converters</code> 转换器组件</li>
-<li><code>Random</code> 随机库</li>
-<li><code>Hashing</code> 哈希库</li>
-<li><code>Encryption</code> 加密库</li>
-<li><code>Compress</code> 压缩库</li>
-</ul>
-<h4 id="新增的特性"><a href="#新增的特性" class="headerlink" title="新增的特性"></a><strong>新增的特性</strong></h4><ul>
-<li><code>Application.Register</code> 在完成初始化后可以继续注册</li>
-<li>新增 <code>Container.Flush</code> 函数用于清空容器</li>
-<li><code>Container</code> 允许自定义注入标记</li>
-<li>可以以Unity组件的方式来书写服务提供者了</li>
-<li>新增版本对比接口<code>Application.Compare</code></li>
-<li><code>Config</code>新增<code>Watch</code>函数支持，用于观察配置的变化</li>
-<li>对其他框架开发者更加友好 </li>
-<li><code>路由系统</code> 的 <code>Dispatcher</code>增加了多线程调用安全支持</li>
-<li><code>Container</code> 增加了<code>Type2Service</code>来更加明确Type到服务名的转化</li>
-</ul>
-<h4 id="新增全局接口"><a href="#新增全局接口" class="headerlink" title="新增全局接口"></a><strong>新增全局接口</strong></h4><ul>
-<li><code>IAwait</code> 用于等待异步加载的服务</li>
-<li><code>IServiceProvider</code> 服务提供者接口</li>
-</ul>
-<h4 id="行为变化的函数"><a href="#行为变化的函数" class="headerlink" title="行为变化的函数"></a><strong>行为变化的函数</strong></h4><ul>
-<li><code>ServiceProvider.Init</code> 由异步逻辑变更为同步逻辑。如果服务需要异步等待请使用<code>IAWait</code></li>
-<li><code>Container.Make</code> 第二个参数拆分至 <code>Container.MakeWith</code></li>
-<li><code>Application.Register</code> 要求传入的是一个具体实例而不是一个Type</li>
-<li><code>Application.Bootstrap</code> 要求传入的是一个具体实例而不是一个Type</li>
-</ul>
-<h4 id="函数迁移"><a href="#函数迁移" class="headerlink" title="函数迁移"></a><strong>函数迁移</strong></h4><ul>
-<li><code>Application.Attach</code> 函数迁移至 <code>MonoDriver</code> 组件</li>
-<li><code>Application.Detach</code> 函数迁移至 <code>MonoDriver</code> 组件</li>
-</ul>
-<h4 id="函数-事件-配置更名"><a href="#函数-事件-配置更名" class="headerlink" title="函数/事件/配置更名"></a><strong>函数/事件/配置更名</strong></h4><ul>
-<li><code>Application.GetPriorities</code> 更名为 <code>Application.GetPriority</code></li>
-<li><code>Application.GetGuid</code> 更名为 <code>Application.GetRuntimeId</code></li>
-<li><code>App.Instance</code> 更名为 <code>App.Handler</code></li>
-<li><code>Timer.OnComplete</code> 更名为 <code>Timer.OnCompleted</code></li>
-<li>事件 <code>Application.OnStartComplete</code> 更名为 <code>Application.OnStartCompleted</code></li>
-<li>配置名已经被统一调整,涉及到的组件有<a href="console.html">调试控制台</a>,<a href="env.html">环境</a>,<a href="routing.html">路由</a>,<a href="translation.html">国际化</a></li>
-</ul>
-<h4 id="组件-函数移除"><a href="#组件-函数移除" class="headerlink" title="组件/函数移除"></a><strong>组件/函数移除</strong></h4><ul>
-<li>移除了 <code>ServiceProvider</code> 抽象类</li>
-<li>移除了 <code>Container.ReleaseAll</code>接口</li>
-<li>移除了旧的事件系统</li>
-<li>移除了<code>Config.AddLocator</code>函数</li>
-<li>移除了<code>IStart</code>增强接口</li>
-</ul>
-<h3 id="V0-8-3-Beta"><a href="#V0-8-3-Beta" class="headerlink" title="V0.8.3 Beta"></a>V0.8.3 Beta</h3><ul>
-<li>修复了 <code>UnitySettingLocator</code> 无法正确存储及访问的问题</li>
-<li>修复了 <code>Application.Version</code> 不一致的问题</li>
-</ul>
-<h3 id="V0-8-2-Beta"><a href="#V0-8-2-Beta" class="headerlink" title="V0.8.2 Beta"></a>V0.8.2 Beta</h3><ul>
-<li>修复了由于 <code>FileSystemManager</code> 门面模型的配置错误引发的bug</li>
-</ul>
-<h3 id="V0-8-1-Beta"><a href="#V0-8-1-Beta" class="headerlink" title="V0.8.1 Beta"></a>V0.8.1 Beta</h3><ul>
-<li>修复了版本名不一致的问题</li>
-<li>修复了遗漏注册的文件服务提供者</li>
-<li>修复了一个bug，这个bug会导致在路径<code>/</code>和<code>\</code>混用时无法正确定位</li>
-<li>修复了一个bug，这个bug导致在没有给定<code>AssetPath</code>时不能返回默认的路径</li>
-</ul>
-<h3 id="V0-8-0-Beta"><a href="#V0-8-0-Beta" class="headerlink" title="V0.8.0 Beta"></a>V0.8.0 Beta</h3><blockquote>
-<p>本版本为 CatLib 预发行Beta版</p>
-</blockquote>
+<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>通过<code>ISocketManager</code>接口获取Socket管理器，Socket管理器可以用于管理活动的Socket。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> socketManager = App.Make&lt;ISocketManager&gt;();</div></pre></td></tr></table></figure>
+<h3 id="通过NSP构建"><a href="#通过NSP构建" class="headerlink" title="通过NSP构建"></a>通过NSP构建</h3><p>通过向Socket管理器的<code>Make</code>方法传入<code>NSP</code>（网络服务提供商）来构建出Socket。</p>
+<p>Socket组件已经为您定义好了以下NSP：</p>
 <ul>
-<li>新增CatLib核心</li>
-<li>新增标准库 - 容器</li>
-<li>新增标准库 - 有序集</li>
-<li>新增标准库 - 快速列表</li>
-<li>新增标准库 - 最少使用缓存</li>
-<li>新增标准库 - 过滤器链</li>
-<li>新增路由组件</li>
-<li>新增文件系统</li>
-<li>新增配置组件</li>
-<li>新增时间组件</li>
-<li>新增计时器组件</li>
+<li>tcp://<code>{host}</code>:<code>{port}</code></li>
+<li>kcp://<code>{conv}</code>@<code>{host}</code>:<code>{port}</code></li>
+</ul>
+<p><code>{host}</code> : 服务器Host<br><code>{port}</code> : 服务器端口号<br><code>{conv}</code> : 会话Id（uint）（部分协议可能需要如：kcp）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> tcpSocket = socketManager.Make(<span class="string">"tcp://127.0.0.1:7777"</span>,<span class="string">"default-tcp"</span>);</div></pre></td></tr></table></figure>
+<h3 id="获取已经构建完成的Socket"><a href="#获取已经构建完成的Socket" class="headerlink" title="获取已经构建完成的Socket"></a>获取已经构建完成的Socket</h3><p>通过<code>Get</code>方法，传入一个<code>name</code>来获取一个已经被完成构建的Socket</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> tcpSocket = socketManager.Get(<span class="string">"default-tcp"</span>);</div></pre></td></tr></table></figure>
+<h3 id="建立链接"><a href="#建立链接" class="headerlink" title="建立链接"></a>建立链接</h3><p>您可以通过<code>Connect</code>方法发起链接，<code>Connect</code>方法是一个异步方法，但返回一个<code>IAWait</code>接口可以被用于同步等待完成。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> waitStatus = tcpSocket.Connect();</div></pre></td></tr></table></figure>
+<p><code>IAwait</code>作为<code>Connect</code>函数的返回值，可能有以下几种状态的返回：</p>
+<ul>
+<li><code>IsDone</code>为<code>True</code>意味着内部执行状态终止（可能由于链接完成，但也可能由于异常）</li>
+<li><code>Result</code>为<code>布尔值</code>且为<code>True</code>代表函数执行成功</li>
+<li><code>Result</code>为<code>Exception</code>类型，意味着在执行过程中出现了异常。</li>
+</ul>
+<h3 id="监听Socket消息"><a href="#监听Socket消息" class="headerlink" title="监听Socket消息"></a>监听Socket消息</h3><p>您可以通过<code>On</code>方法来监听Socket通讯消息。</p>
+<p>能够被监听的消息有：</p>
+<ul>
+<li><code>SocketEvents.Connect</code> : 当链接成功时（载荷为：自身连接器实例）</li>
+<li><code>SocketEvents.Disconnect</code> : 当主动引发断开连接时（载荷为：自身连接器实例）</li>
+<li><code>SocketEvents.Message</code> : 当收到网络消息时（载荷为：网络数据byte[],可能不是接受完全的）</li>
+<li><code>SocketEvents.Sent</code> : 当数据发送完成时（载荷为：自身连接器实例）。</li>
+<li><code>SocketEvents.Closed</code> : 当连接器关闭时（载荷为：自身连接器实例）。</li>
+<li><code>SocketEvents.Error</code> : 当连接器出现异常时（载荷为：Exception）</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">tcpSocket.On(SocketEvents.Message , (data)=&gt;</div><div class="line">&#123;</div><div class="line">    <span class="comment">//todo:</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<blockquote>
+<p>通过<code>Off</code>可以对监听的消息进行释放。</p>
+</blockquote>
+<h3 id="触发外部定义的Socket事件"><a href="#触发外部定义的Socket事件" class="headerlink" title="触发外部定义的Socket事件"></a>触发外部定义的Socket事件</h3><p>通过Trigger可以主动触发Socket事件。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">tcpSocket.Trigger(<span class="string">"Your Events"</span>, <span class="string">"hello world"</span>);</div></pre></td></tr></table></figure>
+<h3 id="发送数据"><a href="#发送数据" class="headerlink" title="发送数据"></a>发送数据</h3><p>可以通过<code>Send</code>方法来向服务器发送一条数据，<code>Send</code>返回一个<code>IAwait</code>可以用于同步等待发送完成。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> sendData = System.Text.Encoding.Default.GetBytes(<span class="string">"hello world"</span>);</div><div class="line"><span class="keyword">var</span> wait = tcpSocket.Send(sendData);</div></pre></td></tr></table></figure>
+<h3 id="断开Socket链接"><a href="#断开Socket链接" class="headerlink" title="断开Socket链接"></a>断开Socket链接</h3><p>您可以通过<code>Disconnect</code>方法断开Socket链接。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">tcpSocket.Disconnect();</div></pre></td></tr></table></figure>
+<h3 id="从管理器中释放Socket"><a href="#从管理器中释放Socket" class="headerlink" title="从管理器中释放Socket"></a>从管理器中释放Socket</h3><p>您可以通过<code>Release</code>方法从管理器中释放链接，释放链接时如果没有断开Socket链接，那么会自动断开。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">socketManager.Release(<span class="string">"default-tcp"</span>);</div></pre></td></tr></table></figure>
+<h3 id="拓展Socket"><a href="#拓展Socket" class="headerlink" title="拓展Socket"></a>拓展Socket</h3><p>您可以通过<code>Extend</code>方法来定制自己的Socket。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">socketManager.Extend(()=&gt;&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> KcpConnector(<span class="number">91828</span>,<span class="string">"127.0.0.1"</span> , <span class="number">7777</span>)&#123;</div><div class="line">        SendWindow = <span class="number">256</span>,</div><div class="line">        RecvWindow = <span class="number">128</span>,</div><div class="line">        NoDelay = <span class="literal">true</span>,</div><div class="line">        IntervalTimer = <span class="number">10</span>,</div><div class="line">        Resend = <span class="number">1</span>,</div><div class="line">        CongestionControl = <span class="literal">true</span></div><div class="line">    &#125;;</div><div class="line">&#125;, <span class="string">"my-kcp"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> kcpSocket = socketManager.Get(<span class="string">"my-kcp"</span>);</div></pre></td></tr></table></figure>
+<h3 id="组件依赖"><a href="#组件依赖" class="headerlink" title="组件依赖"></a>组件依赖</h3><ul>
+<li><a href="tick.html">时钟</a></li>
 </ul>
 
     <div class="footer">
         发现错误？想参与编辑？ 
-        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/version.md" target="_blank">
+        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/socket.md" target="_blank">
             在 Github 上编辑此页！
         </a>
     </div>
