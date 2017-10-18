@@ -1,7 +1,8 @@
 ---
 title: 计时器
 type: guide
-order: 350
+order: 502
+enable: true
 ---
 
 ## 计时器

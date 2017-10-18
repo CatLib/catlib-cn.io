@@ -2,6 +2,7 @@
 title: 命名规范
 type: guide
 order: 4
+enable: true
 ---
 
 ## 命名规范

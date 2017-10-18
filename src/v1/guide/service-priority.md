@@ -2,6 +2,7 @@
 title: 初始化优先级
 type: guide
 order: 3001
+enable: true
 ---
 
 ## 初始化优先级

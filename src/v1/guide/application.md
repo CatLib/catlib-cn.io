@@ -2,6 +2,7 @@
 title: CatLib核心
 type: guide
 order: 102
+enable: true
 ---
 
 ## CatLib核心
@@ -59,24 +60,16 @@ public class Program : MonoBehaviour
 
 ### 从CatLib.Unity开始
 
-除去上文描述的方案外，CatLib已经为开发者准备好了引导程序，在CatLib.Unity项目中您可以通过配置`Providers.cs`文件来设定框架的服务提供者，通过`Configs.cs`文件可以设定初始配置，通过`Assemblys.cs`文件可以设定需要跨域构建的程序集。
+除去上文描述的方案外，CatLib已经为开发者准备好了引导程序，在CatLib.Unity项目中您可以通过配置`Providers.cs`文件来设定框架的服务提供者，通过`Assemblys.cs`文件可以设定需要跨域构建的程序集。
 
 CatLib.Unity默认的用户代码入口在`Main.cs`文件中，当然你也可以同过路由标记来指定启动入口(这需要您删除Main.cs文件,事实上Main.cs的入口也是通过路由完成的)。
 
-通过路由来标记常规配置入口，常规配置的uri固定为`bootstrap://config`
 通过路由来标记启动入口,入口的uri固定为`bootstrap://start`：
 
 ``` csharp
 [Routed]
 public class Main
 {
-    [Routed("bootstrap://config")]
-    public void Config()
-    {
-        //todo: config code here
-        Debug.Log("config code here!");
-    }
-
     [Routed("bootstrap://start")]
     public void Bootstrap()
     {
@@ -85,16 +78,6 @@ public class Main
     }
 }
 ```
-
-### 推荐注册的基础服务提供者
-
-基础服务提供者为框架提供了必须的基础服务，如果您不注册那么框架功能将会被自动降级。
-
-（为Unity提供的项目我们已经注册了常用的组件）。
-
-- `ConfigProvider`
-- `EventsProvider`
-- `ConvertersProvider`
 
 ### 判断当前线程是否在主线程中
 
@@ -112,7 +95,7 @@ CatLib基础支持库提供了优先级特性。您可以使用`[Priority()]`特
 
 ### 全局事件
 
-CatLib核心提供的全局事件系统，您只需要通过简单的API就可以调用。
+CatLib核心提供的全局[事件系统](/v1/detail/support/events.html)，您只需要通过简单的API就可以调用。
 
 #### **触发全局事件**
 
@@ -124,7 +107,7 @@ App.Trigger("event");
 
 监听全局事件时允许您传入触发次数，如果您没有传入则表示事件一直有效，反正如果达到触发，则事件自动被撤销。
 
-> 更多CatLib事件系统特性请参考[事件系统](events.html)
+> 更多CatLib事件系统特性请参考[事件系统](/v1/detail/support/events.html)
 
 ``` csharp
 App.On("event" , (payload)=>

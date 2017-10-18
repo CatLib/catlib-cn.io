@@ -1,7 +1,8 @@
 ---
 title: 控制台扩展
 type: guide
-order: 320
+order: 520
+enable: true
 ---
 
 ## 调试控制台扩展(Unity增强)

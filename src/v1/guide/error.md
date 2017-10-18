@@ -2,6 +2,7 @@
 title: 常见错误
 type: guide
 order: 3
+enable: true
 ---
 
 ## 常见错误

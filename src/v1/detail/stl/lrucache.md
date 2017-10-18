@@ -2,6 +2,7 @@
 title: 近期最少使用缓存
 type: detail
 order: 102
+enable: true
 ---
 
 ## 近期最少使用缓存

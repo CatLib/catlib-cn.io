@@ -2,6 +2,7 @@
 title: 加解密
 type: guide
 order: 232
+enable: true
 ---
 
 ## 加解密

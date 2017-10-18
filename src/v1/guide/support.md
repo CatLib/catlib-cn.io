@@ -1,7 +1,8 @@
 ---
 title: 支持库
 type: guide
-order: 220
+order: 120
+enable: true
 ---
 
 ## 支持库
@@ -13,6 +14,10 @@ CatLib支持库提供了常用的组件，特性的集合，她们是C#标准库
 ### 服务容器(Container)
 
 CatLib服务容器属于支持的一部分，关于服务容器相关介绍请参考：[服务容器](container.html)
+
+### 事件系统（Event）
+
+事件机制是一种很好的应用解耦方式。CatLib事件系统让我们可以订阅和监听程序中出现的各种事件。关于事件系统请参考：[事件系统](/v1/detail/support/events.html)
 
 ### 有序集(SortSet)
 

@@ -6,10 +6,10 @@
                 <li><h3>基础</h3></li>
             <%}%>
             <% if(fileName == 'service-provider'){%>
-                <li><h3>系统架构</h3></li>
+                <li><h3>框架核心</h3></li>
             <%}%>
-            <% if(fileName == 'config'){%>
-                <li><h3>核心组件</h3></li>
+            <% if(fileName == 'routing'){%>
+                <li><h3>框架组件</h3></li>
             <%}%>
             <% if(fileName == 'mono-driver'){%>
                 <li><h3>Unity组件</h3></li>
@@ -18,7 +18,7 @@
                 <li><h3>其他</h3></li>
             <%}%>
             <li>
-                <p><a href="<%- url_for(p.path) %>" class="sidebar-link<%- page.title === p.title ? ' current' : '' %><%- p.is_new ? ' new' : '' %>"><%- p.title %></a></p>
+                <p><a href="<%- url_for(p.path) %>" class="sidebar-link<%- page.title === p.title ? ' current' : '' %><%- p.is_new ? ' new' : '' %>"><%- p.enable === true ? '' : '<del>' %><%- p.title %><%- page.enable === 'true' ? '' : '</del>' %></a></p>
             </li>
         <% }) %>
     </ul>

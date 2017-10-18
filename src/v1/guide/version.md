@@ -2,11 +2,73 @@
 title: 版本说明
 type: guide
 order: 2
+enable: true
 ---
 
 ## 版本说明
 
 > CatLib的版本标准是采用：[Semver语义化版本标准](http://semver.org/lang/zh-CN/)
+
+### Core 更新指南
+
+### v1.1.1 RC
+
+- 移除了在Unity环境下单元测试的支持 - 所有的基础类库都是可靠的无需在Unity下再进行额外测试。
+- 兼容合并(直接使用Framework和Core的)源码导致的类型指定错误
+- 对容器所产生的异常提供更加明确的错误提示
+
+### V1.1.0 RC
+
+**开发者体验改善**
+
+- 错误提示对开发者更加友好和直观
+- Container在手动给予参数时如果转换失败辣么会抛出异常
+- Application事件名变得更有意义
+- 鲁棒性增强
+
+**错误修正**
+
+- 错误的函数名修正: `Releases` 修正为 `Release`
+
+**新增功能**
+
+- 增加了启动引导完成事件: `OnBootstraped`
+- `Arr` 增加 `IndexOf` 查找函数
+
+**已过时**
+
+- 已过时: `Str.RegexQuote()`
+
+**其他改进**
+
+- 将事件转移至Support（所有using CatLib; 的可以无缝升级）
+
+### V1.0.0 RC
+
+- 依赖注入容器
+- 基础事件系统
+- 标准库
+
+### Framework 更新指南
+
+### v1.1.0 Beta
+
+- 移除了在Unity环境下单元测试的支持 - 所有的基础类库都是可靠的无需在Unity下再进行额外测试。
+- 新增Network组件
+- 新增Tick组件
+- 新增了Socket组件
+- 项目文件结构调整，及程序集更名
+- Container，依赖查找对于实现IConvertible的参数会尝试进行转换
+- 模版类增加了ContainsExtend方法，可以用于判断拓展是否存在
+- SystemTime增加了Utc时间
+- `配置组件`和`转换器组件`从核心框架中淘汰至扩展组件库
+
+> 警告：1.0版本Framework使用1.1版本Core，路由机制可能出现转换失败的异常。请升级1.1版本的Framework修复这个问题
+
+### v1.0.0 Beta.2
+
+- bug fixed
+- 为未覆盖断言的代码片段增加断言
 
 ### V1.0 Beta
 

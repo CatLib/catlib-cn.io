@@ -2,11 +2,16 @@
 title: 升级指南
 type: guide
 order: 1
+enable: true
 ---
 
 ## 升级指南
 
 [RFC 2119](https://www.ietf.org/rfc/rfc2199.txt) 中的必须(MUST)，不可(MUST NOT)，建议(SHOULD)，不建议(SHOULD NOT)，可以/可能(MAY)等关键词将在本节用来做一些解释性的描述。
+
+### 从1.0 升级到 1.1
+
+这个版本您可以平滑升级。所有需要您手动修正的问题都会主动抛出警告和修正建议。
 
 ### 从0.8 升级至 1.0
 

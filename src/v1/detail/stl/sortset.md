@@ -2,6 +2,7 @@
 title: 有序集
 type: detail
 order: 100
+enable: true
 ---
 
 ## 有序集

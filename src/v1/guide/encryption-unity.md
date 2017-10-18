@@ -1,7 +1,8 @@
 ---
 title: 加解密扩展
 type: guide
-order: 320
+order: 520
+enable: true
 ---
 
 ## 加解密扩展(Unity增强)

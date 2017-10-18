@@ -2,6 +2,7 @@
 title: 哈希
 type: guide
 order: 231
+enable: true
 ---
 
 ## 哈希

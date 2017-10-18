@@ -1,10 +1,13 @@
 ---
 title: 转换器
 type: guide
-order: 203
+order: 399
+enable: false
 ---
 
 ## 转换器
+
+> 该组件从`V1.1.0`版本后(包含)被移除出Framework。
 
 转换器提供了类型转换统一定义的空间，您可以通过转换器安全的转换类型。
 

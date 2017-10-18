@@ -2,6 +2,7 @@
 title: 文件系统
 type: guide
 order: 230
+enable: true
 ---
 
 ## 文件系统

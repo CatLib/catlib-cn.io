@@ -2,6 +2,7 @@
 title: 快速列表
 type: detail
 order: 101
+enable: true
 ---
 
 ## 快速列表

@@ -1,7 +1,8 @@
 ---
 title: 随机数扩展
 type: guide
-order: 320
+order: 520
+enable: true
 ---
 
 ## 随机数扩展(Unity增强)

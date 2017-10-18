@@ -2,6 +2,7 @@
 title: 服务表
 type: guide
 order: 3000
+enable: true
 ---
 
 ## 服务表
@@ -24,7 +25,7 @@ order: 3000
 | 日志工具            | `ILogger`             | `无`       | [控制台](console.html)                |
 | 数据监控            | `IMonitor`            | `无`       | [控制台](console.html)                |
 | 加解密工具          | `IEncrypter`          | `无`       | [加解密](encryption.html)            |
-| 全局事件            | `IDispatcher`         | `无`       | [事件](events.html)                  |
+| 全局事件            | `IDispatcher`         | `无`       | [事件](/v1/detail/support/events.html) |
 | 文件系统管理器       | `IFileSystemManager` | `无`        | [文件系统](file-system.html)          |
 | 文件系统(默认)       | `IFileSystem`        | `无`        | [文件系统](file-system.html)          |
 | 哈希库              | `IHashing`            | `无`       | [哈希](hashing.html)                 |

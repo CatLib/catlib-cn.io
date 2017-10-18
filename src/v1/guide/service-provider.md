@@ -2,6 +2,7 @@
 title: 服务提供者
 type: guide
 order: 100
+enable: true
 ---
 
 ## 服务提供者

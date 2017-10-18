@@ -2,6 +2,7 @@
 title: 随机数
 type: guide
 order: 204
+enable: true
 ---
 
 ## 随机数

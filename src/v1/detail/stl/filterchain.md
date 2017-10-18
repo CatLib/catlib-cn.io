@@ -2,6 +2,7 @@
 title: 过滤器链
 type: detail
 order: 103
+enable: true
 ---
 
 ## 过滤器链

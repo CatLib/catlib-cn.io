@@ -2,6 +2,7 @@
 title: 控制台
 type: guide
 order: 203
+enable: true
 ---
 
 ## 控制台

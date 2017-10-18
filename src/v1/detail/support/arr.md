@@ -2,6 +2,7 @@
 title: 数组(Arr)
 type: detail
 order: 101
+enable: true
 ---
 
 ## 数组(Arr)
@@ -25,6 +26,7 @@ order: 101
 - [Shift](#Shift)
 - [Unshift](#Unshift)
 - [Reverse](#Reverse)
+- [IndexOf](#IndexOf)
 
 ### Merge
 
@@ -168,4 +170,13 @@ var count = Arr.Unshift(ref data , "0" , "1");
 ```csharp
 var result = Arr.Reverse(new []{"1" , "2" ,"3"});
 // result : ["3" , "2" , "1"]
+```
+
+### IndexOf
+
+从数组中检索指定的值并返回所在的下标，如果返回-1则代表没有出现
+
+```csharp
+var result = Arr.IndexOf(new []{"1" , "2" ,"3" , "4" , "5"} , new []{ "2" , "3" });
+// result : 1
 ```

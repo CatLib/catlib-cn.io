@@ -2,6 +2,7 @@
 title: 贡献指南
 type: guide
 order: 5
+enable: true
 ---
 
 ## 贡献指南

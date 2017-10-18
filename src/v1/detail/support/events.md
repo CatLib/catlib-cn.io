@@ -1,7 +1,8 @@
 ---
 title: 事件系统
-type: guide
-order: 203
+type: detail
+order: 150
+enable: true
 ---
 
 ## 事件系统

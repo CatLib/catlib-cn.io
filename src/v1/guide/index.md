@@ -2,17 +2,26 @@
 title: 介绍
 type: guide
 order: 0
+enable: true
 ---
 
 ## 介绍
 
-<a href="https://github.com/yb199478/CatLib/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" title="license-mit" /></a> <a href="https://github.com/yb199478/catlib/"><img src="https://badge.fury.io/gh/catlib%2Fframework.svg" title="GitHub version" /></a> <a href="https://ci.appveyor.com/project/catlib/framework"><img src="https://ci.appveyor.com/api/projects/status/f12rb3x5hxvq6yr7?svg=true" title="Build status"/></a> <a href="https://codecov.io/gh/CatLib/CatLib"><img src="https://codecov.io/gh/CatLib/Framework/branch/master/graph/badge.svg" alt="Codecov" /></a> <img src="https://img.shields.io/badge/unity-min%205.3-red.svg" alt="min unity" />
+**CatLib Core(框架核心)**
 
-> CatLib要求Unity最低版本为5.3+
+<a href="https://github.com/catlib/core/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" title="license-mit" /></a> <a href="https://www.nuget.org/packages/catlib.core/"><img src="https://badge.fury.io/nu/catlib.core.svg" title="Nuget Version" /></a> <a href="https://ci.appveyor.com/project/catlib/core"><img src="https://ci.appveyor.com/api/projects/status/tk3o571mwbw2rykj?svg=true" title="Build status"/></a> <img src="https://codecov.io/gh/CatLib/Core/branch/master/graph/badge.svg" alt="Codecov" /> 
+
+**CatLib Framework(框架组件)**
+
+<a href="https://github.com/yb199478/CatLib/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" title="license-mit" /></a> <a href="https://github.com/yb199478/catlib/"><img src="https://badge.fury.io/gh/catlib%2Fframework.svg" title="GitHub version" /></a> <a href="https://ci.appveyor.com/project/catlib/framework"><img src="https://ci.appveyor.com/api/projects/status/f12rb3x5hxvq6yr7?svg=true" title="Build status"/></a> <a href="https://codecov.io/gh/CatLib/CatLib"><img src="https://codecov.io/gh/CatLib/Framework/branch/master/graph/badge.svg" alt="Codecov" /></a>
 
 ### CatLib是什么
 
 CatLib 是一套`渐进式`的`服务提供者框架`。框架为客户端提供多个实现，并把他们从多个实现中解耦出来。服务提供者的改变对它们的客户端是透明的，这样提供了更好的可扩展性。她不仅易于上手，还便于与第三方库或既有项目整合。
+
+- `CatLib Core` 是最小可用框架。仅提供最基础的功能，是其他框架开发者作为基础的理想选择。
+- `CatLib Framework` 以最小可用框架作为基础，提供了常见的基础组件来减少开发者们不必要的工作。
+- `CatLib For Unity` 在Framework的基础上增加了对Unity的专有组件支持（要求Unity 5.3+）。
 
 ### CatLib的优势
 
@@ -24,23 +33,14 @@ CatLib 是一套`渐进式`的`服务提供者框架`。框架为客户端提供
 - 中文文档完善，极低的学习成本。
 - 面向接口编程，底层组件无感知替换。
 
-### 从Github上Clone
+### Get Started
 
-> CatLib:[https://github.com/catlib/catlib](https://github.com/catlib/catlib)
+```csharp
+App.Make<ILogger>().Debug("hello world");
+// 掌握App.Make就意味着掌握了框架60%的使用方法
+```
 
-首先，先从Github上Clone出CatLib项目吧！
-
-完成Clone后，您将会发现Clone的文件夹中存在：`CatLib.Unity`和`CatLib.VS` 2个文件夹，她们分别对应的是`CatLib Unity项目` 和 `CatLib编译项目`。
-
-您的项目开发将会基于`CatLib.Unity`开始，而`CatLib.VS`则是用于将CatLib框架编译成`dll`文件。一般情况下CatLib的源码将会在`CatLib.VS`文件中。
-
-使用Unity打开`CatLib.Unity`项目，首先先运行一次`单元测试`以确保您下载的框架项目没有问题。通过`Window` -> `Test Runner`来打开单元测试窗口，随后请执行`Run All`。
-
-请稍等片刻，根据设备性能的不同，单元测试可能会进行1分钟左右。
-
-### 第一次使用
-
-CatLib是易于上手的。你只需要有良好的 C# 基础。你就可以非常快速地通过阅读这份 指南 投入开发。
+> 所有可以通过`App.Make`使用的服务请参考 : [服务表](can-make.html)
 
 ### 技术支持
 

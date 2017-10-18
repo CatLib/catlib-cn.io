@@ -2,6 +2,7 @@
 title: 压缩解压缩
 type: guide
 order: 233
+enable: true
 ---
 
 ## 压缩解压缩

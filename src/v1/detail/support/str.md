@@ -2,6 +2,7 @@
 title: 字符串(Str)
 type: detail
 order: 102
+enable: true
 ---
 
 ## 字符串(Str)
@@ -12,7 +13,6 @@ order: 102
 
 - [Is](#Is)
 - [AsteriskWildcard](#AsteriskWildcard)
-- [RegexQuote](#RegexQuote)
 - [Split](#Split)
 - [Repeat](#Repeat)
 - [Shuffle](#Shuffle)
@@ -42,15 +42,6 @@ var result = Str.Is("/hello/w*d" , "helloworld");
 ```csharp
 var result = Str.AsteriskWildcard("[hello]w*d");
 // result : "\[hello\]w*d"
-```
-
-### RegexQuote
-
-为每个正则表达式语法中的字符前增加一个反斜线。 
-
-```csharp
-var result = Str.RegexQuote("^[hello]w*d$");
-// result : "\^\[hello\]w\*d\$"
 ```
 
 ### Split

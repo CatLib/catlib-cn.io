@@ -2,6 +2,7 @@
 title: 国际化(I18N)
 type: guide
 order: 250
+enable: true
 ---
 
 ## 国际化(I18N)
