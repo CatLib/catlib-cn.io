@@ -289,7 +289,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
+                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
             </li>
         
             
@@ -299,7 +299,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
             </li>
         
             
@@ -341,16 +341,6 @@
             
             
             <li>
-                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</del></a></p>
-            </li>
-        
-            
-            
-            
-            
-            
-            
-            <li>
                 <p><a href="/v1/guide/random-unity.html" class="sidebar-link">随机数扩展</del></a></p>
             </li>
         
@@ -362,6 +352,16 @@
             
             <li>
                 <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</del></a></p>
             </li>
         
             
@@ -470,6 +470,8 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> result = Arr.Reverse(<span class="keyword">new</span> []&#123;<span class="string">"1"</span> , <span class="string">"2"</span> ,<span class="string">"3"</span>&#125;);</div><div class="line"><span class="comment">// result : ["3" , "2" , "1"]</span></div></pre></td></tr></table></figure>
 <h3 id="IndexOf"><a href="#IndexOf" class="headerlink" title="IndexOf"></a>IndexOf</h3><p>从数组中检索指定的值并返回所在的下标，如果返回-1则代表没有出现</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> result = Arr.IndexOf(<span class="keyword">new</span> []&#123;<span class="string">"1"</span> , <span class="string">"2"</span> ,<span class="string">"3"</span> , <span class="string">"4"</span> , <span class="string">"5"</span>&#125; , <span class="keyword">new</span> []&#123; <span class="string">"2"</span> , <span class="string">"3"</span> &#125;);</div><div class="line"><span class="comment">// result : 1</span></div></pre></td></tr></table></figure>
+<h3 id="Difference"><a href="#Difference" class="headerlink" title="Difference"></a>Difference</h3><p>从数组中排除指定的值</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> result = Arr.Difference(<span class="keyword">new</span> []&#123;<span class="string">"1"</span> , <span class="string">"2"</span> ,<span class="string">"3"</span> , <span class="string">"4"</span> , <span class="string">"5"</span>&#125; , <span class="keyword">new</span> []&#123; <span class="string">"2"</span> , <span class="string">"3"</span> &#125;);</div><div class="line"><span class="comment">// result : ["1","4","5"]</span></div></pre></td></tr></table></figure>
     <div class="footer">
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/detail/support/arr.md" target="_blank">

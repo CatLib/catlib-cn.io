@@ -289,7 +289,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
+                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
             </li>
         
             
@@ -299,7 +299,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
             </li>
         
             
@@ -341,16 +341,6 @@
             
             
             <li>
-                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</del></a></p>
-            </li>
-        
-            
-            
-            
-            
-            
-            
-            <li>
                 <p><a href="/v1/guide/random-unity.html" class="sidebar-link">随机数扩展</del></a></p>
             </li>
         
@@ -362,6 +352,16 @@
             
             <li>
                 <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</del></a></p>
             </li>
         
             
@@ -468,6 +468,8 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> result = Str.ReplaceLast(<span class="string">"hel"</span>,<span class="string">"***"</span>,<span class="string">"helloworldhelloworld"</span>);</div><div class="line"><span class="comment">// result : helloworld***loworld</span></div></pre></td></tr></table></figure>
 <h3 id="Random"><a href="#Random" class="headerlink" title="Random"></a>Random</h3><p>生成一个随机字母（含大小写），数字的字符串。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> result = Str.Random(<span class="number">8</span>);</div><div class="line"><span class="comment">// result : 一个随机值，如：u8Kn1YUz</span></div></pre></td></tr></table></figure>
+<h3 id="Trancate"><a href="#Trancate" class="headerlink" title="Trancate"></a>Trancate</h3><p>如果长度超过给定的最大字符串长度，则截断字符串。 截断的字符串的最后一个字符将替换为默认为<code>...</code>的省略字符串。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> result = Str.Trancate(<span class="string">"helloworld"</span>,<span class="number">6</span>);</div><div class="line"><span class="comment">// result: hel...</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> result = Str.Trancate(<span class="string">"hello world"</span>,<span class="number">10</span> , <span class="string">" "</span>);</div><div class="line"><span class="comment">// result: hello...</span></div></pre></td></tr></table></figure>
     <div class="footer">
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/detail/support/str.md" target="_blank">
