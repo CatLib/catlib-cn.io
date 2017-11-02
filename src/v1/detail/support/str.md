@@ -154,3 +154,15 @@ var result = Str.ReplaceLast("hel","***","helloworldhelloworld");
 var result = Str.Random(8);
 // result : 一个随机值，如：u8Kn1YUz
 ```
+
+### Trancate
+
+如果长度超过给定的最大字符串长度，则截断字符串。 截断的字符串的最后一个字符将替换为默认为`...`的省略字符串。
+
+```csharp
+var result = Str.Trancate("helloworld",6);
+// result: hel...
+
+var result = Str.Trancate("hello world",10 , " ");
+// result: hello...
+```
