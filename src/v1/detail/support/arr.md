@@ -27,6 +27,7 @@ enable: true
 - [Unshift](#Unshift)
 - [Reverse](#Reverse)
 - [IndexOf](#IndexOf)
+- [Difference](#Difference)
 
 ### Merge
 

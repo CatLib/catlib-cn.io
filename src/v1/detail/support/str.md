@@ -25,6 +25,7 @@ enable: true
 - [ReplaceFirst](#ReplaceFirst)
 - [ReplaceLast](#ReplaceLast)
 - [Random](#Random)
+- [Trancate](#Trancate)
 
 ### Is
 
