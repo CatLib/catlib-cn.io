@@ -79,6 +79,16 @@ public class Main
 }
 ```
 
+### 当Application被创建时
+
+通过`App.OnNewApplication`您可以捕获Application创建事件
+
+``` csharp
+App.OnNewApplication += (app)=>{
+    // todo:
+};
+```
+
 ### 判断当前线程是否在主线程中
 
 您可以通过`IsMainThread`来判断是否处于主线程中。

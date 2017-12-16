@@ -40,3 +40,26 @@ byte[] str = encrypter.Decrypt(encryptStr);
 ```
 
 如果解密失败，例如：HMac验证失败，那么将会抛出一个`EncryptionException`异常。
+
+## 交换密钥算法
+
+```csharp
+var manager = App.Make<IEncryptionManager>();
+var key = manager.ExchangeSecret((publicKey)=>{
+    //todo: 将客户端的publicKey提交到服务器并换回服务器的serverPublicKey
+    return serverPublicKey;
+});
+```
+
+## 扩展加密组件
+
+您可以通过`Extend`方法对加密函数进行拓展。
+
+```csharp
+var manager = App.Make<IEncryptionManager>();
+manager.Extend(()=>{
+    return new AesEncrypter();
+},"extend-encrypter");
+
+var encrypter = manager["extend-encrypter"];
+```

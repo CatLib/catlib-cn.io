@@ -19,8 +19,8 @@ enable: true
 | 依赖注入容器         | `IContainer`         | `无`        | [服务容器](container.html)        |
 | 压缩解压缩管理器     | `ICompressManager`   | `无`        | [压缩解压缩](compress.html)            |
 | 压缩解压缩(默认)     | `ICompress`          | `无`        | [压缩解压缩](compress.html)            |
-| 配置管理器          | `IConfigManager`      | `无`       | [配置](config.html)                   |
-| 转换器管理器        | `IConvertersManager`  | `无`       | [转换器管理器](converters.html)        |
+| Socket管理器          | `ISocketManager`      | `无`       | [Socket](socket.html)                   |
+| 网络管理器        | `INetworkManager`  | `无`       | [网络管理器](network.html)        |
 | 转换器(默认)        | `IConverters`         | `无`       | [转换器管理器](converters.html)        |
 | 日志工具            | `ILogger`             | `无`       | [控制台](console.html)                |
 | 数据监控            | `IMonitor`            | `无`       | [控制台](console.html)                |

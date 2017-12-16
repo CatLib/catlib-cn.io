@@ -13,13 +13,11 @@ enable: true
 
 | 服务名                     | 优先级      |
 | ------------------------- |:------------:|
-| `ConfigProvider`          | 1           |
 | `FileSystemProvider`      | 10          |
 | `UnityFileSystemProvider` | 10          |
 | `MonoDriverProvider`      | 10          |
 | `DebuggerProvider`        | 20          |
 | `UnityDebuggerProvider`   | 20          |
-| `ConvertersProvider`      | 2147483647  |
 | `CompressProvider`        | 2147483647  |
 | `EncryptionProvider`      | 2147483647  |
 | `EventsProvider`          | 2147483647  |
@@ -33,3 +31,5 @@ enable: true
 | `UnityTimeProvider`       | 2147483647  |
 | `TimerProvider`           | 2147483647  |
 | `TranslationProvider`     | 2147483647  |
+| `SocketProvider`          | 2147483647  |
+| `NetworkProvider`         | 2147483647  |

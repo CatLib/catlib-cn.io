@@ -50,6 +50,6 @@ CatLib 强烈鼓励使用 GitHub 的 pull requests(以下简称PR)，来提供�
 
 - A:[AlianBlank](https://github.com/AlianBlank)
 - D:[DawnKing](https://github.com/DawnKing)
-- I:[idle](https://github.com/views63)
-- L:[LrvingCong](https://github.com/LrvingCong)
+- I:[iamthekk](https://github.com/iamthekk) [idle](https://github.com/views63)
+- L:[liiir1985](https://github.com/liiir1985) [LrvingCong](https://github.com/LrvingCong)
 - S:[silingfei](https://github.com/silingfei)

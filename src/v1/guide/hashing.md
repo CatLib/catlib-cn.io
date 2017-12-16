@@ -31,7 +31,7 @@ enable: true
 
 ### 非加密性哈希
 
-**一致性计算**
+**计算哈希**
 
 您可以通过`Checksum`方法来进行一致性检查，方法接收2个参数，一个参数为输入值，第二个参数为使用的哈希算法。
 
@@ -39,15 +39,6 @@ enable: true
 var hashing = App.Make<IHashing>();
 byte[] data; // 假定需要加密的数据
 long hashCode = hashing.Checksum(data , Checksums.Crc32);
-```
-
-**分布计算**
-
-您可以通过`HashString`方法和`HashByte`方法来进行分布式哈希，方法接收2个参数，一个参数为输入值，第二个参数为使用的哈希算法。。
-
-``` csharp
-var hashing = App.Make<IHashing>();
-uint hashCode = hashing.HashString("输入值" , Hashes.MurmurHash);
 ```
 
 ### 使用加密哈希

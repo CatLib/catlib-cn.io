@@ -27,6 +27,7 @@ enable: true
 - [Unshift](#Unshift)
 - [Reverse](#Reverse)
 - [IndexOf](#IndexOf)
+- [Difference](#Difference)
 
 ### Merge
 
@@ -179,4 +180,13 @@ var result = Arr.Reverse(new []{"1" , "2" ,"3"});
 ```csharp
 var result = Arr.IndexOf(new []{"1" , "2" ,"3" , "4" , "5"} , new []{ "2" , "3" });
 // result : 1
+```
+
+### Difference
+
+从数组中排除指定的值
+
+```csharp
+var result = Arr.Difference(new []{"1" , "2" ,"3" , "4" , "5"} , new []{ "2" , "3" });
+// result : ["1","4","5"]
 ```

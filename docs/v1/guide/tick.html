@@ -4,7 +4,7 @@
     <head>
 
     
-    <title>命名规范 — CatLib</title>
+    <title>时钟 — CatLib</title>
       
     <meta charset="utf-8">
     
@@ -95,7 +95,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/style.html" class="sidebar-link current">命名规范</del></a></p>
+                <p><a href="/v1/guide/style.html" class="sidebar-link">命名规范</del></a></p>
             </li>
         
             
@@ -259,7 +259,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/tick.html" class="sidebar-link">时钟</del></a></p>
+                <p><a href="/v1/guide/tick.html" class="sidebar-link current">时钟</del></a></p>
             </li>
         
             
@@ -419,86 +419,30 @@
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="命名规范"><a href="#命名规范" class="headerlink" title="命名规范"></a>命名规范</h2><p>本文档描述了CatLib框架中的命名规范。</p>
-<blockquote>
-<p>如果您要为为 CatLib 发起贡献，您必须遵循这份命名规范文档。</p>
-</blockquote>
-<p>　</p>
-<blockquote>
-<p>如果没有明确指定<code>访问级别(public|private等)</code>则表示对所有访问级别生效。</p>
-</blockquote>
-<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ul>
-<li><code>代码</code>必须使用<code>4个空格</code>缩进，而不要使用制表符(tab)</li>
-<li>使用<code>using XXX</code>，而不是<code>new XXX.xxx()</code></li>
-<li><p><code>{}</code>必须换行,且内部代码<code>顶格书写</code></p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span>(<span class="literal">true</span>)</div><div class="line">&#123;</div><div class="line">    <span class="keyword">var</span> tf = <span class="literal">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>使用<code>///</code>对<code>代码</code>进行注释</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;summary&gt;</span></span></div><div class="line"><span class="comment"><span class="doctag">///</span> 这里对代码进行了注释</span></div><div class="line"><span class="comment"><span class="doctag">///</span> <span class="doctag">&lt;/summary&gt;</span></span></div><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> VariableName = <span class="string">"VariableName"</span>;</div></pre></td></tr></table></figure>
-</li>
-<li><p>对于容易<code>产生歧义的表达式</code>您应该使用<code>括号</code>包裹</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">if</span>(variable1 + (++variable2) &gt; <span class="number">0</span>)</div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p><code>模板</code>必须为<code>TStudlyCaps</code>（驼峰式大写）以<code>T开头</code></p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">public class Bootstrap&lt;TType&gt;</div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p><code>接口</code>必须为<code>IStudlyCaps</code>（驼峰式大写）以<code>I开头</code></p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IBootstrap</span> </div><div class="line">&#123; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="类名及函数"><a href="#类名及函数" class="headerlink" title="类名及函数"></a>类名及函数</h3><ul>
-<li><p><code>类名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Bootstrap</span></div><div class="line">&#123; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p><code>函数名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">MyFunc</span>(<span class="params"></span>)</span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="变量-常量及属性"><a href="#变量-常量及属性" class="headerlink" title="变量,常量及属性"></a>变量,常量及属性</h3><ul>
-<li><p>类<code>公共变量名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
-</li>
-<li><p>类<code>受保护变量名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">internal</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">protected</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">protected</span> <span class="keyword">internal</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
-</li>
-<li><p>类<code>私有变量名</code>必须为<code>camelCase</code>（驼峰式小写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">string</span> variableName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
-</li>
-<li><p>类<code>属性名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">string</span> VariableName&#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p><code>静态变量</code>和<code>常量</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">const</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">readonly</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">internal</span> <span class="keyword">const</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">protected</span> <span class="keyword">const</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div><div class="line"><span class="keyword">private</span> <span class="keyword">const</span> <span class="keyword">string</span> VariableName = <span class="string">"hello"</span>;</div></pre></td></tr></table></figure>
-</li>
-<li><p><code>参数</code>必须为<code>camelCase</code>（驼峰式小写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">FunctionName</span>(<span class="params">Action callFunction</span>)</span></div><div class="line"><span class="function"></span>&#123;</div><div class="line">    <span class="keyword">var</span> localVariable = callFunction;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="枚举"><a href="#枚举" class="headerlink" title="枚举"></a>枚举</h3><ul>
-<li><p><code>枚举名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> ApplicationEvents</div><div class="line">&#123; </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p><code>枚举元素名</code>必须为<code>StudlyCaps</code>（驼峰式大写）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">enum</span> ApplicationEvents</div><div class="line">&#123;</div><div class="line">    OnStart  = <span class="number">1</span>,</div><div class="line">    OnInited = <span class="number">2</span>,</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="命名空间"><a href="#命名空间" class="headerlink" title="命名空间"></a>命名空间</h3><ul>
-<li><p><code>代码</code>必须在<code>项目名</code>的根命名空间中</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">namespace</span> <span class="title">CatLib</span></div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-<li><p>组件<code>代码</code>必须在<code>项目名.组件名</code>的命名空间中</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">namespace</span> <span class="title">CatLib.Routing</span></div><div class="line">&#123;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="文件"><a href="#文件" class="headerlink" title="文件"></a>文件</h3><ul>
-<li><code>文件名</code>必须和<code>类名</code>一致</li>
-<li><code>文件</code>必须只使用<code>UTF-8</code>而不使用BOM代码</li>
-<li>一个文件中不能出现<code>2个</code>及以上的类，除非它是内部类或者类的重载</li>
-</ul>
-
+    <h2 id="时钟"><a href="#时钟" class="headerlink" title="时钟"></a>时钟</h2><p>时钟组件通过一个独立的线程模拟了内部Fps周期。</p>
+<h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><p>初始配置必须在框架初始化前完成配置，下面是时钟组件需要的初始配置：</p>
+<table>
+<thead>
+<tr>
+<th>配置名</th>
+<th style="text-align:center">是否必须</th>
+<th style="text-align:center">配置描述(可以点击查看详细)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TickProvider.Fps</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">时钟每秒调用频率(1-1000) , 默认值为：60</td>
+</tr>
+</tbody>
+</table>
+<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>实现<code>ITick</code>接口的类并且以<code>单例形式</code>在容器中进行绑定。通过<code>App.Make</code>构建后会自动加入时钟执行序列。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">sealed</span> <span class="keyword">class</span> <span class="title">TickClass</span> : <span class="title">ITick</span></div><div class="line">&#123;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Tick</span>(<span class="params"><span class="keyword">int</span> elapseMillisecond</span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="comment">// 时钟会定期调用</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Singleton&lt;TickClass&gt;();</div><div class="line">App.Make&lt;TickClass&gt;();</div></pre></td></tr></table></figure>
     <div class="footer">
         发现错误？想参与编辑？ 
-        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/style.md" target="_blank">
+        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/tick.md" target="_blank">
             在 Github 上编辑此页！
         </a>
     </div>

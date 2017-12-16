@@ -34,8 +34,8 @@ App.Make<IRouter>().Dispatch("bootstrap://start");
 | 门面名                | 门面描述      |
 | -------------------- |:------------:|
 | `Compress`           | 压缩解压缩工具  |
-| `Config`             | 配置管理器     |
-| `Converters`         | 转换器         |
+| `Socket`             | 套接字管理器     |
+| `Network`            | 网络管理器         |
 | `Dispatcher`         | 全局事件调度器  |
 | `Encrypter`          | 加密器         |
 | `FileSystem`         | 文件系统管理器 |
