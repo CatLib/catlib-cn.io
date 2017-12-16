@@ -430,7 +430,7 @@
 <li>类必须实现必须的MonoDriver提供的增强接口</li>
 </ul>
 <h4 id="手动挂载"><a href="#手动挂载" class="headerlink" title="手动挂载"></a><strong>手动挂载</strong></h4><p>对于非单例，自己手动New出的对象，如果需要挂在到MonoDriver执行，那么必须手动使用Attach接口进行挂载。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> driver = App.Make&lt;IMonoDriver&gt;();</div><div class="line">driver.Attach(<span class="comment">/*you object*/</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> driver = App.Make&lt;IMonoDriver&gt;();</span><br><span class="line">driver.Attach(<span class="comment">/*you object*/</span>);</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>注意，如果您使用了手动挂载，您必须自己管理卸载。使用<code>Detach</code>可以卸载挂载的对象。</p>
 </blockquote>
@@ -466,9 +466,9 @@
 </tbody>
 </table>
 <h3 id="在主线程中运行"><a href="#在主线程中运行" class="headerlink" title="在主线程中运行"></a>在主线程中运行</h3><p>您可以通过<code>MainThread</code>将一个执行调度到主线程执行。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> driver = App.Make&lt;IMonoDriver&gt;();</div><div class="line">driver.MainThread(()=&gt;&#123;&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> driver = App.Make&lt;IMonoDriver&gt;();</span><br><span class="line">driver.MainThread(()=&gt;&#123;&#125;);</span><br></pre></td></tr></table></figure>
 <h3 id="协同执行"><a href="#协同执行" class="headerlink" title="协同执行"></a>协同执行</h3><p>MonoDriver 允许开发者定义的组件使用Unity提供的协同调度服务。通过<code>StartCoroutine</code>您可以执行一个协同程序</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> driver = App.Make&lt;IMonoDriver&gt;();</div><div class="line">driver.StartCoroutine(()=&gt;&#123; <span class="keyword">yield</span> <span class="keyword">return</span> <span class="literal">null</span>; &#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> driver = App.Make&lt;IMonoDriver&gt;();</span><br><span class="line">driver.StartCoroutine(()=&gt;&#123; <span class="keyword">yield</span> <span class="keyword">return</span> <span class="literal">null</span>; &#125;);</span><br></pre></td></tr></table></figure>
 <p>同理，通过<code>StopCoroutine</code>来终止一个协同。</p>
 
     <div class="footer">

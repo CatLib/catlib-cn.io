@@ -419,89 +419,142 @@
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="服务容器"><a href="#服务容器" class="headerlink" title="服务容器"></a>服务容器</h2><p>Container 服务容器是一个用于管理<code>类的依赖</code>和<code>执行依赖注入</code>的强大工具。其实质是通过反射来对<code>构造函数</code>或者标记为<code>[Inject]</code>特性的属性选择器进行注入(将服务实现依赖注入到类中)。</p>
-<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>几乎所有的服务绑定都是在服务提供者中完成。如果一个<code>服务</code>或<code>类</code>没有基于任何接口或者别名那么就没有必要将其绑定到容器。</p>
-<p>容器并不需要被告知如何构建对象，因为它会使用反射服务自动解析出具体的对象。在一个服务提供者中，可以通过<code>App</code>变量访问容器，然后使用<code>Bind()</code>方法注册一个<code>服务</code>或<code>类</code>的绑定。</p>
+    <h2 id="服务容器"><a href="#服务容器" class="headerlink" title="服务容器"></a>服务容器</h2><p>Container 服务容器是一个用于管理<code>类的依赖</code>和<code>执行依赖注入</code>的强大工具。其实质是通过反射来对<code>构造函数</code>或者标记为<code>[Inject]</code>特性的属性选择器进行注入。</p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>几乎所有的服务绑定都是在服务提供者中完成。如果一个<code>服务</code>没有基于任何接口或者别名那么就没有必要将其绑定到容器。</p>
+<p>容器并不需要被告知如何构建对象，因为它会使用反射服务自动解析出具体的对象。在一个服务提供者中，可以通过<code>App</code>全局变量访问容器，然后使用<code>Bind()</code>或者<code>Singleton()</code>方法注册一个<code>服务</code>的绑定。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> container = <span class="keyword">new</span> Container(); <span class="comment">// 构建一个单纯的服务容器</span></span><br></pre></td></tr></table></figure>
+<h3 id="构建服务"><a href="#构建服务" class="headerlink" title="构建服务"></a>构建服务</h3><p>您可以通过<code>Make()</code>方法来构建服务。如果通过容器去生成一个没有被绑定的服务，那么容器会尝试解决需要被生成的服务，如果尝试解决失败，那么将会抛出一个<code>UnresolvableException</code>异常。</p>
 <blockquote>
-<p>下面文档中所使用的代码均是局部代码。您需要根据使用场景酌情调整。</p>
+<p><code>CatLib Framework</code> 中所有可以直接通过<code>Make()</code>生成的服务请参考：<a href="can-make.html">服务表</a></p>
 </blockquote>
-<h3 id="构建服务容器"><a href="#构建服务容器" class="headerlink" title="构建服务容器"></a>构建服务容器</h3><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> container = <span class="keyword">new</span> Container();</div></pre></td></tr></table></figure>
-<p>CatLib核心(<code>Application</code>)继承服务容器，她拥有服务容器的全部功能，所以下面的演示例子用到的都是这种上下文环境。</p>
-<h3 id="依赖注入标记"><a href="#依赖注入标记" class="headerlink" title="依赖注入标记"></a>依赖注入标记</h3><p>CatLib容器采用特性标记的方法来识别哪些属性是允许被注入的。</p>
-<ul>
-<li>任何需要被进行依赖注入的属性选择器需要标记<code>[Inject]</code>特性，同时其<code>Setter</code>的访问级别必须为<code>public</code>。</li>
-<li>任意构造函数的参数会自动完成注入</li>
-<li>依赖注入标记可以作用在构造函数的参数上以提供别名和约束的功能。</li>
-</ul>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Service</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Inject</span>]</div><div class="line">    <span class="keyword">public</span> IFileSystem LocalFileSystem &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Service</span>(<span class="params">IFileSystem fileSystem</span>)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">        <span class="comment">//fileSystem 和 LocalFileSystem 都会被自动注入</span></div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="绑定服务-实例"><a href="#绑定服务-实例" class="headerlink" title="绑定服务 - 实例"></a>绑定服务 - 实例</h3><p>要使用服务容器的强大特性您首先需要将服务绑定到服务容器，如果您不不进行绑定您将没有任何服务可用，这些绑定一般性都是在 <a href="service-provider.html">服务提供者</a> 中完成的。</p>
+<p>通过<code>Bind()</code>方法允许将服务以实例绑定（每次生成都会是一个全新实例）的方式进行绑定。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Bind&lt;SocketManager&gt;().Alias&lt;ISocketManager&gt;();</span><br></pre></td></tr></table></figure>
+<p>我们通过上述代码将<code>SocketManager</code>这个服务绑定到了服务容器。同时赋予了<code>ISocketManager</code>的别名。</p>
+<p>这样您就可以使用使用实例名或者别名来构建服务了，但是请注意：一般情况下我们建议通过<code>ISocketManager</code>来生成服务。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> manager = App.Make&lt;ISocketManager&gt;(); <span class="comment">// 等价与: var manager = new SocketManager();</span></span><br></pre></td></tr></table></figure>
+<p>可能至此您还没有明白服务容器的意义，没关系，请继续阅读。</p>
+<h3 id="绑定服务-单例"><a href="#绑定服务-单例" class="headerlink" title="绑定服务 - 单例"></a>绑定服务 - 单例</h3><p>服务容器通过<code>Singleton</code>方法来对服务进行单例绑定。通过 <a href="facade.html">门面</a> 和 服务容器 的结合，颠覆了传统的单例实现方式，以一种更新，更易于维护的方式来实现传统的单例模式。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Singleton&lt;SocketManager&gt;().Alias&lt;ISocketManager&gt;();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> manager1 = App.Make&lt;ISocketManager&gt;();</span><br><span class="line"><span class="keyword">var</span> manager2 = App.Make&lt;ISocketManager&gt;();</span><br><span class="line"><span class="comment">// manager1 == manager2</span></span><br></pre></td></tr></table></figure>
+<h3 id="构造函数注入"><a href="#构造函数注入" class="headerlink" title="构造函数注入"></a>构造函数注入</h3><p>在您简单的<code>Make()</code>操作中，服务容器已经对绑定的服务进行了一系列复杂操作（服务关系转换，服务构建，服务推测，上下文关系处理，依赖注入，服务修饰，单例化…），这一切对于开发者的您来说完全是透明的无感知的。</p>
+<p>服务容器能够自动识别您构造函数中的参数，并为其注入合适的服务实例。注入方案请参考：<a href="container.html#注入规则">注入规则</a></p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CustomizeService</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Service</span>(<span class="params">IFileSystem fileSystem</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// fileSystem 会被自动注入实现</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果您没有在服务容器中绑定过 IFileSystem 服务</span></span><br><span class="line">        <span class="comment">// 那么会抛出一个UnresolvableException异常</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>注意，您不能在<code>构造函数</code>中访问被标记为注入的<code>属性选择器</code>，因为属性选择器的注入会在构造函数之后进行。</p>
+<p>简而言之，您只需要向服务容器绑定好您开发的服务，服务容器将会在您生成服务时自动处理好您的服务依赖关系。</p>
 </blockquote>
-<h3 id="必须的依赖注入"><a href="#必须的依赖注入" class="headerlink" title="必须的依赖注入"></a>必须的依赖注入</h3><p>在一些场景中可能必须需求注入某些依赖，那么我们可以通过注入标记的<code>Require</code>来标记为强依赖，这样当无法进行注入时框架将会抛出一个<code>RunTimeException</code>异常。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Service</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Inject(Require = true)</span>]</div><div class="line">    <span class="keyword">public</span> IFileSystem LocalFileSystem &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="绑定服务"><a href="#绑定服务" class="headerlink" title="绑定服务"></a>绑定服务</h3><figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Bind&lt;ConfigManager&gt;().Alias&lt;IConfigManager&gt;().Alias(<span class="string">"config.manager"</span>);</div></pre></td></tr></table></figure>
-<p>上述代码进行了一次简单的绑定，实现的作用是将<code>ConfigManager</code>绑定到容器，并且给定了<code>IConfigManager</code>(接口别名)和<code>config.manager</code>(字符串别名)的别名。</p>
-<p>随后您就可以使用别名来构建服务了:</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> manager1 = App.Make&lt;IConfigManager&gt;();</div><div class="line"><span class="keyword">var</span> manager2 = App.Make(<span class="string">"config.manager"</span>) <span class="keyword">as</span> IConfigManager;</div></pre></td></tr></table></figure>
-<h3 id="绑定服务-单例"><a href="#绑定服务-单例" class="headerlink" title="绑定服务(单例)"></a>绑定服务(单例)</h3><p>在上面的绑定中我们会发现<code>manager1</code>和<code>manager2</code>的内存地址是不相等的，这是由于使用常规绑定所导致的，常规绑定服务后，每次<code>Make()</code>都会生成新的服务实例。</p>
-<p>下面我们将使用单例绑定来对服务进行绑定:</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Singleton&lt;ConfigManager&gt;().Alias&lt;IConfigManager&gt;().Alias(<span class="string">"config.manager"</span>);</div></pre></td></tr></table></figure>
-<h3 id="绑定实例"><a href="#绑定实例" class="headerlink" title="绑定实例"></a>绑定实例</h3><p>CatLib还允许您对自己构建的实例进行绑定，随后对容器该实例的调用总是返回给定的实例。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Instance(<span class="string">"config.manager"</span> , <span class="keyword">new</span> ConfigManager());</div></pre></td></tr></table></figure>
-<p>需要注意的是在以下几种情况将不能绑定:</p>
+<h3 id="属性选择器注入"><a href="#属性选择器注入" class="headerlink" title="属性选择器注入"></a>属性选择器注入</h3><p>服务容器采用<code>特性标记</code>的方法来识别哪些属性选择器是允许被注入的。</p>
+<p>任何可以被注入的属性选择器必须满足以下规则：</p>
 <ul>
-<li>服务在绑定服务时使用了常规绑定</li>
+<li>属性选择器必须标记<code>[Inject]</code>特性</li>
+<li>属性选择器<code>set;</code>的访问级别必须为<code>public</code>。</li>
 </ul>
-<h3 id="别名"><a href="#别名" class="headerlink" title="别名"></a>别名</h3><p>别名是服务容器非常重要的一项功能，它可以提供：接口绑定指定实现的能力。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Singleton&lt;ConfigManager&gt;().Alias&lt;IConfigManager&gt;().Alias(<span class="string">"config.manager"</span>);</div></pre></td></tr></table></figure>
-<p>在高层使用时只需要使用别名就能获得ConfigManager的服务，而无需关注底层实现，从而可以实现无感知替换。</p>
-<h3 id="上下文绑定"><a href="#上下文绑定" class="headerlink" title="上下文绑定"></a>上下文绑定</h3><p>有时侯我们可能有两个类使用同一个接口，但我们希望在每个类中注入不同实现,我们可以通过如下代码为它来指定实现。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Singleton&lt;FileLog&gt;().Alias(<span class="string">"log.file"</span>);</div><div class="line">App.Singleton&lt;DatabaseLog&gt;().Alias(<span class="string">"log.database"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CustomizeService</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">Inject</span>]</span><br><span class="line">    <span class="keyword">public</span> IFileSystem FileSystem &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意，您不能在<code>构造函数</code>中访问被标记为注入的<code>属性选择器</code>的实例，因为属性选择器的注入流程会在构造函数之后进行，如果您在构造函数中就访问了将会导致一个<code>NullReferenceException</code>异常。</p>
+</blockquote>
+<h3 id="服务别名"><a href="#服务别名" class="headerlink" title="服务别名"></a>服务别名</h3><p><code>服务别名</code>是服务容器非常重要的一项功能，它可以提供：接口绑定指定实现的能力。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Singleton&lt;SocketManager&gt;().Alias&lt;ISocketManager&gt;();</span><br></pre></td></tr></table></figure>
+<p>通过<code>App.Make&lt;ISocketManager&gt;()</code>您可以获得<code>SocketManager</code>的实现，由于您面向接口编程，无需关注底层实现，从而服务可以实现无感知替换。</p>
+<h3 id="服务构建事件"><a href="#服务构建事件" class="headerlink" title="服务构建事件"></a>服务构建事件</h3><p>服务容器在每一次新构建对象时都会触发服务构建的事件，可以使用<code>OnResolving()</code>方法监听该事件。</p>
+<p>该事件可以进行对被构建服务的修饰处理，允许你在对象被传递给开发者之前为其设置额外属性。</p>
+<p>构建事件分为2种类型，<code>局部构建事件</code>将会优于<code>全局构建事件</code>被调用，构建事件的特性如下：</p>
+<ul>
+<li>基于指定服务的构建事件，只有当指定服务被构建时才会被触发。</li>
+<li>基于全局的构建事件，在任何服务被构建时都会触发。</li>
+<li>静态服务的构建事件只会在第一次构建时触发一次。</li>
+<li>使用<code>Instance()</code>直接设定服务实例会触发服务构建事件。</li>
+</ul>
+<p><strong>基于服务的构建事件</strong></p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Singleton&lt;SocketManager&gt;().OnResolving((binder, instance) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> socketManager = (SocketManager)instance;</span><br><span class="line">    <span class="comment">//todo: 对于SocketManager的实例进行修饰</span></span><br><span class="line">    <span class="keyword">return</span> instance;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>基于全局的构建事件</strong></p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.OnResolving((binder, instance) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//todo: 对于所有被构建的服务进行修饰</span></span><br><span class="line">    <span class="keyword">return</span> instance;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="服务释放事件"><a href="#服务释放事件" class="headerlink" title="服务释放事件"></a>服务释放事件</h3><p>容器允许您使用<code>Release</code>方法为已经生成的静态服务进行释放。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Release&lt;ISocketManager&gt;();</span><br></pre></td></tr></table></figure>
+<p>在释放静态服务后会触发服务释放事件。在释放事件中，您可以对服务进行最后的处理（如：资源释放）。请注意：通过实例绑定的服务被释放并不会触发这个事件。</p>
+<p>释放事件分为2种类型，<code>局部释放事件</code>将会优于<code>全局释放事件</code>被调用，您可以使用<code>OnRelease()</code>方法监听该事件。以下行为都可能引发释放事件:</p>
+<ul>
+<li>通过<code>Instance()</code>为静态服务赋予一个全新的服务，老的服务将会被触发释放事件。</li>
+<li>通过<code>Release()</code>直接释放静态服务。</li>
+<li>通过<code>Unbind()</code>解除服务绑定关系。</li>
+<li>当容器发生<code>Flush()</code>时会触发释放事件。</li>
+</ul>
+<p><strong>基于服务的释放事件</strong></p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Singleton&lt;SocketManager&gt;().OnRelease((binder, instance) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//todo: 对于SocketManager的静态实例释放时</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p><strong>基于全局服务的释放事件</strong></p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.OnRelease((binder, instance) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//todo: 任何被释放的静态实例都会触发</span></span><br><span class="line">    <span class="keyword">return</span> instance;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="重定义事件"><a href="#重定义事件" class="headerlink" title="重定义事件"></a>重定义事件</h3><p>当服务实现发生变化时将会触发重定义事件，通过关注这个事件将可以获得服务的变化，重定义事件对单例绑定和实例绑定的服务均有效，下面这些行为将会触发重定义事件：</p>
+<ul>
+<li>对一个已经绑定，并且被构建的服务重新绑定时。</li>
+<li>使用<code>Instance()</code>更改已经被构建的服务实现。</li>
+</ul>
+<p>下面行为将不会引发重定义事件：</p>
+<ul>
+<li>任何没有被构建的服务发生服务实例变更不会引发重定义事件</li>
+<li>当服务实例被释放时</li>
+<li><code>Instance()</code>修改一个由<code>Instance()</code>直接托管的服务时</li>
+</ul>
+<p>您可以通过 <code>OnRebound</code> 或者 <code>Watch</code> 方法对服务重定义进行关注，Watch方法为OnRebound的扩展别名方法。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Watch&lt;ISocketManager&gt;((instance)=&gt;&#123;</span><br><span class="line">    <span class="comment">// instance 为新的服务实现</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="静态化托管"><a href="#静态化托管" class="headerlink" title="静态化托管"></a>静态化托管</h3><p>服务容器可以通过<code>Instance</code>托管您自己生成的实例，随后对容器该实例的调用总是返回被托管的实例。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Instance(<span class="string">"socket"</span> , <span class="keyword">new</span> SocketManager());</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，如果您使用了<code>Bind</code>为指定的服务进行实例绑定，那么如果您尝试将其静态化出现将会抛出一个<code>RuntimeException</code>异常:</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Bind(<span class="string">"socket"</span>, (container, userParams)=&gt; <span class="keyword">new</span> SocketManager());</span><br><span class="line">App.Instance(<span class="string">"socket"</span> , <span class="keyword">new</span> SocketManager()); <span class="comment">// throw RuntimeException</span></span><br></pre></td></tr></table></figure>
+<h3 id="绑定函数"><a href="#绑定函数" class="headerlink" title="绑定函数"></a>绑定函数</h3><p>服务容器除了可以为服务进行绑定外还可以进行函数绑定，您可以通过<code>BindMethod</code>方法来为函数进行绑定，服务容器会自动对绑定函数所需求的参数进行分析，并提供合适的注入参数。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.BindMethod(<span class="string">"CustomizeFunction"</span> , ()=&gt;&#123;</span><br><span class="line">    <span class="comment">// todo: 你的函数行为</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>如果您需要为绑定的函数参数进行上下文绑定，您可以这么做：</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> binder = App.BindMethod(<span class="string">"CustomizeFunction"</span> , ()=&gt;&#123; &#125;);</span><br><span class="line">binder.Needs&lt;INetwork&gt;.Given&lt;ISocketManager&gt;();</span><br></pre></td></tr></table></figure>
+<p>当函数参数需求一个INetwork类型服务时将会将服务重定向为ISocketManager</p>
+<h3 id="调用绑定函数"><a href="#调用绑定函数" class="headerlink" title="调用绑定函数"></a>调用绑定函数</h3><p>通过<code>Invoke</code>方法可以调用一个被绑定的服务。您可以为被调用的函数传入参数，这些参数会根据服务容器的注入规则选择合适的实例注入到函数参数中，如果函数参数存在不能被解决的参数，那么将会抛出一个<code>UnresolvableException</code>异常。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Invoke(<span class="string">"CustomizeFunction"</span>, <span class="comment">/* Your params*/</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="解除绑定的函数"><a href="#解除绑定的函数" class="headerlink" title="解除绑定的函数"></a>解除绑定的函数</h3><p>通过<code>UnbindMethod</code>方法可以解除一个绑定的方法，该方法支持以下几种解除方式：</p>
+<ul>
+<li>如果为字符串(<code>string</code>)则作为方法名解除对应方法名的函数。</li>
+<li>如果为方法绑定对象(<code>IMethodBind</code>)则解除对应函数。</li>
+<li>如果为其他对象(<code>object</code>)则作为调用目标,解除所有基于这个调用目标的函数</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.UnbindMethod(<span class="string">"CustomizeFunction"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="依赖注入调用"><a href="#依赖注入调用" class="headerlink" title="依赖注入调用"></a>依赖注入调用</h3><p>通过<code>Call</code>方法可以对任何函数或者Lambda发起依赖注入调用，容器将会根据规则自动解决函数所需求的参数。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Call(()=&gt;&#123;</span><br><span class="line">    <span class="comment">// todo</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="上下文绑定"><a href="#上下文绑定" class="headerlink" title="上下文绑定"></a>上下文绑定</h3><p>有时侯我们可能有两个服务使用同一个接口，但我们希望在每个服务中注入不同实现, 我们可以通过上下文绑定来解决这个问题。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Singleton&lt;FileLog&gt;().Alias(<span class="string">"log.file"</span>);</span><br><span class="line">App.Singleton&lt;DatabaseLog&gt;().Alias(<span class="string">"log.database"</span>);</span><br></pre></td></tr></table></figure>
 <p>(<code>FileLog</code>和<code>DatabaseLog</code>均实现了<code>ILog</code>接口)</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Bind&lt;LogService1&gt;().Needs&lt;ILog&gt;().Given(<span class="string">"log.database"</span>);</div><div class="line">App.Bind&lt;LogService2&gt;().Needs&lt;ILog&gt;().Given(<span class="string">"log.file"</span>);</div></pre></td></tr></table></figure>
-<p>这样当生成<code>LogService1</code>服务时给定的ILog实例将会是<code>DatabaseLog</code> ，<code>LogService2</code>服务时给定的ILog实例将会是<code>FileLog</code>。</p>
-<p>除此以外我们还可以使用<code>[Inject]</code>标记来对注入实例指定实现，一般情况下CatLib的注入上下文绑定功能是使用就近原则的（除非您对别名做了额外的上下文定义，这种罕见情况不在这份基础文档的描述范围之内）。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">LogService</span></div><div class="line">&#123;</div><div class="line">    [<span class="meta">Inject(<span class="meta-string">"log.database"</span>)</span>]</div><div class="line">    <span class="keyword">public</span> ILog Log &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LogService</span>(<span class="params">[Inject(<span class="string">"log.file"</span></span>)]ILog logWithFile)</span></div><div class="line"><span class="function">    </span>&#123;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="生成服务"><a href="#生成服务" class="headerlink" title="生成服务"></a>生成服务</h3><p>您可以通过<code>Make()</code>方法来生成服务，服务名可以为接口或别名。如果通过容器去生成一个没有被绑定的服务，那么容器会尝试解决需要被生成的服务，如果尝试解决失败，那么将会返回一个<code>null</code>。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> manager = App.Make&lt;IConfigManager&gt;();</div><div class="line">manager = App.Make(<span class="string">"config.manager"</span>) <span class="keyword">as</span> IConfigManager;</div></pre></td></tr></table></figure>
-<h3 id="函数注入调用"><a href="#函数注入调用" class="headerlink" title="函数注入调用"></a>函数注入调用</h3><p>容器允许您对函数进行依赖注入调用，同服务注入一样，容器会自动识别函数所需求的参数，并使用依赖注入的方式来填充需求参数。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> instance = <span class="keyword">new</span> DemoService();</div><div class="line"><span class="comment">// DemoService 类中存在一个叫 FuncName 的方法</span></div><div class="line"><span class="keyword">var</span> result = App.Call(instance , <span class="string">"FuncName"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Bind&lt;LogServiceDatabase&gt;().Needs&lt;ILog&gt;().Given(<span class="string">"log.database"</span>);</span><br><span class="line">App.Bind&lt;LogServiceFile&gt;().Needs&lt;ILog&gt;().Given(<span class="string">"log.file"</span>);</span><br></pre></td></tr></table></figure>
+<p>这样当生成<code>LogServiceDatabase</code>服务时给定的ILog实例将会是<code>DatabaseLog</code> ，<code>LogServiceFile</code>服务时给定的ILog实例将会是<code>FileLog</code>。</p>
+<p>除此以外我们还可以使用<code>[Inject]</code>标记来对注入实例指定实现，一般情况下服务容器的注入上下文绑定功能是使用就近原则的（除非您对别名做了额外的上下文定义，这种罕见情况不在这份基础文档的描述范围之内）。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">LogService</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">Inject(<span class="meta-string">"log.database"</span>)</span>]</span><br><span class="line">    <span class="keyword">public</span> ILog Log &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LogService</span>(<span class="params">[Inject(<span class="string">"log.file"</span></span>)]ILog logWithFile)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="服务编组"><a href="#服务编组" class="headerlink" title="服务编组"></a>服务编组</h3><p>您可以为多个服务进行编组，编组后将允许您一次生成多个服务。这在一些场景中是非常有用的比如：日志将会被记录到文件日志服务和网络日志服务。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Singleton&lt;FileLog&gt;().Alias(<span class="string">"log.file"</span>);</div><div class="line">App.Singleton&lt;NetworkLog&gt;().Alias(<span class="string">"log.network"</span>);</div><div class="line">App.Tag(<span class="string">"log"</span> , <span class="string">"log.file"</span> , <span class="string">"log.network"</span>);</div><div class="line"><span class="keyword">var</span> logServices = App.Tagged(<span class="string">"log"</span>);</div></pre></td></tr></table></figure>
-<h3 id="释放静态服务"><a href="#释放静态服务" class="headerlink" title="释放静态服务"></a>释放静态服务</h3><p>容器允许您对已经生成的静态服务进行释放，以便于减少不必要的内存开销。</p>
-<p>您可以通过服务名或者别名来对静态实例进行释放：</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Release(<span class="string">"config.manager"</span>);</div></pre></td></tr></table></figure>
-<h3 id="解除绑定"><a href="#解除绑定" class="headerlink" title="解除绑定"></a>解除绑定</h3><p>您可以通过<code>UnBind()</code>来对已经绑定的服务进行解除绑定。如果被绑定的类是静态的，那么解除绑定会自动释放已经被生成的静态实例，同时触发<code>OnRelease()</code>释放事件。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> binder = App.Singleton&lt;ConfigManager&gt;().Alias(<span class="string">"config.manager"</span>);</div><div class="line">binder.UnBind();</div></pre></td></tr></table></figure>
-<h3 id="当查询生成类型时"><a href="#当查询生成类型时" class="headerlink" title="当查询生成类型时"></a>当查询生成类型时</h3><p>当容器尝试去推测一个没有被绑定过的服务时，会通过遍历<code>OnFindType()</code>注册的查询函数来查询服务的<code>Type</code>。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Singleton&lt;FileLog&gt;().Alias(<span class="string">"log.file"</span>);</span><br><span class="line">App.Singleton&lt;NetworkLog&gt;().Alias(<span class="string">"log.network"</span>);</span><br><span class="line">App.Tag(<span class="string">"log"</span> , <span class="string">"log.file"</span> , <span class="string">"log.network"</span>);</span><br><span class="line"><span class="keyword">var</span> logServices = App.Tagged(<span class="string">"log"</span>); <span class="comment">// object[]&#123; FileLog, NetworkLog &#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="解除服务绑定"><a href="#解除服务绑定" class="headerlink" title="解除服务绑定"></a>解除服务绑定</h3><p>您可以通过<code>UnBind()</code>来对已经绑定的服务进行解除绑定。如果被绑定的类是静态的，那么解除绑定会自动释放已经被生成的静态实例，同时触发<code>OnRelease()</code>释放事件。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> binder = App.Singleton&lt;SocketManager&gt;();</span><br><span class="line">binder.UnBind();</span><br></pre></td></tr></table></figure>
+<h3 id="当查询类型时"><a href="#当查询类型时" class="headerlink" title="当查询类型时"></a>当查询类型时</h3><p>当容器尝试去推测一个没有被绑定过的服务时，会通过遍历<code>OnFindType()</code>注册的查询函数来查询服务的<code>Type</code>。</p>
 <p>一般情况下，这种使用场景多数用于跨程序集的Type查找。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.OnFindType((finder)=&gt; Type.GetType(finder) , <span class="number">200</span>);</div><div class="line">App.OnFindType((finder)=&gt; MyType.GetType(finder) , <span class="number">100</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.OnFindType((finder)=&gt; &#123; <span class="keyword">return</span> Type.GetType(finder); &#125; , <span class="number">200</span>);</span><br><span class="line">App.OnFindType((finder)=&gt; &#123; <span class="keyword">return</span> MyType.GetType(finder); &#125; , <span class="number">100</span>);</span><br></pre></td></tr></table></figure>
 <p><code>OnFindType()</code> 允许传入一个优先级，优先级高的会被优先调用。</p>
 <blockquote>
 <p>注意，当生成的服务依赖于<code>OnFindType()</code>来推测服务时，服务构建将会使用c#的反射服务，这一过程对性能的损耗非常严重。所以您应该尽可能使用静态绑定而不是依赖推测来动态生成。</p>
 </blockquote>
-<h3 id="当服务解决-构建-时"><a href="#当服务解决-构建-时" class="headerlink" title="当服务解决(构建)时"></a>当服务解决(构建)时</h3><p>服务容器在每一次新解析对象时都会触发服务解决的事件，可以使用<code>OnResolving()</code>方法监听该事件。</p>
-<p>使用场景往往用于对于解决服务的修饰(初始化，监控等)，从而允许你在对象被传递给消费者之前为其设置额外属性。</p>
-<p>解决事件分为2种类型，局部解决事件将会优于全局解决事件被调用：</p>
-<ul>
-<li>基于指定服务的解决事件，只有当指定服务被解决时才会被触发。</li>
-<li>基于全局的解决事件，任何服务的解决或者绑定实例都会触发。</li>
+<h3 id="暂时性托管"><a href="#暂时性托管" class="headerlink" title="暂时性托管"></a>暂时性托管</h3><p>服务容器允许您使用<code>Flash</code>方法来临时托管服务实例，在回调区间完成后这些临时的托管实例将会被释放。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Flash(()=&gt;&#123;</span><br><span class="line"></span><br><span class="line">&#125;, <span class="comment">/* Service name */</span>, <span class="comment">/* Your service instance */</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="重置服务容器"><a href="#重置服务容器" class="headerlink" title="重置服务容器"></a>重置服务容器</h3><p>您可以使用<code>Flush</code>来重置服务容器，清除服务容器中的一切数据恢复到初始状态，这是一个危险操作所以我们将API隐藏在Handler中。</p>
+<p>通过Flush重置容器的过程中，会触发<code>OnRelease</code>事件。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Handler.Flush();</span><br></pre></td></tr></table></figure>
+<h3 id="其他常规函数"><a href="#其他常规函数" class="headerlink" title="其他常规函数"></a>其他常规函数</h3><ul>
+<li>Type2Service(type); 将类型转为服务名 </li>
+<li>GetBind(service); 获取服务的绑定数据,如果绑定不存在则返回null</li>
+<li>HasBind(service); 是否已经绑定了服务</li>
+<li>CanMake(service); 是否可以生成服务</li>
+<li>IsStatic(service); 服务是否是静态化的,如果服务不存在也将返回false</li>
+<li>IsAlias(service); 服务名是否是别名</li>
+<li>BindIf(service, concrete); 当服务不存在时才绑定(实例绑定)</li>
+<li>SingletonIf(service, concrete); 当服务不存在时才绑定(单例绑定)</li>
+<li>Wrap(lambda,params); 包装一个触发可以以依赖注入形式调用的方法</li>
+<li>Factory(service); 包装一个触发可以获得指定服务的方法</li>
 </ul>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 基于服务的解决事件</span></div><div class="line">App.Singleton&lt;ConfigManager&gt;().OnResolving((binder, obj) =&gt;</div><div class="line">&#123;</div><div class="line">    <span class="comment">//todo: 对于ConfigManager这个类型的实例进行修饰</span></div><div class="line">    <span class="keyword">return</span> obj;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 基于全局的解决事件</span></div><div class="line">App.OnResolving((binder, obj) =&gt;</div><div class="line">&#123;</div><div class="line">    <span class="comment">//todo: 对于解决所有服务或者进行绑定的实例进行修饰</span></div><div class="line">    <span class="keyword">return</span> obj;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<h3 id="当静态实例释放时"><a href="#当静态实例释放时" class="headerlink" title="当静态实例释放时"></a>当静态实例释放时</h3><p>如果托管于服务容器的静态实例被释放时都会触发释放事件，可以使用<code>OnRelease()</code>方法监听该事件。</p>
-<p>托管的静态实例包括:</p>
-<ul>
-<li>通过<code>Instance()</code>绑定的静态实例</li>
-<li>通过<code>Singleton()</code>绑定并生成的静态实例</li>
-</ul>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 基于服务的静态实例释放事件</span></div><div class="line">App.Singleton&lt;ConfigManager&gt;().OnRelease((binder, obj) =&gt;</div><div class="line">&#123;</div><div class="line">    <span class="comment">//todo: 对于ConfigManager这个类型的静态实例释放时</span></div><div class="line">    <span class="keyword">return</span> obj;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="comment">// 基于全局的静态实例释放事件</span></div><div class="line">App.OnRelease((binder, obj) =&gt;</div><div class="line">&#123;</div><div class="line">    <span class="comment">//todo: 对于解决所有服务或者进行绑定的静态实例释放时</span></div><div class="line">    <span class="keyword">return</span> obj;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
 <h3 id="性能优化相关"><a href="#性能优化相关" class="headerlink" title="性能优化相关"></a>性能优化相关</h3><p>一般情况下我们推荐使用静态绑定的方式来对无依赖注入的服务进行实例。以便于能够获得更好的性能。</p>
 <p>下面的代码将进行静态绑定：</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Singleton&lt;ConfigManager&gt;((binder, param)=&gt; <span class="keyword">new</span> ConfigManager()).Alias(<span class="string">"config.manager"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Singleton&lt;SocketManager&gt;((binder, param)=&gt; <span class="keyword">new</span> SocketManager());</span><br></pre></td></tr></table></figure>
 <p>下面的代码将进行动态绑定：</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">App.Singleton&lt;ConfigManager&gt;().Alias(<span class="string">"config.manager"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Singleton&lt;SocketManager&gt;();</span><br></pre></td></tr></table></figure>
 <p>除了进行静态绑定外，我们还需要尽可能将服务设置为单例绑定，服务容器对于单例服务的优化要优于实例服务。</p>
 <p>我们已经测试了服务生成调用所花费的时间以供您参考，所有的测试均建立于：<code>100万</code>次服务生成测试（测试<code>100次</code>的平均值），和<code>Debug</code>编译的程序集上。</p>
 <ul>

@@ -420,8 +420,8 @@
 </section>
     <article class="clearfix">
     <h2 id="控制台"><a href="#控制台" class="headerlink" title="控制台"></a>控制台</h2><p>CatLib控制台系统允许您在web端对您的设备进行控制，监控，日志输出。</p>
-<p>公共的控制台：<a href="http://console.catlib.io" target="_blank" rel="external">console.catlib.io</a></p>
-<p>CatLib的日志工具使用了 <a href="https://www.ietf.org/rfc/rfc5424.txt" target="_blank" rel="external">RFC 5424</a> 所描述的日志等级。</p>
+<p>公共的控制台：<a href="http://console.catlib.io" target="_blank" rel="noopener">console.catlib.io</a></p>
+<p>CatLib的日志工具使用了 <a href="https://www.ietf.org/rfc/rfc5424.txt" target="_blank" rel="noopener">RFC 5424</a> 所描述的日志等级。</p>
 <h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><p>初始配置必须在框架初始化前完成配置，下面是控制台组件需要的初始配置：</p>
 <table>
 <thead>
@@ -509,10 +509,10 @@
 </tr>
 </tbody>
 </table>
-<h3 id="公共的控制台服务器"><a href="#公共的控制台服务器" class="headerlink" title="公共的控制台服务器"></a>公共的控制台服务器</h3><p>CatLib已经为您部署了公共的控制台服务器，您可以通过<a href="http://console.catlib.io" target="_blank" rel="external">console.catlib.io</a>来访问公共控制台，CatLib 的控制台程序是基于您的浏览器发起控制指令，所以哪怕使用的是公共的控制台服务器也不会导致您的资料外泄。</p>
-<h3 id="内网搭建控制台服务器"><a href="#内网搭建控制台服务器" class="headerlink" title="内网搭建控制台服务器"></a>内网搭建控制台服务器</h3><p>除了访问公共的控制台服务器外，您还可以在内网搭建自己的控制台服务器，首先Clone出 <a href="https://github.com/CatLib/console.CatLib.io" target="_blank" rel="external">https://github.com/CatLib/console.CatLib.io</a> 控制台项目。</p>
-<p>安装必须的<a href="http://nodejs.cn/" target="_blank" rel="external">Nodejs</a> , 随后执行下面指令即可启动服务器:</p>
-<figure class="highlight shell"><table><tr><td class="code"><pre><div class="line">npm install</div><div class="line">npm run dev</div></pre></td></tr></table></figure>
+<h3 id="公共的控制台服务器"><a href="#公共的控制台服务器" class="headerlink" title="公共的控制台服务器"></a>公共的控制台服务器</h3><p>CatLib已经为您部署了公共的控制台服务器，您可以通过<a href="http://console.catlib.io" target="_blank" rel="noopener">console.catlib.io</a>来访问公共控制台，CatLib 的控制台程序是基于您的浏览器发起控制指令，所以哪怕使用的是公共的控制台服务器也不会导致您的资料外泄。</p>
+<h3 id="内网搭建控制台服务器"><a href="#内网搭建控制台服务器" class="headerlink" title="内网搭建控制台服务器"></a>内网搭建控制台服务器</h3><p>除了访问公共的控制台服务器外，您还可以在内网搭建自己的控制台服务器，首先Clone出 <a href="https://github.com/CatLib/console.CatLib.io" target="_blank" rel="noopener">https://github.com/CatLib/console.CatLib.io</a> 控制台项目。</p>
+<p>安装必须的<a href="http://nodejs.cn/" target="_blank" rel="noopener">Nodejs</a> , 随后执行下面指令即可启动服务器:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install</span><br><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
 <h4 id="编译控制台"><a href="#编译控制台" class="headerlink" title="编译控制台"></a><strong>编译控制台</strong></h4><p>您可以通过 <code>npm run build</code> 指令来编译出可以直接使用的html文件。</p>
 <h3 id="控制台日志搜索"><a href="#控制台日志搜索" class="headerlink" title="控制台日志搜索"></a>控制台日志搜索</h3><p>控制台日志搜索允许您输入关键词来搜索对应日志，搜索输入除了常规关键字外还允许输入特殊指令进行搜索：</p>
 <ul>
@@ -531,8 +531,8 @@
 <li>通过<code>;</code>来分隔多条件搜索</li>
 </ul>
 <h3 id="打印一条日志"><a href="#打印一条日志" class="headerlink" title="打印一条日志"></a>打印一条日志</h3><p>您可以通过<code>Log</code>方法来输出日志，Log方法需要3个参数，第一个参数是日志的等级，第二个参数是日志的消息，第三个参数是日志携带的上下文。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> logger = App.Make&lt;ILogger&gt;();</div><div class="line">logger.Log(DebugLevels.Debug, <span class="string">"helloworld"</span>);</div></pre></td></tr></table></figure>
-<p>CatLib日志系统遵循<a href="https://www.ietf.org/rfc/rfc5424.txt" target="_blank" rel="external">RFC 5424</a>描述的日志等级。所以您还可以使用下面这写快捷函数：</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> logger = App.Make&lt;ILogger&gt;();</span><br><span class="line">logger.Log(DebugLevels.Debug, <span class="string">"helloworld"</span>);</span><br></pre></td></tr></table></figure>
+<p>CatLib日志系统遵循<a href="https://www.ietf.org/rfc/rfc5424.txt" target="_blank" rel="noopener">RFC 5424</a>描述的日志等级。所以您还可以使用下面这写快捷函数：</p>
 <ul>
 <li><code>Debug()</code> 调试级日志</li>
 <li><code>Info()</code> 信息级日志</li>

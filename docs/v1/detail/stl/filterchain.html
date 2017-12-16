@@ -429,11 +429,11 @@
 <li><a href="#FilterList">FilterList</a></li>
 </ul>
 <h3 id="Add"><a href="#Add" class="headerlink" title="Add"></a>Add</h3><p>增加一个处理器到过滤器链中，处理器根据优先级进行排序。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">filterChain.Add((data, next)=&gt;</div><div class="line">&#123;</div><div class="line">    <span class="comment">// todo:</span></div><div class="line">&#125;,<span class="number">100</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">filterChain.Add((data, next)=&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// todo:</span></span><br><span class="line">&#125;,<span class="number">100</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="Do"><a href="#Do" class="headerlink" title="Do"></a>Do</h3><p>将数据传入过滤器链并依次执行处理器。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">filterChain.Do(<span class="string">"helloworld"</span> , (data)=&gt;</div><div class="line">&#123;</div><div class="line">    <span class="comment">//todo</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">filterChain.Do(<span class="string">"helloworld"</span> , (data)=&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//todo</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <h3 id="FilterList"><a href="#FilterList" class="headerlink" title="FilterList"></a>FilterList</h3><p>获取过滤器链中的所有处理器。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> list = filterChain.FilterList;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> list = filterChain.FilterList;</span><br></pre></td></tr></table></figure>
 
     <div class="footer">
         发现错误？想参与编辑？ 

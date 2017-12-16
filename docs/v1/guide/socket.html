@@ -424,7 +424,7 @@
 <p>这是一个底层网络组件您应该使用 <a href="network.html">网络组件</a> 来管理您的网络链接，除非您对这个组件非常的了解。</p>
 </blockquote>
 <h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>通过<code>ISocketManager</code>接口获取Socket管理器，Socket管理器可以用于管理活动的Socket。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> socketManager = App.Make&lt;ISocketManager&gt;();</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> socketManager = App.Make&lt;ISocketManager&gt;();</span><br></pre></td></tr></table></figure>
 <h3 id="通过NSP构建"><a href="#通过NSP构建" class="headerlink" title="通过NSP构建"></a>通过NSP构建</h3><p>通过向Socket管理器的<code>Make</code>方法传入<code>NSP</code>（网络服务提供商）来构建出Socket。</p>
 <p>Socket组件已经为您定义好了以下NSP：</p>
 <ul>
@@ -432,11 +432,11 @@
 <li>kcp://<code>{conv}</code>@<code>{host}</code>:<code>{port}</code></li>
 </ul>
 <p><code>{host}</code> : 服务器Host<br><code>{port}</code> : 服务器端口号<br><code>{conv}</code> : 会话Id（uint）（部分协议可能需要如：kcp）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> tcpSocket = socketManager.Make(<span class="string">"tcp://127.0.0.1:7777"</span>,<span class="string">"default-tcp"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> tcpSocket = socketManager.Make(<span class="string">"tcp://127.0.0.1:7777"</span>,<span class="string">"default-tcp"</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="获取已经构建完成的Socket"><a href="#获取已经构建完成的Socket" class="headerlink" title="获取已经构建完成的Socket"></a>获取已经构建完成的Socket</h3><p>通过<code>Get</code>方法，传入一个<code>name</code>来获取一个已经被完成构建的Socket</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> tcpSocket = socketManager.Get(<span class="string">"default-tcp"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> tcpSocket = socketManager.Get(<span class="string">"default-tcp"</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="建立链接"><a href="#建立链接" class="headerlink" title="建立链接"></a>建立链接</h3><p>您可以通过<code>Connect</code>方法发起链接，<code>Connect</code>方法是一个异步方法，但返回一个<code>IAWait</code>接口可以被用于同步等待完成。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> waitStatus = tcpSocket.Connect();</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> waitStatus = tcpSocket.Connect();</span><br></pre></td></tr></table></figure>
 <p><code>IAwait</code>作为<code>Connect</code>函数的返回值，可能有以下几种状态的返回：</p>
 <ul>
 <li><code>IsDone</code>为<code>True</code>意味着内部执行状态终止（可能由于链接完成，但也可能由于异常）</li>
@@ -453,21 +453,21 @@
 <li><code>SocketEvents.Closed</code> : 当连接器关闭时（载荷为：自身连接器实例）。</li>
 <li><code>SocketEvents.Error</code> : 当连接器出现异常时（载荷为：Exception）</li>
 </ul>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">tcpSocket.On(SocketEvents.Message , (data)=&gt;</div><div class="line">&#123;</div><div class="line">    <span class="comment">//todo:</span></div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">tcpSocket.On(SocketEvents.Message , (data)=&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//todo:</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>通过<code>Off</code>可以对监听的消息进行释放。</p>
 </blockquote>
 <h3 id="触发外部定义的Socket事件"><a href="#触发外部定义的Socket事件" class="headerlink" title="触发外部定义的Socket事件"></a>触发外部定义的Socket事件</h3><p>通过Trigger可以主动触发Socket事件。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">tcpSocket.Trigger(<span class="string">"Your Events"</span>, <span class="string">"hello world"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">tcpSocket.Trigger(<span class="string">"Your Events"</span>, <span class="string">"hello world"</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="发送数据"><a href="#发送数据" class="headerlink" title="发送数据"></a>发送数据</h3><p>可以通过<code>Send</code>方法来向服务器发送一条数据，<code>Send</code>返回一个<code>IAwait</code>可以用于同步等待发送完成。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> sendData = System.Text.Encoding.Default.GetBytes(<span class="string">"hello world"</span>);</div><div class="line"><span class="keyword">var</span> wait = tcpSocket.Send(sendData);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> sendData = System.Text.Encoding.Default.GetBytes(<span class="string">"hello world"</span>);</span><br><span class="line"><span class="keyword">var</span> wait = tcpSocket.Send(sendData);</span><br></pre></td></tr></table></figure>
 <h3 id="断开Socket链接"><a href="#断开Socket链接" class="headerlink" title="断开Socket链接"></a>断开Socket链接</h3><p>您可以通过<code>Disconnect</code>方法断开Socket链接。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">tcpSocket.Disconnect();</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">tcpSocket.Disconnect();</span><br></pre></td></tr></table></figure>
 <h3 id="从管理器中释放Socket"><a href="#从管理器中释放Socket" class="headerlink" title="从管理器中释放Socket"></a>从管理器中释放Socket</h3><p>您可以通过<code>Release</code>方法从管理器中释放链接，释放链接时如果没有断开Socket链接，那么会自动断开。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">socketManager.Release(<span class="string">"default-tcp"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">socketManager.Release(<span class="string">"default-tcp"</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="拓展Socket"><a href="#拓展Socket" class="headerlink" title="拓展Socket"></a>拓展Socket</h3><p>您可以通过<code>Extend</code>方法来定制自己的Socket。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">socketManager.Extend(()=&gt;&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> KcpConnector(<span class="number">91828</span>,<span class="string">"127.0.0.1"</span> , <span class="number">7777</span>)&#123;</div><div class="line">        SendWindow = <span class="number">256</span>,</div><div class="line">        RecvWindow = <span class="number">128</span>,</div><div class="line">        NoDelay = <span class="literal">true</span>,</div><div class="line">        IntervalTimer = <span class="number">10</span>,</div><div class="line">        Resend = <span class="number">1</span>,</div><div class="line">        CongestionControl = <span class="literal">true</span></div><div class="line">    &#125;;</div><div class="line">&#125;, <span class="string">"my-kcp"</span>);</div></pre></td></tr></table></figure>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> kcpSocket = socketManager.Get(<span class="string">"my-kcp"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">socketManager.Extend(()=&gt;&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> KcpConnector(<span class="number">91828</span>,<span class="string">"127.0.0.1"</span> , <span class="number">7777</span>)&#123;</span><br><span class="line">        SendWindow = <span class="number">256</span>,</span><br><span class="line">        RecvWindow = <span class="number">128</span>,</span><br><span class="line">        NoDelay = <span class="literal">true</span>,</span><br><span class="line">        IntervalTimer = <span class="number">10</span>,</span><br><span class="line">        Resend = <span class="number">1</span>,</span><br><span class="line">        CongestionControl = <span class="literal">true</span></span><br><span class="line">    &#125;;</span><br><span class="line">&#125;, <span class="string">"my-kcp"</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> kcpSocket = socketManager.Get(<span class="string">"my-kcp"</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="组件依赖"><a href="#组件依赖" class="headerlink" title="组件依赖"></a>组件依赖</h3><ul>
 <li><a href="tick.html">时钟</a></li>
 </ul>

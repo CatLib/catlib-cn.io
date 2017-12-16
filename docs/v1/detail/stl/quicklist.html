@@ -440,41 +440,41 @@
 <li><a href="#UnShift">UnShift</a></li>
 </ul>
 <h3 id="Add"><a href="#Add" class="headerlink" title="Add"></a>Add</h3><p>将<code>element</code>插入到列表尾部。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">quicklist.Add(<span class="string">"hello world"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">quicklist.Add(<span class="string">"hello world"</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="Clear"><a href="#Clear" class="headerlink" title="Clear"></a>Clear</h3><p>清空快速列表</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">quicklist.Clear();</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">quicklist.Clear();</span><br></pre></td></tr></table></figure>
 <h3 id="Count"><a href="#Count" class="headerlink" title="Count"></a>Count</h3><p>获取快速列表的<code>element</code>数量。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> num = quicklist.Count;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> num = quicklist.Count;</span><br></pre></td></tr></table></figure>
 <h3 id="First"><a href="#First" class="headerlink" title="First"></a>First</h3><p>获取快速列表中的第一个元素。如果有序集为空则引发<code>InvalidOperationException</code>异常。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> element = quicklist.First();</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> element = quicklist.First();</span><br></pre></td></tr></table></figure>
 <h3 id="GetRange"><a href="#GetRange" class="headerlink" title="GetRange"></a>GetRange</h3><p>获取区间内的所有<code>element</code>。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> range = quicklist.GetRange(<span class="number">10</span>,<span class="number">20</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> range = quicklist.GetRange(<span class="number">10</span>,<span class="number">20</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="InsertAfter"><a href="#InsertAfter" class="headerlink" title="InsertAfter"></a>InsertAfter</h3><p>在指定<code>element</code>之后插入新的<code>element</code>。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">quicklist.InsertAfter(<span class="string">"hello world"</span> , <span class="string">"new hello world"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">quicklist.InsertAfter(<span class="string">"hello world"</span> , <span class="string">"new hello world"</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="InsertBefore"><a href="#InsertBefore" class="headerlink" title="InsertBefore"></a>InsertBefore</h3><p>在指定<code>element</code>之前插入新的<code>element</code>。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">quicklist.InsertBefore(<span class="string">"hello world"</span> , <span class="string">"new hello world"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">quicklist.InsertBefore(<span class="string">"hello world"</span> , <span class="string">"new hello world"</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="Last"><a href="#Last" class="headerlink" title="Last"></a>Last</h3><p>获取快速列表中的最后一个元素。如果有序集为空则引发<code>InvalidOperationException</code>异常。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> element = quicklist.Last();</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> element = quicklist.Last();</span><br></pre></td></tr></table></figure>
 <h3 id="Length"><a href="#Length" class="headerlink" title="Length"></a>Length</h3><p>获取快速列表的<code>节点</code>数量。(快速列表宏观上为双向链表，每个节点可以有N个element)</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> num = quicklist.Length;</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> num = quicklist.Length;</span><br></pre></td></tr></table></figure>
 <h3 id="Pop"><a href="#Pop" class="headerlink" title="Pop"></a>Pop</h3><p>移除并返回列表尾部的<code>element</code>。如果列表为空则引发<code>InvalidOperationException</code>异常。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> element = quicklist.Pop();</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> element = quicklist.Pop();</span><br></pre></td></tr></table></figure>
 <h3 id="Push"><a href="#Push" class="headerlink" title="Push"></a>Push</h3><p>将<code>element</code>插入到列表尾部。(和Add是等价的)</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">quicklist.Push(<span class="string">"hello world"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">quicklist.Push(<span class="string">"hello world"</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="Remove"><a href="#Remove" class="headerlink" title="Remove"></a>Remove</h3><p>根据参数<code>count</code>的值，移除列表中与参数<code>element</code>相等的元素。<br>如果 <code>count &gt; 0</code>从表头开始向表尾搜索，移除与<code>element</code>相等的元素，数量为<code>count</code>。<br>如果 <code>count = 0</code>从表头开始向表尾搜索，移除全部与<code>element</code>相等的元素。<br>如果 <code>count &lt; 0</code>从表尾开始向表头搜索，移除与<code>element</code>相等的元素，数量为<code>count</code>。</p>
 <p>返回值为被移除元素的数量。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> num = quicklist.Remove(<span class="string">"hello world"</span> , <span class="number">10</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> num = quicklist.Remove(<span class="string">"hello world"</span> , <span class="number">10</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="ReverseIterator"><a href="#ReverseIterator" class="headerlink" title="ReverseIterator"></a>ReverseIterator</h3><p>反转迭代器迭代顺序。</p>
 <blockquote>
 <p>注意，这并不是真正意义反转整个快速列表，只是反转了迭代顺序。</p>
 </blockquote>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">quicklist.ReverseIterator();</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">quicklist.ReverseIterator();</span><br></pre></td></tr></table></figure>
 <h3 id="Shift"><a href="#Shift" class="headerlink" title="Shift"></a>Shift</h3><p>移除并返回列表头部的<code>element</code>。如果列表为空则引发<code>InvalidOperationException</code>异常。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line"><span class="keyword">var</span> element = quicklist.Shift();</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> element = quicklist.Shift();</span><br></pre></td></tr></table></figure>
 <h3 id="Trim"><a href="#Trim" class="headerlink" title="Trim"></a>Trim</h3><p>对列表进行修剪，只保留下标范围内的元素（包括min和包括max）。返回值为被移除元素的数量。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">quicklist.Trim(<span class="number">10</span>,<span class="number">200</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">quicklist.Trim(<span class="number">10</span>,<span class="number">200</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="UnShift"><a href="#UnShift" class="headerlink" title="UnShift"></a>UnShift</h3><p>将<code>element</code>插入到列表头部。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><div class="line">quicklist.UnShift(<span class="string">"hello world"</span>);</div></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">quicklist.UnShift(<span class="string">"hello world"</span>);</span><br></pre></td></tr></table></figure>
 
     <div class="footer">
         发现错误？想参与编辑？ 
