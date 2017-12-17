@@ -1,11 +1,11 @@
 ---
-title: 数组(Arr)
+title: 数组辅助函数(Arr)
 type: detail
 order: 101
 enable: true
 ---
 
-## 数组(Arr)
+## 数组辅助函数(Arr)
 
 数组方法库允许您通过简单的方式访问和操作数组。
 
@@ -28,6 +28,8 @@ enable: true
 - [Reverse](#Reverse)
 - [IndexOf](#IndexOf)
 - [Difference](#Difference)
+- [RemoveAt](#RemoveAt)
+- [Flash](#Flash)
 
 ### Merge
 
@@ -189,4 +191,33 @@ var result = Arr.IndexOf(new []{"1" , "2" ,"3" , "4" , "5"} , new []{ "2" , "3" 
 ```csharp
 var result = Arr.Difference(new []{"1" , "2" ,"3" , "4" , "5"} , new []{ "2" , "3" });
 // result : ["1","4","5"]
+```
+
+### RemoveAt
+
+从数组中移除并返回指定下标的元素。
+
+```csharp
+var src = new object[]{ "1" , "2" , "3" };
+var result = Arr.RemoveAt(ref src, 1); // 2
+// src : object[] { "1" , "3" }
+```
+
+### Flash
+
+临时性的回调元素，如果遇到异常或者完成回调后会进行回滚元素回调
+
+```csharp
+var src = new object[]{ "a", "b" , "c" };
+Arr.Flash(src,
+(element)=> Console.WriteLine("start:" + element),
+(element)=> Console.WriteLine("rollback:" + element), 
+()=> { Console.WriteLine("Completed"); });
+// start:a
+// start:b
+// start:c
+// Completed
+// rollback:c
+// rollback:b
+// rollback:a
 ```
