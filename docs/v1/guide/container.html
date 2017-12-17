@@ -157,6 +157,16 @@
             
             
             <li>
+                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
                 <p><a href="/v1/guide/support.html" class="sidebar-link">支持库</del></a></p>
             </li>
         
@@ -179,7 +189,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</del></a></p>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</del></a></p>
             </li>
         
             
@@ -189,7 +199,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</del></a></p>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</del></a></p>
             </li>
         
             
@@ -289,7 +299,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
+                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
             </li>
         
             
@@ -299,7 +309,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
             </li>
         
             
@@ -351,7 +361,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/random-unity.html" class="sidebar-link">随机数扩展</del></a></p>
+                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</del></a></p>
             </li>
         
             
@@ -361,7 +371,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</del></a></p>
+                <p><a href="/v1/guide/random-unity.html" class="sidebar-link">随机数扩展</del></a></p>
             </li>
         
             
@@ -420,10 +430,10 @@
 </section>
     <article class="clearfix">
     <h2 id="服务容器"><a href="#服务容器" class="headerlink" title="服务容器"></a>服务容器</h2><p>Container 服务容器是一个用于管理<code>类的依赖</code>和<code>执行依赖注入</code>的强大工具。其实质是通过反射来对<code>构造函数</code>或者标记为<code>[Inject]</code>特性的属性选择器进行注入。</p>
-<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>几乎所有的服务绑定都是在服务提供者中完成。如果一个<code>服务</code>没有基于任何接口或者别名那么就没有必要将其绑定到容器。</p>
-<p>容器并不需要被告知如何构建对象，因为它会使用反射服务自动解析出具体的对象。在一个服务提供者中，可以通过<code>App</code>全局变量访问容器，然后使用<code>Bind()</code>或者<code>Singleton()</code>方法注册一个<code>服务</code>的绑定。</p>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>几乎所有的服务绑定都是在服务提供者中完成。如果一个<code>服务</code>没有基于任何接口那么就没有必要将其绑定到容器。</p>
+<p>容器并不需要被告知如何构建对象，因为它会使用反射服务自动解析出具体的对象实例。在任何位置，您可以通过<code>App</code>全局变量访问容器。在服务提供者中我们可以使用<code>Bind()</code>或者<code>Singleton()</code>方法来注册一个<code>服务</code>的绑定。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> container = <span class="keyword">new</span> Container(); <span class="comment">// 构建一个单纯的服务容器</span></span><br></pre></td></tr></table></figure>
-<h3 id="构建服务"><a href="#构建服务" class="headerlink" title="构建服务"></a>构建服务</h3><p>您可以通过<code>Make()</code>方法来构建服务。如果通过容器去生成一个没有被绑定的服务，那么容器会尝试解决需要被生成的服务，如果尝试解决失败，那么将会抛出一个<code>UnresolvableException</code>异常。</p>
+<h3 id="构建服务"><a href="#构建服务" class="headerlink" title="构建服务"></a>构建服务</h3><p>您可以通过<code>Make()</code>方法来构建服务。如果通过容器去生成一个没有被绑定的服务，那么容器会根据策略尝试解决需要被生成的服务，如果尝试解决失败，那么将会抛出一个<code>UnresolvableException</code>异常。</p>
 <blockquote>
 <p><code>CatLib Framework</code> 中所有可以直接通过<code>Make()</code>生成的服务请参考：<a href="can-make.html">服务表</a></p>
 </blockquote>
@@ -431,13 +441,13 @@
 <p>通过<code>Bind()</code>方法允许将服务以实例绑定（每次生成都会是一个全新实例）的方式进行绑定。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Bind&lt;SocketManager&gt;().Alias&lt;ISocketManager&gt;();</span><br></pre></td></tr></table></figure>
 <p>我们通过上述代码将<code>SocketManager</code>这个服务绑定到了服务容器。同时赋予了<code>ISocketManager</code>的别名。</p>
-<p>这样您就可以使用使用实例名或者别名来构建服务了，但是请注意：一般情况下我们建议通过<code>ISocketManager</code>来生成服务。</p>
+<p>这样您就可以使用使用实例名或者别名来构建服务了，但是请注意：一般情况下我们都建议通过<code>ISocketManager</code>来生成服务。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> manager = App.Make&lt;ISocketManager&gt;(); <span class="comment">// 等价与: var manager = new SocketManager();</span></span><br></pre></td></tr></table></figure>
 <p>可能至此您还没有明白服务容器的意义，没关系，请继续阅读。</p>
 <h3 id="绑定服务-单例"><a href="#绑定服务-单例" class="headerlink" title="绑定服务 - 单例"></a>绑定服务 - 单例</h3><p>服务容器通过<code>Singleton</code>方法来对服务进行单例绑定。通过 <a href="facade.html">门面</a> 和 服务容器 的结合，颠覆了传统的单例实现方式，以一种更新，更易于维护的方式来实现传统的单例模式。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Singleton&lt;SocketManager&gt;().Alias&lt;ISocketManager&gt;();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> manager1 = App.Make&lt;ISocketManager&gt;();</span><br><span class="line"><span class="keyword">var</span> manager2 = App.Make&lt;ISocketManager&gt;();</span><br><span class="line"><span class="comment">// manager1 == manager2</span></span><br></pre></td></tr></table></figure>
 <h3 id="构造函数注入"><a href="#构造函数注入" class="headerlink" title="构造函数注入"></a>构造函数注入</h3><p>在您简单的<code>Make()</code>操作中，服务容器已经对绑定的服务进行了一系列复杂操作（服务关系转换，服务构建，服务推测，上下文关系处理，依赖注入，服务修饰，单例化…），这一切对于开发者的您来说完全是透明的无感知的。</p>
-<p>服务容器能够自动识别您构造函数中的参数，并为其注入合适的服务实例。注入方案请参考：<a href="container.html#注入规则">注入规则</a></p>
+<p>服务容器能够自动识别您构造函数中的参数，并为其注入合适的服务实例。注入方案请参考：<a href="container.html#依赖注入规则">依赖注入规则</a></p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CustomizeService</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Service</span>(<span class="params">IFileSystem fileSystem</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// fileSystem 会被自动注入实现</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果您没有在服务容器中绑定过 IFileSystem 服务</span></span><br><span class="line">        <span class="comment">// 那么会抛出一个UnresolvableException异常</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>简而言之，您只需要向服务容器绑定好您开发的服务，服务容器将会在您生成服务时自动处理好您的服务依赖关系。</p>
@@ -450,7 +460,7 @@
 </ul>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CustomizeService</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">Inject</span>]</span><br><span class="line">    <span class="keyword">public</span> IFileSystem FileSystem &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
-<p>注意，您不能在<code>构造函数</code>中访问被标记为注入的<code>属性选择器</code>的实例，因为属性选择器的注入流程会在构造函数之后进行，如果您在构造函数中就访问了将会导致一个<code>NullReferenceException</code>异常。</p>
+<p>注意，您不能在<code>构造函数</code>中访问被标记为注入的<code>属性选择器</code>的实例，因为属性选择器的注入流程会在构造函数之后进行，如果您在构造函数中访问了被标记为注入的属性选择器，这将会导致一个<code>NullReferenceException</code>异常。</p>
 </blockquote>
 <h3 id="服务别名"><a href="#服务别名" class="headerlink" title="服务别名"></a>服务别名</h3><p><code>服务别名</code>是服务容器非常重要的一项功能，它可以提供：接口绑定指定实现的能力。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Singleton&lt;SocketManager&gt;().Alias&lt;ISocketManager&gt;();</span><br></pre></td></tr></table></figure>
@@ -497,7 +507,7 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Watch&lt;ISocketManager&gt;((instance)=&gt;&#123;</span><br><span class="line">    <span class="comment">// instance 为新的服务实现</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <h3 id="静态化托管"><a href="#静态化托管" class="headerlink" title="静态化托管"></a>静态化托管</h3><p>服务容器可以通过<code>Instance</code>托管您自己生成的实例，随后对容器该实例的调用总是返回被托管的实例。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Instance(<span class="string">"socket"</span> , <span class="keyword">new</span> SocketManager());</span><br></pre></td></tr></table></figure>
-<p>需要注意的是，如果您使用了<code>Bind</code>为指定的服务进行实例绑定，那么如果您尝试将其静态化出现将会抛出一个<code>RuntimeException</code>异常:</p>
+<p>需要注意的是，如果您使用了<code>Bind</code>为指定的服务进行实例绑定，那么如果您尝试将这个服务静态化，服务容器将会抛出一个<code>RuntimeException</code>异常:</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Bind(<span class="string">"socket"</span>, (container, userParams)=&gt; <span class="keyword">new</span> SocketManager());</span><br><span class="line">App.Instance(<span class="string">"socket"</span> , <span class="keyword">new</span> SocketManager()); <span class="comment">// throw RuntimeException</span></span><br></pre></td></tr></table></figure>
 <h3 id="绑定函数"><a href="#绑定函数" class="headerlink" title="绑定函数"></a>绑定函数</h3><p>服务容器除了可以为服务进行绑定外还可以进行函数绑定，您可以通过<code>BindMethod</code>方法来为函数进行绑定，服务容器会自动对绑定函数所需求的参数进行分析，并提供合适的注入参数。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.BindMethod(<span class="string">"CustomizeFunction"</span> , ()=&gt;&#123;</span><br><span class="line">    <span class="comment">// todo: 你的函数行为</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
@@ -538,6 +548,13 @@
 <h3 id="重置服务容器"><a href="#重置服务容器" class="headerlink" title="重置服务容器"></a>重置服务容器</h3><p>您可以使用<code>Flush</code>来重置服务容器，清除服务容器中的一切数据恢复到初始状态，这是一个危险操作所以我们将API隐藏在Handler中。</p>
 <p>通过Flush重置容器的过程中，会触发<code>OnRelease</code>事件。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Handler.Flush();</span><br></pre></td></tr></table></figure>
+<h3 id="依赖注入规则"><a href="#依赖注入规则" class="headerlink" title="依赖注入规则"></a>依赖注入规则</h3><ul>
+<li><strong>执行构造函数注入</strong></li>
+<li>遍历参数列表:<br>– <strong>检查是否为紧缩注入参数(<code>object</code>或<code>object[]</code>)，并且可以进行紧缩注入：</strong><br>—– 是：将用户传入的参数紧缩注入，清空用户传入的参数。<br>– <strong>从剩余的用户传入的参数中挑选并弹出合适的参数。</strong><br>– 使用依赖注入容器进行分析：<br>—– <strong>如果是：类，接口注入：</strong><br>——— 递归执行服务构建<br>——— 如果构建失败：检查是否可以使用默认值。<br>——— 如果均失败：抛出<code>UnresolvableException</code>异常<br>—– <strong>如果是基础类型注入：</strong><br>——— 如果可以构建则，递归执行服务构建<br>——— 使用参数名来推测服务实现<br>——— 如果推测失败，则检查是否可以使用默认值<br>——— 如果均失败：抛出<code>UnresolvableException</code>异常</li>
+<li><strong>执行实例的特性注入</strong></li>
+<li>遍历参数列表:<br>– <strong>检查可读写状态，不可写则跳过</strong><br>– 使用依赖注入容器进行分析：<br>—– <strong>如果是：类，接口注入：</strong><br>———- 递归执行服务构建<br>———- 如果构建失败：抛出<code>UnresolvableException</code>异常<br>—– <strong>如果是基础类型注入：</strong><br>———- 如果可以构建则，递归执行服务构建<br>———- 使用属性名来推测服务实现<br>———- 如果推测失败：抛出<code>UnresolvableException</code>异常</li>
+<li>注入完成</li>
+</ul>
 <h3 id="其他常规函数"><a href="#其他常规函数" class="headerlink" title="其他常规函数"></a>其他常规函数</h3><ul>
 <li>Type2Service(type); 将类型转为服务名 </li>
 <li>GetBind(service); 获取服务的绑定数据,如果绑定不存在则返回null</li>
@@ -549,6 +566,32 @@
 <li>SingletonIf(service, concrete); 当服务不存在时才绑定(单例绑定)</li>
 <li>Wrap(lambda,params); 包装一个触发可以以依赖注入形式调用的方法</li>
 <li>Factory(service); 包装一个触发可以获得指定服务的方法</li>
+</ul>
+<h3 id="容器行为定制"><a href="#容器行为定制" class="headerlink" title="容器行为定制"></a>容器行为定制</h3><p>当开发者需要深度定制容器行为时可以重构下面提供的虚方法来调整容器默认行为。容器行为定制只有您非常了解虚函数对应的行为才能操作。</p>
+<ul>
+<li><strong>GetDependenciesFromUserParams</strong>：从用户传入的参数中获取合适的参数进行注入。</li>
+<li><strong>ChangeType</strong>：转换类型到指定类型。</li>
+<li><strong>GetPropertyNeedsService</strong>：传入一个属性选择器对象(<code>PropertyInfo</code>)获取对应对象需求的服务名。</li>
+<li><strong>GetParamNeedsService</strong>：传入一个参数对象(<code>ParameterInfo</code>)获取对应的参数需求的服务名</li>
+<li><strong>ResolveAttrPrimitive</strong>：当解决属性选择器的基础类型时，返回值为需求的服务实例。</li>
+<li><strong>ResloveAttrClass</strong>：当解决属性选择器类或者接口类型时，返回值为需求的服务实例。</li>
+<li><strong>ResolvePrimitive</strong>：当解决构造函数的基础类型时，返回值为需求的服务实例。</li>
+<li><strong>ResloveClass</strong>：当解决构造函数的类或者接口类型时，返回值为需求的服务实例。</li>
+<li><strong>SpeculationServiceByParamName</strong>：根据一个参数信息来推测服务。返回值为需求的服务实例。</li>
+<li><strong>GetBuildStackDebugMessage</strong>：获取编译堆栈的调试信息。</li>
+<li><strong>MakeBuildFaildException</strong>：构建一个编译失败的异常。</li>
+<li><strong>MakeUnresolvablePrimitiveException</strong>：构建一个未能解决基础参数的异常。</li>
+<li><strong>MakeCircularDependencyException</strong>：构建一个循环依赖异常。</li>
+<li><strong>FormatService</strong>：格式化(标准化)服务名。</li>
+<li><strong>CanInject</strong>：检查实例是否可以被注入。</li>
+<li><strong>GuardUserParamsCount</strong>：限制用户传入的参数数量。</li>
+<li><strong>GuardResolveInstance</strong>：限制解决实例的有效条件。</li>
+<li><strong>SpeculatedServiceType</strong>：根据服务名推测指定的服务类型。</li>
+<li><strong>AttributeInject</strong>：对指定的实例进行属性注入。</li>
+<li><strong>CheckCompactInjectUserParams</strong>：检查是否可以紧缩注入用户传入的参数。</li>
+<li><strong>GetCompactInjectUserParams</strong>：获取紧缩注入的用户参数。</li>
+<li><strong>GetDependencies</strong>：获取指定参数列表的依赖注入结果。</li>
+<li><strong>GetConstructorsInjectParams</strong>：选择一个合适的构造函数并且获取指定需要注入的参数。</li>
 </ul>
 <h3 id="性能优化相关"><a href="#性能优化相关" class="headerlink" title="性能优化相关"></a>性能优化相关</h3><p>一般情况下我们推荐使用静态绑定的方式来对无依赖注入的服务进行实例。以便于能够获得更好的性能。</p>
 <p>下面的代码将进行静态绑定：</p>
