@@ -4,7 +4,7 @@
     <head>
 
     
-    <title>数组(Arr) — CatLib</title>
+    <title>数组辅助函数(Arr) — CatLib</title>
       
     <meta charset="utf-8">
     
@@ -429,7 +429,7 @@
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="数组-Arr"><a href="#数组-Arr" class="headerlink" title="数组(Arr)"></a>数组(Arr)</h2><p>数组方法库允许您通过简单的方式访问和操作数组。</p>
+    <h2 id="数组辅助函数-Arr"><a href="#数组辅助函数-Arr" class="headerlink" title="数组辅助函数(Arr)"></a>数组辅助函数(Arr)</h2><p>数组方法库允许您通过简单的方式访问和操作数组。</p>
 <h3 id="可用方法"><a href="#可用方法" class="headerlink" title="可用方法"></a>可用方法</h3><ul>
 <li><a href="#Merge">Merge</a></li>
 <li><a href="#Rand">Rand</a></li>
@@ -448,6 +448,8 @@
 <li><a href="#Reverse">Reverse</a></li>
 <li><a href="#IndexOf">IndexOf</a></li>
 <li><a href="#Difference">Difference</a></li>
+<li><a href="#RemoveAt">RemoveAt</a></li>
+<li><a href="#Flash">Flash</a></li>
 </ul>
 <h3 id="Merge"><a href="#Merge" class="headerlink" title="Merge"></a>Merge</h3><p>将多个数组合并成一个数组。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Arr.Merge(<span class="keyword">new</span> []&#123;<span class="string">"1"</span>,<span class="string">"2"</span>&#125; , <span class="keyword">new</span> []&#123;<span class="string">"3"</span>&#125;); <span class="comment">// ["1" , "2" , "3"]</span></span><br></pre></td></tr></table></figure>
@@ -483,6 +485,10 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Arr.IndexOf(<span class="keyword">new</span> []&#123;<span class="string">"1"</span> , <span class="string">"2"</span> ,<span class="string">"3"</span> , <span class="string">"4"</span> , <span class="string">"5"</span>&#125; , <span class="keyword">new</span> []&#123; <span class="string">"2"</span> , <span class="string">"3"</span> &#125;);</span><br><span class="line"><span class="comment">// result : 1</span></span><br></pre></td></tr></table></figure>
 <h3 id="Difference"><a href="#Difference" class="headerlink" title="Difference"></a>Difference</h3><p>从数组中排除指定的值</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Arr.Difference(<span class="keyword">new</span> []&#123;<span class="string">"1"</span> , <span class="string">"2"</span> ,<span class="string">"3"</span> , <span class="string">"4"</span> , <span class="string">"5"</span>&#125; , <span class="keyword">new</span> []&#123; <span class="string">"2"</span> , <span class="string">"3"</span> &#125;);</span><br><span class="line"><span class="comment">// result : ["1","4","5"]</span></span><br></pre></td></tr></table></figure>
+<h3 id="RemoveAt"><a href="#RemoveAt" class="headerlink" title="RemoveAt"></a>RemoveAt</h3><p>从数组中移除并返回指定下标的元素。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> src = <span class="keyword">new</span> <span class="keyword">object</span>[]&#123; <span class="string">"1"</span> , <span class="string">"2"</span> , <span class="string">"3"</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> result = Arr.RemoveAt(<span class="keyword">ref</span> src, <span class="number">1</span>); <span class="comment">// 2</span></span><br><span class="line"><span class="comment">// src : object[] &#123; "1" , "3" &#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Flash"><a href="#Flash" class="headerlink" title="Flash"></a>Flash</h3><p>临时性的回调元素，如果遇到异常或者完成回调后会进行回滚元素回调</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> src = <span class="keyword">new</span> <span class="keyword">object</span>[]&#123; <span class="string">"a"</span>, <span class="string">"b"</span> , <span class="string">"c"</span> &#125;;</span><br><span class="line">Arr.Flash(src,</span><br><span class="line">(element)=&gt; Console.WriteLine(<span class="string">"start:"</span> + element),</span><br><span class="line">(element)=&gt; Console.WriteLine(<span class="string">"rollback:"</span> + element), </span><br><span class="line">()=&gt; &#123; Console.WriteLine(<span class="string">"Completed"</span>); &#125;);</span><br><span class="line"><span class="comment">// start:a</span></span><br><span class="line"><span class="comment">// start:b</span></span><br><span class="line"><span class="comment">// start:c</span></span><br><span class="line"><span class="comment">// Completed</span></span><br><span class="line"><span class="comment">// rollback:c</span></span><br><span class="line"><span class="comment">// rollback:b</span></span><br><span class="line"><span class="comment">// rollback:a</span></span><br></pre></td></tr></table></figure>
     <div class="footer">
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/detail/support/arr.md" target="_blank">

@@ -4,7 +4,7 @@
     <head>
 
     
-    <title>字符串辅助函数(Str) — CatLib</title>
+    <title>字典辅助函数(Str) — CatLib</title>
       
     <meta charset="utf-8">
     
@@ -429,64 +429,41 @@
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="字符串辅助函数-Str"><a href="#字符串辅助函数-Str" class="headerlink" title="字符串辅助函数(Str)"></a>字符串辅助函数(Str)</h2><p>字符串方法库允许您通过简单的方式访问和操作字符串。</p>
+    <h2 id="字典辅助函数-Str"><a href="#字典辅助函数-Str" class="headerlink" title="字典辅助函数(Str)"></a>字典辅助函数(Str)</h2><p>字典辅助方法库允许您以更加便捷的方式对字典进行操作。</p>
 <h3 id="可用方法"><a href="#可用方法" class="headerlink" title="可用方法"></a>可用方法</h3><ul>
-<li><a href="#Method">Method</a></li>
-<li><a href="#Is">Is</a></li>
-<li><a href="#AsteriskWildcard">AsteriskWildcard</a></li>
-<li><a href="#Split">Split</a></li>
-<li><a href="#Repeat">Repeat</a></li>
-<li><a href="#Shuffle">Shuffle</a></li>
-<li><a href="#SubstringCount">SubstringCount</a></li>
-<li><a href="#Reverse">Reverse</a></li>
-<li><a href="#Pad">Pad</a></li>
-<li><a href="#After">After</a></li>
-<li><a href="#Contains">Contains</a></li>
-<li><a href="#Replace">Replace</a></li>
-<li><a href="#ReplaceFirst">ReplaceFirst</a></li>
-<li><a href="#ReplaceLast">ReplaceLast</a></li>
-<li><a href="#Random">Random</a></li>
-<li><a href="#Trancate">Trancate</a></li>
+<li><a href="#Filter">Filter</a></li>
+<li><a href="#Modify">Modify</a></li>
+<li><a href="#AddRange">AddRange</a></li>
+<li><a href="#Map">Map</a></li>
+<li><a href="#Keys">Keys</a></li>
+<li><a href="#Values">Values</a></li>
+<li><a href="#Get">Get</a></li>
+<li><a href="#Set">Set</a></li>
+<li><a href="#Remove">Remove</a></li>
 </ul>
-<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>获取字符串所表达的合法的函数名。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Str.Method(<span class="string">"ClassName.Function"</span>); <span class="comment">// Function</span></span><br><span class="line">Str.Method(<span class="string">"ClassName.Function@NewFunction"</span>); <span class="comment">// New Function</span></span><br><span class="line">Str.Method(<span class="string">"ClassName.Function@#$%^^&amp;*"</span>); <span class="comment">// Function</span></span><br></pre></td></tr></table></figure>
-<h3 id="Is"><a href="#Is" class="headerlink" title="Is"></a>Is</h3><p>判断规定字符串是否符合匹配表达式。（匹配表达式允许使用星号(*)通配）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.Is(<span class="string">"/hello/w*d"</span> , <span class="string">"helloworld"</span>);</span><br><span class="line"><span class="comment">// result : true</span></span><br></pre></td></tr></table></figure>
-<h3 id="AsteriskWildcard"><a href="#AsteriskWildcard" class="headerlink" title="AsteriskWildcard"></a>AsteriskWildcard</h3><p>将规定字符串翻译为星号匹配表达式。（即删减正则表达式中除了星号外的所有功能）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.AsteriskWildcard(<span class="string">"[hello]w*d"</span>);</span><br><span class="line"><span class="comment">// result : "\[hello\]w*d"</span></span><br></pre></td></tr></table></figure>
-<h3 id="Split"><a href="#Split" class="headerlink" title="Split"></a>Split</h3><p>根据长度将字符串分割到数组中。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.Split(<span class="string">"helloworld"</span> , <span class="number">2</span>);</span><br><span class="line"><span class="comment">// result = ["he" , "ll" , "ow" , "or" , "ld"]</span></span><br></pre></td></tr></table></figure>
-<h3 id="Repeat"><a href="#Repeat" class="headerlink" title="Repeat"></a>Repeat</h3><p>将字符串重复指定的次数。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.Repeat(<span class="string">"hello"</span> , <span class="number">3</span>);</span><br><span class="line"><span class="comment">// result : hellohellohello</span></span><br></pre></td></tr></table></figure>
-<h3 id="Shuffle"><a href="#Shuffle" class="headerlink" title="Shuffle"></a>Shuffle</h3><p>随机打乱字符串中的所有字符</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.Shuffle(<span class="string">"helloworld"</span>);</span><br><span class="line"><span class="comment">// result 为被打乱的值，如：lwloeodlrh, 每次调用值都不一样</span></span><br></pre></td></tr></table></figure>
-<h3 id="SubstringCount"><a href="#SubstringCount" class="headerlink" title="SubstringCount"></a>SubstringCount</h3><p>计算子串在字符串中出现的次数（该函数不计数重叠的子串）</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.SubstringCount(<span class="string">"abcabcab"</span>,<span class="string">"abcab"</span>);</span><br><span class="line"><span class="comment">// result : 1</span></span><br></pre></td></tr></table></figure>
-<h3 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h3><p>反转规定字符串</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.Reverse(<span class="string">"helloworld"</span>);</span><br><span class="line"><span class="comment">// result : dlrowolleh</span></span><br></pre></td></tr></table></figure>
-<h3 id="Pad"><a href="#Pad" class="headerlink" title="Pad"></a>Pad</h3><p>把规定字符串填充为新的长度。</p>
-<ul>
-<li>如果填充长度小于字符串的原始长度，则不进行任何操作。</li>
-<li>填充字符串的两侧。如果不是偶数，则右侧获得额外的填充。</li>
-</ul>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.Pad(<span class="string">"hello"</span>, <span class="number">10</span>, <span class="string">"wor"</span>, PadTypes.Both);</span><br><span class="line"><span class="comment">// result : wohellowor</span></span><br></pre></td></tr></table></figure>
-<h3 id="After"><a href="#After" class="headerlink" title="After"></a>After</h3><p>在规定字符串中查找在规定搜索值，并在规定搜索值之后返回规定字符串的剩余部分。(如果没有找到则返回规定字符串本身)</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.After(<span class="string">"helloworld"</span>,<span class="string">"llo"</span>);</span><br><span class="line"><span class="comment">// result : world</span></span><br></pre></td></tr></table></figure>
-<h3 id="Contains"><a href="#Contains" class="headerlink" title="Contains"></a>Contains</h3><p>判断规定字符串是否包含规定子字符串。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.Contains(<span class="string">"helloworld"</span>,<span class="string">"llo"</span>);</span><br><span class="line"><span class="comment">// result : true</span></span><br></pre></td></tr></table></figure>
-<h3 id="Replace"><a href="#Replace" class="headerlink" title="Replace"></a>Replace</h3><p>在规定字符串中替换匹配项。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.Replace(<span class="keyword">new</span> []&#123;<span class="string">"hel"</span>,<span class="string">"wor"</span>&#125;,<span class="string">"***"</span>,<span class="string">"helloworld"</span>);</span><br><span class="line"><span class="comment">// result : ***lo***ld</span></span><br></pre></td></tr></table></figure>
-<h3 id="ReplaceFirst"><a href="#ReplaceFirst" class="headerlink" title="ReplaceFirst"></a>ReplaceFirst</h3><p>替换规定字符串中第一次遇到的匹配项</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.ReplaceFirst(<span class="string">"hel"</span>,<span class="string">"***"</span>,<span class="string">"helloworldhelloworld"</span>);</span><br><span class="line"><span class="comment">// result : ***loworldhelloworld</span></span><br></pre></td></tr></table></figure>
-<h3 id="ReplaceLast"><a href="#ReplaceLast" class="headerlink" title="ReplaceLast"></a>ReplaceLast</h3><p>替换规定字符串中从后往前第一次遇到的匹配项</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.ReplaceLast(<span class="string">"hel"</span>,<span class="string">"***"</span>,<span class="string">"helloworldhelloworld"</span>);</span><br><span class="line"><span class="comment">// result : helloworld***loworld</span></span><br></pre></td></tr></table></figure>
-<h3 id="Random"><a href="#Random" class="headerlink" title="Random"></a>Random</h3><p>生成一个随机字母（含大小写），数字的字符串。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.Random(<span class="number">8</span>);</span><br><span class="line"><span class="comment">// result : 一个随机值，如：u8Kn1YUz</span></span><br></pre></td></tr></table></figure>
-<h3 id="Trancate"><a href="#Trancate" class="headerlink" title="Trancate"></a>Trancate</h3><p>如果长度超过给定的最大字符串长度，则截断字符串。 截断的字符串的最后一个字符将替换为默认为<code>...</code>的省略字符串。</p>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.Trancate(<span class="string">"helloworld"</span>,<span class="number">6</span>);</span><br><span class="line"><span class="comment">// result: hel...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> result = Str.Trancate(<span class="string">"hello world"</span>,<span class="number">10</span> , <span class="string">" "</span>);</span><br><span class="line"><span class="comment">// result: hello...</span></span><br></pre></td></tr></table></figure>
+<h3 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h3><p>将输入字典中的每个值传给回调函数,如果回调函数返回 true，则把输入字典中的当前键值对加入结果字典中。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> src = <span class="comment">// &#123; "a" : "1"&#125; , &#123; "b" : "2" &#125;</span></span><br><span class="line">Dict.Filter(src, (key, val)=&gt; val == <span class="string">"2"</span>); <span class="comment">// &#123; "b" : "2" &#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Modify"><a href="#Modify" class="headerlink" title="Modify"></a>Modify</h3><p>将输入字典中的每个值传给回调函数，回调函数的返回值用于修改元素的值。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> src = <span class="comment">// &#123; "a" : "1"&#125; , &#123; "b" : "2" &#125;</span></span><br><span class="line">Dict.Modify(src, (key , val) =&gt; <span class="string">"3"</span>);</span><br><span class="line"><span class="comment">// src:</span></span><br><span class="line"><span class="comment">// &#123; "a" : "3" &#125;,</span></span><br><span class="line"><span class="comment">// &#123; "b" : "3" &#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="AddRange"><a href="#AddRange" class="headerlink" title="AddRange"></a>AddRange</h3><p>将元素批量添加到字典。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> src = <span class="comment">// &#123; "a" : "1" &#125;, &#123; "b" : "2" &#125;</span></span><br><span class="line"><span class="keyword">var</span> added = <span class="comment">// &#123; "c" : "3" &#125;</span></span><br><span class="line">Dict.AddRange(src, added); </span><br><span class="line"><span class="comment">// &#123; "a" : "1" &#125;, &#123; "b" : "2" &#125;, &#123; "c" : "3" &#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h3><p>将字典值传入用户自定义函数，自定义函数返回的值作为新的字典值。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> src = <span class="comment">// &#123; "a" : "1" &#125;, &#123; "b" : "2" &#125;</span></span><br><span class="line">Dict.Map(src, (key,val)=&gt; <span class="string">"3"</span>);</span><br><span class="line"><span class="comment">// src:</span></span><br><span class="line"><span class="comment">// &#123; "a" : "1"&#125;,</span></span><br><span class="line"><span class="comment">// &#123; "b" : "2" &#125;</span></span><br><span class="line"><span class="comment">// return:</span></span><br><span class="line"><span class="comment">// &#123; "a" : "3" &#125;,</span></span><br><span class="line"><span class="comment">// &#123; "b" : "3" &#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Keys"><a href="#Keys" class="headerlink" title="Keys"></a>Keys</h3><p>获取字典的键数组。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> src = <span class="comment">// &#123; "a" : "1" &#125;, &#123; "b" : "2" &#125;</span></span><br><span class="line">Dict.Keys(src);</span><br><span class="line"><span class="comment">// &#123; "a" : "b" &#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Keys-1"><a href="#Keys-1" class="headerlink" title="Keys"></a>Keys</h3><p>获取字典的值数组。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> src = <span class="comment">// &#123; "a" , "1" &#125;, &#123; "b" , "2" &#125;</span></span><br><span class="line">Dict.Values(src);</span><br><span class="line"><span class="comment">// &#123; "1" , "2" &#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Get"><a href="#Get" class="headerlink" title="Get"></a>Get</h3><p>使用点（.）来访问深度字典（<code>IDictionary&lt;string, object&gt;</code>）。一般性Json的返回结果会被使用深度字典表示。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> src = <span class="comment">// &#123; "hello" : &#123; "world" : "catlib" &#125; &#125;</span></span><br><span class="line">Dict.Get(src, <span class="string">"hello.world"</span>); <span class="comment">// catlib</span></span><br><span class="line">Dict.Get(src, <span class="string">"hello.none"</span>, <span class="string">"null"</span>); <span class="comment">// null</span></span><br></pre></td></tr></table></figure>
+<h3 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h3><p>使用点（.）来访问深度字典，并为其指定位置设定一个值。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> src = <span class="comment">// &#123; "hello" : &#123; "world" : "catlib" &#125; &#125;</span></span><br><span class="line">Dict.Set(src, <span class="string">"hello.catlib"</span> , <span class="string">"hello"</span>);</span><br><span class="line"><span class="comment">// &#123; "hello" : &#123; &#123;"world" : "catlib"&#125; , &#123; "catlib" , "hello"&#125; &#125; &#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Remove"><a href="#Remove" class="headerlink" title="Remove"></a>Remove</h3><p><strong>将输入字典中的每个值传给回调函数，如果回调函数返回 true，则移除字典中对应的元素</strong></p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> src = <span class="comment">// &#123; "hello" : "world" &#125;</span></span><br><span class="line">Dict.Remove(src, (key,<span class="keyword">value</span>) =&gt; <span class="literal">true</span>);</span><br><span class="line"><span class="comment">// &#123; &#125;</span></span><br></pre></td></tr></table></figure>
+<p><strong>使用点（.）来访问深度字典，并移除其中指定的值</strong></p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> src = <span class="comment">// &#123; "hello" : &#123; &#123;"world" : "catlib"&#125; , &#123; "catlib" , "hello"&#125; &#125; &#125;</span></span><br><span class="line">Dict.Remove(src, <span class="string">"hello.catlib"</span>);</span><br><span class="line"><span class="comment">// &#123; "hello" : &#123; "world" : "catlib" &#125; &#125;</span></span><br></pre></td></tr></table></figure>
     <div class="footer">
         发现错误？想参与编辑？ 
-        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/detail/support/str.md" target="_blank">
+        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/detail/support/dict.md" target="_blank">
             在 Github 上编辑此页！
         </a>
     </div>
