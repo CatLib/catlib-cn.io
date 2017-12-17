@@ -11,9 +11,9 @@ Container 服务容器是一个用于管理`类的依赖`和`执行依赖注入`
 
 ### 简介
 
-几乎所有的服务绑定都是在服务提供者中完成。如果一个`服务`没有基于任何接口或者别名那么就没有必要将其绑定到容器。
+几乎所有的服务绑定都是在服务提供者中完成。如果一个`服务`没有基于任何接口那么就没有必要将其绑定到容器。
 
-容器并不需要被告知如何构建对象，因为它会使用反射服务自动解析出具体的对象。在一个服务提供者中，可以通过`App`全局变量访问容器，然后使用`Bind()`或者`Singleton()`方法注册一个`服务`的绑定。
+容器并不需要被告知如何构建对象，因为它会使用反射服务自动解析出具体的对象实例。在任何位置，您可以通过`App`全局变量访问容器。在服务提供者中我们可以使用`Bind()`或者`Singleton()`方法来注册一个`服务`的绑定。
 
 ``` csharp
 var container = new Container(); // 构建一个单纯的服务容器
@@ -21,7 +21,7 @@ var container = new Container(); // 构建一个单纯的服务容器
 
 ### 构建服务
 
-您可以通过`Make()`方法来构建服务。如果通过容器去生成一个没有被绑定的服务，那么容器会尝试解决需要被生成的服务，如果尝试解决失败，那么将会抛出一个`UnresolvableException`异常。
+您可以通过`Make()`方法来构建服务。如果通过容器去生成一个没有被绑定的服务，那么容器会根据策略尝试解决需要被生成的服务，如果尝试解决失败，那么将会抛出一个`UnresolvableException`异常。
 
 > `CatLib Framework` 中所有可以直接通过`Make()`生成的服务请参考：[服务表](can-make.html)
 
@@ -37,7 +37,7 @@ App.Bind<SocketManager>().Alias<ISocketManager>();
 
 我们通过上述代码将`SocketManager`这个服务绑定到了服务容器。同时赋予了`ISocketManager`的别名。
 
-这样您就可以使用使用实例名或者别名来构建服务了，但是请注意：一般情况下我们建议通过`ISocketManager`来生成服务。
+这样您就可以使用使用实例名或者别名来构建服务了，但是请注意：一般情况下我们都建议通过`ISocketManager`来生成服务。
 
 ``` csharp
 var manager = App.Make<ISocketManager>(); // 等价与: var manager = new SocketManager();
@@ -61,7 +61,7 @@ var manager2 = App.Make<ISocketManager>();
 
 在您简单的`Make()`操作中，服务容器已经对绑定的服务进行了一系列复杂操作（服务关系转换，服务构建，服务推测，上下文关系处理，依赖注入，服务修饰，单例化...），这一切对于开发者的您来说完全是透明的无感知的。
 
-服务容器能够自动识别您构造函数中的参数，并为其注入合适的服务实例。注入方案请参考：[注入规则](container.html#注入规则)
+服务容器能够自动识别您构造函数中的参数，并为其注入合适的服务实例。注入方案请参考：[依赖注入规则](container.html#依赖注入规则)
 
 ``` csharp
 public class CustomizeService
@@ -95,7 +95,7 @@ public class CustomizeService
 }
 ```
 
-> 注意，您不能在`构造函数`中访问被标记为注入的`属性选择器`的实例，因为属性选择器的注入流程会在构造函数之后进行，如果您在构造函数中就访问了将会导致一个`NullReferenceException`异常。
+> 注意，您不能在`构造函数`中访问被标记为注入的`属性选择器`的实例，因为属性选择器的注入流程会在构造函数之后进行，如果您在构造函数中访问了被标记为注入的属性选择器，这将会导致一个`NullReferenceException`异常。
 
 ### 服务别名
 
@@ -206,7 +206,7 @@ App.Watch<ISocketManager>((instance)=>{
 App.Instance("socket" , new SocketManager());
 ```
 
-需要注意的是，如果您使用了`Bind`为指定的服务进行实例绑定，那么如果您尝试将其静态化出现将会抛出一个`RuntimeException`异常:
+需要注意的是，如果您使用了`Bind`为指定的服务进行实例绑定，那么如果您尝试将这个服务静态化，服务容器将会抛出一个`RuntimeException`异常:
 
 ``` csharp
 App.Bind("socket", (container, userParams)=> new SocketManager());
@@ -348,6 +348,36 @@ App.Flash(()=>{
 App.Handler.Flush();
 ```
 
+### 依赖注入规则
+
+- **执行构造函数注入**
+- 遍历参数列表:
+-- **检查是否为紧缩注入参数(`object`或`object[]`)，并且可以进行紧缩注入：**
+----- 是：将用户传入的参数紧缩注入，清空用户传入的参数。
+-- **从剩余的用户传入的参数中挑选并弹出合适的参数。**
+-- 使用依赖注入容器进行分析：
+----- **如果是：类，接口注入：**
+--------- 递归执行服务构建
+--------- 如果构建失败：检查是否可以使用默认值。
+--------- 如果均失败：抛出`UnresolvableException`异常
+----- **如果是基础类型注入：**
+--------- 如果可以构建则，递归执行服务构建
+--------- 使用参数名来推测服务实现
+--------- 如果推测失败，则检查是否可以使用默认值
+--------- 如果均失败：抛出`UnresolvableException`异常
+- **执行实例的特性注入**
+- 遍历参数列表:
+-- **检查可读写状态，不可写则跳过**
+-- 使用依赖注入容器进行分析：
+----- **如果是：类，接口注入：**
+---------- 递归执行服务构建
+---------- 如果构建失败：抛出`UnresolvableException`异常
+----- **如果是基础类型注入：**
+---------- 如果可以构建则，递归执行服务构建
+---------- 使用属性名来推测服务实现
+---------- 如果推测失败：抛出`UnresolvableException`异常
+- 注入完成
+
 ### 其他常规函数
 
 - Type2Service(type); 将类型转为服务名 
@@ -360,6 +390,34 @@ App.Handler.Flush();
 - SingletonIf(service, concrete); 当服务不存在时才绑定(单例绑定)
 - Wrap(lambda,params); 包装一个触发可以以依赖注入形式调用的方法
 - Factory(service); 包装一个触发可以获得指定服务的方法
+
+### 容器行为定制
+
+当开发者需要深度定制容器行为时可以重构下面提供的虚方法来调整容器默认行为。容器行为定制只有您非常了解虚函数对应的行为才能操作。
+
+- **GetDependenciesFromUserParams**：从用户传入的参数中获取合适的参数进行注入。
+- **ChangeType**：转换类型到指定类型。
+- **GetPropertyNeedsService**：传入一个属性选择器对象(`PropertyInfo`)获取对应对象需求的服务名。
+- **GetParamNeedsService**：传入一个参数对象(`ParameterInfo`)获取对应的参数需求的服务名
+- **ResolveAttrPrimitive**：当解决属性选择器的基础类型时，返回值为需求的服务实例。
+- **ResloveAttrClass**：当解决属性选择器类或者接口类型时，返回值为需求的服务实例。
+- **ResolvePrimitive**：当解决构造函数的基础类型时，返回值为需求的服务实例。
+- **ResloveClass**：当解决构造函数的类或者接口类型时，返回值为需求的服务实例。
+- **SpeculationServiceByParamName**：根据一个参数信息来推测服务。返回值为需求的服务实例。
+- **GetBuildStackDebugMessage**：获取编译堆栈的调试信息。
+- **MakeBuildFaildException**：构建一个编译失败的异常。
+- **MakeUnresolvablePrimitiveException**：构建一个未能解决基础参数的异常。
+- **MakeCircularDependencyException**：构建一个循环依赖异常。
+- **FormatService**：格式化(标准化)服务名。
+- **CanInject**：检查实例是否可以被注入。
+- **GuardUserParamsCount**：限制用户传入的参数数量。
+- **GuardResolveInstance**：限制解决实例的有效条件。
+- **SpeculatedServiceType**：根据服务名推测指定的服务类型。
+- **AttributeInject**：对指定的实例进行属性注入。
+- **CheckCompactInjectUserParams**：检查是否可以紧缩注入用户传入的参数。
+- **GetCompactInjectUserParams**：获取紧缩注入的用户参数。
+- **GetDependencies**：获取指定参数列表的依赖注入结果。
+- **GetConstructorsInjectParams**：选择一个合适的构造函数并且获取指定需要注入的参数。
 
 ### 性能优化相关
 
