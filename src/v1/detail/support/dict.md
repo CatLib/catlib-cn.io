@@ -110,15 +110,16 @@ Dict.Set(src, "hello.catlib" , "hello");
 
 ### Remove
 
-**将输入字典中的每个值传给回调函数，如果回调函数返回 true，则移除字典中对应的元素**
+**将输入字典中的每个值传给回调函数，如果回调函数返回 true，则移除字典中对应的元素并返回被移除的元素**
 
 ```csharp
 var src = // { "hello" : "world" }
-Dict.Remove(src, (key,value) => true);
+var result = Dict.Remove(src, (key,value) => true);
+// result:  { "hello" : "world" }
 // { }
 ```
 
-**使用点（.）来访问深度字典，并移除其中指定的值**
+**使用点（.）来访问深度字典，并移除其中指定的值,返回一个bool值来指定是否成功**
 
 ```csharp
 var src = // { "hello" : { {"world" : "catlib"} , { "catlib" , "hello"} } }

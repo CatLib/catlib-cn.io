@@ -17,6 +17,7 @@ enable: true
 - [Splice](#Splice)
 - [Chunk](#Chunk)
 - [Fill](#Fill)
+- [Remove](#Remove)
 - [Filter](#Filter)
 - [Map](#Map)
 - [Pop](#Pop)
@@ -82,6 +83,17 @@ var result = Arr.Chunk(new []{"1","2","3"} , 2);
 ```csharp
 var result = Arr.Fill(2,3,"100",new []{"1","2","3"});
 // result : ["1","2","100","100","100","3"]
+```
+
+### Remove
+
+将数组每个值传给回调函数，如果回调函数返回 true，则移除数组中对应的元素，并返回被移除的元素
+
+```csharp
+var data = new string[]{"1","2","3"};
+var result = Arr.Remove(ref data,(v) => v == "2");
+// result : ["2"]
+// data: ["1","3"]
 ```
 
 ### Filter
