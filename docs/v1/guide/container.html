@@ -550,7 +550,7 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Handler.Flush();</span><br></pre></td></tr></table></figure>
 <h3 id="依赖注入规则"><a href="#依赖注入规则" class="headerlink" title="依赖注入规则"></a>依赖注入规则</h3><ul>
 <li><strong>执行构造函数注入</strong></li>
-<li>遍历参数列表:<br>– <strong>检查是否为紧缩注入参数(<code>object</code>或<code>object[]</code>)，并且可以进行紧缩注入：</strong><br>—– 是：将用户传入的参数紧缩注入，清空用户传入的参数。<br>– <strong>从剩余的用户传入的参数中挑选并弹出合适的参数。</strong><br>– 使用依赖注入容器进行分析：<br>—– <strong>如果是：类，接口注入：</strong><br>——— 递归执行服务构建<br>——— 如果构建失败：检查是否可以使用默认值。<br>——— 如果均失败：抛出<code>UnresolvableException</code>异常<br>—– <strong>如果是基础类型注入：</strong><br>——— 如果可以构建则，递归执行服务构建<br>——— 使用参数名来推测服务实现<br>——— 如果推测失败，则检查是否可以使用默认值<br>——— 如果均失败：抛出<code>UnresolvableException</code>异常</li>
+<li>遍历参数列表:<br>– <strong>通过参数匹配器获取可以用于被注入的参数</strong><br>—– 默认匹配器通过参数名和传入的匹配表进行匹配，返回一个有效的结果。<br>– <strong>检查是否为紧缩注入参数(<code>object</code>或<code>object[]</code>)，并且可以进行紧缩注入：</strong><br>—– 是：将用户传入的参数紧缩注入，清空用户传入的参数。<br>– <strong>从剩余的用户传入的参数中挑选并弹出合适的参数。</strong><br>– 使用依赖注入容器进行分析：<br>—– <strong>如果是：类，接口注入：</strong><br>——— 执行服务构建，如果产生异常则执行后续步骤<br>——— 使用参数名来推测服务实现<br>——— 如果推测失败，则检查是否可以使用默认值。<br>——— 如果均失败：抛出<code>UnresolvableException</code>异常<br>—– <strong>如果是基础类型注入：</strong><br>——— 如果可以构建则，执行服务构建<br>——— 使用参数名来推测服务实现<br>——— 如果推测失败，则检查是否可以使用默认值<br>——— 如果均失败：抛出<code>UnresolvableException</code>异常</li>
 <li><strong>执行实例的特性注入</strong></li>
 <li>遍历参数列表:<br>– <strong>检查可读写状态，不可写则跳过</strong><br>– 使用依赖注入容器进行分析：<br>—– <strong>如果是：类，接口注入：</strong><br>———- 递归执行服务构建<br>———- 如果构建失败：抛出<code>UnresolvableException</code>异常<br>—– <strong>如果是基础类型注入：</strong><br>———- 如果可以构建则，递归执行服务构建<br>———- 使用属性名来推测服务实现<br>———- 如果推测失败：抛出<code>UnresolvableException</code>异常</li>
 <li>注入完成</li>
@@ -589,6 +589,7 @@
 <li><strong>SpeculatedServiceType</strong>：根据服务名推测指定的服务类型。</li>
 <li><strong>AttributeInject</strong>：对指定的实例进行属性注入。</li>
 <li><strong>CheckCompactInjectUserParams</strong>：检查是否可以紧缩注入用户传入的参数。</li>
+<li><strong>GetParamsMatcher</strong>：获取一个参数匹配器，参数匹配器匹配到的有效结果将作为最优参数值。</li>
 <li><strong>GetCompactInjectUserParams</strong>：获取紧缩注入的用户参数。</li>
 <li><strong>GetDependencies</strong>：获取指定参数列表的依赖注入结果。</li>
 <li><strong>GetConstructorsInjectParams</strong>：选择一个合适的构造函数并且获取指定需要注入的参数。</li>
