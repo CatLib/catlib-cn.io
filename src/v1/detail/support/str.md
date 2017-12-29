@@ -1,16 +1,17 @@
 ---
-title: 字符串(Str)
+title: 字符串辅助函数(Str)
 type: detail
 order: 102
 enable: true
 ---
 
-## 字符串(Str)
+## 字符串辅助函数(Str)
 
 字符串方法库允许您通过简单的方式访问和操作字符串。
 
 ### 可用方法
 
+- [Method](#Method)
 - [Is](#Is)
 - [AsteriskWildcard](#AsteriskWildcard)
 - [Split](#Split)
@@ -26,6 +27,16 @@ enable: true
 - [ReplaceLast](#ReplaceLast)
 - [Random](#Random)
 - [Trancate](#Trancate)
+
+### Method
+
+获取字符串所表达的合法的函数名。
+
+```csharp
+Str.Method("ClassName.Function"); // Function
+Str.Method("ClassName.Function@NewFunction"); // New Function
+Str.Method("ClassName.Function@#$%^^&*"); // Function
+```
 
 ### Is
 

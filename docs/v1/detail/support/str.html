@@ -4,7 +4,7 @@
     <head>
 
     
-    <title>字符串(Str) — CatLib</title>
+    <title>字符串辅助函数(Str) — CatLib</title>
       
     <meta charset="utf-8">
     
@@ -157,6 +157,16 @@
             
             
             <li>
+                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
                 <p><a href="/v1/guide/support.html" class="sidebar-link">支持库</del></a></p>
             </li>
         
@@ -179,7 +189,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</del></a></p>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</del></a></p>
             </li>
         
             
@@ -189,7 +199,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</del></a></p>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</del></a></p>
             </li>
         
             
@@ -289,7 +299,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
             </li>
         
             
@@ -299,7 +309,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
+                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
             </li>
         
             
@@ -341,7 +351,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</del></a></p>
+                <p><a href="/v1/guide/random-unity.html" class="sidebar-link">随机数扩展</del></a></p>
             </li>
         
             
@@ -361,7 +371,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/random-unity.html" class="sidebar-link">随机数扩展</del></a></p>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</del></a></p>
             </li>
         
             
@@ -419,8 +429,9 @@
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="字符串-Str"><a href="#字符串-Str" class="headerlink" title="字符串(Str)"></a>字符串(Str)</h2><p>字符串方法库允许您通过简单的方式访问和操作字符串。</p>
+    <h2 id="字符串辅助函数-Str"><a href="#字符串辅助函数-Str" class="headerlink" title="字符串辅助函数(Str)"></a>字符串辅助函数(Str)</h2><p>字符串方法库允许您通过简单的方式访问和操作字符串。</p>
 <h3 id="可用方法"><a href="#可用方法" class="headerlink" title="可用方法"></a>可用方法</h3><ul>
+<li><a href="#Method">Method</a></li>
 <li><a href="#Is">Is</a></li>
 <li><a href="#AsteriskWildcard">AsteriskWildcard</a></li>
 <li><a href="#Split">Split</a></li>
@@ -437,6 +448,8 @@
 <li><a href="#Random">Random</a></li>
 <li><a href="#Trancate">Trancate</a></li>
 </ul>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>获取字符串所表达的合法的函数名。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Str.Method(<span class="string">"ClassName.Function"</span>); <span class="comment">// Function</span></span><br><span class="line">Str.Method(<span class="string">"ClassName.Function@NewFunction"</span>); <span class="comment">// New Function</span></span><br><span class="line">Str.Method(<span class="string">"ClassName.Function@#$%^^&amp;*"</span>); <span class="comment">// Function</span></span><br></pre></td></tr></table></figure>
 <h3 id="Is"><a href="#Is" class="headerlink" title="Is"></a>Is</h3><p>判断规定字符串是否符合匹配表达式。（匹配表达式允许使用星号(*)通配）</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.Is(<span class="string">"/hello/w*d"</span> , <span class="string">"helloworld"</span>);</span><br><span class="line"><span class="comment">// result : true</span></span><br></pre></td></tr></table></figure>
 <h3 id="AsteriskWildcard"><a href="#AsteriskWildcard" class="headerlink" title="AsteriskWildcard"></a>AsteriskWildcard</h3><p>将规定字符串翻译为星号匹配表达式。（即删减正则表达式中除了星号外的所有功能）</p>

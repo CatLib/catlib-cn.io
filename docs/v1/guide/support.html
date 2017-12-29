@@ -157,6 +157,16 @@
             
             
             <li>
+                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
                 <p><a href="/v1/guide/support.html" class="sidebar-link current">支持库</del></a></p>
             </li>
         
@@ -179,7 +189,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</del></a></p>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</del></a></p>
             </li>
         
             
@@ -189,7 +199,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</del></a></p>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</del></a></p>
             </li>
         
             
@@ -289,7 +299,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
             </li>
         
             
@@ -299,7 +309,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
+                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
             </li>
         
             
@@ -341,7 +351,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</del></a></p>
+                <p><a href="/v1/guide/random-unity.html" class="sidebar-link">随机数扩展</del></a></p>
             </li>
         
             
@@ -361,7 +371,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/random-unity.html" class="sidebar-link">随机数扩展</del></a></p>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</del></a></p>
             </li>
         
             
@@ -424,7 +434,7 @@
 <p>支持库组件不能通过容器进行生成，您需要手动<code>new</code>出支持库组件。</p>
 </blockquote>
 <h3 id="服务容器-Container"><a href="#服务容器-Container" class="headerlink" title="服务容器(Container)"></a>服务容器(Container)</h3><p>CatLib服务容器属于支持的一部分，关于服务容器相关介绍请参考：<a href="container.html">服务容器</a></p>
-<h3 id="事件系统（Event）"><a href="#事件系统（Event）" class="headerlink" title="事件系统（Event）"></a>事件系统（Event）</h3><p>事件机制是一种很好的应用解耦方式。CatLib事件系统让我们可以订阅和监听程序中出现的各种事件。关于事件系统请参考：<a href="/v1/detail/support/events.html">事件系统</a></p>
+<h3 id="事件系统（Event）"><a href="#事件系统（Event）" class="headerlink" title="事件系统（Event）"></a>事件系统（Event）</h3><p>事件机制是一种很好的应用解耦方式。CatLib事件系统让我们可以订阅和监听程序中出现的各种事件。关于事件系统请参考：<a href="events.html">事件系统</a></p>
 <h3 id="有序集-SortSet"><a href="#有序集-SortSet" class="headerlink" title="有序集(SortSet)"></a>有序集(SortSet)</h3><p>有序集合和集合一样也是元素的集合,且不允许重复的成员。不同的是每个元素都会关联一个可以被排序的分数。</p>
 <p>有序集合是通过分数来为集合中的成员进行从小到大的排序。有序集合的成员是唯一的,但分数却可以重复。</p>
 <p>关于有序集的详细文档请参考：<a href="/v1/detail/stl/sortset.html">有序集</a></p>
@@ -438,8 +448,9 @@
 <p>关于过滤器链的详细文档请参考：<a href="/v1/detail/stl/filterchain.html">过滤器链</a></p>
 <h3 id="优先级"><a href="#优先级" class="headerlink" title="优先级"></a>优先级</h3><p>支持库提供了优先级特性的支持，您可以通过<code>Util.GetPriorities</code>获取类或者函数的优先级定义。</p>
 <h3 id="版本-Version"><a href="#版本-Version" class="headerlink" title="版本(Version)"></a>版本(Version)</h3><p>版本组件是<a href="http://semver.org" target="_blank" rel="noopener">Semver</a>标准的实现。通过语义化的版本控制，在这套约定下，版本号及其更新方式包含了相邻版本间的底层代码和修改内容的信息。</p>
-<h3 id="数组-Arr"><a href="#数组-Arr" class="headerlink" title="数组(Arr)"></a>数组(Arr)</h3><p>数组方法库允许您通过简单的方式访问和操作数组。文档详情请参考：<a href="/v1/detail/support/arr.html">数组(Arr)</a></p>
-<h3 id="字符串-Str"><a href="#字符串-Str" class="headerlink" title="字符串(Str)"></a>字符串(Str)</h3><p>字符串方法库许您通过简单的方式访问和操作字符串。文档详情请参考：<a href="/v1/detail/support/str.html">字符串(Str)</a></p>
+<h3 id="数组辅助函数-Arr"><a href="#数组辅助函数-Arr" class="headerlink" title="数组辅助函数(Arr)"></a>数组辅助函数(Arr)</h3><p>数组方法库允许您通过简单的方式访问和操作数组。文档详情请参考：<a href="/v1/detail/support/arr.html">数组辅助函数(Arr)</a></p>
+<h3 id="字符串辅助函数-Str"><a href="#字符串辅助函数-Str" class="headerlink" title="字符串辅助函数(Str)"></a>字符串辅助函数(Str)</h3><p>字符串方法库许您通过简单的方式访问和操作字符串。文档详情请参考：<a href="/v1/detail/support/str.html">字符串辅助函数(Str)</a></p>
+<h3 id="字典辅助函数-Dict"><a href="#字典辅助函数-Dict" class="headerlink" title="字典辅助函数(Dict)"></a>字典辅助函数(Dict)</h3><p>字典辅助方法库允许您以更加便捷的方式对字典进行操作。文档详情参考: <a href="/v1/detail/support/dict.html">字典辅助函数(Dict)</a></p>
 <h3 id="IAwait"><a href="#IAwait" class="headerlink" title="IAwait"></a>IAwait</h3><p>标准等待接口，实现这个接口表示该服务或者类是一个异步等待类，必须等待<code>IAwait</code>完成后才能够使用。这个接口经常会被用于某些SDK组件，某些SDK组件可能会异步初始化，那么服务就必须等待SDK异步初始化完成后才能使用。</p>
 
     <div class="footer">
