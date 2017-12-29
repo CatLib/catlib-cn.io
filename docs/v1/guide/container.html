@@ -351,6 +351,16 @@
             
             
             <li>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
                 <p><a href="/v1/guide/random-unity.html" class="sidebar-link">随机数扩展</del></a></p>
             </li>
         
@@ -362,16 +372,6 @@
             
             <li>
                 <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</del></a></p>
-            </li>
-        
-            
-            
-            
-            
-            
-            
-            <li>
-                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</del></a></p>
             </li>
         
             
@@ -438,7 +438,12 @@
 <p><code>CatLib Framework</code> 中所有可以直接通过<code>Make()</code>生成的服务请参考：<a href="can-make.html">服务表</a></p>
 </blockquote>
 <h3 id="绑定服务-实例"><a href="#绑定服务-实例" class="headerlink" title="绑定服务 - 实例"></a>绑定服务 - 实例</h3><p>要使用服务容器的强大特性您首先需要将服务绑定到服务容器，如果您不不进行绑定您将没有任何服务可用，这些绑定一般性都是在 <a href="service-provider.html">服务提供者</a> 中完成的。</p>
-<p>通过<code>Bind()</code>方法允许将服务以实例绑定（每次生成都会是一个全新实例）的方式进行绑定。</p>
+<p>绑定服务分为以下两种类型：</p>
+<ul>
+<li>实例绑定 - 每次生成都会是一个全新实例</li>
+<li>单例绑定 - 只在第一次生成实例，之后的调用都将返回这个实例</li>
+</ul>
+<p>通过<code>Bind()</code>方法允许将服务以实例绑定的方式进行绑定。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Bind&lt;SocketManager&gt;().Alias&lt;ISocketManager&gt;();</span><br></pre></td></tr></table></figure>
 <p>我们通过上述代码将<code>SocketManager</code>这个服务绑定到了服务容器。同时赋予了<code>ISocketManager</code>的别名。</p>
 <p>这样您就可以使用使用实例名或者别名来构建服务了，但是请注意：一般情况下我们都建议通过<code>ISocketManager</code>来生成服务。</p>
@@ -545,6 +550,11 @@
 </blockquote>
 <h3 id="暂时性托管"><a href="#暂时性托管" class="headerlink" title="暂时性托管"></a>暂时性托管</h3><p>服务容器允许您使用<code>Flash</code>方法来临时托管服务实例，在回调区间完成后这些临时的托管实例将会被释放。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Flash(()=&gt;&#123;</span><br><span class="line"></span><br><span class="line">&#125;, <span class="comment">/* Service name */</span>, <span class="comment">/* Your service instance */</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="可变类型"><a href="#可变类型" class="headerlink" title="可变类型"></a>可变类型</h3><p>使用<code>IVariant</code>接口标记的类将会被容器认为是可变类型，可变类型允许容器使用开发者传入的基础类型参数进行变换（即将基础参数变化为可变类型）。</p>
+<p>默认的基础类型参数为：<code>Boolean</code>,<code>Byte</code>,<code>SByte</code>,<code>Int16</code>,<code>Int32</code>,<code>UInt32</code>,<code>Int64</code>,<code>IntPtr</code>,<code>UIntPtr</code>,<code>Char</code>,<code>Double</code>,<code>Single</code>,<code>String</code>.</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ItemModel</span> : <span class="title">IVariant</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">int</span> itemId;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ItemModel</span>(<span class="params"><span class="keyword">int</span> itemId</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.itemId = itemId;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ItemUI</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">string</span> name;</span><br><span class="line">    <span class="keyword">public</span> ItemModel model;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ItemUI</span>(<span class="params"><span class="keyword">string</span> name, ItemModel model</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.name = name;</span><br><span class="line">        <span class="keyword">this</span>.model = model;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> ui = container.Make&lt;ItemUI&gt;(<span class="string">"道具详情"</span>, <span class="number">10</span>);</span><br><span class="line"><span class="comment">// ui.name : 道具详情</span></span><br><span class="line"><span class="comment">// ui.model.itemId : 10</span></span><br></pre></td></tr></table></figure>
 <h3 id="重置服务容器"><a href="#重置服务容器" class="headerlink" title="重置服务容器"></a>重置服务容器</h3><p>您可以使用<code>Flush</code>来重置服务容器，清除服务容器中的一切数据恢复到初始状态，这是一个危险操作所以我们将API隐藏在Handler中。</p>
 <p>通过Flush重置容器的过程中，会触发<code>OnRelease</code>事件。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Handler.Flush();</span><br></pre></td></tr></table></figure>
@@ -569,6 +579,7 @@
 </ul>
 <h3 id="容器行为定制"><a href="#容器行为定制" class="headerlink" title="容器行为定制"></a>容器行为定制</h3><p>当开发者需要深度定制容器行为时可以重构下面提供的虚方法来调整容器默认行为。容器行为定制只有您非常了解虚函数对应的行为才能操作。</p>
 <ul>
+<li><strong>IsBasicType</strong>：是否为默认的基础类型（默认情况下为：原始类型+string）</li>
 <li><strong>GetDependenciesFromUserParams</strong>：从用户传入的参数中获取合适的参数进行注入。</li>
 <li><strong>ChangeType</strong>：转换类型到指定类型。</li>
 <li><strong>GetPropertyNeedsService</strong>：传入一个属性选择器对象(<code>PropertyInfo</code>)获取对应对象需求的服务名。</li>
