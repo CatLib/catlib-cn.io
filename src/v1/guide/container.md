@@ -343,6 +343,42 @@ App.Flash(()=>{
 }, /* Service name */, /* Your service instance */);
 ```
 
+### 可变类型
+
+使用`IVariant`接口标记的类将会被容器认为是可变类型，可变类型允许容器使用开发者传入的基础类型参数进行变换（即将基础参数变化为可变类型）。
+
+默认的基础类型参数为：`Boolean`,`Byte`,`SByte`,`Int16`,`Int32`,`UInt32`,`Int64`,`IntPtr`,`UIntPtr`,`Char`,`Double`,`Single`,`String`.
+
+```csharp
+public class ItemModel : IVariant
+{
+    public int itemId;
+    public ItemModel(int itemId)
+    {
+        this.itemId = itemId;
+    }
+}
+```
+
+```csharp
+public class ItemUI
+{
+    public string name;
+    public ItemModel model;
+    public ItemUI(string name, ItemModel model)
+    {
+        this.name = name;
+        this.model = model;
+    }
+}
+```
+
+```csharp
+var ui = container.Make<ItemUI>("道具详情", 10);
+// ui.name : 道具详情
+// ui.model.itemId : 10
+```
+
 ### 重置服务容器
 
 您可以使用`Flush`来重置服务容器，清除服务容器中的一切数据恢复到初始状态，这是一个危险操作所以我们将API隐藏在Handler中。
@@ -403,6 +439,7 @@ App.Handler.Flush();
 
 当开发者需要深度定制容器行为时可以重构下面提供的虚方法来调整容器默认行为。容器行为定制只有您非常了解虚函数对应的行为才能操作。
 
+- **IsBasicType**：是否为默认的基础类型（默认情况下为：原始类型+string）
 - **GetDependenciesFromUserParams**：从用户传入的参数中获取合适的参数进行注入。
 - **ChangeType**：转换类型到指定类型。
 - **GetPropertyNeedsService**：传入一个属性选择器对象(`PropertyInfo`)获取对应对象需求的服务名。
