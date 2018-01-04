@@ -50,7 +50,7 @@ var random = App.Make<IRandom>();
 
 ```csharp
 var value = random.Next();
-value = random.Next(100); //最大值为10（不包含）
+value = random.Next(100); //最大值为100（不包含）
 value = random.Next(0,100);//最小值为0（包含），最大值为100（不包含）
 ```
 
