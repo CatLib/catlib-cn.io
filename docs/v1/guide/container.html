@@ -580,6 +580,8 @@
 <h3 id="容器行为定制"><a href="#容器行为定制" class="headerlink" title="容器行为定制"></a>容器行为定制</h3><p>当开发者需要深度定制容器行为时可以重构下面提供的虚方法来调整容器默认行为。容器行为定制只有您非常了解虚函数对应的行为才能操作。</p>
 <ul>
 <li><strong>IsBasicType</strong>：是否为默认的基础类型（默认情况下为：原始类型+string）</li>
+<li><strong>IsUnableType</strong>：是否是无法被构建的类型</li>
+<li><strong>WrapperTypeBuilder</strong>：包装一个类型，可以被用来生成服务</li>
 <li><strong>GetDependenciesFromUserParams</strong>：从用户传入的参数中获取合适的参数进行注入。</li>
 <li><strong>ChangeType</strong>：转换类型到指定类型。</li>
 <li><strong>GetPropertyNeedsService</strong>：传入一个属性选择器对象(<code>PropertyInfo</code>)获取对应对象需求的服务名。</li>
@@ -605,7 +607,8 @@
 <li><strong>GetDependencies</strong>：获取指定参数列表的依赖注入结果。</li>
 <li><strong>GetConstructorsInjectParams</strong>：选择一个合适的构造函数并且获取指定需要注入的参数。</li>
 </ul>
-<h3 id="性能优化相关"><a href="#性能优化相关" class="headerlink" title="性能优化相关"></a>性能优化相关</h3><p>一般情况下我们推荐使用静态绑定的方式来对无依赖注入的服务进行实例。以便于能够获得更好的性能。</p>
+<h3 id="性能优化相关"><a href="#性能优化相关" class="headerlink" title="性能优化相关"></a>性能优化相关</h3><p>最优的方案是使用<a href="facade.html">Facade</a>来访问静态绑定的服务，这样您将获得和源生代码直接访问一样的性能。</p>
+<p>一般情况下我们推荐使用静态绑定的方式来对无依赖注入的服务进行实例。以便于能够获得更好的性能。</p>
 <p>下面的代码将进行静态绑定：</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Singleton&lt;SocketManager&gt;((binder, param)=&gt; <span class="keyword">new</span> SocketManager());</span><br></pre></td></tr></table></figure>
 <p>下面的代码将进行动态绑定：</p>
