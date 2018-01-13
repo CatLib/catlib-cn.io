@@ -440,6 +440,8 @@ App.Handler.Flush();
 当开发者需要深度定制容器行为时可以重构下面提供的虚方法来调整容器默认行为。容器行为定制只有您非常了解虚函数对应的行为才能操作。
 
 - **IsBasicType**：是否为默认的基础类型（默认情况下为：原始类型+string）
+- **IsUnableType**：是否是无法被构建的类型
+- **WrapperTypeBuilder**：包装一个类型，可以被用来生成服务
 - **GetDependenciesFromUserParams**：从用户传入的参数中获取合适的参数进行注入。
 - **ChangeType**：转换类型到指定类型。
 - **GetPropertyNeedsService**：传入一个属性选择器对象(`PropertyInfo`)获取对应对象需求的服务名。
@@ -466,6 +468,8 @@ App.Handler.Flush();
 - **GetConstructorsInjectParams**：选择一个合适的构造函数并且获取指定需要注入的参数。
 
 ### 性能优化相关
+
+最优的方案是使用[Facade](facade.html)来访问静态绑定的服务，这样您将获得和源生代码直接访问一样的性能。
 
 一般情况下我们推荐使用静态绑定的方式来对无依赖注入的服务进行实例。以便于能够获得更好的性能。
 
