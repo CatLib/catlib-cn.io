@@ -427,6 +427,8 @@ App.Handler.Flush();
 - Type2Service(type); 将类型转为服务名 
 - GetBind(service); 获取服务的绑定数据,如果绑定不存在则返回null
 - HasBind(service); 是否已经绑定了服务
+- HasInstance(service) : 是否存在静态化实例
+- IsResolved(service) : 服务是否已经被解决过
 - CanMake(service); 是否可以生成服务
 - IsStatic(service); 服务是否是静态化的,如果服务不存在也将返回false
 - IsAlias(service); 服务名是否是别名
