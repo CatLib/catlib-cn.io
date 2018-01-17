@@ -24,7 +24,7 @@
             <nav class="nav">
     <div class="border">
         <img src="/images/logo.png" />
-        <!--button class="hiden-in-phone">v1.0</button!-->
+        <!--button class="hiden-in-phone">v1.2</button!-->
         <button id="btn-menu" class="hiden-in-pc">菜单</button>
         <ul class="nav-link hiden-in-phone">
             <!--li>
@@ -189,7 +189,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</del></a></p>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</del></a></p>
             </li>
         
             
@@ -199,7 +199,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</del></a></p>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</del></a></p>
             </li>
         
             
@@ -299,7 +299,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
             </li>
         
             
@@ -309,7 +309,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
+                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
             </li>
         
             
@@ -361,7 +361,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</del></a></p>
+                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</del></a></p>
             </li>
         
             
@@ -371,7 +371,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</del></a></p>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</del></a></p>
             </li>
         
             
@@ -569,6 +569,8 @@
 <li>Type2Service(type); 将类型转为服务名 </li>
 <li>GetBind(service); 获取服务的绑定数据,如果绑定不存在则返回null</li>
 <li>HasBind(service); 是否已经绑定了服务</li>
+<li>HasInstance(service) : 是否存在静态化实例</li>
+<li>IsResolved(service) : 服务是否已经被解决过</li>
 <li>CanMake(service); 是否可以生成服务</li>
 <li>IsStatic(service); 服务是否是静态化的,如果服务不存在也将返回false</li>
 <li>IsAlias(service); 服务名是否是别名</li>
