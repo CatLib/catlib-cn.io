@@ -189,7 +189,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</del></a></p>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</del></a></p>
             </li>
         
             
@@ -199,7 +199,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</del></a></p>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</del></a></p>
             </li>
         
             
@@ -361,7 +361,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</del></a></p>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</del></a></p>
             </li>
         
             
@@ -371,7 +371,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</del></a></p>
+                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</del></a></p>
             </li>
         
             
@@ -609,7 +609,7 @@
 <li><strong>GetDependencies</strong>：获取指定参数列表的依赖注入结果。</li>
 <li><strong>GetConstructorsInjectParams</strong>：选择一个合适的构造函数并且获取指定需要注入的参数。</li>
 </ul>
-<h3 id="性能优化相关"><a href="#性能优化相关" class="headerlink" title="性能优化相关"></a>性能优化相关</h3><p>最优的方案是使用<a href="facade.html">Facade</a>来访问静态绑定的服务，这样您将获得和源生代码直接访问一样的性能。</p>
+<h3 id="性能优化相关"><a href="#性能优化相关" class="headerlink" title="性能优化相关"></a>性能优化相关</h3><p>最优的方案是使用<a href="facade.html">Facade</a>来访问静态绑定的服务，这样您将获得和源生代码直接访问差距不大的访问性能。</p>
 <p>一般情况下我们推荐使用静态绑定的方式来对无依赖注入的服务进行实例。以便于能够获得更好的性能。</p>
 <p>下面的代码将进行静态绑定：</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Singleton&lt;SocketManager&gt;((binder, param)=&gt; <span class="keyword">new</span> SocketManager());</span><br></pre></td></tr></table></figure>
