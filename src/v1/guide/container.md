@@ -502,3 +502,35 @@ App.Singleton<SocketManager>();
 - `(常用)` Facade(门面)(单例，依赖注入): `61 ms` (1ms = 16393次调用Facade)
 - Facade(门面)(实例，依赖注入): `5419 ms`
 - Facade(门面)(实例，无注入): `2144 ms`
+
+> 在测试环境下，原生单例模版访问的速度为：`21 ms` (1ms = 47619次原生调用)
+
+**下面代码是原生单例模版参考**
+
+``` csharp
+public class TestClass
+{
+    public TestClass(){ }
+}
+```
+
+``` csharp
+public class OriginalBaseFacade<TInterface> where TInterface : new()
+{
+    private static TInterface instance;
+    public static TInterface Instance
+    {
+        get
+        {
+            if (instance != null){ return instance; }
+            return instance = new TInterface();
+        }
+    }
+}
+```
+
+``` csharp
+public class TestOriginalFacade : OriginalBaseFacade<TestClass>
+{
+}
+```
