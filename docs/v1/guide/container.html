@@ -620,19 +620,21 @@
 <ul>
 <li>非反射生成(单例): <code>271 ms</code></li>
 <li><code>(常用)</code> 反射生成(单例，依赖注入): <code>295 ms</code> (1ms = 3378次调用Make)</li>
-<li><p>反射生成(单例，无注入): <code>265 ms</code></p>
-</li>
-<li><p>非反射生成(实例): <code>745 ms</code></p>
-</li>
+<li>反射生成(单例，无注入): <code>265 ms</code></li>
+<li>非反射生成(实例): <code>745 ms</code></li>
 <li>反射生成(实例，依赖注入): <code>4959 ms</code></li>
-<li><p>反射生成(实例，无注入): <code>1599 ms</code></p>
-</li>
-<li><p><code>(常用)</code> Facade(门面)(单例，依赖注入): <code>61 ms</code> (1ms = 16393次调用Facade)</p>
-</li>
+<li>反射生成(实例，无注入): <code>1599 ms</code></li>
+<li><code>(常用)</code> Facade(门面)(单例，依赖注入): <code>61 ms</code> (1ms = 16393次调用Facade)</li>
 <li>Facade(门面)(实例，依赖注入): <code>5419 ms</code></li>
 <li>Facade(门面)(实例，无注入): <code>2144 ms</code></li>
 </ul>
-
+<blockquote>
+<p>在测试环境下，原生单例模版访问的速度为：<code>21 ms</code> (1ms = 47619次原生调用)</p>
+</blockquote>
+<p><strong>下面代码是原生单例模版参考</strong></p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">TestClass</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TestClass</span>(<span class="params"></span>)</span>&#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">public class OriginalBaseFacade&lt;TInterface&gt; where TInterface : new()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> TInterface instance;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> TInterface Instance</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">get</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (instance != <span class="literal">null</span>)&#123; <span class="keyword">return</span> instance; &#125;</span><br><span class="line">            <span class="keyword">return</span> instance = <span class="keyword">new</span> TInterface();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">public class TestOriginalFacade : OriginalBaseFacade&lt;TestClass&gt;</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     <div class="footer">
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/container.md" target="_blank">
