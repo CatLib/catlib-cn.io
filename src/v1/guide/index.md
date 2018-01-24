@@ -42,6 +42,10 @@ App.Make<ILogger>().Debug("hello world");
 
 > 所有可以通过`App.Make`使用的服务请参考 : [服务表](can-make.html)
 
+### 使用者
+
+<a href="http://www.ztgame.com/"><img src="../../images/used/giant.png" width="150px"/></a> <a href="http://www.ourpalm.com/"><img src="../../images/used/ourpalm.png" width="150px"/></a> <a href="http://www.06game.com/"><img src="../../images/used/06game.png" width="150px"/></a> <a href="http://www.heeking.com"><img src="../../images/used/heeking.png" width="65px"/></a> <a href="http://www.app-echo.com/"><img src="../../images/used/echo.png" width="150px"/></a> <a href="http://www.hrgame.com.cn/"><img src="../../images/used/hrg.png" width="150px"/></a>
+
 ### 技术支持
 
 - QQ群: [150371044](//shang.qq.com/wpa/qunwpa?idkey=ac3de81fa9b3a4379f80c44e05ff021bcfb51c0fb9092b0741762265a911878b) (验证: CatLib Support)
