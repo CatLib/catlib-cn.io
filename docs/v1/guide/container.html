@@ -636,10 +636,12 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">public class OriginalBaseFacade&lt;TInterface&gt; where TInterface : new()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> TInterface instance;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> TInterface Instance</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">get</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (instance != <span class="literal">null</span>)&#123; <span class="keyword">return</span> instance; &#125;</span><br><span class="line">            <span class="keyword">return</span> instance = <span class="keyword">new</span> TInterface();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">public class TestOriginalFacade : OriginalBaseFacade&lt;TestClass&gt;</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     <div class="footer">
+        
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/container.md" target="_blank">
             在 Github 上编辑此页！
         </a>
+        
     </div>
 </article>
 

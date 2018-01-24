@@ -473,10 +473,12 @@
 <h3 id="扩展一个解压缩器"><a href="#扩展一个解压缩器" class="headerlink" title="扩展一个解压缩器"></a>扩展一个解压缩器</h3><p>您可以通过<code>Extend</code>方法来对解压缩器进行扩展</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> manager = App.Make&lt;ICompressManager&gt;();</span><br><span class="line">manager.Extend(() =&gt; <span class="keyword">new</span> LzmaAdapter() , <span class="string">"lzma"</span>);</span><br></pre></td></tr></table></figure>
     <div class="footer">
+        
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/compress.md" target="_blank">
             在 Github 上编辑此页！
         </a>
+        
     </div>
 </article>
 
