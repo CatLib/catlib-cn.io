@@ -451,10 +451,12 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">sealed</span> <span class="keyword">class</span> <span class="title">TickClass</span> : <span class="title">ITick</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Tick</span>(<span class="params"><span class="keyword">int</span> elapseMillisecond</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// 时钟会定期调用</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Singleton&lt;TickClass&gt;();</span><br><span class="line">App.Make&lt;TickClass&gt;();</span><br></pre></td></tr></table></figure>
     <div class="footer">
+        
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/tick.md" target="_blank">
             在 Github 上编辑此页！
         </a>
+        
     </div>
 </article>
 

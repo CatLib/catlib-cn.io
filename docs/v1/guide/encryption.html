@@ -463,10 +463,12 @@
 <h2 id="扩展加密组件"><a href="#扩展加密组件" class="headerlink" title="扩展加密组件"></a>扩展加密组件</h2><p>您可以通过<code>Extend</code>方法对加密函数进行拓展。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> manager = App.Make&lt;IEncryptionManager&gt;();</span><br><span class="line">manager.Extend(()=&gt;&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> AesEncrypter();</span><br><span class="line">&#125;,<span class="string">"extend-encrypter"</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> encrypter = manager[<span class="string">"extend-encrypter"</span>];</span><br></pre></td></tr></table></figure>
     <div class="footer">
+        
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/encryption.md" target="_blank">
             在 Github 上编辑此页！
         </a>
+        
     </div>
 </article>
 

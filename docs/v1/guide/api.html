@@ -444,10 +444,12 @@
 <h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><p>您可以为属性选择器标注<code>[Inject]</code>或者在类的<code>构造函数</code>中定义的变量类型，容器在构建服务的时候都会自动注入依赖。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Service</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">Inject</span>]</span><br><span class="line">    <span class="keyword">public</span> IFileSystem LocalFileSystem &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Service</span>(<span class="params">IFileSystem fileSystem</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">//构造函数 和 属性选择器 都可以被注入</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
     <div class="footer">
+        
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/api.md" target="_blank">
             在 Github 上编辑此页！
         </a>
+        
     </div>
 </article>
 

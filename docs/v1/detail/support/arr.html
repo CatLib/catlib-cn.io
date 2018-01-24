@@ -493,10 +493,12 @@
 <h3 id="Flash"><a href="#Flash" class="headerlink" title="Flash"></a>Flash</h3><p>临时性的回调元素，如果遇到异常或者完成回调后会进行回滚元素回调</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> src = <span class="keyword">new</span> <span class="keyword">object</span>[]&#123; <span class="string">"a"</span>, <span class="string">"b"</span> , <span class="string">"c"</span> &#125;;</span><br><span class="line">Arr.Flash(src,</span><br><span class="line">(element)=&gt; Console.WriteLine(<span class="string">"start:"</span> + element),</span><br><span class="line">(element)=&gt; Console.WriteLine(<span class="string">"rollback:"</span> + element), </span><br><span class="line">()=&gt; &#123; Console.WriteLine(<span class="string">"Completed"</span>); &#125;);</span><br><span class="line"><span class="comment">// start:a</span></span><br><span class="line"><span class="comment">// start:b</span></span><br><span class="line"><span class="comment">// start:c</span></span><br><span class="line"><span class="comment">// Completed</span></span><br><span class="line"><span class="comment">// rollback:c</span></span><br><span class="line"><span class="comment">// rollback:b</span></span><br><span class="line"><span class="comment">// rollback:a</span></span><br></pre></td></tr></table></figure>
     <div class="footer">
+        
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/detail/support/arr.md" target="_blank">
             在 Github 上编辑此页！
         </a>
+        
     </div>
 </article>
 
