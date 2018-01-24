@@ -1,10 +1,14 @@
 <article class="clearfix">
     <%- page.content %>
     <div class="footer">
+        <% if(page.path === 'v1/guide/use.html'){ %>
+            数据来源来自开发者提交，如果需要从使用案例中增加，移除或者变更，请联系我们。
+        <% }else{ %>
         发现错误？想参与编辑？ 
         <a href="https://github.com/catlib/catlib.io/blob/master/src/<%- page.path.replace(/\.html$/, '.md') %>" target="_blank">
             在 Github 上编辑此页！
         </a>
+        <% } %>
     </div>
 </article>
 
