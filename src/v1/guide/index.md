@@ -46,6 +46,14 @@ App.Make<ILogger>().Debug("hello world");
 
 <a href="http://www.ztgame.com/"><img src="../../images/used/giant.png" width="150px"/></a> <a href="http://www.ourpalm.com/"><img src="../../images/used/ourpalm.png" width="150px"/></a> <a href="http://www.06game.com/"><img src="../../images/used/06game.png" width="150px"/></a> <a href="http://www.putao.com/"><img src="../../images/used/putao.png" width="60px"/></a> <a href="http://www.app-echo.com/"><img src="../../images/used/echo.png" width="150px"/></a> <a href="http://www.hrgame.com.cn/"><img src="../../images/used/hrg.png" width="150px"/></a> <a href="http://www.heeking.com"><img src="../../images/used/heeking.png" width="65px"/></a> <a href="http://www.sourcemuch.com"><img src="../../images/used/sourcemuch.png" width="60px"/></a> <a href="http://www.fancydream.net"><img src="../../images/used/fancydream.png" width="150px"/></a> <a href="https://www.koalac.com/"><img src="../../images/used/koalac.png" width="150px"/></a> <a href="http://www.geniusorbit.com/"><img src="../../images/used/geniusorbit.png" width="60px"/></a>
 
+### 如何选择
+
+在采集使用CatLib的公司和个人中：
+
+- 绝大多数`中大型企业`或`框架开发者`都采用了 [CatLib Core](https://github.com/CatLib/Core)。
+- 绝大多数`小型企业`都采用了 [CatLib Framework](https://github.com/CatLib/Framework)。
+- `个人开发者`多数从 [CatLib Unity](https://github.com/CatLib/CatLib)开始入门。
+
 ### 技术支持
 
 - QQ群: [150371044](//shang.qq.com/wpa/qunwpa?idkey=ac3de81fa9b3a4379f80c44e05ff021bcfb51c0fb9092b0741762265a911878b) (验证: CatLib Support)
