@@ -78,7 +78,7 @@ Dict.Keys(src);
 // { "a" : "b" }
 ```
 
-### Keys
+### Values
 
 获取字典的值数组。
 
