@@ -11,6 +11,21 @@ enable: true
 
 ### Core 更新指南
 
+### v1.2.2 Beta
+
+**新增内容**
+- 增加了`Tag<TService>(string)`允许直接将类型标记
+- 增加了`Release(params object[]...)`允许通过实例对象进行释放
+- 增加了`Terminate()`函数，用于终止CatLib框架
+- 增加了`ApplicationEvents.OnTerminate`用于监听框架终止之前的事件
+- 增加了`ApplicationEvents.OnTerminated`用于监听框架终止之后的事件
+
+**其他优化**
+- `Facade`增加`HasInstance`来优化`App.HasInstance`(这是个内部优化)
+- `OnResolving`允许只获取实例
+- `OnRelease`允许只获取实例
+- `OnResolving`允许不在获取返回值
+
 ### v1.2.1 Beta
 
 **性能优化**
