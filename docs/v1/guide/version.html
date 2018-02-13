@@ -432,7 +432,25 @@
     <h2 id="版本说明"><a href="#版本说明" class="headerlink" title="版本说明"></a>版本说明</h2><blockquote>
 <p>CatLib的版本标准是采用：<a href="http://semver.org/lang/zh-CN/" target="_blank" rel="noopener">Semver语义化版本标准</a></p>
 </blockquote>
-<h3 id="Core-更新指南"><a href="#Core-更新指南" class="headerlink" title="Core 更新指南"></a>Core 更新指南</h3><h3 id="v1-2-1-Beta"><a href="#v1-2-1-Beta" class="headerlink" title="v1.2.1 Beta"></a>v1.2.1 Beta</h3><p><strong>性能优化</strong></p>
+<h3 id="Core-更新指南"><a href="#Core-更新指南" class="headerlink" title="Core 更新指南"></a>Core 更新指南</h3><h3 id="v1-2-3-Beta"><a href="#v1-2-3-Beta" class="headerlink" title="v1.2.3 Beta"></a>v1.2.3 Beta</h3><ul>
+<li>紧急修复了Netstandard Dll库未能正确发布的问题</li>
+</ul>
+<h3 id="v1-2-2-Beta"><a href="#v1-2-2-Beta" class="headerlink" title="v1.2.2 Beta"></a>v1.2.2 Beta</h3><p><strong>新增内容</strong></p>
+<ul>
+<li>增加了<code>Tag&lt;TService&gt;(string)</code>允许直接将类型标记</li>
+<li>增加了<code>Release(params object[]...)</code>允许通过实例对象进行释放</li>
+<li>增加了<code>Terminate()</code>函数，用于终止CatLib框架</li>
+<li>增加了<code>ApplicationEvents.OnTerminate</code>用于监听框架终止之前的事件</li>
+<li>增加了<code>ApplicationEvents.OnTerminated</code>用于监听框架终止之后的事件</li>
+</ul>
+<p><strong>其他优化</strong></p>
+<ul>
+<li><code>Facade</code>增加<code>HasInstance</code>来优化<code>App.HasInstance</code>(这是个内部优化)</li>
+<li><code>OnResolving</code>允许只获取实例</li>
+<li><code>OnRelease</code>允许只获取实例</li>
+<li><code>OnResolving</code>允许不在获取返回值</li>
+</ul>
+<h3 id="v1-2-1-Beta"><a href="#v1-2-1-Beta" class="headerlink" title="v1.2.1 Beta"></a>v1.2.1 Beta</h3><p><strong>性能优化</strong></p>
 <ul>
 <li><code>Facade</code> 拥有更好的性能。</li>
 <li><code>App.Make</code> 拥有更好的性能。</li>
