@@ -189,7 +189,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</del></a></p>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</del></a></p>
             </li>
         
             
@@ -199,7 +199,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</del></a></p>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</del></a></p>
             </li>
         
             
@@ -299,7 +299,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
             </li>
         
             
@@ -309,7 +309,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
+                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
             </li>
         
             
@@ -361,7 +361,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</del></a></p>
+                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</del></a></p>
             </li>
         
             
@@ -371,7 +371,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</del></a></p>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</del></a></p>
             </li>
         
             
@@ -544,7 +544,23 @@
 <li>基础事件系统</li>
 <li>标准库</li>
 </ul>
-<h3 id="Framework-更新指南"><a href="#Framework-更新指南" class="headerlink" title="Framework 更新指南"></a>Framework 更新指南</h3><h3 id="v1-1-0-Beta"><a href="#v1-1-0-Beta" class="headerlink" title="v1.1.0 Beta"></a>v1.1.0 Beta</h3><ul>
+<h3 id="Framework-更新指南"><a href="#Framework-更新指南" class="headerlink" title="Framework 更新指南"></a>Framework 更新指南</h3><h3 id="v1-1-2-Beta"><a href="#v1-1-2-Beta" class="headerlink" title="v1.1.2 Beta"></a>v1.1.2 Beta</h3><ul>
+<li>路由支持可变参数注入</li>
+<li>路由针对可以根据路由变量注入</li>
+<li>Routing支持无参数类型限制的lambda</li>
+<li>路由的返回值会直接作为Response结果</li>
+<li>Netstandard同步</li>
+<li>LitJson替代SimpleJson</li>
+<li>适配 1.2.X 版本的CatLib Core</li>
+<li>网络系统bug修复，在特定条件下会出现粘包</li>
+</ul>
+<h3 id="v1-1-1-Beta"><a href="#v1-1-1-Beta" class="headerlink" title="v1.1.1 Beta"></a>v1.1.1 Beta</h3><ul>
+<li>修复Network在一定条件下分包异常的bug</li>
+<li>IJson接口支持输入type来获取对象</li>
+<li>解决第三方组件库与开发者的冲突</li>
+<li>修复Tcp在mono下不能建立连接的bug</li>
+</ul>
+<h3 id="v1-1-0-Beta"><a href="#v1-1-0-Beta" class="headerlink" title="v1.1.0 Beta"></a>v1.1.0 Beta</h3><ul>
 <li>移除了在Unity环境下单元测试的支持 - 所有的基础类库都是可靠的无需在Unity下再进行额外测试。</li>
 <li>新增Network组件</li>
 <li>新增Tick组件</li>
