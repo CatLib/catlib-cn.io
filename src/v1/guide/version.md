@@ -11,6 +11,18 @@ enable: true
 
 ### Core 更新指南
 
+### v1.2.5 Beta
+
+- 优化了Listen，不在只允许监听返回值为object的函数
+- 修复了一个bug，这个bug导致全局事件不能够正确的在Static函数上监听
+- 修复了一个bug 这个bug导致如果作为参数筛选器，要求注入的是筛选器类型的话将会导致无效匹配
+- Call(Action...)相关函数将支持自定义用户参数传入
+
+### v1.2.4 Beta
+
+- 无用代码清理
+- Params特殊参数通过IParams来代替
+
 ### v1.2.3 Beta
 
 - 紧急修复了Netstandard Dll库未能正确发布的问题
