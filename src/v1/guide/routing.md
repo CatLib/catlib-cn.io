@@ -134,6 +134,39 @@ Router.Instance.Reg("character/{tag?}", (request, response) =>
 IResponse response = Router.Instance.Dispatch("character/10" , "hello world");
 ```
 
+### 隐式参数注入
+
+CatLib路由系统具备将路由参数名绑定至函数变量的能力。
+
+``` csharp
+Router.Instance.Reg("ui://item/{id}", (int id) =>
+{
+    // id: 1;
+});
+Router.Instance.Dispatch("ui://item/1");
+```
+
+### 可变参数注入
+
+可变参数注入是隐式参数注入的升级，如隐式参数注入的例子所述，在常规开发中每次都需要使用Id来置换具体的道具实现这将会变得非常繁琐，所以CatLib路由系统支持了可变参数，将会自动将注入的简单类型变换为一个复杂类型。
+
+``` csharp
+class Item : IVariant
+{
+    // 当Id传入为 1 时将会是道具：连衣裙
+    public Item(int id){ }
+}
+```
+
+``` csharp
+Router.Instance.Reg("ui://item/{id}", (Item item) =>
+{
+    // item: 连衣裙;
+});
+Router.Instance.Dispatch("ui://item/1");
+```
+
+
 ### 参数正则约束
 
 您可以使用`Where()`来约束您的路由参数的格式，`Where()`方法接受参数名和定义的参数约束的正则表达式。
