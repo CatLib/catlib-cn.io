@@ -432,7 +432,17 @@
     <h2 id="版本说明"><a href="#版本说明" class="headerlink" title="版本说明"></a>版本说明</h2><blockquote>
 <p>CatLib的版本标准是采用：<a href="http://semver.org/lang/zh-CN/" target="_blank" rel="noopener">Semver语义化版本标准</a></p>
 </blockquote>
-<h3 id="Core-更新指南"><a href="#Core-更新指南" class="headerlink" title="Core 更新指南"></a>Core 更新指南</h3><h3 id="v1-2-3-Beta"><a href="#v1-2-3-Beta" class="headerlink" title="v1.2.3 Beta"></a>v1.2.3 Beta</h3><ul>
+<h3 id="Core-更新指南"><a href="#Core-更新指南" class="headerlink" title="Core 更新指南"></a>Core 更新指南</h3><h3 id="v1-2-5-Beta"><a href="#v1-2-5-Beta" class="headerlink" title="v1.2.5 Beta"></a>v1.2.5 Beta</h3><ul>
+<li>优化了Listen，不在只允许监听返回值为object的函数</li>
+<li>修复了一个bug，这个bug导致全局事件不能够正确的在Static函数上监听</li>
+<li>修复了一个bug 这个bug导致如果作为参数筛选器，要求注入的是筛选器类型的话将会导致无效匹配</li>
+<li>Call(Action…)相关函数将支持自定义用户参数传入</li>
+</ul>
+<h3 id="v1-2-4-Beta"><a href="#v1-2-4-Beta" class="headerlink" title="v1.2.4 Beta"></a>v1.2.4 Beta</h3><ul>
+<li>无用代码清理</li>
+<li>Params特殊参数通过IParams来代替</li>
+</ul>
+<h3 id="v1-2-3-Beta"><a href="#v1-2-3-Beta" class="headerlink" title="v1.2.3 Beta"></a>v1.2.3 Beta</h3><ul>
 <li>紧急修复了Netstandard Dll库未能正确发布的问题</li>
 </ul>
 <h3 id="v1-2-2-Beta"><a href="#v1-2-2-Beta" class="headerlink" title="v1.2.2 Beta"></a>v1.2.2 Beta</h3><p><strong>新增内容</strong></p>
