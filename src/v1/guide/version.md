@@ -140,6 +140,24 @@ enable: true
 
 ### Framework 更新指南
 
+### v1.1.2 Beta
+
+- 路由支持可变参数注入
+- 路由针对可以根据路由变量注入
+- Routing支持无参数类型限制的lambda
+- 路由的返回值会直接作为Response结果
+- Netstandard同步
+- LitJson替代SimpleJson
+- 适配 1.2.X 版本的CatLib Core
+- 网络系统bug修复，在特定条件下会出现粘包
+
+### v1.1.1 Beta
+
+- 修复Network在一定条件下分包异常的bug
+- IJson接口支持输入type来获取对象
+- 解决第三方组件库与开发者的冲突
+- 修复Tcp在mono下不能建立连接的bug
+
 ### v1.1.0 Beta
 
 - 移除了在Unity环境下单元测试的支持 - 所有的基础类库都是可靠的无需在Unity下再进行额外测试。
