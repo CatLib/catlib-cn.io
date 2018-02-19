@@ -189,7 +189,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</del></a></p>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</del></a></p>
             </li>
         
             
@@ -199,7 +199,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</del></a></p>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</del></a></p>
             </li>
         
             
@@ -299,7 +299,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
+                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
             </li>
         
             
@@ -309,7 +309,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
             </li>
         
             
@@ -361,7 +361,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</del></a></p>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</del></a></p>
             </li>
         
             
@@ -371,7 +371,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</del></a></p>
+                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</del></a></p>
             </li>
         
             
@@ -445,6 +445,8 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> channel = networkManager.Make(<span class="string">"text.tcp://127.0.0.1:7777"</span>, <span class="string">"my-connect"</span>);</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p><code>text协议</code> : 协议格式为 <code>数据包</code>+<code>换行符(\n)</code>，即在每个数据包末尾加上一个换行符表示包的结束。</p>
+</blockquote>
+<blockquote>
 <p><code>frame协议</code> : 协议格式为 <code>总包长</code>+<code>包体</code>，其中包长(总包长+包体)为4字节网络字节序的整数，包体可以是普通文本或者二进制数据。</p>
 </blockquote>
 <p>您还可以通过<code>Make</code>的重载来强制指定使用的<code>打包解包协议</code>：</p>
