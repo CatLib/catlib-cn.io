@@ -28,7 +28,7 @@ CatLib 是一套`渐进式`的`服务提供者框架`。框架为客户端提供
 - CatLib是渐进式的框架，可以无缝和现有框架融合。无论您的项目处于哪个阶段您都可以轻易的接入CatLib。
 - CatLib提供的依赖注入方案，可以极大程度的帮助项目解耦。
 - CatLib提供了大量可靠，可持续的公共组件，帮助企业降低开发成本。
-- 基于MIT协议，企业可以通过CatLib的组件化方案建立私有的公共组件库，积攒公共组件。
+- 基于MIT协议，企业可以通过CatLib的组件化方案建立私有的公共组件库，提高项目研发效率和质量。
 - 轻量级的框架，所有的组件都是可以被移除的，您可以只选择适合您的组件。
 - 中文文档完善，极低的学习成本。
 - 面向接口编程，底层组件无感知替换。
@@ -52,7 +52,7 @@ App.Make<ILogger>().Debug("hello world");
 
 - 绝大多数`中大型企业`或`框架开发者`都采用了 [CatLib Core](https://github.com/CatLib/Core)。
 - 绝大多数`小型企业`都采用了 [CatLib Framework](https://github.com/CatLib/Framework)。
-- `个人开发者`多数从 [CatLib Unity](https://github.com/CatLib/CatLib)开始入门。
+- `个人开发者`多数从 [CatLib Unity](https://github.com/CatLib/CatLib) 开始入门。
 
 ### 技术支持
 
