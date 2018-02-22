@@ -78,3 +78,4 @@ App.Make<ILogger>().Debug("hello world");
 - [GameFramework](https://github.com/EllanJiang/GameFramework) 是一个基于 Unity 5.3+ 引擎的游戏框架，主要对游戏开发过程中常用模块进行了封装，很大程度地规范开发过程、加快开发速度并保证产品质量。（`@Ellan`）
 - [KSFramework](https://github.com/mr-kelly/KSFramework) 是一个整合KEngine、SLua的Unity 5 Asset Bundle开发框架，并为程序、美术、策划、运营提供辅助工具集。
 - [ET框架](https://github.com/egametang/Egametang) 是一个Unity3d客户端+C#分布式服务端框架。使用组件式开发，提供客户端热更，服务端热更功能，提供erlang式分布式消息机制（`@熊猫`）
+- [QFramework](https://github.com/liangxiegame/QFramework) 是一个 **简易**,**快速** 开发框架。依赖于 Catlib.Core 的 DI 方案，集成了一些比较通用的模块如:UI、ResKit、以及专注于异步逻辑的 **ActionKit** 等，原理简单，是刚入行的小伙伴们的比较合适的选择。(`@凉鞋`)
