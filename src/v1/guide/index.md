@@ -28,7 +28,7 @@ CatLib 是一套`渐进式`的`服务提供者框架`。框架为客户端提供
 - CatLib是渐进式的框架，可以无缝和现有框架融合。无论您的项目处于哪个阶段您都可以轻易的接入CatLib。
 - CatLib提供的依赖注入方案，可以极大程度的帮助项目解耦。
 - CatLib提供了大量可靠，可持续的公共组件，帮助企业降低开发成本。
-- 基于MIT协议，企业可以通过CatLib的组件化方案建立私有的公共组件库，积攒公共组件。
+- 基于MIT协议，企业可以通过CatLib的组件化方案建立私有的公共组件库，提高项目研发效率和质量。
 - 轻量级的框架，所有的组件都是可以被移除的，您可以只选择适合您的组件。
 - 中文文档完善，极低的学习成本。
 - 面向接口编程，底层组件无感知替换。
@@ -52,7 +52,7 @@ App.Make<ILogger>().Debug("hello world");
 
 - 绝大多数`中大型企业`或`框架开发者`都采用了 [CatLib Core](https://github.com/CatLib/Core)。
 - 绝大多数`小型企业`都采用了 [CatLib Framework](https://github.com/CatLib/Framework)。
-- `个人开发者`多数从 [CatLib Unity](https://github.com/CatLib/CatLib)开始入门。
+- `个人开发者`多数从 [CatLib Unity](https://github.com/CatLib/CatLib) 开始入门。
 
 ### 技术支持
 
@@ -78,3 +78,4 @@ App.Make<ILogger>().Debug("hello world");
 - [GameFramework](https://github.com/EllanJiang/GameFramework) 是一个基于 Unity 5.3+ 引擎的游戏框架，主要对游戏开发过程中常用模块进行了封装，很大程度地规范开发过程、加快开发速度并保证产品质量。（`@Ellan`）
 - [KSFramework](https://github.com/mr-kelly/KSFramework) 是一个整合KEngine、SLua的Unity 5 Asset Bundle开发框架，并为程序、美术、策划、运营提供辅助工具集。
 - [ET框架](https://github.com/egametang/Egametang) 是一个Unity3d客户端+C#分布式服务端框架。使用组件式开发，提供客户端热更，服务端热更功能，提供erlang式分布式消息机制（`@熊猫`）
+- [QFramework](https://github.com/liangxiegame/QFramework) 是一个 **简易**,**快速** 开发框架。依赖于 Catlib.Core 的 DI 方案，集成了一些比较通用的模块如:UI、ResKit、以及专注于异步逻辑的 **ActionKit** 等，原理简单，是刚入行的小伙伴们的比较合适的选择。(`@凉鞋`)

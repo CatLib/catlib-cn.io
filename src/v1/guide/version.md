@@ -11,6 +11,22 @@ enable: true
 
 ### Core 更新指南
 
+### v1.2.5 Beta
+
+- 优化了Listen，不在只允许监听返回值为object的函数
+- 修复了一个bug，这个bug导致全局事件不能够正确的在Static函数上监听
+- 修复了一个bug 这个bug导致如果作为参数筛选器，要求注入的是筛选器类型的话将会导致无效匹配
+- Call(Action...)相关函数将支持自定义用户参数传入
+
+### v1.2.4 Beta
+
+- 无用代码清理
+- Params特殊参数通过IParams来代替
+
+### v1.2.3 Beta
+
+- 紧急修复了Netstandard Dll库未能正确发布的问题
+
 ### v1.2.2 Beta
 
 **新增内容**
@@ -123,6 +139,24 @@ enable: true
 - 标准库
 
 ### Framework 更新指南
+
+### v1.1.2 Beta
+
+- 路由支持可变参数注入
+- 路由针对可以根据路由变量注入
+- Routing支持无参数类型限制的lambda
+- 路由的返回值会直接作为Response结果
+- Netstandard同步
+- LitJson替代SimpleJson
+- 适配 1.2.X 版本的CatLib Core
+- 网络系统bug修复，在特定条件下会出现粘包
+
+### v1.1.1 Beta
+
+- 修复Network在一定条件下分包异常的bug
+- IJson接口支持输入type来获取对象
+- 解决第三方组件库与开发者的冲突
+- 修复Tcp在mono下不能建立连接的bug
 
 ### v1.1.0 Beta
 
