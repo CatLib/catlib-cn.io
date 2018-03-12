@@ -429,7 +429,10 @@
     </ul>
 </section>
     <article class="clearfix">
-    <h2 id="网络组件"><a href="#网络组件" class="headerlink" title="网络组件"></a>网络组件</h2><p>网络组件是基于Socket组件的更高级的封装，为您提供了简单的API以实现：<code>心跳包</code>，<code>协议解包</code> 等处理。一般情况下您应该直接使用网络组件。</p>
+    <h2 id="网络组件"><a href="#网络组件" class="headerlink" title="网络组件"></a>网络组件</h2><blockquote>
+<p>实验中的组件，尚未完成测试及开发，请谨慎使用。</p>
+</blockquote>
+<p>网络组件是基于Socket组件的更高级的封装，为您提供了简单的API以实现：<code>心跳包</code>，<code>协议解包</code> 等处理。一般情况下您应该直接使用网络组件。</p>
 <h3 id="使用网络组件"><a href="#使用网络组件" class="headerlink" title="使用网络组件"></a>使用网络组件</h3><p>通过<code>INetworkManager</code>接口获取网络管理器，网络管理器可以用于管理活动的<code>网络频道</code>。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> networkManager = App.Make&lt;INetworkManager&gt;();</span><br></pre></td></tr></table></figure>
 <h3 id="生成一个网络频道"><a href="#生成一个网络频道" class="headerlink" title="生成一个网络频道"></a>生成一个网络频道</h3><p>通过<code>Make</code>方法可以生成一个网络频道，Make方法接受一个<code>NSP</code>(网络服务提供商)来确定使用的应用层协议和传输层协议。</p>
