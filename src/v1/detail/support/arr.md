@@ -31,6 +31,7 @@ enable: true
 - [Difference](#Difference)
 - [RemoveAt](#RemoveAt)
 - [Flash](#Flash)
+- [Cut](#Cut)
 
 ### Merge
 
@@ -232,4 +233,14 @@ Arr.Flash(src,
 // rollback:c
 // rollback:b
 // rollback:a
+```
+
+### Cut
+
+修剪指定长度的数组，负数为从后向前修剪
+
+```csharp
+var data = new char[] { '1', '2', '3', '4', '5' };
+Arr.Cut(ref data, 1);
+// data[0] == 2
 ```
