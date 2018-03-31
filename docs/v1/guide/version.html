@@ -432,7 +432,18 @@
     <h2 id="版本说明"><a href="#版本说明" class="headerlink" title="版本说明"></a>版本说明</h2><blockquote>
 <p>CatLib的版本标准是采用：<a href="http://semver.org/lang/zh-CN/" target="_blank" rel="noopener">Semver语义化版本标准</a></p>
 </blockquote>
-<h3 id="Core-更新指南"><a href="#Core-更新指南" class="headerlink" title="Core 更新指南"></a>Core 更新指南</h3><h3 id="v1-2-5-Beta"><a href="#v1-2-5-Beta" class="headerlink" title="v1.2.5 Beta"></a>v1.2.5 Beta</h3><ul>
+<h3 id="Core-更新指南"><a href="#Core-更新指南" class="headerlink" title="Core 更新指南"></a>Core 更新指南</h3><h3 id="v1-2-6-Beta"><a href="#v1-2-6-Beta" class="headerlink" title="v1.2.6 Beta"></a>v1.2.6 Beta</h3><ul>
+<li>增加了新的数据结构，环型缓冲区(RingBuffer)</li>
+<li>增加了 <code>Arr.Cut</code> 裁剪函数，允许裁剪数组</li>
+<li><code>SortSet</code> 支持自定义比较器来进行排序</li>
+<li>优化了在容器构建发生异常后的错误提示</li>
+<li>事件系统可以通过字符串注册获取私有的方法了</li>
+<li>增加ServiceProvider抽象类, 意味着接口的Init将不是必须的了</li>
+<li><code>Release</code>方法在通过类型释放时可以获得没有释放成功的类型了</li>
+<li>对<code>Container</code>性能进行了优化</li>
+<li>对事件系统进行了性能优化</li>
+</ul>
+<h3 id="v1-2-5-Beta"><a href="#v1-2-5-Beta" class="headerlink" title="v1.2.5 Beta"></a>v1.2.5 Beta</h3><ul>
 <li>优化了Listen，不在只允许监听返回值为object的函数</li>
 <li>修复了一个bug，这个bug导致全局事件不能够正确的在Static函数上监听</li>
 <li>修复了一个bug 这个bug导致如果作为参数筛选器，要求注入的是筛选器类型的话将会导致无效匹配</li>
