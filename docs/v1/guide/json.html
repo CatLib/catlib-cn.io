@@ -351,6 +351,16 @@
             
             
             <li>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
                 <p><a href="/v1/guide/random-unity.html" class="sidebar-link">随机数扩展</del></a></p>
             </li>
         
@@ -362,16 +372,6 @@
             
             <li>
                 <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</del></a></p>
-            </li>
-        
-            
-            
-            
-            
-            
-            
-            <li>
-                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</del></a></p>
             </li>
         
             
@@ -431,13 +431,14 @@
     <article class="clearfix">
     <h2 id="Json"><a href="#Json" class="headerlink" title="Json"></a>Json</h2><p>CatLib 提供了Json的解析组件。</p>
 <blockquote>
-<p>CatLib的Json解析器使用 <a href="https://github.com/facebook-csharp-sdk/simple-json" target="_blank" rel="noopener">facebook-csharp-sdk/simple-json</a> 提供的解析支持</p>
+<p>CatLib的Json解析器使用 <a href="https://litjson.net/" target="_blank" rel="noopener">Litjson</a> 提供的解析支持</p>
 </blockquote>
 <h3 id="序列化对象"><a href="#序列化对象" class="headerlink" title="序列化对象"></a>序列化对象</h3><p>通过<code>Encode</code>您可以序列化对象</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> json = App.Make&lt;IJson&gt;();</span><br><span class="line"><span class="keyword">var</span> jsonStr = json.Encode(<span class="comment">/*your object*/</span>);</span><br></pre></td></tr></table></figure>
 <h3 id="反序列化对象"><a href="#反序列化对象" class="headerlink" title="反序列化对象"></a>反序列化对象</h3><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> json = App.Make&lt;IJson&gt;();</span><br><span class="line"><span class="keyword">var</span> jsonObject = json.Decode&lt;<span class="comment">/*your object*/</span>&gt;(jsonStr);</span><br></pre></td></tr></table></figure>
 <h3 id="替换Json解析组件"><a href="#替换Json解析组件" class="headerlink" title="替换Json解析组件"></a>替换Json解析组件</h3><p>您可以使用<code>IJsonAware</code>接口来替换内部Json解析器实现</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> jsonAware = App.Make&lt;IJsonAware&gt;();</span><br><span class="line">jsonAware.SetJson(<span class="comment">/*new json impl*/</span>);</span><br></pre></td></tr></table></figure>
+
     <div class="footer">
         
         发现错误？想参与编辑？ 
