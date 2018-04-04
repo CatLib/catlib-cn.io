@@ -9,7 +9,7 @@ enable: true
 
 CatLib 提供了Json的解析组件。
 
-> CatLib的Json解析器使用 [facebook-csharp-sdk/simple-json](https://github.com/facebook-csharp-sdk/simple-json) 提供的解析支持
+> CatLib的Json解析器使用 [Litjson](https://litjson.net/) 提供的解析支持
 
 ### 序列化对象
 
