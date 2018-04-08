@@ -119,5 +119,5 @@ App.Listen("event" , ()=>{
 var handler = App.On("event.*" , (payload)=>{
     //todo
 });
-handler.Off(handler);
+App.Off(handler);
 ```
