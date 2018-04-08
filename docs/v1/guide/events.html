@@ -189,7 +189,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</del></a></p>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</del></a></p>
             </li>
         
             
@@ -199,7 +199,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</del></a></p>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</del></a></p>
             </li>
         
             
@@ -299,7 +299,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
             </li>
         
             
@@ -309,7 +309,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
+                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
             </li>
         
             
@@ -460,7 +460,7 @@
 <li>如果传入的是事件对象(<code>IEvent</code>)那么解除对应事件</li>
 <li>如果传入的是其他实例(<code>object</code>)会解除该实例下的所有事件</li>
 </ul>
-<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> handler = App.On(<span class="string">"event.*"</span> , (payload)=&gt;&#123;</span><br><span class="line">    <span class="comment">//todo</span></span><br><span class="line">&#125;);</span><br><span class="line">handler.Off(handler);</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> handler = App.On(<span class="string">"event.*"</span> , (payload)=&gt;&#123;</span><br><span class="line">    <span class="comment">//todo</span></span><br><span class="line">&#125;);</span><br><span class="line">App.Off(handler);</span><br></pre></td></tr></table></figure>
 
     <div class="footer">
         
