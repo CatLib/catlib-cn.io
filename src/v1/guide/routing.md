@@ -63,6 +63,13 @@ CatLib路由系统由`路由器`，`特性路由`，`路由条目`，`路由编�
 注册一个基本路由只需要一个`url`与一个`lambda`, 如果您没有定义uri的`scheme`那么将会使用默认值:
 
 ``` csharp
+// 如果您使用的是 CatLib Framework 这段代码已经内置在框架内了
+public sealed class Router : Facade<IRouter> {
+
+}
+```
+
+``` csharp
 Router.Instance.Reg("main", (request, response) =>
 {
     response.SetContext("hello world");
