@@ -61,6 +61,10 @@ CatLib路由系统由`路由器`，`特性路由`，`路由条目`，`路由编�
 ### 基础注册
 
 注册一个基本路由只需要一个`url`与一个`lambda`, 如果您没有定义uri的`scheme`那么将会使用默认值:
+``` Router
+public sealed class Router : Facade<IRouter> {
+
+}
 
 ``` csharp
 Router.Instance.Reg("main", (request, response) =>
