@@ -11,6 +11,14 @@ enable: true
 
 ### Core 更新指南
 
+### v1.2.7 Beta
+
+- 移除了引用计数模块
+- 修复一个bug，这个bug导致`SortSet`在存储相同的Value时有概率不能正确移除元素， 同等情况下获取排名不正确的问题
+- `OnResolving`增加无参数Lambda支持
+- 为`RingBuffer`增加了接口
+- 删除了不必要的Using
+
 ### v1.2.6 Beta
 
 - 增加了新的数据结构，环型缓冲区(RingBuffer)
