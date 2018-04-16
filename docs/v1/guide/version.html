@@ -189,7 +189,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</del></a></p>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</del></a></p>
             </li>
         
             
@@ -199,7 +199,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</del></a></p>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</del></a></p>
             </li>
         
             
@@ -299,7 +299,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
+                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
             </li>
         
             
@@ -309,7 +309,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
             </li>
         
             
@@ -361,7 +361,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</del></a></p>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</del></a></p>
             </li>
         
             
@@ -371,7 +371,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</del></a></p>
+                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</del></a></p>
             </li>
         
             
@@ -432,7 +432,14 @@
     <h2 id="版本说明"><a href="#版本说明" class="headerlink" title="版本说明"></a>版本说明</h2><blockquote>
 <p>CatLib的版本标准是采用：<a href="http://semver.org/lang/zh-CN/" target="_blank" rel="noopener">Semver语义化版本标准</a></p>
 </blockquote>
-<h3 id="Core-更新指南"><a href="#Core-更新指南" class="headerlink" title="Core 更新指南"></a>Core 更新指南</h3><h3 id="v1-2-6-Beta"><a href="#v1-2-6-Beta" class="headerlink" title="v1.2.6 Beta"></a>v1.2.6 Beta</h3><ul>
+<h3 id="Core-更新指南"><a href="#Core-更新指南" class="headerlink" title="Core 更新指南"></a>Core 更新指南</h3><h3 id="v1-2-7-Beta"><a href="#v1-2-7-Beta" class="headerlink" title="v1.2.7 Beta"></a>v1.2.7 Beta</h3><ul>
+<li>移除了引用计数模块</li>
+<li>修复一个bug，这个bug导致<code>SortSet</code>在存储相同的Value时有概率不能正确移除元素， 同等情况下获取排名不正确的问题</li>
+<li><code>OnResolving</code>增加无参数Lambda支持</li>
+<li>为<code>RingBuffer</code>增加了接口</li>
+<li>删除了不必要的Using</li>
+</ul>
+<h3 id="v1-2-6-Beta"><a href="#v1-2-6-Beta" class="headerlink" title="v1.2.6 Beta"></a>v1.2.6 Beta</h3><ul>
 <li>增加了新的数据结构，环型缓冲区(RingBuffer)</li>
 <li>增加了 <code>Arr.Cut</code> 裁剪函数，允许裁剪数组</li>
 <li><code>SortSet</code> 支持自定义比较器来进行排序</li>
