@@ -68,6 +68,8 @@ var manager2 = App.Make<ISocketManager>();
 
 服务容器能够自动识别您构造函数中的参数，并为其注入合适的服务实例。注入方案请参考：[依赖注入规则](container.html#依赖注入规则)
 
+> 注意,只有构造函数为`public`才能够被注入
+
 ``` csharp
 public class CustomizeService
 {
