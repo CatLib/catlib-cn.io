@@ -299,7 +299,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
             </li>
         
             
@@ -309,7 +309,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
+                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
             </li>
         
             
@@ -351,6 +351,16 @@
             
             
             <li>
+                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
                 <p><a href="/v1/guide/random-unity.html" class="sidebar-link">随机数扩展</del></a></p>
             </li>
         
@@ -362,16 +372,6 @@
             
             <li>
                 <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</del></a></p>
-            </li>
-        
-            
-            
-            
-            
-            
-            
-            <li>
-                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</del></a></p>
             </li>
         
             
@@ -453,6 +453,9 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Singleton&lt;SocketManager&gt;().Alias&lt;ISocketManager&gt;();</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> manager1 = App.Make&lt;ISocketManager&gt;();</span><br><span class="line"><span class="keyword">var</span> manager2 = App.Make&lt;ISocketManager&gt;();</span><br><span class="line"><span class="comment">// manager1 == manager2</span></span><br></pre></td></tr></table></figure>
 <h3 id="构造函数注入"><a href="#构造函数注入" class="headerlink" title="构造函数注入"></a>构造函数注入</h3><p>在您简单的<code>Make()</code>操作中，服务容器已经对绑定的服务进行了一系列复杂操作（服务关系转换，服务构建，服务推测，上下文关系处理，依赖注入，服务修饰，单例化…），这一切对于开发者的您来说完全是透明的无感知的。</p>
 <p>服务容器能够自动识别您构造函数中的参数，并为其注入合适的服务实例。注入方案请参考：<a href="container.html#依赖注入规则">依赖注入规则</a></p>
+<blockquote>
+<p>注意,只有构造函数为<code>public</code>才能够被注入</p>
+</blockquote>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CustomizeService</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Service</span>(<span class="params">IFileSystem fileSystem</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// fileSystem 会被自动注入实现</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果您没有在服务容器中绑定过 IFileSystem 服务</span></span><br><span class="line">        <span class="comment">// 那么会抛出一个UnresolvableException异常</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <blockquote>
 <p>简而言之，您只需要向服务容器绑定好您开发的服务，服务容器将会在您生成服务时自动处理好您的服务依赖关系。</p>
@@ -635,6 +638,7 @@
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">TestClass</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">TestClass</span>(<span class="params"></span>)</span>&#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">public class OriginalBaseFacade&lt;TInterface&gt; where TInterface : new()</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> TInterface instance;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> TInterface Instance</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">get</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (instance != <span class="literal">null</span>)&#123; <span class="keyword">return</span> instance; &#125;</span><br><span class="line">            <span class="keyword">return</span> instance = <span class="keyword">new</span> TInterface();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">public class TestOriginalFacade : OriginalBaseFacade&lt;TestClass&gt;</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
     <div class="footer">
         
         发现错误？想参与编辑？ 
