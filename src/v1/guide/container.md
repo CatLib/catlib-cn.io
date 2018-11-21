@@ -300,6 +300,25 @@ public class LogService
 }
 ```
 
+#### 根据参数名进行推导
+
+CatLib支持对服务进行参数名推导，这要求服务注册的别名以`@`开头,且大小写完全匹配。
+
+```csharp
+App.Singleton<LogFile>().Alias("@logFile");
+App.Singleton<LogDatabase>().Alias("@logDatabase");
+```
+
+``` csharp
+public class LogService
+{
+    public LogService(ILog logFile)
+    {
+        // logFile = LogFile实例
+    }
+}
+```
+
 ### 服务编组
 
 您可以为多个服务进行编组，编组后将允许您一次生成多个服务。这在一些场景中是非常有用的比如：日志将会被记录到文件日志服务和网络日志服务。
