@@ -189,7 +189,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
             </li>
         
             
@@ -199,7 +199,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
             </li>
         
             
@@ -299,7 +299,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
+                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
             </li>
         
             
@@ -309,7 +309,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
             </li>
         
             
@@ -361,7 +361,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</a></p>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</a></p>
             </li>
         
             
@@ -371,7 +371,7 @@
             
             
             <li>
-                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</a></p>
+                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</a></p>
             </li>
         
             
@@ -540,6 +540,9 @@
 <p>这样当生成<code>LogServiceDatabase</code>服务时给定的ILog实例将会是<code>DatabaseLog</code> ，<code>LogServiceFile</code>服务时给定的ILog实例将会是<code>FileLog</code>。</p>
 <p>除此以外我们还可以使用<code>[Inject]</code>标记来对注入实例指定实现，一般情况下服务容器的注入上下文绑定功能是使用就近原则的（除非您对别名做了额外的上下文定义，这种罕见情况不在这份基础文档的描述范围之内）。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">LogService</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">Inject(<span class="meta-string">"log.database"</span>)</span>]</span><br><span class="line">    <span class="keyword">public</span> ILog Log &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LogService</span>(<span class="params">[Inject(<span class="string">"log.file"</span></span>)]ILog logWithFile)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="根据参数名进行推导"><a href="#根据参数名进行推导" class="headerlink" title="根据参数名进行推导"></a>根据参数名进行推导</h4><p>CatLib支持对服务进行参数名推导，这要求服务注册的别名以<code>@</code>开头,且大小写完全匹配。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Singleton&lt;LogFile&gt;().Alias(<span class="string">"@logFile"</span>);</span><br><span class="line">App.Singleton&lt;LogDatabase&gt;().Alias(<span class="string">"@logDatabase"</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">LogService</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LogService</span>(<span class="params">ILog logFile</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// logFile = LogFile实例</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="服务编组"><a href="#服务编组" class="headerlink" title="服务编组"></a>服务编组</h3><p>您可以为多个服务进行编组，编组后将允许您一次生成多个服务。这在一些场景中是非常有用的比如：日志将会被记录到文件日志服务和网络日志服务。</p>
 <figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Singleton&lt;FileLog&gt;().Alias(<span class="string">"log.file"</span>);</span><br><span class="line">App.Singleton&lt;NetworkLog&gt;().Alias(<span class="string">"log.network"</span>);</span><br><span class="line">App.Tag(<span class="string">"log"</span> , <span class="string">"log.file"</span> , <span class="string">"log.network"</span>);</span><br><span class="line"><span class="keyword">var</span> logServices = App.Tagged(<span class="string">"log"</span>); <span class="comment">// object[]&#123; FileLog, NetworkLog &#125;</span></span><br></pre></td></tr></table></figure>
 <h3 id="解除服务绑定"><a href="#解除服务绑定" class="headerlink" title="解除服务绑定"></a>解除服务绑定</h3><p>您可以通过<code>UnBind()</code>来对已经绑定的服务进行解除绑定。如果被绑定的类是静态的，那么解除绑定会自动释放已经被生成的静态实例，同时触发<code>OnRelease()</code>释放事件。</p>
