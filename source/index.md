@@ -1,3 +1,4 @@
 ---
-redirect: v0/
+title: 文档
+layout: index
 ---

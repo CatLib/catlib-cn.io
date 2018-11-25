@@ -27,3 +27,12 @@ deploy:
   - type: git
     repo: https://gh_token@github.com/gh_user/gh_repository.git
     branch: gh-pages
+
+node_sass:
+  includePaths:
+   - node_modules
+
+cookbook:
+  partials:
+    index:
+      - _layout/index.ejs

@@ -5,7 +5,7 @@ navigation:
         text : CatLib
         href : /
       -
-        text: Cookbook
+        text: 核心库
         href : index.html
   -
     divider: true
@@ -17,6 +17,6 @@ navigation:
   -
     divider : true
   -
-    text: Power by Cookbook
-    href: https://cookbook.catlib.io
+    text: Power by CatLib
+    href: https://github.com/CatLib
     external: true
