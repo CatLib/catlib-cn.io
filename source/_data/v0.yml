@@ -1,0 +1,22 @@
+navigation:
+  -
+    levels:
+      -
+        text : CatLib
+        href : /
+      -
+        text: Cookbook
+        href : index.html
+  -
+    divider: true
+  -
+    text: 起步
+  -
+    text: Hello World           
+    href: index.html
+  -
+    divider : true
+  -
+    text: Power by Cookbook
+    href: https://cookbook.catlib.io
+    external: true
