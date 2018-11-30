@@ -18,7 +18,9 @@
     "hexo-theme-cookbook": "^0.8.0"
   },
   "devDependencies": {
-    "hexo-server": "^0.3.3"
+    "hexo-server": "^0.3.3",
+    "js-yaml": "^3.12.0",
+    "nodejieba": "^2.3.0"
   },
   "scripts": {
     "dev": "node node_modules/hexo/bin/hexo s",
