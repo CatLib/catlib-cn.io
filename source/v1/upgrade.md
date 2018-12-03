@@ -20,50 +20,50 @@ title: 更新日志
 
 **框架**
 
-- 升级为 c# 7.0 语法(#64 )
-- 增加`LogicException`逻辑错误异常(#80 )
-- 增加`CodeStandardException`代码规范异常(#62 )
+- 升级为 c# 7.0 语法({% issues 64%})
+- 增加`LogicException`逻辑错误异常({% issues 80 %})
+- 增加`CodeStandardException`代码规范异常({% issues 62 %})
 - `ServiceProvider.Register`不再是`abstract` 
 - 增加了`ICoroutineInit` 协同初始化接口(默认的迭代器为同步迭代器和`Init`没有本质区别,在其他环境下可能受到环境影响)
 - `ApplicationEvents.OnIniting`被标记为已过时，使用：`ApplicationEvents.OnProviderInit`替换
 - 新增了`ApplicationEvents.OnProviderInit` 服务提供者初始化之前
 - 新增了`ApplicationEvents.OnProviderInited` 服务提供者初始化完成
-- Application Version现在是静态化的了(#90 )
+- Application Version现在是静态化的了({% issues 90 %})
 
 **代码规范性检查** 
 
-- 如果尝试为同一个单例化的实例注册不同的服务名，则会异常发一个异常(#62)
-- 如果尝试在注册流程中Make服务，那么会引发一个异常。 (#59)
-- 通过容器Watch一个对象时，只有当对象时可以被构建时才允许被watch。因为我们认为观察的只能是一个已经被确定的服务，而不是一个未知服务。 (#59)
-- 如果尝试在注册流程中Invoke函数，那么会引发一个异常。(#62)
+- 如果尝试为同一个单例化的实例注册不同的服务名，则会异常发一个异常({% issues 62 %})
+- 如果尝试在注册流程中Make服务，那么会引发一个异常。 ({% issues 59 %})
+- 通过容器Watch一个对象时，只有当对象时可以被构建时才允许被watch。因为我们认为观察的只能是一个已经被确定的服务，而不是一个未知服务。 ({% issues 59 %})
+- 如果尝试在注册流程中Invoke函数，那么会引发一个异常。({% issues 62 %})
 
 **容器服务**
 
-- 服务容器增加了解决事件和释放事件的条件筛选(#84 )
-- 服务容器增加OnAfterResolving的支持。(#83 )
-- 使用this[] set对象时会进行隐式的对象绑定(bind)(#82 )
-- 增加Extend函数，用于处理服务的覆盖及拓展关系，OnResolving不再允许覆盖对象。(#79)
-- 服务容器Watch接口从容器实现转移至扩展函数(#81)
-- 增加服务特殊字符`@`,`$`和`:`识别，如果包含则不允许注册。(#61)
-- 增加变量标签`$`同`@`一样，具备相同的变量映射作用。(#61)
-- 容器在`flush`对象时将会按照构建顺序的相反顺序释放服务（之前是需要通过辅助组件来完成）(#55)
-- 服务容器增加`App.Alias<TService, TAlias>()`的拓展方法支持(#57)
+- 服务容器增加了解决事件和释放事件的条件筛选({% issues 84 %})
+- 服务容器增加OnAfterResolving的支持。({% issues 83 %})
+- 使用this[] set对象时会进行隐式的对象绑定(bind)({% issues 82 %})
+- 增加Extend函数，用于处理服务的覆盖及拓展关系，OnResolving不再允许覆盖对象。({% issues 79 %})
+- 服务容器Watch接口从容器实现转移至扩展函数({% issues 81 %})
+- 增加服务特殊字符`@`,`$`和`:`识别，如果包含则不允许注册。({% issues 61 %})
+- 增加变量标签`$`同`@`一样，具备相同的变量映射作用。({% issues 61 %})
+- 容器在`flush`对象时将会按照构建顺序的相反顺序释放服务（之前是需要通过辅助组件来完成）({% issues 55 %})
+- 服务容器增加`App.Alias<TService, TAlias>()`的拓展方法支持({% issues 57 %})
 
 **支持库**
 
-- 增加 `SegmentStream` 分片流(#74)
-- 增加 `WrapperStream` 包装流(#69)
-- 增加 `CombineStream` 组合流(#70)
-- `Arr.Filter` 支持迭代器(#67)
-- `Arr.Map` 支持迭代器(#66)
-- 增加了`SortSet.ReverseIterator(bool forward)`指定反转方向的接口(#56)
-- StreamExtension.ToText() 加入对不能读取流的判断(#75)
-- 管理器模版支持OnAfterResolving(#92 )
+- 增加 `SegmentStream` 分片流({% issues 74 %})
+- 增加 `WrapperStream` 包装流({% issues 69 %})
+- 增加 `CombineStream` 组合流({% issues 70 %})
+- `Arr.Filter` 支持迭代器({% issues 67 %})
+- `Arr.Map` 支持迭代器({% issues 66 %})
+- 增加了`SortSet.ReverseIterator(bool forward)`指定反转方向的接口({% issues 56 %})
+- StreamExtension.ToText() 加入对不能读取流的判断({% issues 75 %})
+- 管理器模版支持OnAfterResolving({% issues 92 %})
 
 ## v1.2.12 Beta
 
 - 增加模版方法的门面静态类
-- 修复`Dict.Modify`的bug，这个bug导致不必要的字典实例 #52
+- 修复`Dict.Modify`的bug，这个bug导致不必要的字典实例 {% issues 52 %}
 - `DebugLevels` 枚举命名调整
 -- Prod标记为已过时
 -- Dev标记为已过时

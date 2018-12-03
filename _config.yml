@@ -36,3 +36,7 @@ cookbook:
   partials:
     index:
       - _layout/index.ejs
+  tag:
+    anchor:
+      default: core
+      core: https://github.com/CatLib/Core
