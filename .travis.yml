@@ -7,6 +7,8 @@ before_install:
 
 install:
   - npm install
+  - npm install js-yaml --save-dev
+  - npm install nodejieba --save-dev
 
 script:
   - hexo clean
