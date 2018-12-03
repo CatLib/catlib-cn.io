@@ -29,7 +29,7 @@ title: 应用程序
 
 ## 生命周期
 
-<div style="padding-left:10%"><img src="../imgs/life-cycle.svg" alt="life-cycle" style="max-width:820px;"></div>
+<div style="padding-left:10%"><img src="../imgs/life-cycle.svg" alt="life-cycle" style="max-width:1000px;"></div>
 
 ## 创建框架实例
 
