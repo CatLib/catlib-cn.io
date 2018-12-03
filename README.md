@@ -8,6 +8,7 @@
 
 - [Nodejs(8.0.2+)](https://nodejs.org/en/)
 - [Git(2.13.1+)](https://nodejs.org/en/)
+- [node-gyp](#node-gyp)
 
 ## 快速开始
 
@@ -30,6 +31,22 @@ $ hexo s
 ```
 
 如果您打开浏览器并访问`http://localhost:4000`,您应该看到文档网站已启动并正在运行。
+
+## node-gyp安装
+
+- 安装windows-build-tools(仅限windows)
+
+```shell
+npm install -g -production windows-build-tools
+```
+
+- 安装node-gyp
+
+```shell
+npm install -g node-gyp
+```
+
+- 重启您的命令行
 
 ## 欢迎贡献
 
