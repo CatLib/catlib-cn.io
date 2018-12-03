@@ -8,7 +8,7 @@
 
 - [Nodejs(8.0.2+)](https://nodejs.org/en/)
 - [Git(2.13.1+)](https://nodejs.org/en/)
-- [node-gyp](#node-gyp)
+- [node-gyp](#node-gyp安装)
 
 ## 快速开始
 
