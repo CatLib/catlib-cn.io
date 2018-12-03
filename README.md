@@ -8,7 +8,6 @@
 
 - [Nodejs(8.0.2+)](https://nodejs.org/en/)
 - [Git(2.13.1+)](https://nodejs.org/en/)
-- [node-gyp](#node-gyp安装)
 
 ## 快速开始
 
@@ -32,7 +31,9 @@ $ hexo s
 
 如果您打开浏览器并访问`http://localhost:4000`,您应该看到文档网站已启动并正在运行。
 
-## node-gyp安装
+## 搜索支持(可选)
+
+**环境需求: node-gyp**
 
 - 安装windows-build-tools(仅限windows)
 
@@ -47,6 +48,22 @@ npm install -g node-gyp
 ```
 
 - 重启您的命令行
+
+**安装依赖包**
+
+- 安装js-yaml
+
+```shell
+$ npm install js-yaml --save-dev
+```
+
+- 安装nodejieba
+
+```shell
+$ npm install nodejieba --save-dev
+```
+
+> 当完成依赖包安装后，搜索功能会自动生效
 
 ## 欢迎贡献
 
