@@ -332,6 +332,7 @@ App.Singleton<ScreenshotUpload>()
 我们还可以通过变量名隐式的设定上下文关系，隐式设定的上下文服务别名必须以`$`开头，并且名字必须和变量名一致(大小写敏感)
 
 - 为服务设定隐式别名
+
 ``` csharp
 App.Singleton<LogFile>().Alias("$logFile");
 App.Singleton<LogDatabase>().Alias("$logDatabase");
@@ -349,12 +350,14 @@ public class LogService
 #### 通过服务提供者提供上下文服务名
 
 - 为服务设定别名
+
 ``` csharp
 App.Singleton<LogFile>().Alias("logFile");
 App.Singleton<LogDatabase>().Alias("logDatabase");
 ```
 
 - 在服务提供者中通过`Needs`和`Given`来设定上下文。
+
 ``` csharp
 App.Bind<ServiceDatabase>().Needs<ILog>().Given("logDatabase");
 App.Bind<ServiceFile>().Needs<ILog>().Given("logFile");
