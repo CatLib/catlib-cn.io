@@ -315,11 +315,38 @@ App.Release(ref services);
 
 有时侯我们可能有两个不同的服务使用同一个接口，但我们希望在每个服务中注入不同实现, 我们可以通过上下文绑定来解决这个问题。
 
-上下文绑定一共有三种方式，它们的优先级是：`Inject标记的上下文绑定` > `服务提供者上下文绑定` > `隐式上下文绑定`
+上下文绑定一共有三种方式，它们的优先级是：`Inject标记的上下文绑定` > `服务提供者(闭包/服务名)上下文绑定` > `隐式上下文绑定`
 
-#### 通过服务提供者上下文进行绑定
+#### 通过服务提供者提供上下文闭包
 
-> `LogFile`和`LogDatabase`均实现了`ILog`接口
+```csharp
+App.Singleton<ScreenshotUpload>()
+    .Needs<IDisk>()
+    .Given(()=> FileSystem.Disk("aliyun-oss"))
+```
+
+当截图上传服务需求一个抽象磁盘时，使用闭包来为其提供一个文件系统管理器下的磁盘。
+
+#### 通过变量名隐式映射上下文
+
+我们还可以通过变量名隐式的设定上下文关系，隐式设定的上下文服务别名必须以`$`开头，并且名字必须和变量名一致(大小写敏感)
+
+- 为服务设定隐式别名
+``` csharp
+App.Singleton<LogFile>().Alias("$logFile");
+App.Singleton<LogDatabase>().Alias("$logDatabase");
+```
+
+``` csharp
+public class LogService
+{
+    public LogService(ILog logFile, ILog logDatabase)
+    {
+    }
+}
+```
+
+#### 通过服务提供者提供上下文服务名
 
 - 为服务设定别名
 ``` csharp
@@ -345,25 +372,6 @@ public class LogService
     [Inject("logDatabase")]
     public ILog LogDatabase { get; set; }
     public LogService([Inject("logFile")]ILog logFile)
-    {
-    }
-}
-```
-
-#### 通过变量名隐式映射上下文
-
-我们还可以通过变量名隐式的设定上下文关系，隐式设定的上下文服务别名必须以`$`开头，并且名字必须和变量名一致(大小写敏感)
-
-- 为服务设定隐式别名
-``` csharp
-App.Singleton<LogFile>().Alias("$logFile");
-App.Singleton<LogDatabase>().Alias("$logDatabase");
-```
-
-``` csharp
-public class LogService
-{
-    public LogService(ILog logFile, ILog logDatabase)
     {
     }
 }
