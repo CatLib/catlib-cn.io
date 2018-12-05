@@ -128,7 +128,11 @@ App.Singleton<FileSystem>().Alias<IFileSystem>();
 App.Release<IFileSystem>();
 ```
 
-> 对于所有已经生成的单例服务进行释放时，会检查服务实现是否实现了`IDisposable`接口。如果实现了该接口将会自动调用。
+#### IDisposable 释放接口
+
+对于已经生成的单例服务进行释放，会检查服务实现是否实现了`IDisposable`接口。如果实现了该接口将会自动调用。
+
+> 如果服务未能在容器中找到，那么会`Release`函数会返回`false`
 
 ## 解除服务绑定
 
