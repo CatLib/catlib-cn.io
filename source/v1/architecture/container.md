@@ -185,7 +185,7 @@ App.OnResolving((binder, instance) =>
 App.Singleton<FileSystem>().OnAfterResolving((binder, instance) =>
 {
     var fileSystem = (FileSystem)instance;
-    //todo: 对于FileSystem的实例进行修饰
+    //todo: 对于FileSystem的实例进行校验或其他操作
 });
 ```
 
@@ -194,7 +194,7 @@ App.Singleton<FileSystem>().OnAfterResolving((binder, instance) =>
 ``` csharp
 App.OnAfterResolving((binder, instance) =>
 {
-    //todo: 对于所有被构建的服务进行修饰
+    //todo: 对于所有被构建的服务进行校验或其他操作
 });
 ```
 
