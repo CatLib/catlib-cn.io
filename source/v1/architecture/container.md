@@ -539,6 +539,41 @@ App.Make<IFileSystem>(new Params(){
 });
 ```
 
+## 紧缩参数注入
+
+服务容器允许通过特殊类型`object`或`object[]`来一次性接受用户传入的全部参数。
+
+```csharp
+public class Tight
+{
+    public Tight(object[] paramsObjects)
+    { 
+        // paramsObjects[0] == 1
+        // paramsObjects[1] == "str"
+    }
+}
+```
+
+```csharp
+App.Make<Tight>(1, "str");
+```
+
+如果接收类型为`object`，且传入参数个数为1个，那么参数将会被自动解构,否则将会是一个`object[]`数组。
+
+```csharp
+public class Tight
+{
+    public Tight(object paramsObject)
+    { 
+        // paramsObject == "str"
+    }
+}
+```
+
+```csharp
+App.Make<Tight>("str");
+```
+
 ## 依赖注入规则
 
 - **执行构造函数注入**
