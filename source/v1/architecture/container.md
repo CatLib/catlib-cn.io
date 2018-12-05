@@ -259,15 +259,15 @@ App.Watch<IFileSystem>((instance)=>{
 > - 通过重定义事件可以让您的程序始终使用最新的服务实现。
 > - 通过[门面](facade.html)获得的服务实现永远是最新的。
 
-## 单例化托管
+## 单例化对象
 
-服务容器可以通过`Instance`托管您自己生成的实例，随后通过容器获取该实例总是返回被托管的实例。
+服务容器可以通过`Instance`单例化您自己生成的实例，随后通过容器获取该实例总是返回被托管的实例。
 
 ``` csharp
 App.Instance("filesystem" , new FileSystem());
 ```
 
-需要注意的是，如果您使用了`Bind`为指定的服务进行实例绑定，那么如果您尝试将这个服务单例化，服务容器将会抛出一个`LogicException`异常:
+需要注意的是，如果您使用了`Bind`为指定的服务进行实例绑定，那么如果您尝试将这个实例单例化，服务容器将会抛出一个`LogicException`异常:
 
 ``` csharp
 App.Bind("filesystem", (container, userParams)=> new FileSystem());
