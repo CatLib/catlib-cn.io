@@ -24,6 +24,14 @@ Container 服务容器是一个用于管理`类的依赖`和`执行依赖注入`
 var fileSystem = App.Make<IFileSystem>();
 ```
 
+#### 构建服务时传入自定义参数
+
+CatLib支持在构建一个服务时为其提供自定义的参数，您只需要这样做：
+
+```csharp
+var fileSystem = App.Make<IFileSystem>("params-1", "params-2");
+```
+
 ## 绑定服务
 
 要使用服务容器的强大特性您首先需要将服务绑定到服务容器，如果您不进行绑定,那么您将没有任何服务可用，这些绑定一般都是在[服务提供者](service-provider.html)中完成的。
