@@ -567,6 +567,38 @@ public class LoginUI
 }
 ```
 
+## `(C)`门面应该放置在Facades命名空间下
+
+属于[门面](architecture/facade.html)的代码应该被放置在`项目名.Facades`的命名空间下。
+
+**错误的例子**
+
+- `Providers/CatLib.FileSystem/Facades/FileSystem.cs`
+
+```csharp
+namespace CatLib.FileSystem
+{
+    public class FileSystem : Facade<IFileSystem>
+    {
+    }
+}
+```
+
+**正确的例子**
+
+- `Providers/CatLib.FileSystem/Facades/FileSystem.cs`
+
+```csharp
+namespace CatLib.Facades
+{
+    public class FileSystem : Facade<IFileSystem>
+    {
+    }
+}
+```
+
+> 门面作为一个特殊存在，所以我们允许其命名空间例外于其他规范。
+
 ## `(D)`在循环中生成Lambda表达式，并尝试访问迭代器变量。
 
 在循环中生成Lambda表达式，并尝试访问迭代器变量时，会导致迭代器变量不是预期值的问题。
