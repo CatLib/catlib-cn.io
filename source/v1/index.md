@@ -24,6 +24,17 @@ CatLib 是一套`渐进式`的`服务提供者框架`。框架为客户端提供
 - 中文文档完善，极低的学习成本。
 - 面向接口编程，底层组件无感知替换。
 
+## 学习路线图
+
+CatLib是易于上手的。你只需要有良好的 C# 基础。你就可以非常快速地通过阅读这份 指南 投入开发。
+
+- [服务提供者](architecture/service-provider.html): 了解服务提供者的基本概念，以及系统架构。
+- [核心框架](architecture/framework.html): 了解核心框架的运行生命周期，以及具备的功能。
+- [服务容器](architecture/container.html): 了解核心容器的运行原理以及可用方法。
+- [服务接口](architecture/api.html): 了解服务接口概念，对比门面的区别。
+- [服务门面](architecture/facade.html): 了解服务门面概念，对比常规静态方法。
+- [风格指南](style.html): 帮助开发者避免错误，降低沟通成本，解决小纠结和反模式。
+
 ## 使用者
 
 <a href="http://www.ztgame.com/"><img src="../imgs/used/giant.png" width="150px"/></a> <a href="http://www.ourpalm.com/"><img src="../imgs/used/ourpalm.png" width="150px"/></a> <a href="http://www.06game.com/"><img src="../imgs/used/06game.png" width="150px"/></a> <a href="http://www.putao.com/"><img src="../imgs/used/putao.png" width="60px"/></a> <a href="http://www.app-echo.com/"><img src="../imgs/used/echo.png" width="150px"/></a> <a href="http://www.hrgame.com.cn/"><img src="../imgs/used/hrg.png" width="150px"/></a> <a href="http://www.heeking.com"><img src="../imgs/used/heeking.png" width="65px"/></a> <a href="http://www.sourcemuch.com"><img src="../imgs/used/sourcemuch.png" width="60px"/></a>
