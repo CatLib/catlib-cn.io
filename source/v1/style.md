@@ -274,6 +274,42 @@ Providers/
 
 因为编辑器通常会按字母顺序组织文件，所以将高级别的单词排在前类之间的重要关系一目了然。
 
+## `(B)`多级目录与类命名
+
+[类名的单词顺序](#B-类名的单词顺序)指出的问题可以通过多级目录进行解决，但是我们只推荐服务只有在非常大型的情况下(100+的类)才这么做。因为在多级目录中查找要比在单目录中查找更加花费精力，并且对于命名空间的引用将会变得复杂。
+
+如果您使用了多级目录来区分那么可以忽略重名部分。
+
+**错误的例子**
+
+```tree
+Providers/
+  CatLib.LoginUI/
+    Checkbox/
+        CheckboxAgreement.cs
+    Button/
+        ButtonLogin.cs
+        ButtonRegister.cs
+    Input/
+        InputPassword.cs
+        InputText.cs
+```
+
+**正确的例子**
+
+```tree
+Providers/
+  CatLib.LoginUI/
+    Checkbox/
+        Agreement.cs
+    Button/
+        Login.cs
+        Register.cs
+    Input/
+        Password.cs
+        Text.cs
+```
+
 ## `(B)`函数名和类名大小写
 
 在声明函数和类的时候，其命名始终使用CamelCase。
@@ -509,6 +545,27 @@ public class ProviderFileSystem : ServiceProvider
 }
 ```
 
+## `(C)`可拆分单词的命名
+
+有些时候我们可能纠结于可拆分单词如何进行命名，如：`username`可以被拆分为`user`和`name`。虽然这些单词可以被拆分但是我们需要注意`username`为英文中的一个整体单词。所以我们应该视作为一个单词。
+
+**错误的例子**
+
+```csharp
+public class LoginUI
+{
+    private string userName; // UserName, _userName 都是错误的例子
+}
+```
+
+**正确的例子**
+
+```csharp
+public class LoginUI
+{
+    private string username; // Username, _username 都是正确的例子
+}
+```
 
 ## `(D)`在循环中生成Lambda表达式，并尝试访问迭代器变量。
 
