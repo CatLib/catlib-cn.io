@@ -184,6 +184,38 @@ if(a == 0)
 
 示例中会导致完全不同的两种结果。
 
+## `(A)`对外服务的接口放在API命名空间下
+
+对外服务的接口放在API命名空间下，这样在IED using的时候可以避免错误的引用实现代码而发生耦合。
+
+一般来说我们放置在:`项目名`.`API`.`组件名`的命名空间下
+
+**错误的例子**
+
+- `Providers/CatLib.FileSystem/API/IFileSystem.cs`
+
+```csharp
+namespace CatLib.FileSystem
+{
+    public interface IFileSystem
+    {
+    }
+}
+```
+
+**正确的例子**
+
+- `Providers/CatLib.FileSystem/API/IFileSystem.cs`
+
+```csharp
+namespace CatLib.API.FileSystem
+{
+    public interface IFileSystem
+    {
+    }
+}
+```
+
 ## `(B)`完整单词的类名
 
 类名应该倾向于完整单词，而不是单词的缩写。
