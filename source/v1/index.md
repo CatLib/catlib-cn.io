@@ -33,7 +33,7 @@ CatLib是易于上手的。你只需要有良好的 C# 基础。你就可以非�
 - [服务容器](architecture/container.html): 了解核心容器的运行原理以及可用方法。
 - [服务接口](architecture/api.html): 了解服务接口概念，对比门面的区别。
 - [服务门面](architecture/facade.html): 了解服务门面概念，对比常规静态方法。
-- [风格指南](style.html): 帮助开发者避免错误，降低沟通成本，解决小纠结和反模式。
+- [风格指南](style.html): 帮助开发者避免错误，降低沟通成本，解决小纠结和[反模式](anti-pattern.html)。
 
 ## 使用者
 
