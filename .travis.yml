@@ -26,3 +26,4 @@ deploy:
 branches:
   only:
     - 1.3
+    - master
