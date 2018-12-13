@@ -20,7 +20,6 @@
     "hexo-server": "^0.3.3"
   },
   "scripts": {
-    "dev": "node node_modules/hexo/bin/hexo s",
-    "deploy": "node node_modules/hexo/bin/hexo d"
+    "dev": "node node_modules/hexo/bin/hexo s"
   }
 }
