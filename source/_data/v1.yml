@@ -1,0 +1,113 @@
+navigation:
+  -
+    levels:
+      -
+        text : CatLib
+        href : /
+      -
+        text: 核心库
+        href : index.html
+  -
+    divider: true
+  -
+    text: 起步
+  -
+    text: 介绍
+    href: index.html
+  -
+    text: 迁移指南
+    href: migration.html
+  -
+    text: 更新日志
+    href: upgrade.html
+  -
+    text: 常见问题
+    href: faq.html
+  -
+    text: 风格指南
+    href: style.html
+  -
+    text: 贡献指南
+    href: contribution.html
+  -
+    text: 系统架构
+  -
+    text: 服务提供者
+    href: architecture/service-provider.html
+  -
+    text: 应用程序
+    href: architecture/application.html
+  -
+    text: 服务容器
+    href: architecture/container.html
+  -
+    text: 服务门面
+    href: architecture/facade.html
+  -
+    text: 框架组件
+  -
+    text: 事件系统
+    href: components/event.html
+  -
+    text: 管理器模版
+    href: components/template.html
+  -
+    text: 辅助函数
+  -
+    text: 数组
+    href: helper/arr.html
+  -
+    text: 字符串
+    href: helper/str.html
+  -
+    text: 字典
+    href: helper/dict.html
+  -
+    text: 时间
+    href: helper/system-time.html
+  -
+    text: 线程静态
+    href: helper/thread-static.html
+  -
+    text: 通用
+    href: helper/util.html
+  -
+    text: 数据结构
+  -
+    text: 有序集
+    href: data-structure/sort-set.html
+  -
+    text: 快速列表
+    href: data-structure/quick-list.html
+  -
+    text: 环型缓冲区
+    href: data-structure/ring-buffer.html
+  -
+    text: 内存存储
+    href: data-structure/memory-storage.html
+  -
+    text: 过滤器链
+    href: data-structure/filter-chain.html
+  -
+    text: 流
+  -
+    text: 包装流
+    href: stream/wrapper-stream.html
+  -
+    text: 管道流
+    href: stream/pipeline-stream.html
+  -
+    text: 存储流
+    href: stream/storage-stream.html
+  -
+    text: 组合流
+    href: stream/combine-stream.html
+  -
+    text: 分片流
+    href: stream/segment-stream.html
+  -
+    divider : true
+  -
+    text: Power by CatLib
+    href: https://github.com/CatLib
+    external: true

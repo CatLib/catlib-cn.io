@@ -1,0 +1,18 @@
+navigation:
+  -
+    type: versions
+    mobile: true
+
+tool:
+  editor: 
+    text: 编辑
+    href: https://github.com/CatLib/CatLib.io/tree/master/
+    external: true
+
+support:
+  label: 
+    - '在文档中没有找到您需要的内容？'
+    - '尝试在左侧搜索栏中搜索，或者{text}'
+  text: 在GitHub中发起提问
+  href: https://github.com/CatLib/CatLib.io/issues
+  external: true
