@@ -13,12 +13,15 @@ install:
 script:
   - hexo clean
   - hexo g
-
-after_script:
-  - sed -i "s/gh_token/${GH_TOKEN}/g" ./_config.yml
-  - sed -i "s/gh_user/${GH_USER}/g" ./_config.yml
-  - sed -i "s/gh_repository/${GH_REPOSITORY}/g" ./_config.yml
-  - hexo deploy
+  
+deploy:
+  provider: pages
+  local-dir: public
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  committer-from-gh: true
+  on:
+    branch: 1.3
 
 branches:
   only:
