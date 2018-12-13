@@ -13,6 +13,17 @@ title: 迁移指南
 **不兼容部分**
 
 - `OnResolve` 不再支持返回值覆盖，如果您使用了这一特性，请使用`Extend`替换。
+- `Bind`,`BindIf`,`Singleton`,`SingletonIf`，行为语意变更。
+
+```csharp
+ IBindData Bind<TService, TAlias>();
+```
+
+行为语意, 变更为：
+
+```csharp
+ IBindData Bind<TService, TConcrete>();
+```
 
 **代码规范**
 
