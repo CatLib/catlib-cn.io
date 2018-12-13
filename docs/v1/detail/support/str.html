@@ -1,0 +1,920 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta name="generator" content="Hexo 3.8.0">
+
+    
+    <title>字符串辅助函数(Str) — CatLib</title>
+      
+    <meta charset="utf-8">
+    
+    <meta name="description" content="CatLib Unity Framework.">
+      
+    <meta name="keywords" content="CatLib,CatLib中文网,CatLib教程,CatLib官网">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="/css/page.css">
+
+    <script src="/js/vue.js"></script>
+    <script src="/js/jquery.js"></script>
+    </head>
+
+    <body>
+        
+            <nav class="nav">
+    <div class="border">
+        <img src="/images/logo.png">
+        <!--button class="hiden-in-phone">v1.2</button!-->
+        <button id="btn-menu" class="hiden-in-pc">菜单</button>
+        <ul class="nav-link hiden-in-phone">
+            <!--li>
+                <form id="search-form">
+                    <input type="text" id="search-query" class="search-query">
+                </form>
+            </li!-->
+            <li><a href="https://github.com/catlib/framework" class="nav-link-li">下载框架</a></li>
+            <li><a href="/v1/guide/use.html" class="nav-link-li">使用案例</a></li>
+            <li><a href="/v1/guide/version.html" class="nav-link-li">版本说明</a></li>
+            <li><a href="/v1/guide/contribution.html" class="nav-link-li">贡献指南</a></li>
+            <li><a href="/v1/guide/index.html" class="nav-link-li">介绍</a></li>
+            <li><a href="/" class="nav-link-li current">首页</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div id="container" class="container clear">
+    <section class="sidebar clearfix">
+    <ul>
+        
+            
+            
+                <li><h3>基础</h3></li>
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/index.html" class="sidebar-link">介绍</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/upgrade.html" class="sidebar-link">升级指南</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/version.html" class="sidebar-link">版本说明</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/error.html" class="sidebar-link">常见错误</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/style.html" class="sidebar-link">命名规范</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/contribution.html" class="sidebar-link">贡献指南</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/use.html" class="sidebar-link">使用案例</a></p>
+            </li>
+        
+            
+            
+            
+                <li><h3>框架核心</h3></li>
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/service-provider.html" class="sidebar-link">服务提供者</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/container.html" class="sidebar-link">服务容器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/application.html" class="sidebar-link">CatLib核心</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/support.html" class="sidebar-link">支持库</a></p>
+            </li>
+        
+            
+            
+            
+            
+                <li><h3>框架组件</h3></li>
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/routing.html" class="sidebar-link">路由</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/random.html" class="sidebar-link">随机数</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/file-system.html" class="sidebar-link">文件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/hashing.html" class="sidebar-link">哈希</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/encryption.html" class="sidebar-link">加解密</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/compress.html" class="sidebar-link">压缩解压缩</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/translation.html" class="sidebar-link">国际化(I18N)</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/tick.html" class="sidebar-link">时钟</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/network.html" class="sidebar-link">网络</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/socket.html" class="sidebar-link">Socket</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+                <li><h3>Unity组件</h3></li>
+            
+            
+            <li>
+                <p><a href="/v1/guide/mono-driver.html" class="sidebar-link">Mono Driver</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/time.html" class="sidebar-link">时间</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/timer.html" class="sidebar-link">计时器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/random-unity.html" class="sidebar-link">随机数扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/file-system-unity.html" class="sidebar-link">文件系统扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+                <li><h3>其他</h3></li>
+            
+            <li>
+                <p><a href="/v1/guide/can-make.html" class="sidebar-link">服务表</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/service-priority.html" class="sidebar-link">初始化优先级</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/api.html" class="sidebar-link">服务接口</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/facade.html" class="sidebar-link">服务门面</a></p>
+            </li>
+        
+    </ul>
+</section>
+    <article class="clearfix">
+    <h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><p>字符串方法库允许您通过简单的方式访问和操作字符串。</p>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>提取字符串所表达的合法的函数名。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Str.Method(<span class="string">"Function"</span>);                       <span class="comment">// Function</span></span><br><span class="line">Str.Method(<span class="string">"ClassName.Function"</span>);             <span class="comment">// Function</span></span><br><span class="line">Str.Method(<span class="string">"ClassName.Function@NewFunction"</span>); <span class="comment">// NewFunction</span></span><br><span class="line">Str.Method(<span class="string">"ClassName.Function@#$%^^&amp;*"</span>);     <span class="comment">// Function</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型"><a href="#函数原型" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">string</span> <span class="title">Method</span>(<span class="params"><span class="keyword">string</span> pattern</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pattern</code></td>
+<td style="text-align:center">需要提取函数名的字符串</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Is"><a href="#Is" class="headerlink" title="Is"></a>Is</h3><p>判断规定字符串是否符合匹配表达式。匹配表达式只允许使用星号<code>*</code>通配(即删减正则表达式中除了星号外的所有功能)</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.Is(<span class="string">"he*d"</span> , <span class="string">"helloworld"</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-1"><a href="#函数原型-1" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">string</span> <span class="title">Is</span>(<span class="params"><span class="keyword">string</span> pattern, <span class="keyword">string</span> <span class="keyword">value</span></span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pattern</code></td>
+<td style="text-align:center">匹配表达式</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td style="text-align:center">进行匹配的值</td>
+</tr>
+</tbody>
+</table>
+<h3 id="AsteriskWildcard"><a href="#AsteriskWildcard" class="headerlink" title="AsteriskWildcard"></a>AsteriskWildcard</h3><p>将规定字符串翻译为星号匹配表达式。(即删减正则表达式中除了星号外的所有功能)</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.AsteriskWildcard(<span class="string">"[hello]w*d"</span>);</span><br><span class="line"><span class="comment">// result : "\[hello\]w*d"</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-2"><a href="#函数原型-2" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">string</span> <span class="title">AsteriskWildcard</span>(<span class="params"><span class="keyword">string</span> pattern</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pattern</code></td>
+<td style="text-align:center">需要处理的表达式</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Split"><a href="#Split" class="headerlink" title="Split"></a>Split</h3><p>根据长度将字符串分割到数组中,最后一个元素可能小于需求长度。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.Split(<span class="string">"helloworld1"</span> , <span class="number">2</span>);</span><br><span class="line"><span class="comment">// result : ["he", "ll", "ow", "or", "ld", "1"]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-3"><a href="#函数原型-3" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">string</span>[] <span class="title">Split</span>(<span class="params"><span class="keyword">string</span> str, <span class="keyword">int</span> length = <span class="number">1</span></span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td style="text-align:center">需要进行拆分的字符串</td>
+</tr>
+<tr>
+<td><code>length</code></td>
+<td style="text-align:center">拆分后每个元素的长度</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Repeat"><a href="#Repeat" class="headerlink" title="Repeat"></a>Repeat</h3><p>将字符串重复指定的次数。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.Repeat(<span class="string">"hello"</span> , <span class="number">3</span>);</span><br><span class="line"><span class="comment">// result : hellohellohello</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-4"><a href="#函数原型-4" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">string</span> <span class="title">Repeat</span>(<span class="params"><span class="keyword">string</span> str, <span class="keyword">int</span> num</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td style="text-align:center">规定字符串</td>
+</tr>
+<tr>
+<td><code>num</code></td>
+<td style="text-align:center">规定字符串重复的次数</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Shuffle"><a href="#Shuffle" class="headerlink" title="Shuffle"></a>Shuffle</h3><p>随机打乱字符串中的所有字符</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.Shuffle(<span class="string">"helloworld"</span>);</span><br><span class="line"><span class="comment">// result 为被打乱的值，如：lwloeodlrh, 每次调用值都不一样</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-5"><a href="#函数原型-5" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">string</span> <span class="title">Shuffle</span>(<span class="params"><span class="keyword">string</span> str, <span class="keyword">int</span>? seed = <span class="literal">null</span></span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td style="text-align:center">规定字符串</td>
+</tr>
+<tr>
+<td><code>seed</code></td>
+<td style="text-align:center">随机种子，相同的种子，相同的规定字符串可以随机出相同的值</td>
+</tr>
+</tbody>
+</table>
+<h3 id="SubstringCount"><a href="#SubstringCount" class="headerlink" title="SubstringCount"></a>SubstringCount</h3><p>计算子串在字符串中出现的次数（该函数不计数重叠的子串）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.SubstringCount(<span class="string">"abcabcab"</span>,<span class="string">"abcab"</span>);</span><br><span class="line"><span class="comment">// result : 1</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-6"><a href="#函数原型-6" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">SubstringCount</span>(<span class="params"><span class="keyword">string</span> str, <span class="keyword">string</span> subStr, <span class="keyword">int</span> start = <span class="number">0</span>, <span class="keyword">int</span>? length = <span class="literal">null</span>, StringComparison comparison = StringComparison.CurrentCultureIgnoreCase</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td style="text-align:center">规定字符串</td>
+</tr>
+<tr>
+<td><code>subStr</code></td>
+<td style="text-align:center">查找的子字符串</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td style="text-align:center">起始位置，如果为负数则从后向前计算起始位置</td>
+</tr>
+<tr>
+<td><code>length</code></td>
+<td style="text-align:center">从起始位置开始查询的长度，如果为负数则从后向前计算终止位置</td>
+</tr>
+<tr>
+<td><code>comparison</code></td>
+<td style="text-align:center">扫描规则</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h3><p>反转规定字符串</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.Reverse(<span class="string">"helloworld"</span>);</span><br><span class="line"><span class="comment">// result : dlrowolleh</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-7"><a href="#函数原型-7" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">string</span> <span class="title">Reverse</span>(<span class="params"><span class="keyword">string</span> str</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td style="text-align:center">规定字符串</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Reverse-1"><a href="#Reverse-1" class="headerlink" title="Reverse"></a>Reverse</h3><p>反转规定字符串</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.Reverse(<span class="string">"helloworld"</span>);</span><br><span class="line"><span class="comment">// result : dlrowolleh</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-8"><a href="#函数原型-8" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">string</span> <span class="title">Reverse</span>(<span class="params"><span class="keyword">string</span> str</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td style="text-align:center">规定字符串</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Pad"><a href="#Pad" class="headerlink" title="Pad"></a>Pad</h3><p>把规定字符串填充为新的长度。</p>
+<ul>
+<li>如果填充长度小于字符串的原始长度，则不进行任何操作。</li>
+<li>填充字符串的两侧。如果不是偶数，则右侧获得额外的填充。</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.Pad(<span class="string">"hello"</span>, <span class="number">10</span>, <span class="string">"wor"</span>, PadTypes.Both);</span><br><span class="line"><span class="comment">// result : wohellowor</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-9"><a href="#函数原型-9" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">string</span> <span class="title">Pad</span>(<span class="params"><span class="keyword">string</span> str, <span class="keyword">int</span> length, <span class="keyword">string</span> padStr = <span class="literal">null</span>, PadTypes type = PadTypes.Right</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td style="text-align:center">规定字符串</td>
+</tr>
+<tr>
+<td><code>length</code></td>
+<td style="text-align:center">规定字符串新的字符串长度，如果该值小于规定字符串的原始长度，则不进行任何操作。</td>
+</tr>
+<tr>
+<td><code>padStr</code></td>
+<td style="text-align:center">规定供填充使用的字符串。默认是空白。注释：空白不是空字符串,而是<code></code>(空白)</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td style="text-align:center">填充的方向<code>Both</code>,<code>Left</code>,<code>Right</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="After"><a href="#After" class="headerlink" title="After"></a>After</h3><p>在规定字符串中查找在规定搜索值，并在规定搜索值之后返回规定字符串的剩余部分。(如果没有找到则返回规定字符串本身)</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.After(<span class="string">"helloworld"</span>,<span class="string">"llo"</span>);</span><br><span class="line"><span class="comment">// result : world</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-10"><a href="#函数原型-10" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">string</span> <span class="title">After</span>(<span class="params"><span class="keyword">string</span> str, <span class="keyword">string</span> search</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td style="text-align:center">规定字符串</td>
+</tr>
+<tr>
+<td><code>search</code></td>
+<td style="text-align:center">搜索的值</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Contains"><a href="#Contains" class="headerlink" title="Contains"></a>Contains</h3><p>判断规定字符串是否包含规定子字符串。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.Contains(<span class="string">"helloworld"</span>,<span class="string">"llo"</span>);</span><br><span class="line"><span class="comment">// result : true</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-11"><a href="#函数原型-11" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Contains</span>(<span class="params"><span class="keyword">string</span> str, <span class="keyword">params</span> <span class="keyword">string</span>[] needles</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td style="text-align:center">规定字符串</td>
+</tr>
+<tr>
+<td><code>needles</code></td>
+<td style="text-align:center">规定子字符串</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Replace"><a href="#Replace" class="headerlink" title="Replace"></a>Replace</h3><p>在规定字符串中替换匹配项。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.Replace(<span class="keyword">new</span> []&#123;<span class="string">"hel"</span>,<span class="string">"wor"</span>&#125;,<span class="string">"***"</span>,<span class="string">"helloworld"</span>);</span><br><span class="line"><span class="comment">// result : ***lo***ld</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-12"><a href="#函数原型-12" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">string</span> <span class="title">Replace</span>(<span class="params"><span class="keyword">string</span>[] matches, <span class="keyword">string</span> replace, <span class="keyword">string</span> str</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>matches</code></td>
+<td style="text-align:center">匹配的值列表</td>
+</tr>
+<tr>
+<td><code>replace</code></td>
+<td style="text-align:center">替换的值</td>
+</tr>
+<tr>
+<td><code>str</code></td>
+<td style="text-align:center">规定子字符串</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ReplaceFirst"><a href="#ReplaceFirst" class="headerlink" title="ReplaceFirst"></a>ReplaceFirst</h3><p>替换规定字符串中第一次遇到的匹配项</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.ReplaceFirst(<span class="string">"hel"</span>,<span class="string">"***"</span>,<span class="string">"helloworldhelloworld"</span>);</span><br><span class="line"><span class="comment">// result : ***loworldhelloworld</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-13"><a href="#函数原型-13" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">string</span> <span class="title">ReplaceFirst</span>(<span class="params"><span class="keyword">string</span> match, <span class="keyword">string</span> replace, <span class="keyword">string</span> str</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>match</code></td>
+<td style="text-align:center">匹配的值</td>
+</tr>
+<tr>
+<td><code>replace</code></td>
+<td style="text-align:center">替换的值</td>
+</tr>
+<tr>
+<td><code>str</code></td>
+<td style="text-align:center">规定子字符串</td>
+</tr>
+</tbody>
+</table>
+<h3 id="ReplaceLast"><a href="#ReplaceLast" class="headerlink" title="ReplaceLast"></a>ReplaceLast</h3><p>替换规定字符串中从后往前第一次遇到的匹配项</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.ReplaceLast(<span class="string">"hel"</span>,<span class="string">"***"</span>,<span class="string">"helloworldhelloworld"</span>);</span><br><span class="line"><span class="comment">// result : helloworld***loworld</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-14"><a href="#函数原型-14" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">string</span> <span class="title">ReplaceLast</span>(<span class="params"><span class="keyword">string</span> match, <span class="keyword">string</span> replace, <span class="keyword">string</span> str</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>match</code></td>
+<td style="text-align:center">匹配的值</td>
+</tr>
+<tr>
+<td><code>replace</code></td>
+<td style="text-align:center">替换的值</td>
+</tr>
+<tr>
+<td><code>str</code></td>
+<td style="text-align:center">规定子字符串</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Random"><a href="#Random" class="headerlink" title="Random"></a>Random</h3><p>生成一个随机字母（含大小写），数字的字符串。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.Random(<span class="number">8</span>);</span><br><span class="line"><span class="comment">// result : 一个随机值，如：u8Kn1YUz</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-15"><a href="#函数原型-15" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">string</span> <span class="title">Random</span>(<span class="params"><span class="keyword">int</span> length = <span class="number">16</span>, <span class="keyword">int</span>? seed = <span class="literal">null</span></span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>length</code></td>
+<td style="text-align:center">生成的随机字符串长度</td>
+</tr>
+<tr>
+<td><code>seed</code></td>
+<td style="text-align:center">随机种子，种子一致则随机顺序结果一致</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Trancate"><a href="#Trancate" class="headerlink" title="Trancate"></a>Trancate</h3><p>如果长度超过给定的最大字符串长度，则截断字符串。 截断的字符串的最后一个字符将替换为默认为<code>...</code>的省略字符串。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.Trancate(<span class="string">"helloworld"</span>,<span class="number">6</span>);</span><br><span class="line"><span class="comment">// result: hel...</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Str.Trancate(<span class="string">"hello world"</span>,<span class="number">10</span> , <span class="string">" "</span>);</span><br><span class="line"><span class="comment">// result: hello...</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-16"><a href="#函数原型-16" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">string</span> <span class="title">Truncate</span>(<span class="params"><span class="keyword">string</span> str, <span class="keyword">int</span> length, <span class="keyword">object</span> separator = <span class="literal">null</span>, <span class="keyword">string</span> mission = <span class="literal">null</span></span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>str</code></td>
+<td style="text-align:center">规定字符串</td>
+</tr>
+<tr>
+<td><code>length</code></td>
+<td style="text-align:center">截断长度(含缺省字符长度)</td>
+</tr>
+<tr>
+<td><code>separator</code></td>
+<td style="text-align:center">临近的分隔符，如果设定则，截断长度为距离截断长度最近的分隔符位置,如果传入的是一个正则表达式那么则使用正则进行匹配。</td>
+</tr>
+<tr>
+<td><code>mission</code></td>
+<td style="text-align:center">缺省字符，默认是<code>...</code></td>
+</tr>
+</tbody>
+</table>
+
+    <div class="footer">
+        
+        发现错误？想参与编辑？ 
+        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/detail/support/str.md" target="_blank">
+            在 Github 上编辑此页！
+        </a>
+        
+    </div>
+</article>
+
+<div class="sub-nav hiden-in-phone">
+    <dl id="sub-nav">
+        <dt>本文内容</dt>
+        <dd v-for="(ele, index) in sub_nav">
+           <a v-bind:href="ele.href">{{ ele.name }}</a>
+        </dd>
+    </dl>
+</div> 
+</div>
+
+<footer>
+    <div>
+        <p>© Copyright 2017-2018 catlib.io All Rights Reserved</p>
+        <p>喵喵喵，快来一起玩喵~</p>
+    </div>
+</footer>
+
+
+<script>
+var vm = new Vue({
+    el : '#container',
+    data: {
+        sub_nav : [ ]
+    },
+    created:function(){
+        var obj = [];
+        $("article h3").each(function(){
+            obj.push({name :  $(this).find("a").attr("title") , href : "#"+$(this).attr("id") });
+        });
+
+        this.sub_nav = obj;       
+    }
+});
+
+var isShow = false;
+$("nav").on("click","#btn-menu" , function(){
+
+    if(!isShow){
+        
+        if($(document).scrollTop() > $(".sidebar").height() - 100){
+
+            $('html, body').animate({scrollTop:0} , 300, "swing",function(){
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+            });
+        }else{
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+
+        }
+
+    }else{
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+    }
+    isShow = !isShow;
+
+});
+
+$(".container").on("click" , "article" , function(){
+
+    if(isShow){
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+        isShow = false;    
+    }
+
+});
+</script>
+        
+    </body>
+</html>

@@ -1,0 +1,682 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta name="generator" content="Hexo 3.8.0">
+
+    
+    <title>服务表 — CatLib</title>
+      
+    <meta charset="utf-8">
+    
+    <meta name="description" content="CatLib Unity Framework.">
+      
+    <meta name="keywords" content="CatLib,CatLib中文网,CatLib教程,CatLib官网">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="/css/page.css">
+
+    <script src="/js/vue.js"></script>
+    <script src="/js/jquery.js"></script>
+    </head>
+
+    <body>
+        
+            <nav class="nav">
+    <div class="border">
+        <img src="/images/logo.png">
+        <!--button class="hiden-in-phone">v1.2</button!-->
+        <button id="btn-menu" class="hiden-in-pc">菜单</button>
+        <ul class="nav-link hiden-in-phone">
+            <!--li>
+                <form id="search-form">
+                    <input type="text" id="search-query" class="search-query">
+                </form>
+            </li!-->
+            <li><a href="https://github.com/catlib/framework" class="nav-link-li">下载框架</a></li>
+            <li><a href="/v1/guide/use.html" class="nav-link-li">使用案例</a></li>
+            <li><a href="/v1/guide/version.html" class="nav-link-li">版本说明</a></li>
+            <li><a href="/v1/guide/contribution.html" class="nav-link-li">贡献指南</a></li>
+            <li><a href="/v1/guide/index.html" class="nav-link-li">介绍</a></li>
+            <li><a href="/" class="nav-link-li current">首页</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div id="container" class="container clear">
+    <section class="sidebar clearfix">
+    <ul>
+        
+            
+            
+                <li><h3>基础</h3></li>
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/index.html" class="sidebar-link">介绍</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/upgrade.html" class="sidebar-link">升级指南</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/version.html" class="sidebar-link">版本说明</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/error.html" class="sidebar-link">常见错误</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/style.html" class="sidebar-link">命名规范</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/contribution.html" class="sidebar-link">贡献指南</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/use.html" class="sidebar-link">使用案例</a></p>
+            </li>
+        
+            
+            
+            
+                <li><h3>框架核心</h3></li>
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/service-provider.html" class="sidebar-link">服务提供者</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/container.html" class="sidebar-link">服务容器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/application.html" class="sidebar-link">CatLib核心</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/support.html" class="sidebar-link">支持库</a></p>
+            </li>
+        
+            
+            
+            
+            
+                <li><h3>框架组件</h3></li>
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/routing.html" class="sidebar-link">路由</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/random.html" class="sidebar-link">随机数</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/file-system.html" class="sidebar-link">文件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/hashing.html" class="sidebar-link">哈希</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/encryption.html" class="sidebar-link">加解密</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/compress.html" class="sidebar-link">压缩解压缩</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/translation.html" class="sidebar-link">国际化(I18N)</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/tick.html" class="sidebar-link">时钟</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/network.html" class="sidebar-link">网络</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/socket.html" class="sidebar-link">Socket</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+                <li><h3>Unity组件</h3></li>
+            
+            
+            <li>
+                <p><a href="/v1/guide/mono-driver.html" class="sidebar-link">Mono Driver</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/time.html" class="sidebar-link">时间</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/timer.html" class="sidebar-link">计时器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/random-unity.html" class="sidebar-link">随机数扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/file-system-unity.html" class="sidebar-link">文件系统扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+                <li><h3>其他</h3></li>
+            
+            <li>
+                <p><a href="/v1/guide/can-make.html" class="sidebar-link current">服务表</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/service-priority.html" class="sidebar-link">初始化优先级</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/api.html" class="sidebar-link">服务接口</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/facade.html" class="sidebar-link">服务门面</a></p>
+            </li>
+        
+    </ul>
+</section>
+    <article class="clearfix">
+    <h2 id="服务表"><a href="#服务表" class="headerlink" title="服务表"></a>服务表</h2><p>本表中列出了CatLib框架所有内置组件可以通过<code>Make</code>方法构建的服务，<code>接口名</code>和<code>别名</code>均可用于构建服务。</p>
+<ul>
+<li>所有的<code>(默认)</code>等价与使用<code>管理器</code>调用<code>Default</code>方法得到的内容。</li>
+</ul>
+<h3 id="基础库"><a href="#基础库" class="headerlink" title="基础库"></a>基础库</h3><table>
+<thead>
+<tr>
+<th>描述</th>
+<th style="text-align:center">接口名</th>
+<th style="text-align:center">别名</th>
+<th style="text-align:center">所属组件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CatLib核心</td>
+<td style="text-align:center"><code>IApplication</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="application.html">CatLib核心</a></td>
+</tr>
+<tr>
+<td>依赖注入容器</td>
+<td style="text-align:center"><code>IContainer</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="container.html">服务容器</a></td>
+</tr>
+<tr>
+<td>压缩解压缩管理器</td>
+<td style="text-align:center"><code>ICompressManager</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="compress.html">压缩解压缩</a></td>
+</tr>
+<tr>
+<td>压缩解压缩(默认)</td>
+<td style="text-align:center"><code>ICompress</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="compress.html">压缩解压缩</a></td>
+</tr>
+<tr>
+<td>Socket管理器</td>
+<td style="text-align:center"><code>ISocketManager</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="socket.html">Socket</a></td>
+</tr>
+<tr>
+<td>网络管理器</td>
+<td style="text-align:center"><code>INetworkManager</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="network.html">网络管理器</a></td>
+</tr>
+<tr>
+<td>转换器(默认)</td>
+<td style="text-align:center"><code>IConverters</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="converters.html">转换器管理器</a></td>
+</tr>
+<tr>
+<td>日志工具</td>
+<td style="text-align:center"><code>ILogger</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="console.html">控制台</a></td>
+</tr>
+<tr>
+<td>数据监控</td>
+<td style="text-align:center"><code>IMonitor</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="console.html">控制台</a></td>
+</tr>
+<tr>
+<td>加解密工具</td>
+<td style="text-align:center"><code>IEncrypter</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="encryption.html">加解密</a></td>
+</tr>
+<tr>
+<td>全局事件</td>
+<td style="text-align:center"><code>IDispatcher</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="/v1/detail/support/events.html">事件</a></td>
+</tr>
+<tr>
+<td>文件系统管理器</td>
+<td style="text-align:center"><code>IFileSystemManager</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="file-system.html">文件系统</a></td>
+</tr>
+<tr>
+<td>文件系统(默认)</td>
+<td style="text-align:center"><code>IFileSystem</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="file-system.html">文件系统</a></td>
+</tr>
+<tr>
+<td>哈希库</td>
+<td style="text-align:center"><code>IHashing</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="hashing.html">哈希</a></td>
+</tr>
+<tr>
+<td>Json库</td>
+<td style="text-align:center"><code>IJson</code>, <code>IJsonAware</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="json.html">Json</a></td>
+</tr>
+<tr>
+<td>随机数库</td>
+<td style="text-align:center"><code>IRandomFactory</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="random.html">随机数</a></td>
+</tr>
+<tr>
+<td>随机数发生器(默认)</td>
+<td style="text-align:center"><code>IRandom</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="random.html">随机数</a></td>
+</tr>
+<tr>
+<td>路由系统</td>
+<td style="text-align:center"><code>IRouter</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="routing.html">路由系统</a></td>
+</tr>
+<tr>
+<td>国际化(I18N)</td>
+<td style="text-align:center"><code>ITranslator</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="translation.html">国际化(I18N)</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="Unity增强库"><a href="#Unity增强库" class="headerlink" title="Unity增强库"></a>Unity增强库</h3><table>
+<thead>
+<tr>
+<th>描述</th>
+<th style="text-align:center">接口名</th>
+<th style="text-align:center">别名</th>
+<th style="text-align:center">所属组件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mono驱动器</td>
+<td style="text-align:center"><code>IMonoDriver</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="mono-driver.html">Mono驱动器</a></td>
+</tr>
+<tr>
+<td>时间管理器</td>
+<td style="text-align:center"><code>ITimeManager</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="time.html">时间</a></td>
+</tr>
+<tr>
+<td>时间(默认)</td>
+<td style="text-align:center"><code>ITime</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="time.html">时间</a></td>
+</tr>
+<tr>
+<td>定时器</td>
+<td style="text-align:center"><code>ITimer</code></td>
+<td style="text-align:center"><code>无</code></td>
+<td style="text-align:center"><a href="timer.html">定时器</a></td>
+</tr>
+</tbody>
+</table>
+
+    <div class="footer">
+        
+        发现错误？想参与编辑？ 
+        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/can-make.md" target="_blank">
+            在 Github 上编辑此页！
+        </a>
+        
+    </div>
+</article>
+
+<div class="sub-nav hiden-in-phone">
+    <dl id="sub-nav">
+        <dt>本文内容</dt>
+        <dd v-for="(ele, index) in sub_nav">
+           <a v-bind:href="ele.href">{{ ele.name }}</a>
+        </dd>
+    </dl>
+</div> 
+</div>
+
+<footer>
+    <div>
+        <p>© Copyright 2017-2018 catlib.io All Rights Reserved</p>
+        <p>喵喵喵，快来一起玩喵~</p>
+    </div>
+</footer>
+
+
+<script>
+var vm = new Vue({
+    el : '#container',
+    data: {
+        sub_nav : [ ]
+    },
+    created:function(){
+        var obj = [];
+        $("article h3").each(function(){
+            obj.push({name :  $(this).find("a").attr("title") , href : "#"+$(this).attr("id") });
+        });
+
+        this.sub_nav = obj;       
+    }
+});
+
+var isShow = false;
+$("nav").on("click","#btn-menu" , function(){
+
+    if(!isShow){
+        
+        if($(document).scrollTop() > $(".sidebar").height() - 100){
+
+            $('html, body').animate({scrollTop:0} , 300, "swing",function(){
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+            });
+        }else{
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+
+        }
+
+    }else{
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+    }
+    isShow = !isShow;
+
+});
+
+$(".container").on("click" , "article" , function(){
+
+    if(isShow){
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+        isShow = false;    
+    }
+
+});
+</script>
+        
+    </body>
+</html>

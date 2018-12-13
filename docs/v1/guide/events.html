@@ -1,0 +1,548 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta name="generator" content="Hexo 3.8.0">
+
+    
+    <title>事件系统 — CatLib</title>
+      
+    <meta charset="utf-8">
+    
+    <meta name="description" content="CatLib Unity Framework.">
+      
+    <meta name="keywords" content="CatLib,CatLib中文网,CatLib教程,CatLib官网">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="/css/page.css">
+
+    <script src="/js/vue.js"></script>
+    <script src="/js/jquery.js"></script>
+    </head>
+
+    <body>
+        
+            <nav class="nav">
+    <div class="border">
+        <img src="/images/logo.png">
+        <!--button class="hiden-in-phone">v1.2</button!-->
+        <button id="btn-menu" class="hiden-in-pc">菜单</button>
+        <ul class="nav-link hiden-in-phone">
+            <!--li>
+                <form id="search-form">
+                    <input type="text" id="search-query" class="search-query">
+                </form>
+            </li!-->
+            <li><a href="https://github.com/catlib/framework" class="nav-link-li">下载框架</a></li>
+            <li><a href="/v1/guide/use.html" class="nav-link-li">使用案例</a></li>
+            <li><a href="/v1/guide/version.html" class="nav-link-li">版本说明</a></li>
+            <li><a href="/v1/guide/contribution.html" class="nav-link-li">贡献指南</a></li>
+            <li><a href="/v1/guide/index.html" class="nav-link-li">介绍</a></li>
+            <li><a href="/" class="nav-link-li current">首页</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div id="container" class="container clear">
+    <section class="sidebar clearfix">
+    <ul>
+        
+            
+            
+                <li><h3>基础</h3></li>
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/index.html" class="sidebar-link">介绍</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/upgrade.html" class="sidebar-link">升级指南</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/version.html" class="sidebar-link">版本说明</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/error.html" class="sidebar-link">常见错误</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/style.html" class="sidebar-link">命名规范</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/contribution.html" class="sidebar-link">贡献指南</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/use.html" class="sidebar-link">使用案例</a></p>
+            </li>
+        
+            
+            
+            
+                <li><h3>框架核心</h3></li>
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/service-provider.html" class="sidebar-link">服务提供者</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/container.html" class="sidebar-link">服务容器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/application.html" class="sidebar-link">CatLib核心</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/events.html" class="sidebar-link current">事件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/support.html" class="sidebar-link">支持库</a></p>
+            </li>
+        
+            
+            
+            
+            
+                <li><h3>框架组件</h3></li>
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/routing.html" class="sidebar-link">路由</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/random.html" class="sidebar-link">随机数</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/file-system.html" class="sidebar-link">文件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/hashing.html" class="sidebar-link">哈希</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/encryption.html" class="sidebar-link">加解密</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/compress.html" class="sidebar-link">压缩解压缩</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/translation.html" class="sidebar-link">国际化(I18N)</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/tick.html" class="sidebar-link">时钟</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/network.html" class="sidebar-link">网络</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/socket.html" class="sidebar-link">Socket</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+                <li><h3>Unity组件</h3></li>
+            
+            
+            <li>
+                <p><a href="/v1/guide/mono-driver.html" class="sidebar-link">Mono Driver</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/time.html" class="sidebar-link">时间</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/timer.html" class="sidebar-link">计时器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/random-unity.html" class="sidebar-link">随机数扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/file-system-unity.html" class="sidebar-link">文件系统扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+                <li><h3>其他</h3></li>
+            
+            <li>
+                <p><a href="/v1/guide/can-make.html" class="sidebar-link">服务表</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/service-priority.html" class="sidebar-link">初始化优先级</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/api.html" class="sidebar-link">服务接口</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/facade.html" class="sidebar-link">服务门面</a></p>
+            </li>
+        
+    </ul>
+</section>
+    <article class="clearfix">
+    <h2 id="事件系统"><a href="#事件系统" class="headerlink" title="事件系统"></a>事件系统</h2><p>事件机制是一种很好的应用解耦方式。CatLib事件系统让我们可以订阅和监听程序中出现的各种事件。事件系统结合<a href="container.html">服务容器</a>，将提供更加优秀的事件处理方式。</p>
+<p><a href="application.html">CatLib核心</a>已经默认提供了事件系统，供给全局事件使用。如果您要定义私有范围的事件可以这么做：</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> dispatcher = <span class="keyword">new</span> Dispatcher(); <span class="comment">// 构建一个单纯的事件调度器</span></span><br></pre></td></tr></table></figure>
+<h3 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a>名词解释</h3><ul>
+<li><code>载荷</code>是指程序调用所附带的上下文信息。不同的调用者所提供的上下文信息各不相同。</li>
+</ul>
+<h3 id="注册普通监听器"><a href="#注册普通监听器" class="headerlink" title="注册普通监听器"></a>注册普通监听器</h3><p>通过 <code>App.On</code> 命令您可以注册一个事件的监听器，监听器函数会通过服务容器调用，自动解析并且注入合适的参数。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.On(<span class="string">"event.name"</span> , (IApplication application)=&gt;&#123;</span><br><span class="line">    <span class="comment">//todo</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>除了通过lambda注册外事件监听器还能够通过对象方法注册，一共接收3个参数，第一个参数为事件名，第二个参数为触发事件后调用的对象，第三个参数为触发事件后调用对象的函数名（可选项），如果您没有传入第三个参数作为函数名，CatLib事件系统会通过<a href="/v1/detail/support/str.html#Method">字符串方法分析</a>事件名给定一个函数名，这一特性在有完整的事件名规范时将会大大简化代码。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.On(<span class="string">"MyEvent.CallEvent"</span> , cls); <span class="comment">// 分析得出的函数名 : CallEvent</span></span><br></pre></td></tr></table></figure>
+<h3 id="注册通配符监听器"><a href="#注册通配符监听器" class="headerlink" title="注册通配符监听器"></a>注册通配符监听器</h3><p>CatLib事件系统允许使用通配符<code>*</code>对事件进行匹配。它让你在一个监听器中可以监听到多个事件。</p>
+<blockquote>
+<p>注意：通配符事件每次事件调用都会被依次检查，您应该控制他们在项目中的数量。</p>
+</blockquote>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.On(<span class="string">"event.*"</span> , ()=&gt;&#123;</span><br><span class="line">    <span class="comment">//todo</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// event.catlib</span></span><br><span class="line"><span class="comment">// event.catlib.version</span></span><br></pre></td></tr></table></figure>
+<h3 id="触发事件"><a href="#触发事件" class="headerlink" title="触发事件"></a>触发事件</h3><p>如果要触发事件，您可以通过<code>App.Trigger</code>来触发事件。这个函数将会把事件分发到它所有已经注册的监听器上。因为 App 是全局可访问的，所以你可以在项目中的任何地方调用它, CatLib的将使用容器来调度到方法，这意味这您可以直接展开传入的参数。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Trigger(<span class="string">"event.name"</span>, <span class="comment">/*Your params*/</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="触发单次事件"><a href="#触发单次事件" class="headerlink" title="触发单次事件"></a>触发单次事件</h3><p>通过<code>TriggerHalt</code>您可以限定这次事件的触发只要监听器返回了有效处理结果（不为null）那么就自动终止事件传递。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.TriggerHalt(<span class="string">"event"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="返回处理结果"><a href="#返回处理结果" class="headerlink" title="返回处理结果"></a>返回处理结果</h3><p>您可以通过<code>return</code>一个对象，这个对象将会被返回给调用者。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Listen(<span class="string">"event"</span> , ()=&gt;&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"call complete"</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">App.Listen(<span class="string">"event.*"</span> , ()=&gt;&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"call all"</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">App.TriggerHalt(<span class="string">"event"</span>); <span class="comment">// call complete</span></span><br><span class="line">App.Trigger(<span class="string">"event.name"</span>); <span class="comment">// object[]&#123; "call complete" , "call all" &#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="监听器是否存在"><a href="#监听器是否存在" class="headerlink" title="监听器是否存在"></a>监听器是否存在</h3><p>您可以通过<code>HasListeners</code>来判断事件监听器是否存在，该方法接收两个参数，第一个参数为事件名，第二个参数为是否进行严格匹配（可选）, 如果进行严格匹配那么将禁用通配符匹配。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Listen(<span class="string">"event.*"</span> , ()=&gt;&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"call complete"</span>;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">App.HasListeners(<span class="string">"event.name"</span>, <span class="literal">false</span>); <span class="comment">// true</span></span><br><span class="line">App.HasListeners(<span class="string">"event.name"</span>, <span class="literal">true</span>);  <span class="comment">// false</span></span><br><span class="line">App.HasListeners(<span class="string">"event.*"</span>, <span class="literal">true</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h3 id="终止事件传递"><a href="#终止事件传递" class="headerlink" title="终止事件传递"></a>终止事件传递</h3><p>CatLib事件系统支持返回一个false来终止事件的传递。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">App.Listen(<span class="string">"event"</span> , ()=&gt;&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="解除监听器"><a href="#解除监听器" class="headerlink" title="解除监听器"></a>解除监听器</h3><p>您可以通过<code>Off</code>方法来解除事件监听器，该方法支持三种解除方式：</p>
+<ul>
+<li>如果传入的是字符串(<code>string</code>)将会解除对应事件名的所有事件</li>
+<li>如果传入的是事件对象(<code>IEvent</code>)那么解除对应事件</li>
+<li>如果传入的是其他实例(<code>object</code>)会解除该实例下的所有事件</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> handler = App.On(<span class="string">"event.*"</span> , (payload)=&gt;&#123;</span><br><span class="line">    <span class="comment">//todo</span></span><br><span class="line">&#125;);</span><br><span class="line">App.Off(handler);</span><br></pre></td></tr></table></figure>
+
+    <div class="footer">
+        
+        发现错误？想参与编辑？ 
+        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/events.md" target="_blank">
+            在 Github 上编辑此页！
+        </a>
+        
+    </div>
+</article>
+
+<div class="sub-nav hiden-in-phone">
+    <dl id="sub-nav">
+        <dt>本文内容</dt>
+        <dd v-for="(ele, index) in sub_nav">
+           <a v-bind:href="ele.href">{{ ele.name }}</a>
+        </dd>
+    </dl>
+</div> 
+</div>
+
+<footer>
+    <div>
+        <p>© Copyright 2017-2018 catlib.io All Rights Reserved</p>
+        <p>喵喵喵，快来一起玩喵~</p>
+    </div>
+</footer>
+
+
+<script>
+var vm = new Vue({
+    el : '#container',
+    data: {
+        sub_nav : [ ]
+    },
+    created:function(){
+        var obj = [];
+        $("article h3").each(function(){
+            obj.push({name :  $(this).find("a").attr("title") , href : "#"+$(this).attr("id") });
+        });
+
+        this.sub_nav = obj;       
+    }
+});
+
+var isShow = false;
+$("nav").on("click","#btn-menu" , function(){
+
+    if(!isShow){
+        
+        if($(document).scrollTop() > $(".sidebar").height() - 100){
+
+            $('html, body').animate({scrollTop:0} , 300, "swing",function(){
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+            });
+        }else{
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+
+        }
+
+    }else{
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+    }
+    isShow = !isShow;
+
+});
+
+$(".container").on("click" , "article" , function(){
+
+    if(isShow){
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+        isShow = false;    
+    }
+
+});
+</script>
+        
+    </body>
+</html>

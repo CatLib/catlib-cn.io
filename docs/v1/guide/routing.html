@@ -1,0 +1,687 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta name="generator" content="Hexo 3.8.0">
+
+    
+    <title>路由 — CatLib</title>
+      
+    <meta charset="utf-8">
+    
+    <meta name="description" content="CatLib Unity Framework.">
+      
+    <meta name="keywords" content="CatLib,CatLib中文网,CatLib教程,CatLib官网">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="/css/page.css">
+
+    <script src="/js/vue.js"></script>
+    <script src="/js/jquery.js"></script>
+    </head>
+
+    <body>
+        
+            <nav class="nav">
+    <div class="border">
+        <img src="/images/logo.png">
+        <!--button class="hiden-in-phone">v1.2</button!-->
+        <button id="btn-menu" class="hiden-in-pc">菜单</button>
+        <ul class="nav-link hiden-in-phone">
+            <!--li>
+                <form id="search-form">
+                    <input type="text" id="search-query" class="search-query">
+                </form>
+            </li!-->
+            <li><a href="https://github.com/catlib/framework" class="nav-link-li">下载框架</a></li>
+            <li><a href="/v1/guide/use.html" class="nav-link-li">使用案例</a></li>
+            <li><a href="/v1/guide/version.html" class="nav-link-li">版本说明</a></li>
+            <li><a href="/v1/guide/contribution.html" class="nav-link-li">贡献指南</a></li>
+            <li><a href="/v1/guide/index.html" class="nav-link-li">介绍</a></li>
+            <li><a href="/" class="nav-link-li current">首页</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div id="container" class="container clear">
+    <section class="sidebar clearfix">
+    <ul>
+        
+            
+            
+                <li><h3>基础</h3></li>
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/index.html" class="sidebar-link">介绍</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/upgrade.html" class="sidebar-link">升级指南</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/version.html" class="sidebar-link">版本说明</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/error.html" class="sidebar-link">常见错误</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/style.html" class="sidebar-link">命名规范</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/contribution.html" class="sidebar-link">贡献指南</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/use.html" class="sidebar-link">使用案例</a></p>
+            </li>
+        
+            
+            
+            
+                <li><h3>框架核心</h3></li>
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/service-provider.html" class="sidebar-link">服务提供者</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/container.html" class="sidebar-link">服务容器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/application.html" class="sidebar-link">CatLib核心</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/support.html" class="sidebar-link">支持库</a></p>
+            </li>
+        
+            
+            
+            
+            
+                <li><h3>框架组件</h3></li>
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/routing.html" class="sidebar-link current">路由</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/random.html" class="sidebar-link">随机数</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/file-system.html" class="sidebar-link">文件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/hashing.html" class="sidebar-link">哈希</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/encryption.html" class="sidebar-link">加解密</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/compress.html" class="sidebar-link">压缩解压缩</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/translation.html" class="sidebar-link">国际化(I18N)</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/tick.html" class="sidebar-link">时钟</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/network.html" class="sidebar-link">网络</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/socket.html" class="sidebar-link">Socket</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+                <li><h3>Unity组件</h3></li>
+            
+            
+            <li>
+                <p><a href="/v1/guide/mono-driver.html" class="sidebar-link">Mono Driver</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/time.html" class="sidebar-link">时间</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/timer.html" class="sidebar-link">计时器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/random-unity.html" class="sidebar-link">随机数扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/file-system-unity.html" class="sidebar-link">文件系统扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+                <li><h3>其他</h3></li>
+            
+            <li>
+                <p><a href="/v1/guide/can-make.html" class="sidebar-link">服务表</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/service-priority.html" class="sidebar-link">初始化优先级</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/api.html" class="sidebar-link">服务接口</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/facade.html" class="sidebar-link">服务门面</a></p>
+            </li>
+        
+    </ul>
+</section>
+    <article class="clearfix">
+    <h2 id="路由"><a href="#路由" class="headerlink" title="路由"></a>路由</h2><p>CatLib路由系统可以赋予您通过一个uri调度到指定功能的能力。</p>
+<h3 id="基础概念"><a href="#基础概念" class="headerlink" title="基础概念"></a>基础概念</h3><h4 id="基本构成"><a href="#基本构成" class="headerlink" title="基本构成"></a><strong>基本构成</strong></h4><p>CatLib路由系统由<code>路由器</code>，<code>特性路由</code>，<code>路由条目</code>，<code>路由编译器</code>，<code>路由组</code>组成。</p>
+<p><code>路由器</code>负责整个路由系统的调度</p>
+<p><code>路由条目</code>是路由系统中的基本单位，她确定了具体的一条路由及路由的目标。</p>
+<p><code>路由组</code>则是一个群体范围，一个路由组内部可以有多个路由条目，反之一个路由条目也可以拥有多个路由组。</p>
+<p><code>特性路由</code>是路由系统的扩展，允许开发者以特性的形式对路由目标方法进行标记后对标记的路由方法进行调度。</p>
+<p><code>路由编译器</code>用于编译路由条目。编译后的路由条目可以被路由器使用。</p>
+<h4 id="名词解释"><a href="#名词解释" class="headerlink" title="名词解释"></a><strong>名词解释</strong></h4><p><code>调度</code>一个方法，通过路由的方式调用被路由的方法。</p>
+<h3 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h3><ul>
+<li>(客户端,服务器)通过URI控制客户端切换UI，场景等。</li>
+<li>允许拦截UI，场景跳转过程，处理客户端埋点等逻辑。</li>
+<li>跨组件API调用，允许参数传递与解析，并通过控制反转来做组件解耦。</li>
+<li>Debug调试指令控制</li>
+</ul>
+<h3 id="路由架构图"><a href="#路由架构图" class="headerlink" title="路由架构图"></a>路由架构图</h3><p><img src="../../images/routing-diagram.svg" width="100%"></p>
+<h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><p>初始配置必须在框架初始化前完成配置，下面是路由组件需要的初始配置：</p>
+<table>
+<thead>
+<tr>
+<th>配置名</th>
+<th style="text-align:center">是否必须</th>
+<th style="text-align:center">配置描述(可以点击查看详细)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>RoutingProvider.DefaultScheme</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">默认的Scheme</td>
+</tr>
+<tr>
+<td><code>RoutingProvider.CompilerAssembly</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center"><a href="#路由编译剥离">路由编译时参与编译的程序集</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="合法的URI"><a href="#合法的URI" class="headerlink" title="合法的URI"></a>合法的URI</h3><p>符合下面RFC定义的URI均是合法的URI，都可以被CatLib路由系统解析：</p>
+<ul>
+<li><a href="https://www.ietf.org/rfc/rfc1808.txt" target="_blank" rel="noopener">RFC1808</a></li>
+<li><a href="https://www.ietf.org/rfc/rfc1738.txt" target="_blank" rel="noopener">RFC1738</a></li>
+<li><a href="https://www.ietf.org/rfc/rfc2396.txt" target="_blank" rel="noopener">RFC2396</a></li>
+<li><a href="https://www.ietf.org/rfc/rfc2732.txt" target="_blank" rel="noopener">RFC2732</a></li>
+</ul>
+<h3 id="基础注册"><a href="#基础注册" class="headerlink" title="基础注册"></a>基础注册</h3><p>注册一个基本路由只需要一个<code>url</code>与一个<code>lambda</code>, 如果您没有定义uri的<code>scheme</code>那么将会使用默认值:</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 如果您使用的是 CatLib Framework 这段代码已经内置在框架内了</span></span><br><span class="line">public sealed class Router : Facade&lt;IRouter&gt; &#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Router.Instance.Reg(<span class="string">"main"</span>, (request, response) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    response.SetContext(<span class="string">"hello world"</span>);</span><br><span class="line">&#125;);</span><br><span class="line">Router.Instance.Dispatch(<span class="string">"catlib://main"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="特性路由注册"><a href="#特性路由注册" class="headerlink" title="特性路由注册"></a>特性路由注册</h3><p>CatLib还允许您为类添加路由标记<code>[Routed]</code>来进行特性路由,注意被路由的类必须标记为<code>[Routed]</code>,且需要在路由方法上也标记<code>[Routed]</code>,同时保证方法访问级别为<code>public</code>：</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">[<span class="meta">Routed</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AttrRouting</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">Routed</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call</span>(<span class="params">IRequest request, IResponse response</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        res.SetContext(<span class="string">"hello world"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Router.Instance.Dispatch(<span class="string">"catlib://attr-routing/call"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="必选路由参数"><a href="#必选路由参数" class="headerlink" title="必选路由参数"></a>必选路由参数</h3><p>有时，我们需要在路由中捕获一些<code>url</code>的片段。例如，如果我们需要从url中捕获访问<code>道具详细界面</code>时的<code>道具id</code>,我们可以这样定义路由参数：</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Router.Instance.Reg(<span class="string">"props-detail/&#123;id&#125;"</span>, (request, response) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    response.SetContext(<span class="string">"props id:"</span> + request[<span class="string">"id"</span>]);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>您也可以根据需要定义多个参数：</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Router.Instance.Reg(<span class="string">"bag/&#123;type&#125;/&#123;sub_type&#125;"</span>, (request, response) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    response.SetContext(<span class="string">"bag type:"</span> + request[<span class="string">"type"</span>] + <span class="string">" , sub type:"</span> + request[<span class="string">"sub_type"</span>]);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>路由参数通常都会被放在<code>{}</code>内，并且参数名只能为：<code>a-z</code>、<code>A-Z</code>、<code>0-9</code>,以及<code>_</code>。</p>
+<blockquote>
+<p>注意，路由参数不能包含<code>-</code>字符。请使用<code>_</code>替换。</p>
+</blockquote>
+<h3 id="可选的路由参数"><a href="#可选的路由参数" class="headerlink" title="可选的路由参数"></a>可选的路由参数</h3><p>您也可以指定路由参数为可选参数，如果需要将参数指定为可选参数，可以在参数末尾加上<code>?</code>实现。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Router.Instance.Reg(<span class="string">"character/&#123;tag?&#125;"</span>, (request, response) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    response.SetContext(<span class="string">"tag:"</span> + request[<span class="string">"tag"</span>]);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>如果<code>tag</code>没有匹配到合适参数，那么将会使用默认值。</p>
+<h3 id="路由调度"><a href="#路由调度" class="headerlink" title="路由调度"></a>路由调度</h3><p>如果要调用一个已经注册的路由，您可以使用<code>Dispatch()</code>方法。方法接受一个<code>uri</code>和<code>上下文</code></p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">IResponse response = Router.Instance.Dispatch(<span class="string">"character/10"</span> , <span class="string">"hello world"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="隐式参数注入"><a href="#隐式参数注入" class="headerlink" title="隐式参数注入"></a>隐式参数注入</h3><p>CatLib路由系统具备将路由参数名绑定至函数变量的能力。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Router.Instance.Reg(<span class="string">"ui://item/&#123;id&#125;"</span>, (<span class="keyword">int</span> id) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// id: 1;</span></span><br><span class="line">&#125;);</span><br><span class="line">Router.Instance.Dispatch(<span class="string">"ui://item/1"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="可变参数注入"><a href="#可变参数注入" class="headerlink" title="可变参数注入"></a>可变参数注入</h3><p>可变参数注入是隐式参数注入的升级，如隐式参数注入的例子所述，在常规开发中每次都需要使用Id来置换具体的道具实现这将会变得非常繁琐，所以CatLib路由系统支持了可变参数，将会自动将注入的简单类型变换为一个复杂类型。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">Item</span> : <span class="title">IVariant</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 当Id传入为 1 时将会是道具：连衣裙</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Item</span>(<span class="params"><span class="keyword">int</span> id</span>)</span>&#123; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Router.Instance.Reg(<span class="string">"ui://item/&#123;id&#125;"</span>, (Item item) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// item: 连衣裙;</span></span><br><span class="line">&#125;);</span><br><span class="line">Router.Instance.Dispatch(<span class="string">"ui://item/1"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="参数正则约束"><a href="#参数正则约束" class="headerlink" title="参数正则约束"></a>参数正则约束</h3><p>您可以使用<code>Where()</code>来约束您的路由参数的格式，<code>Where()</code>方法接受参数名和定义的参数约束的正则表达式。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Router.Instance.Reg(<span class="string">"character/&#123;tag?&#125;"</span>, (request, response) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    response.SetContext(<span class="string">"tag:"</span> + request[<span class="string">"tag"</span>]);</span><br><span class="line">&#125;).Where(<span class="string">"tag"</span>, <span class="string">"[0-9]+"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="参数默认值"><a href="#参数默认值" class="headerlink" title="参数默认值"></a>参数默认值</h3><p>如果您定义了可选路由，那么当没有匹配到对应参数时，我们往往需要一个默认值。您可以通过<code>Defaults()</code>方法来为一个参数设定默认值。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Router.Instance.Reg(<span class="string">"character/&#123;tag?&#125;"</span>, (request, response) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    response.SetContext(<span class="string">"tag:"</span> + request[<span class="string">"tag"</span>]);</span><br><span class="line">&#125;).Default(<span class="string">"tag"</span>, <span class="string">"1"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="路由组"><a href="#路由组" class="headerlink" title="路由组"></a>路由组</h3><p>路由组允许您共享路由的特性，可以被共享的特性有：<code>参数默认值</code>，<code>参数正则约束</code>,<code>处理中间件</code>,<code>路由异常中间件</code>。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Router.Instance.Group(()=&gt;</span><br><span class="line">&#123;</span><br><span class="line">    Router.Instance.Reg(<span class="string">"character/&#123;type?&#125;"</span>, (request, response) =&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        response.SetContext(<span class="string">"type:"</span> + request[<span class="string">"type"</span>]);</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    Router.Instance.Reg(<span class="string">"bag/&#123;type?&#125;"</span>, (request, response) =&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        response.SetContext(<span class="string">"type:"</span> + request[<span class="string">"type"</span>]);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;).Where(<span class="string">"type"</span> , <span class="string">"[0-9]+"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="关联多个路由组"><a href="#关联多个路由组" class="headerlink" title="关联多个路由组"></a>关联多个路由组</h3><p>一个路由条目可以关系多个路由组，您可以通过给定路由组的名字来设定。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">IGroup group1 = Router.Instance.Group(<span class="string">"group1"</span>);</span><br><span class="line">group1.Where(<span class="string">"type"</span> , <span class="string">"[0-9]+"</span>);</span><br><span class="line"></span><br><span class="line">IGroup group2 = Router.Instance.Group(<span class="string">"group2"</span>);</span><br><span class="line">group1.Where(<span class="string">"page"</span> , <span class="string">"[0-9]+"</span>);</span><br><span class="line"></span><br><span class="line">Router.Instance.Reg(<span class="string">"character/&#123;type?&#125;"</span>, (request, response) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    response.SetContext(<span class="string">"type:"</span> + request[<span class="string">"type"</span>]);</span><br><span class="line">&#125;).Group(<span class="string">"group1"</span>).Group(<span class="string">"group2"</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意，一般情况下我们不建议对多个路由组进行关联，这会导致问题变得复杂化，如果需要使用请提前做好规划。</p>
+</blockquote>
+<h3 id="主编译过程"><a href="#主编译过程" class="headerlink" title="主编译过程"></a>主编译过程</h3><p>得到一条可以被使用的有效路由条目，CatLib在内部已经做了大量的工作。路由条目一般会进行2次编译，编译如下：</p>
+<p><code>特性路由编译</code> =&gt; <code>条目特征编译</code></p>
+<p>特性路由编译在框架启动时就会进行，而条目特征编译则会等到用到路由条目时再进行编译。</p>
+<h3 id="特性路由编译过程"><a href="#特性路由编译过程" class="headerlink" title="特性路由编译过程"></a>特性路由编译过程</h3><p>CatLib路由编译器会在框架启动时扫描被特性路由标记的类，并将其解析成对应的路由条目（编译过程中，为不覆盖设定参数），执行流程如下：</p>
+<ul>
+<li><code>扫描所有被标记路由的类</code><ul>
+<li><code>解析类中所有被标记路由的方法</code><ul>
+<li><code>编译方法Where约束</code></li>
+<li><code>编译方法Defaults默认值</code></li>
+<li><code>编译方法Group组</code></li>
+</ul>
+</li>
+<li><code>编译类Where约束</code></li>
+<li><code>编译类Defaults约束</code></li>
+<li><code>编译类Group组</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="特性路由配置"><a href="#特性路由配置" class="headerlink" title="特性路由配置"></a>特性路由配置</h3><p>如果您使用特性路由，如果想要在特性路由中表达路由的特性，那么可以这么做：</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">[<span class="meta">Routed(Defaults=<span class="meta-string">"type=&gt;1,tag=&gt;2"</span>,Where=<span class="meta-string">"type=&gt;[0-9]+,tag=&gt;[0-9]+"</span>)</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AttrRouting</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">Routed(Defaults=<span class="meta-string">"type=&gt;0"</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call</span>(<span class="params">IRequest request, IResponse response</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        res.SetContext(<span class="string">"hello world"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">Routed</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Func</span>(<span class="params">IRequest request, IResponse response</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        res.SetContext(<span class="string">"hello world"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>特性路由的配置是使用<code>=&gt;</code>和<code>,</code>进行区分的。<code>参数1名=&gt;参数1值,参数2名=&gt;参数2值</code>。 </p>
+<p>上述我们为<code>AttrRouting</code>这个类下的所有特性路由定义了2个默认值：<code>type</code> 和 <code>tag</code>，其值分别为<code>1</code>和<code>2</code>。同时也定义了参数正则约束。</p>
+<p>在方法<code>Call</code>中我们定义了方法的特性路由默认值<code>type</code>。根据<code>特性路由编译过程</code>所以最终生效的默认值的将是<code>0</code>。</p>
+<h3 id="特性路由Scheme"><a href="#特性路由Scheme" class="headerlink" title="特性路由Scheme"></a>特性路由Scheme</h3><p>特性路由可以通过给定绝对地址的方式来定义Scheme</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">[<span class="meta">Routed(<span class="meta-string">"ui://main"</span>)</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AttrRouting</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">Routed(<span class="meta-string">"call"</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call</span>(<span class="params">IRequest request, IResponse response</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        res.SetContext(<span class="string">"hello world"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">Routed(<span class="meta-string">"ui2://func"</span>)</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Func</span>(<span class="params">IRequest request, IResponse response</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        res.SetContext(<span class="string">"hello world"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Router.Instance.Dispatch(<span class="string">"ui://main/call"</span>);</span><br><span class="line">Router.Instance.Dispatch(<span class="string">"ui2://func"</span>);</span><br></pre></td></tr></table></figure>
+<p>上述代码以绝对地址的形式定义了特性路由，这样编译时将不会使用默认的<code>Scheme</code>。</p>
+<h3 id="什么是路由中间件"><a href="#什么是路由中间件" class="headerlink" title="什么是路由中间件"></a>什么是路由中间件</h3><p>路由中间件允许拦截，修改路由请求及响应，中间件将会按照顺序依次执行。</p>
+<p>路由中间件在宏观面上分为：<code>全局中间件</code> ， <code>类中间件</code> ，<code>路由条目中间件</code> , 中间件的执行流程为：</p>
+<p>(调度入口) <code>全局中间件</code> =&gt; <code>类中间件</code> =&gt; <code>路由条目中间件</code> =&gt; <code>目标路由方法</code><br>(调度出口) <code>全局中间件</code> &lt;= <code>类中间件</code> &lt;= <code>路由条目中间件</code> &lt;= <code>目标路由方法</code></p>
+<blockquote>
+<p><code>全局中间件</code> ， <code>类中间件</code> 和 <code>路由条目中间件</code> 为不同的过滤器链池所以她们之间的<code>优先级</code>不产生影响。</p>
+</blockquote>
+<h3 id="路由条目中间件"><a href="#路由条目中间件" class="headerlink" title="路由条目中间件"></a>路由条目中间件</h3><p>路由条目中间件属于<code>路由条目中间件</code>的过滤器链池。</p>
+<p>路由条目中间件能够为当前路由条目设定中间件，它可以指定具体的路由执行指定的中间件。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Router.Instance.Reg(<span class="string">"character/&#123;type?&#125;"</span>, (request, response) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    response.SetContext(<span class="string">"type:"</span> + request[<span class="string">"type"</span>]);</span><br><span class="line">&#125;).Middleware((request,response,next)=&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 中间件逻辑 ， 在路由执行之前</span></span><br><span class="line">    <span class="keyword">var</span> result = next(request,response);</span><br><span class="line">    <span class="comment">// 中间件逻辑 ， 在路由执行之后</span></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="路由组中间件"><a href="#路由组中间件" class="headerlink" title="路由组中间件"></a>路由组中间件</h3><p>路由组中间件属于<code>路由条目中间件</code>的过滤器链池。</p>
+<p>路由组中间件将对所有组内的路由生效。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Router.Instance.Group(()=&gt;</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// 注册路由条目  </span></span><br><span class="line">&#125;).Middleware((request,response,next)=&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 中间件逻辑</span></span><br><span class="line">    <span class="keyword">return</span> next(request,response);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="类中间件"><a href="#类中间件" class="headerlink" title="类中间件"></a>类中间件</h3><p>类中间件属于<code>类中间件</code>的过滤器链池。</p>
+<p>通过特性路由的方式和类注册方式，将允许您设定类的中间件接口：<code>IMiddleware</code>;</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">[<span class="meta">Routed</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AttrRouting</span> : <span class="title">IMiddleware</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> IFilterChain&lt;IRequest, IResponse&gt; Middleware </span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">get</span></span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// 过滤器链</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    [<span class="meta">Routed</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call</span>(<span class="params">IRequest request, IResponse response</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        res.SetContext(<span class="string">"hello world"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>如果您的路由标记类中设定了中间件接口，那么在调度到当前类下的路由方法时将会经过设定的中间件。</p>
+<h3 id="全局中间件"><a href="#全局中间件" class="headerlink" title="全局中间件"></a>全局中间件</h3><p>全局中间件属于<code>全局中间件</code>的过滤器链池。</p>
+<p>全局中间件会对所有调度的路由条目进行处理。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Router.Instance.Middleware((request,response,next)=&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 中间件逻辑</span></span><br><span class="line">    <span class="keyword">return</span> next(request,response);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="无法找到路由条目"><a href="#无法找到路由条目" class="headerlink" title="无法找到路由条目"></a>无法找到路由条目</h3><p>CatLib路由系统允许您使用中间件的方式来处理<code>NotFoundRouteException</code>（无法找到可以被使用的路由条目）。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Router.Instance.OnNotFound((request , next)=&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 逻辑处理</span></span><br><span class="line">    <span class="keyword">return</span> next(request);</span><br><span class="line">&#125;,<span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+<p>您可以传入一个<code>优先级</code>来决定哪个处理方案被优先执行，这在终止冒泡时非常有用。</p>
+<h3 id="异常处理"><a href="#异常处理" class="headerlink" title="异常处理"></a>异常处理</h3><p>在执行目标方法时，可能会引发某些异常，所以我们需要进行异常处理。</p>
+<p>CatLib的路由异常处理系统在触发异常时会冒泡处理各级异常处理链，异常处理被分为：<code>全局异常处理</code>和<code>局部异常处理</code>，同中间件一样，她们的过滤器链池是不同的。</p>
+<p>异常处理总是从<code>局部</code>开始的，CatLib的异常处理器会依次调用异常处理函数，逐层冒泡执行（如果冒泡被终止那么后续异常抛出也会被终止）。</p>
+<p><code>触发异常</code> =&gt; <code>局部异常处理</code> =&gt; <code>全局异常处理</code> =&gt; <code>Dispatch()抛出异常</code></p>
+<blockquote>
+<p>请注意<code>递归路由调度</code>的时的异常处理。</p>
+</blockquote>
+<h4 id="路由条目的异常处理"><a href="#路由条目的异常处理" class="headerlink" title="路由条目的异常处理"></a><strong>路由条目的异常处理</strong></h4><p>路由条目的异常处理属于<code>局部异常处理</code>。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Router.Instance.Reg(<span class="string">"character/&#123;type?&#125;"</span>, (request, response) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    response.SetContext(<span class="string">"type:"</span> + request[<span class="string">"type"</span>]);</span><br><span class="line">&#125;).OnError((request,response,ex,next) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 在其他异常处理类执行之前</span></span><br><span class="line">    <span class="keyword">var</span> result = next(request,response,ex);</span><br><span class="line">    <span class="comment">// 在其他异常处理类执行之后</span></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="路由组的异常处理"><a href="#路由组的异常处理" class="headerlink" title="路由组的异常处理"></a><strong>路由组的异常处理</strong></h4><p>路由条目的异常处理属于<code>局部异常处理</code>。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Router.Instance.Group(()=&gt;</span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// 注册路由条目  </span></span><br><span class="line">&#125;).OnError((request,response,ex,next) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 在其他异常处理类执行之前</span></span><br><span class="line">    <span class="keyword">var</span> result = next(request,response,ex);</span><br><span class="line">    <span class="comment">// 在其他异常处理类执行之后</span></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="全局异常处理"><a href="#全局异常处理" class="headerlink" title="全局异常处理"></a><strong>全局异常处理</strong></h4><p>路由条目的异常处理属于<code>全局异常处理</code>。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Router.Instance.OnError((request,response,ex,next) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 在其他异常处理类执行之前</span></span><br><span class="line">    <span class="keyword">var</span> result = next(request,response,ex);</span><br><span class="line">    <span class="comment">// 在其他异常处理类执行之后</span></span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="递归路由调度"><a href="#递归路由调度" class="headerlink" title="递归路由调度"></a>递归路由调度</h3><p>CatLib路由系统已经对递归调用做了良好的支持，您可以安全的进行递归调用。</p>
+<h4 id="递归路由调度时异常处理的流程"><a href="#递归路由调度时异常处理的流程" class="headerlink" title="递归路由调度时异常处理的流程"></a><strong>递归路由调度时异常处理的流程</strong></h4><p>假设我们进行了一次递归调用,异常将会按照如下流程触发：</p>
+<p><code>触发异常</code> =&gt; <code>局部异常处理(嵌套的Dispatch(&quot;ui://call2&quot;))</code> =&gt; <code>全局异常处理</code> =&gt; <code>局部异常处理(ui://call)</code> =&gt; <code>全局异常处理</code> =&gt; <code>Dispatch()抛出异常</code></p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Router.Instance.Reg(<span class="string">"ui://call"</span> , (request,response)=&gt;</span><br><span class="line">&#123;</span><br><span class="line">    Router.Instance.Dispatch(<span class="string">"ui://call2"</span>);</span><br><span class="line">&#125;);</span><br><span class="line">Router.Instance.Reg(<span class="string">"ui://call2"</span> , (request,response)=&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> Exception(<span class="string">"ex"</span>);</span><br><span class="line">&#125;);</span><br><span class="line">Router.Instance.Dispatch(<span class="string">"ui://call"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="修改默认的Scheme"><a href="#修改默认的Scheme" class="headerlink" title="修改默认的Scheme"></a>修改默认的Scheme</h3><p>CatLib路由系统的默认Scheme为<code>catlib</code>。但您可以通过<code>SetDefaultScheme()</code>来修改默认的Scheme。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">Router.Instance.SetDefaultScheme(<span class="string">"home"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="路由编译剥离"><a href="#路由编译剥离" class="headerlink" title="路由编译剥离"></a>路由编译剥离</h3><p>CatLib路由系统在在编译时会剥离掉不必要扫描的程序集。</p>
+<p>下面的程序集在编译时不会被剥离：</p>
+<ul>
+<li>Assembly-CSharp</li>
+<li>Assembly-CSharp-Editor-firstpass</li>
+<li>Assembly-CSharp-Editor</li>
+<li>CatLib</li>
+<li>CatLib.Tests</li>
+</ul>
+<p>您可以通过配置:<code>routing.stripping.reserved</code>来填写不要被剥离的程序集，使用<code>;</code>分隔程序集。</p>
+<h3 id="路由自动命名"><a href="#路由自动命名" class="headerlink" title="路由自动命名"></a>路由自动命名</h3><p>使用特性路由时，如果您没有给定路由<code>uri</code>那么将会使用路由自动命名机制。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">[<span class="meta">Routed</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AttrRouting</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">Routed</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        res.SetContext(<span class="string">"hello world"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    [<span class="meta">Routed</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">CallNPC</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        res.SetContext(<span class="string">"hello world"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>自动命名的规则是：根据类名或函数名转为全小写，单词之间用<code>-</code>进行分割的字符串,连续的大写视为一个单词。</p>
+<p>上述路由将会被转化为：<code>catlib://attr-routing/call</code>和<code>catlib://attr-routing/call-npc</code>。</p>
+<h3 id="自动路由注入"><a href="#自动路由注入" class="headerlink" title="自动路由注入"></a>自动路由注入</h3><p>使用特性路由时您可以使用自动参数注入来获取需要的参数。CatLib容器会自动解析并注入需求参数。</p>
+<p>其中<code>IRequest</code>和 <code>IResponse</code>类型为<code>当前路由</code>的请求和响应。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">[<span class="meta">Routed</span>]</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AttrRouting</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">Routed</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call</span>(<span class="params">IRequest request, IResponse response</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        res.SetContext(<span class="string">"hello world"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    [<span class="meta">Routed</span>]</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Call2</span>(<span class="params">IResponse response, IApplication App , IRouter router</span>)</span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        res.SetContext(<span class="string">"hello world"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="性能优化相关"><a href="#性能优化相关" class="headerlink" title="性能优化相关"></a>性能优化相关</h3><p>CatLib 路由系统是一个复杂的系统，您不应该使用在高性能需求的地方或者频繁调用。</p>
+<p>我们给出了下面几种优化方案：</p>
+<ul>
+<li>为不同的类型的路由目标定义不同的Scheme</li>
+<li>降低约束的复杂度</li>
+<li>使用手动注册的路由</li>
+</ul>
+
+    <div class="footer">
+        
+        发现错误？想参与编辑？ 
+        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/routing.md" target="_blank">
+            在 Github 上编辑此页！
+        </a>
+        
+    </div>
+</article>
+
+<div class="sub-nav hiden-in-phone">
+    <dl id="sub-nav">
+        <dt>本文内容</dt>
+        <dd v-for="(ele, index) in sub_nav">
+           <a v-bind:href="ele.href">{{ ele.name }}</a>
+        </dd>
+    </dl>
+</div> 
+</div>
+
+<footer>
+    <div>
+        <p>© Copyright 2017-2018 catlib.io All Rights Reserved</p>
+        <p>喵喵喵，快来一起玩喵~</p>
+    </div>
+</footer>
+
+
+<script>
+var vm = new Vue({
+    el : '#container',
+    data: {
+        sub_nav : [ ]
+    },
+    created:function(){
+        var obj = [];
+        $("article h3").each(function(){
+            obj.push({name :  $(this).find("a").attr("title") , href : "#"+$(this).attr("id") });
+        });
+
+        this.sub_nav = obj;       
+    }
+});
+
+var isShow = false;
+$("nav").on("click","#btn-menu" , function(){
+
+    if(!isShow){
+        
+        if($(document).scrollTop() > $(".sidebar").height() - 100){
+
+            $('html, body').animate({scrollTop:0} , 300, "swing",function(){
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+            });
+        }else{
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+
+        }
+
+    }else{
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+    }
+    isShow = !isShow;
+
+});
+
+$(".container").on("click" , "article" , function(){
+
+    if(isShow){
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+        isShow = false;    
+    }
+
+});
+</script>
+        
+    </body>
+</html>

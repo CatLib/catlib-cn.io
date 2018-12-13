@@ -1,0 +1,547 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta name="generator" content="Hexo 3.8.0">
+
+    
+    <title>计时器 — CatLib</title>
+      
+    <meta charset="utf-8">
+    
+    <meta name="description" content="CatLib Unity Framework.">
+      
+    <meta name="keywords" content="CatLib,CatLib中文网,CatLib教程,CatLib官网">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="/css/page.css">
+
+    <script src="/js/vue.js"></script>
+    <script src="/js/jquery.js"></script>
+    </head>
+
+    <body>
+        
+            <nav class="nav">
+    <div class="border">
+        <img src="/images/logo.png">
+        <!--button class="hiden-in-phone">v1.2</button!-->
+        <button id="btn-menu" class="hiden-in-pc">菜单</button>
+        <ul class="nav-link hiden-in-phone">
+            <!--li>
+                <form id="search-form">
+                    <input type="text" id="search-query" class="search-query">
+                </form>
+            </li!-->
+            <li><a href="https://github.com/catlib/framework" class="nav-link-li">下载框架</a></li>
+            <li><a href="/v1/guide/use.html" class="nav-link-li">使用案例</a></li>
+            <li><a href="/v1/guide/version.html" class="nav-link-li">版本说明</a></li>
+            <li><a href="/v1/guide/contribution.html" class="nav-link-li">贡献指南</a></li>
+            <li><a href="/v1/guide/index.html" class="nav-link-li">介绍</a></li>
+            <li><a href="/" class="nav-link-li current">首页</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div id="container" class="container clear">
+    <section class="sidebar clearfix">
+    <ul>
+        
+            
+            
+                <li><h3>基础</h3></li>
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/index.html" class="sidebar-link">介绍</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/upgrade.html" class="sidebar-link">升级指南</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/version.html" class="sidebar-link">版本说明</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/error.html" class="sidebar-link">常见错误</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/style.html" class="sidebar-link">命名规范</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/contribution.html" class="sidebar-link">贡献指南</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/use.html" class="sidebar-link">使用案例</a></p>
+            </li>
+        
+            
+            
+            
+                <li><h3>框架核心</h3></li>
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/service-provider.html" class="sidebar-link">服务提供者</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/container.html" class="sidebar-link">服务容器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/application.html" class="sidebar-link">CatLib核心</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/support.html" class="sidebar-link">支持库</a></p>
+            </li>
+        
+            
+            
+            
+            
+                <li><h3>框架组件</h3></li>
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/routing.html" class="sidebar-link">路由</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/random.html" class="sidebar-link">随机数</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/file-system.html" class="sidebar-link">文件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/hashing.html" class="sidebar-link">哈希</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/encryption.html" class="sidebar-link">加解密</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/compress.html" class="sidebar-link">压缩解压缩</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/translation.html" class="sidebar-link">国际化(I18N)</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/tick.html" class="sidebar-link">时钟</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/network.html" class="sidebar-link">网络</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/socket.html" class="sidebar-link">Socket</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+                <li><h3>Unity组件</h3></li>
+            
+            
+            <li>
+                <p><a href="/v1/guide/mono-driver.html" class="sidebar-link">Mono Driver</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/time.html" class="sidebar-link">时间</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/timer.html" class="sidebar-link current">计时器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/random-unity.html" class="sidebar-link">随机数扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/file-system-unity.html" class="sidebar-link">文件系统扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+                <li><h3>其他</h3></li>
+            
+            <li>
+                <p><a href="/v1/guide/can-make.html" class="sidebar-link">服务表</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/service-priority.html" class="sidebar-link">初始化优先级</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/api.html" class="sidebar-link">服务接口</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/facade.html" class="sidebar-link">服务门面</a></p>
+            </li>
+        
+    </ul>
+</section>
+    <article class="clearfix">
+    <h2 id="计时器"><a href="#计时器" class="headerlink" title="计时器"></a>计时器</h2><p>使用计时器可以快速简单的实现<code>定时回调</code>,<code>重复执行</code>,<code>延迟执行</code>,<code>间隔执行</code>等一系列和计时相关的功能。</p>
+<h3 id="获取计时器管理器"><a href="#获取计时器管理器" class="headerlink" title="获取计时器管理器"></a>获取计时器管理器</h3><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> timerManager = App.Make&lt;ITimerManager&gt;();</span><br></pre></td></tr></table></figure>
+<h3 id="创建一个定时器"><a href="#创建一个定时器" class="headerlink" title="创建一个定时器"></a>创建一个定时器</h3><p>您可以通过计时器管理器的<code>Make()</code>方法来创建计时器。</p>
+<blockquote>
+<p><code>Make()</code>函数实质上在内部构建了一个匿名的定时器队列，而队列中只有一个定时器。</p>
+</blockquote>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> timer = timerManager.Make(()=&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 计时器需要执行的任务</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="延迟执行"><a href="#延迟执行" class="headerlink" title="延迟执行"></a>延迟执行</h3><h4 id="延迟指定秒数后执行"><a href="#延迟指定秒数后执行" class="headerlink" title="延迟指定秒数后执行"></a><strong>延迟指定秒数后执行</strong></h4><p>您可以使用<code>Delay()</code>来延迟指定的秒数后执行定时器的任务。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">timer.Delay(<span class="number">3.25</span>f);</span><br></pre></td></tr></table></figure>
+<h4 id="延迟指定帧数执行"><a href="#延迟指定帧数执行" class="headerlink" title="延迟指定帧数执行"></a><strong>延迟指定帧数执行</strong></h4><p>您可以使用<code>DelayFrame()</code>来延迟指定的帧数后执行定时器的任务。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">timer.DelayFrame(<span class="number">3</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="循环执行"><a href="#循环执行" class="headerlink" title="循环执行"></a>循环执行</h3><h4 id="在指定时间内循环执行"><a href="#在指定时间内循环执行" class="headerlink" title="在指定时间内循环执行"></a><strong>在指定时间内循环执行</strong></h4><p>您可以使用<code>Loop()</code>在指定的时长内，每帧都执行定时器任务。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">timer.Loop(<span class="number">3.25</span>f);</span><br></pre></td></tr></table></figure>
+<h4 id="循环执行，直到函数返回false"><a href="#循环执行，直到函数返回false" class="headerlink" title="循环执行，直到函数返回false"></a><strong>循环执行，直到函数返回false</strong></h4><p>您可以使用<code>Loop()</code>来定义一个循环执行，每帧都执行，直到函数返回false。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">timer.Loop(()=&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="循环执行指定帧数"><a href="#循环执行指定帧数" class="headerlink" title="循环执行指定帧数"></a><strong>循环执行指定帧数</strong></h4><p>您可以使用<code>LoopFrame()</code>来定义一个循环执行，每帧都执行，直到到达指定帧数后停止。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">timer.LoopFrame(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="间隔执行"><a href="#间隔执行" class="headerlink" title="间隔执行"></a>间隔执行</h3><p>如果您要取消间隔执行，那么请使用句柄来取消任务。</p>
+<h4 id="每隔指定秒数执行一次"><a href="#每隔指定秒数执行一次" class="headerlink" title="每隔指定秒数执行一次"></a><strong>每隔指定秒数执行一次</strong></h4><p>每次间隔指定秒数后执行一次定时器任务。通过第二个参数可以指定最大执行次数。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">timer.Interval(<span class="number">3.25</span>f);</span><br><span class="line"><span class="comment">// timer.Interval(3.25f, 3);</span></span><br></pre></td></tr></table></figure>
+<h4 id="每隔指定帧数执行一次"><a href="#每隔指定帧数执行一次" class="headerlink" title="每隔指定帧数执行一次"></a><strong>每隔指定帧数执行一次</strong></h4><p>每次间隔指定帧数后执行一次定时器任务。通过第二个参数可以指定最大执行次数。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">timer.IntervalFrame(<span class="number">10</span>);</span><br><span class="line"><span class="comment">// timer.IntervalFrame(10, 3);</span></span><br></pre></td></tr></table></figure>
+<h3 id="定时器队列"><a href="#定时器队列" class="headerlink" title="定时器队列"></a>定时器队列</h3><p>定时器队列是将多个定时器串联起来依次执行。只有前一个定时器完成任务后后一个定时器才会被执行。</p>
+<p>您可以传入一个<code>优先级</code>来决定定时器队列在全局中执行的顺序。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">timerManager.MakeQueue(()=&gt;</span><br><span class="line">&#123;</span><br><span class="line">    timerManager.Make(()=&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//定时器1的任务</span></span><br><span class="line">    &#125;).Delay(<span class="number">3</span>);</span><br><span class="line">    timerManager.Make(()=&gt;</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">//定时器2的任务</span></span><br><span class="line">    &#125;).Loop(<span class="number">5</span>);</span><br><span class="line">&#125;,<span class="number">100</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="取消执行"><a href="#取消执行" class="headerlink" title="取消执行"></a>取消执行</h3><p>撤销定时器(队列)的执行。撤销后队列状态可不恢复。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> handler = timerManager.MakeQueue(()=&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// todo</span></span><br><span class="line">&#125;);</span><br><span class="line">timerManager.Cancel(handler);</span><br></pre></td></tr></table></figure>
+<h3 id="暂停执行"><a href="#暂停执行" class="headerlink" title="暂停执行"></a>暂停执行</h3><p>暂时停止定时器(队列)的执行。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> handler = timerManager.MakeQueue(()=&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// todo</span></span><br><span class="line">&#125;);</span><br><span class="line">timerManager.Pause(handler);</span><br></pre></td></tr></table></figure>
+<h3 id="恢复执行"><a href="#恢复执行" class="headerlink" title="恢复执行"></a>恢复执行</h3><p>恢复定时器(队列)的执行。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> handler = timerManager.MakeQueue(()=&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// todo</span></span><br><span class="line">&#125;);</span><br><span class="line">timerManager.Play(handler);</span><br></pre></td></tr></table></figure>
+
+    <div class="footer">
+        
+        发现错误？想参与编辑？ 
+        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/timer.md" target="_blank">
+            在 Github 上编辑此页！
+        </a>
+        
+    </div>
+</article>
+
+<div class="sub-nav hiden-in-phone">
+    <dl id="sub-nav">
+        <dt>本文内容</dt>
+        <dd v-for="(ele, index) in sub_nav">
+           <a v-bind:href="ele.href">{{ ele.name }}</a>
+        </dd>
+    </dl>
+</div> 
+</div>
+
+<footer>
+    <div>
+        <p>© Copyright 2017-2018 catlib.io All Rights Reserved</p>
+        <p>喵喵喵，快来一起玩喵~</p>
+    </div>
+</footer>
+
+
+<script>
+var vm = new Vue({
+    el : '#container',
+    data: {
+        sub_nav : [ ]
+    },
+    created:function(){
+        var obj = [];
+        $("article h3").each(function(){
+            obj.push({name :  $(this).find("a").attr("title") , href : "#"+$(this).attr("id") });
+        });
+
+        this.sub_nav = obj;       
+    }
+});
+
+var isShow = false;
+$("nav").on("click","#btn-menu" , function(){
+
+    if(!isShow){
+        
+        if($(document).scrollTop() > $(".sidebar").height() - 100){
+
+            $('html, body').animate({scrollTop:0} , 300, "swing",function(){
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+            });
+        }else{
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+
+        }
+
+    }else{
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+    }
+    isShow = !isShow;
+
+});
+
+$(".container").on("click" , "article" , function(){
+
+    if(isShow){
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+        isShow = false;    
+    }
+
+});
+</script>
+        
+    </body>
+</html>

@@ -1,0 +1,563 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta name="generator" content="Hexo 3.8.0">
+
+    
+    <title>国际化(I18N) — CatLib</title>
+      
+    <meta charset="utf-8">
+    
+    <meta name="description" content="CatLib Unity Framework.">
+      
+    <meta name="keywords" content="CatLib,CatLib中文网,CatLib教程,CatLib官网">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="/css/page.css">
+
+    <script src="/js/vue.js"></script>
+    <script src="/js/jquery.js"></script>
+    </head>
+
+    <body>
+        
+            <nav class="nav">
+    <div class="border">
+        <img src="/images/logo.png">
+        <!--button class="hiden-in-phone">v1.2</button!-->
+        <button id="btn-menu" class="hiden-in-pc">菜单</button>
+        <ul class="nav-link hiden-in-phone">
+            <!--li>
+                <form id="search-form">
+                    <input type="text" id="search-query" class="search-query">
+                </form>
+            </li!-->
+            <li><a href="https://github.com/catlib/framework" class="nav-link-li">下载框架</a></li>
+            <li><a href="/v1/guide/use.html" class="nav-link-li">使用案例</a></li>
+            <li><a href="/v1/guide/version.html" class="nav-link-li">版本说明</a></li>
+            <li><a href="/v1/guide/contribution.html" class="nav-link-li">贡献指南</a></li>
+            <li><a href="/v1/guide/index.html" class="nav-link-li">介绍</a></li>
+            <li><a href="/" class="nav-link-li current">首页</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div id="container" class="container clear">
+    <section class="sidebar clearfix">
+    <ul>
+        
+            
+            
+                <li><h3>基础</h3></li>
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/index.html" class="sidebar-link">介绍</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/upgrade.html" class="sidebar-link">升级指南</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/version.html" class="sidebar-link">版本说明</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/error.html" class="sidebar-link">常见错误</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/style.html" class="sidebar-link">命名规范</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/contribution.html" class="sidebar-link">贡献指南</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/use.html" class="sidebar-link">使用案例</a></p>
+            </li>
+        
+            
+            
+            
+                <li><h3>框架核心</h3></li>
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/service-provider.html" class="sidebar-link">服务提供者</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/container.html" class="sidebar-link">服务容器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/application.html" class="sidebar-link">CatLib核心</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/support.html" class="sidebar-link">支持库</a></p>
+            </li>
+        
+            
+            
+            
+            
+                <li><h3>框架组件</h3></li>
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/routing.html" class="sidebar-link">路由</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/random.html" class="sidebar-link">随机数</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/file-system.html" class="sidebar-link">文件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/hashing.html" class="sidebar-link">哈希</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/encryption.html" class="sidebar-link">加解密</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/compress.html" class="sidebar-link">压缩解压缩</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/translation.html" class="sidebar-link current">国际化(I18N)</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/tick.html" class="sidebar-link">时钟</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/network.html" class="sidebar-link">网络</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/socket.html" class="sidebar-link">Socket</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+                <li><h3>Unity组件</h3></li>
+            
+            
+            <li>
+                <p><a href="/v1/guide/mono-driver.html" class="sidebar-link">Mono Driver</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/time.html" class="sidebar-link">时间</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/timer.html" class="sidebar-link">计时器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/random-unity.html" class="sidebar-link">随机数扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/file-system-unity.html" class="sidebar-link">文件系统扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+                <li><h3>其他</h3></li>
+            
+            <li>
+                <p><a href="/v1/guide/can-make.html" class="sidebar-link">服务表</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/service-priority.html" class="sidebar-link">初始化优先级</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/api.html" class="sidebar-link">服务接口</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/facade.html" class="sidebar-link">服务门面</a></p>
+            </li>
+        
+    </ul>
+</section>
+    <article class="clearfix">
+    <h2 id="国际化-I18N"><a href="#国际化-I18N" class="headerlink" title="国际化(I18N)"></a>国际化(I18N)</h2><p>CatLib国际化功能提供方便的方法来获取多语言的字符串，让你的游戏可以简单的支持多语言。</p>
+<p>CatLib的语言代码遵循ISO 639, ISO 639-1, ISO 639-2, ISO 639-3</p>
+<h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><p>初始配置必须在框架初始化前完成配置，下面是国际化组件需要的初始配置：</p>
+<table>
+<thead>
+<tr>
+<th>配置名</th>
+<th style="text-align:center">是否必须</th>
+<th style="text-align:center">配置描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TranslationProvider.DefaultLanguage</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">默认的语言</td>
+</tr>
+<tr>
+<td><code>TranslationProvider.FallbackLanguage</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">备选的语言</td>
+</tr>
+</tbody>
+</table>
+<h3 id="设定翻译资源"><a href="#设定翻译资源" class="headerlink" title="设定翻译资源"></a>设定翻译资源</h3><p>您可以通过 <code>SetResources</code> 接口来设定翻译资源，国际化工具本身不提供如何获取翻译字符串。您需要给定翻译资源国际化才能对其进行选择。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> translator = App.Make&lt;ITranslator&gt;();</span><br><span class="line">translator.SetResources(<span class="comment">/*you resources*/</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="设定当前语言"><a href="#设定当前语言" class="headerlink" title="设定当前语言"></a>设定当前语言</h3><p>您可以通过<code>SetLocale</code>来设定当前语言。设定的语言需要遵循<code>ISO639</code>语言规范。我们已经为您提供了<code>Languages</code>类来辅助您定义语言。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> translator = App.Make&lt;ITranslator&gt;();</span><br><span class="line">translator.SetLocale(Languages.Chinese);</span><br></pre></td></tr></table></figure>
+<h3 id="设定备选语言"><a href="#设定备选语言" class="headerlink" title="设定备选语言"></a>设定备选语言</h3><p>备选语言则主语言无法获取时会使用备选语言（如果备选语言也不存在那么会将返回一个空字符串）</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> translator = App.Make&lt;ITranslator&gt;();</span><br><span class="line">translator.SetFallback(Languages.Chinese);</span><br></pre></td></tr></table></figure>
+<h3 id="获取翻译语句"><a href="#获取翻译语句" class="headerlink" title="获取翻译语句"></a>获取翻译语句</h3><p>您可以通过<code>Get</code>方法来获取翻译语句。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> translator = App.Make&lt;ITranslator&gt;();</span><br><span class="line">translator.Get(<span class="string">"msg.title"</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="翻译语句中的参数替换"><a href="#翻译语句中的参数替换" class="headerlink" title="翻译语句中的参数替换"></a><strong>翻译语句中的参数替换</strong></h4><p>如果需要，你也可以在翻译语句中定义占位符。所有的占位符都使用的 <code>:</code> 开头。</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123; <span class="attr">"msg.title"</span> : <span class="string">"你好:name"</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>你可以在 <code>Get</code> 方法中传递一个数组作为第二个参数，它会将数组的值替换到语言内容的占位符中：</p>
+<p>数组的第0个元素是键，第1个元素是对应的值，以此类推。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">translator.Get(<span class="string">"msg.title"</span> ,<span class="string">"name"</span> ,<span class="string">"catlib"</span>); <span class="comment">//output: 你好catlib</span></span><br></pre></td></tr></table></figure>
+<p>除此之外您还可以使用另外一种格式:</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">translator.Get(<span class="string">"msg.title"</span> ,<span class="string">"name:catlib"</span>); <span class="comment">//output: 你好catlib</span></span><br></pre></td></tr></table></figure>
+<p>如果你的占位符中包含了<code>首字母大写</code>或者<code>全体大写</code>，翻译过来的内容也会相应的做相应的处理：</p>
+<figure class="highlight"><table><tr><td class="code"><pre><span class="line">&#123; "msg.title" : "你好:Name" &#125; //output: 你好Catlib</span><br><span class="line">&#123; "msg.title" : "你好:NAME" &#125; //output: 你好CATLIB</span><br></pre></td></tr></table></figure>
+<h3 id="复数形式"><a href="#复数形式" class="headerlink" title="复数形式"></a>复数形式</h3><p>复数是个复杂的问题，不同语言对于复数有不同的规则，对此我们采用了成熟的复数形式方案，CatLib使用的复数形式方案来自于：<a href="https://framework.zend.com/" target="_blank" rel="noopener">ZendFramework</a></p>
+<h4 id="简单的区分"><a href="#简单的区分" class="headerlink" title="简单的区分"></a><strong>简单的区分</strong></h4><p>使用管道符 <code>|</code> ，可以区分单复数字符串格式：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123; <span class="attr">"msg.apple"</span> : <span class="string">"这里只有一个苹果|这里有好多苹果"</span> &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="复杂的区分"><a href="#复杂的区分" class="headerlink" title="复杂的区分"></a><strong>复杂的区分</strong></h4><p>你可以创建使用更复杂的复数规则，例如根据数量的范围不同来指定不同翻译语句：</p>
+<figure class="highlight json"><table><tr><td class="code"><pre><span class="line">&#123; <span class="attr">"msg.apple"</span> : <span class="string">"这里只有一个苹果|[1,19]这里有好多苹果|[20,*]天那成堆的苹果"</span> &#125;</span><br></pre></td></tr></table></figure>
+<p>当你定义完复数语句条件的时候，你可以使用 Get 方法来设置 <code>总数</code> 以获取符合对应条件的复数翻译语句。例如，在这个例子中，设置 <code>总数</code> 为 10 ，符合数量范围 1 至 19，所以会得到 <code>这里有好多苹果</code> 这条复数语句。</p>
+
+    <div class="footer">
+        
+        发现错误？想参与编辑？ 
+        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/translation.md" target="_blank">
+            在 Github 上编辑此页！
+        </a>
+        
+    </div>
+</article>
+
+<div class="sub-nav hiden-in-phone">
+    <dl id="sub-nav">
+        <dt>本文内容</dt>
+        <dd v-for="(ele, index) in sub_nav">
+           <a v-bind:href="ele.href">{{ ele.name }}</a>
+        </dd>
+    </dl>
+</div> 
+</div>
+
+<footer>
+    <div>
+        <p>© Copyright 2017-2018 catlib.io All Rights Reserved</p>
+        <p>喵喵喵，快来一起玩喵~</p>
+    </div>
+</footer>
+
+
+<script>
+var vm = new Vue({
+    el : '#container',
+    data: {
+        sub_nav : [ ]
+    },
+    created:function(){
+        var obj = [];
+        $("article h3").each(function(){
+            obj.push({name :  $(this).find("a").attr("title") , href : "#"+$(this).attr("id") });
+        });
+
+        this.sub_nav = obj;       
+    }
+});
+
+var isShow = false;
+$("nav").on("click","#btn-menu" , function(){
+
+    if(!isShow){
+        
+        if($(document).scrollTop() > $(".sidebar").height() - 100){
+
+            $('html, body').animate({scrollTop:0} , 300, "swing",function(){
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+            });
+        }else{
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+
+        }
+
+    }else{
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+    }
+    isShow = !isShow;
+
+});
+
+$(".container").on("click" , "article" , function(){
+
+    if(isShow){
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+        isShow = false;    
+    }
+
+});
+</script>
+        
+    </body>
+</html>

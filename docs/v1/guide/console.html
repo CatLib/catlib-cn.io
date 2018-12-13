@@ -1,0 +1,640 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta name="generator" content="Hexo 3.8.0">
+
+    
+    <title>控制台 — CatLib</title>
+      
+    <meta charset="utf-8">
+    
+    <meta name="description" content="CatLib Unity Framework.">
+      
+    <meta name="keywords" content="CatLib,CatLib中文网,CatLib教程,CatLib官网">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="/css/page.css">
+
+    <script src="/js/vue.js"></script>
+    <script src="/js/jquery.js"></script>
+    </head>
+
+    <body>
+        
+            <nav class="nav">
+    <div class="border">
+        <img src="/images/logo.png">
+        <!--button class="hiden-in-phone">v1.2</button!-->
+        <button id="btn-menu" class="hiden-in-pc">菜单</button>
+        <ul class="nav-link hiden-in-phone">
+            <!--li>
+                <form id="search-form">
+                    <input type="text" id="search-query" class="search-query">
+                </form>
+            </li!-->
+            <li><a href="https://github.com/catlib/framework" class="nav-link-li">下载框架</a></li>
+            <li><a href="/v1/guide/use.html" class="nav-link-li">使用案例</a></li>
+            <li><a href="/v1/guide/version.html" class="nav-link-li">版本说明</a></li>
+            <li><a href="/v1/guide/contribution.html" class="nav-link-li">贡献指南</a></li>
+            <li><a href="/v1/guide/index.html" class="nav-link-li">介绍</a></li>
+            <li><a href="/" class="nav-link-li current">首页</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div id="container" class="container clear">
+    <section class="sidebar clearfix">
+    <ul>
+        
+            
+            
+                <li><h3>基础</h3></li>
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/index.html" class="sidebar-link">介绍</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/upgrade.html" class="sidebar-link">升级指南</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/version.html" class="sidebar-link">版本说明</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/error.html" class="sidebar-link">常见错误</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/style.html" class="sidebar-link">命名规范</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/contribution.html" class="sidebar-link">贡献指南</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/use.html" class="sidebar-link">使用案例</a></p>
+            </li>
+        
+            
+            
+            
+                <li><h3>框架核心</h3></li>
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/service-provider.html" class="sidebar-link">服务提供者</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/container.html" class="sidebar-link">服务容器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/application.html" class="sidebar-link">CatLib核心</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/support.html" class="sidebar-link">支持库</a></p>
+            </li>
+        
+            
+            
+            
+            
+                <li><h3>框架组件</h3></li>
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/routing.html" class="sidebar-link">路由</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link current">控制台</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/random.html" class="sidebar-link">随机数</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/file-system.html" class="sidebar-link">文件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/hashing.html" class="sidebar-link">哈希</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/encryption.html" class="sidebar-link">加解密</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/compress.html" class="sidebar-link">压缩解压缩</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/translation.html" class="sidebar-link">国际化(I18N)</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/tick.html" class="sidebar-link">时钟</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/network.html" class="sidebar-link">网络</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/socket.html" class="sidebar-link">Socket</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+                <li><h3>Unity组件</h3></li>
+            
+            
+            <li>
+                <p><a href="/v1/guide/mono-driver.html" class="sidebar-link">Mono Driver</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/time.html" class="sidebar-link">时间</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/timer.html" class="sidebar-link">计时器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/random-unity.html" class="sidebar-link">随机数扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/file-system-unity.html" class="sidebar-link">文件系统扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+                <li><h3>其他</h3></li>
+            
+            <li>
+                <p><a href="/v1/guide/can-make.html" class="sidebar-link">服务表</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/service-priority.html" class="sidebar-link">初始化优先级</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/api.html" class="sidebar-link">服务接口</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/facade.html" class="sidebar-link">服务门面</a></p>
+            </li>
+        
+    </ul>
+</section>
+    <article class="clearfix">
+    <h2 id="控制台"><a href="#控制台" class="headerlink" title="控制台"></a>控制台</h2><p>CatLib控制台系统允许您在web端对您的设备进行控制，监控，日志输出。</p>
+<p>公共的控制台：<a href="http://console.catlib.io" target="_blank" rel="noopener">console.catlib.io</a></p>
+<p>CatLib的日志工具使用了 <a href="https://www.ietf.org/rfc/rfc5424.txt" target="_blank" rel="noopener">RFC 5424</a> 所描述的日志等级。</p>
+<h3 id="初始配置"><a href="#初始配置" class="headerlink" title="初始配置"></a>初始配置</h3><p>初始配置必须在框架初始化前完成配置，下面是控制台组件需要的初始配置：</p>
+<table>
+<thead>
+<tr>
+<th>配置名</th>
+<th style="text-align:center">是否必须</th>
+<th style="text-align:center">配置描述(可以点击查看详细)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>DebuggerProvider.WebConsoleEnable</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是否启用Web控制台</td>
+</tr>
+<tr>
+<td><code>UnityDebuggerProvider.UnityConsoleLoggerHandler</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是否启用Unity Log</td>
+</tr>
+<tr>
+<td><code>DebuggerProvider.ConsoleLoggerHandler</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是否启用控制台输出</td>
+</tr>
+<tr>
+<td><code>DebuggerProvider.WebConsoleHost</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">Web控制台监听地址</td>
+</tr>
+<tr>
+<td><code>DebuggerProvider.WebConsolePort</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">Web控制台监听端口(默认:9478)</td>
+</tr>
+<tr>
+<td><code>UnityDebuggerProvider.MonitorPerformance</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是否启动性能监控</td>
+</tr>
+<tr>
+<td><code>UnityDebuggerProvider.MonitorScreen</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是否启动屏幕监控</td>
+</tr>
+<tr>
+<td><code>UnityDebuggerProvider.MonitorScene</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是否启动场景监控</td>
+</tr>
+<tr>
+<td><code>UnityDebuggerProvider.MonitorSystemInfo</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是否启动系统信息监控</td>
+</tr>
+<tr>
+<td><code>UnityDebuggerProvider.MonitorPath</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是否启动路径监控</td>
+</tr>
+<tr>
+<td><code>UnityDebuggerProvider.MonitorInput</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是否启动输入监控</td>
+</tr>
+<tr>
+<td><code>UnityDebuggerProvider.MonitorInputLocation</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是否启动定位监控</td>
+</tr>
+<tr>
+<td><code>UnityDebuggerProvider.MonitorInputGyroscope</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是否启动陀螺仪监控</td>
+</tr>
+<tr>
+<td><code>UnityDebuggerProvider.MonitorInputCompass</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是否启动罗盘监控</td>
+</tr>
+<tr>
+<td><code>UnityDebuggerProvider.MonitorGraphics</code></td>
+<td style="text-align:center">否</td>
+<td style="text-align:center">是否启动显卡监控</td>
+</tr>
+</tbody>
+</table>
+<h3 id="公共的控制台服务器"><a href="#公共的控制台服务器" class="headerlink" title="公共的控制台服务器"></a>公共的控制台服务器</h3><p>CatLib已经为您部署了公共的控制台服务器，您可以通过<a href="http://console.catlib.io" target="_blank" rel="noopener">console.catlib.io</a>来访问公共控制台，CatLib 的控制台程序是基于您的浏览器发起控制指令，所以哪怕使用的是公共的控制台服务器也不会导致您的资料外泄。</p>
+<h3 id="内网搭建控制台服务器"><a href="#内网搭建控制台服务器" class="headerlink" title="内网搭建控制台服务器"></a>内网搭建控制台服务器</h3><p>除了访问公共的控制台服务器外，您还可以在内网搭建自己的控制台服务器，首先Clone出 <a href="https://github.com/CatLib/console.CatLib.io" target="_blank" rel="noopener">https://github.com/CatLib/console.CatLib.io</a> 控制台项目。</p>
+<p>安装必须的<a href="http://nodejs.cn/" target="_blank" rel="noopener">Nodejs</a> , 随后执行下面指令即可启动服务器:</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">npm install</span><br><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
+<h4 id="编译控制台"><a href="#编译控制台" class="headerlink" title="编译控制台"></a><strong>编译控制台</strong></h4><p>您可以通过 <code>npm run build</code> 指令来编译出可以直接使用的html文件。</p>
+<h3 id="控制台日志搜索"><a href="#控制台日志搜索" class="headerlink" title="控制台日志搜索"></a>控制台日志搜索</h3><p>控制台日志搜索允许您输入关键词来搜索对应日志，搜索输入除了常规关键字外还允许输入特殊指令进行搜索：</p>
+<ul>
+<li>通过<code>ns@关键字</code>来对命名空间进行搜索</li>
+</ul>
+<h3 id="控制台指令执行"><a href="#控制台指令执行" class="headerlink" title="控制台指令执行"></a>控制台指令执行</h3><p>控制台允许开发这输入指令，这个指令会使用<a href="routing.md">路由系统</a>进行调度。（您可以通过输入：<code>debug://util/echo/helloworld</code> 来进行回显测试）</p>
+<p>您除了可以执行被路由系统识别的指令外控制台还内嵌的如下的常规操作指令：</p>
+<ul>
+<li>通过<code>@clear</code>清屏</li>
+<li>通过<code>↑</code>翻上一条输入的指令</li>
+<li>通过<code>↓</code>翻下一条输入的指令</li>
+</ul>
+<h3 id="监控搜索"><a href="#监控搜索" class="headerlink" title="监控搜索"></a>监控搜索</h3><p>CatLib控制台监控和日志搜索一样内嵌了一些特殊搜索指令和特殊搜索方法：</p>
+<ul>
+<li>通过<code>tag@标签名</code>进行标签搜索</li>
+<li>通过<code>;</code>来分隔多条件搜索</li>
+</ul>
+<h3 id="打印一条日志"><a href="#打印一条日志" class="headerlink" title="打印一条日志"></a>打印一条日志</h3><p>您可以通过<code>Log</code>方法来输出日志，Log方法需要3个参数，第一个参数是日志的等级，第二个参数是日志的消息，第三个参数是日志携带的上下文。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> logger = App.Make&lt;ILogger&gt;();</span><br><span class="line">logger.Log(DebugLevels.Debug, <span class="string">"helloworld"</span>);</span><br></pre></td></tr></table></figure>
+<p>CatLib日志系统遵循<a href="https://www.ietf.org/rfc/rfc5424.txt" target="_blank" rel="noopener">RFC 5424</a>描述的日志等级。所以您还可以使用下面这写快捷函数：</p>
+<ul>
+<li><code>Debug()</code> 调试级日志</li>
+<li><code>Info()</code> 信息级日志</li>
+<li><code>Notice()</code> 通知级日志</li>
+<li><code>Warning()</code> 警告级日志</li>
+<li><code>Error()</code> 错误级日志</li>
+<li><code>Critical()</code> 关键级日志</li>
+<li><code>Alert()</code> 警报级日志</li>
+<li><code>Emergency()</code> 紧急级日志</li>
+</ul>
+
+    <div class="footer">
+        
+        发现错误？想参与编辑？ 
+        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/console.md" target="_blank">
+            在 Github 上编辑此页！
+        </a>
+        
+    </div>
+</article>
+
+<div class="sub-nav hiden-in-phone">
+    <dl id="sub-nav">
+        <dt>本文内容</dt>
+        <dd v-for="(ele, index) in sub_nav">
+           <a v-bind:href="ele.href">{{ ele.name }}</a>
+        </dd>
+    </dl>
+</div> 
+</div>
+
+<footer>
+    <div>
+        <p>© Copyright 2017-2018 catlib.io All Rights Reserved</p>
+        <p>喵喵喵，快来一起玩喵~</p>
+    </div>
+</footer>
+
+
+<script>
+var vm = new Vue({
+    el : '#container',
+    data: {
+        sub_nav : [ ]
+    },
+    created:function(){
+        var obj = [];
+        $("article h3").each(function(){
+            obj.push({name :  $(this).find("a").attr("title") , href : "#"+$(this).attr("id") });
+        });
+
+        this.sub_nav = obj;       
+    }
+});
+
+var isShow = false;
+$("nav").on("click","#btn-menu" , function(){
+
+    if(!isShow){
+        
+        if($(document).scrollTop() > $(".sidebar").height() - 100){
+
+            $('html, body').animate({scrollTop:0} , 300, "swing",function(){
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+            });
+        }else{
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+
+        }
+
+    }else{
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+    }
+    isShow = !isShow;
+
+});
+
+$(".container").on("click" , "article" , function(){
+
+    if(isShow){
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+        isShow = false;    
+    }
+
+});
+</script>
+        
+    </body>
+</html>

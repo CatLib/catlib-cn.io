@@ -1,0 +1,610 @@
+
+<!DOCTYPE html>
+<html lang="zh-cn">
+    <head><meta name="generator" content="Hexo 3.8.0">
+
+    
+    <title>网络 — CatLib</title>
+      
+    <meta charset="utf-8">
+    
+    <meta name="description" content="CatLib Unity Framework.">
+      
+    <meta name="keywords" content="CatLib,CatLib中文网,CatLib教程,CatLib官网">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <link rel="stylesheet" href="/css/page.css">
+
+    <script src="/js/vue.js"></script>
+    <script src="/js/jquery.js"></script>
+    </head>
+
+    <body>
+        
+            <nav class="nav">
+    <div class="border">
+        <img src="/images/logo.png">
+        <!--button class="hiden-in-phone">v1.2</button!-->
+        <button id="btn-menu" class="hiden-in-pc">菜单</button>
+        <ul class="nav-link hiden-in-phone">
+            <!--li>
+                <form id="search-form">
+                    <input type="text" id="search-query" class="search-query">
+                </form>
+            </li!-->
+            <li><a href="https://github.com/catlib/framework" class="nav-link-li">下载框架</a></li>
+            <li><a href="/v1/guide/use.html" class="nav-link-li">使用案例</a></li>
+            <li><a href="/v1/guide/version.html" class="nav-link-li">版本说明</a></li>
+            <li><a href="/v1/guide/contribution.html" class="nav-link-li">贡献指南</a></li>
+            <li><a href="/v1/guide/index.html" class="nav-link-li">介绍</a></li>
+            <li><a href="/" class="nav-link-li current">首页</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div id="container" class="container clear">
+    <section class="sidebar clearfix">
+    <ul>
+        
+            
+            
+                <li><h3>基础</h3></li>
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/index.html" class="sidebar-link">介绍</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/upgrade.html" class="sidebar-link">升级指南</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/version.html" class="sidebar-link">版本说明</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/error.html" class="sidebar-link">常见错误</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/style.html" class="sidebar-link">命名规范</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/contribution.html" class="sidebar-link">贡献指南</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/use.html" class="sidebar-link">使用案例</a></p>
+            </li>
+        
+            
+            
+            
+                <li><h3>框架核心</h3></li>
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/service-provider.html" class="sidebar-link">服务提供者</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/container.html" class="sidebar-link">服务容器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/application.html" class="sidebar-link">CatLib核心</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/events.html" class="sidebar-link">事件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/support.html" class="sidebar-link">支持库</a></p>
+            </li>
+        
+            
+            
+            
+            
+                <li><h3>框架组件</h3></li>
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/routing.html" class="sidebar-link">路由</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/json.html" class="sidebar-link">Json</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console.html" class="sidebar-link">控制台</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/random.html" class="sidebar-link">随机数</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/file-system.html" class="sidebar-link">文件系统</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/hashing.html" class="sidebar-link">哈希</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/encryption.html" class="sidebar-link">加解密</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/compress.html" class="sidebar-link">压缩解压缩</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/translation.html" class="sidebar-link">国际化(I18N)</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/tick.html" class="sidebar-link">时钟</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/network.html" class="sidebar-link current">网络</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/socket.html" class="sidebar-link">Socket</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/converters.html" class="sidebar-link"><del>转换器</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/config.html" class="sidebar-link"><del>配置</del></a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+                <li><h3>Unity组件</h3></li>
+            
+            
+            <li>
+                <p><a href="/v1/guide/mono-driver.html" class="sidebar-link">Mono Driver</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/time.html" class="sidebar-link">时间</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/timer.html" class="sidebar-link">计时器</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/random-unity.html" class="sidebar-link">随机数扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/encryption-unity.html" class="sidebar-link">加解密扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/console-unity.html" class="sidebar-link">控制台扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/file-system-unity.html" class="sidebar-link">文件系统扩展</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+                <li><h3>其他</h3></li>
+            
+            <li>
+                <p><a href="/v1/guide/can-make.html" class="sidebar-link">服务表</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/service-priority.html" class="sidebar-link">初始化优先级</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/api.html" class="sidebar-link">服务接口</a></p>
+            </li>
+        
+            
+            
+            
+            
+            
+            
+            <li>
+                <p><a href="/v1/guide/facade.html" class="sidebar-link">服务门面</a></p>
+            </li>
+        
+    </ul>
+</section>
+    <article class="clearfix">
+    <h2 id="网络组件"><a href="#网络组件" class="headerlink" title="网络组件"></a>网络组件</h2><blockquote>
+<p>实验中的组件，尚未完成测试及开发，请谨慎使用。</p>
+</blockquote>
+<p>网络组件是基于Socket组件的更高级的封装，为您提供了简单的API以实现：<code>心跳包</code>，<code>协议解包</code> 等处理。一般情况下您应该直接使用网络组件。</p>
+<h3 id="使用网络组件"><a href="#使用网络组件" class="headerlink" title="使用网络组件"></a>使用网络组件</h3><p>通过<code>INetworkManager</code>接口获取网络管理器，网络管理器可以用于管理活动的<code>网络频道</code>。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> networkManager = App.Make&lt;INetworkManager&gt;();</span><br></pre></td></tr></table></figure>
+<h3 id="生成一个网络频道"><a href="#生成一个网络频道" class="headerlink" title="生成一个网络频道"></a>生成一个网络频道</h3><p>通过<code>Make</code>方法可以生成一个网络频道，Make方法接受一个<code>NSP</code>(网络服务提供商)来确定使用的应用层协议和传输层协议。</p>
+<p>Network组件已经为您定义好了以下<code>NSP</code>：</p>
+<ul>
+<li>tcp://<code>{host}</code>:<code>{port}</code></li>
+<li>kcp://<code>{conv}</code>@<code>{host}</code>:<code>{port}</code></li>
+<li>text.tcp://<code>{host}</code>:<code>{port}</code></li>
+<li>text.kcp://<code>{conv}</code>@<code>{host}</code>:<code>{port}</code></li>
+<li>frame.tcp://<code>{host}</code>:<code>{port}</code></li>
+<li>frame.kcp://<code>{conv}</code>@<code>{host}</code>:<code>{port}</code></li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> channel = networkManager.Make(<span class="string">"text.tcp://127.0.0.1:7777"</span>, <span class="string">"my-connect"</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>text协议</code> : 协议格式为 <code>数据包</code>+<code>换行符(\n)</code>，即在每个数据包末尾加上一个换行符表示包的结束。</p>
+</blockquote>
+<blockquote>
+<p><code>frame协议</code> : 协议格式为 <code>总包长</code>+<code>包体</code>，其中包长(总包长+包体)为4字节网络字节序的整数，包体可以是普通文本或者二进制数据。</p>
+</blockquote>
+<p>您还可以通过<code>Make</code>的重载来强制指定使用的<code>打包解包协议</code>：</p>
+<blockquote>
+<p>所有的打包解包协议必须实现<code>IPacker</code>接口。</p>
+</blockquote>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> channel = networkManager.Make(<span class="string">"tcp://127.0.0.1:7777"</span>, <span class="keyword">new</span> TextPacker(), <span class="string">"my-connect"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="网络事件"><a href="#网络事件" class="headerlink" title="网络事件"></a>网络事件</h3><p>您可以通过网络事件来跟踪网络中的数据以及状态的变化以便于即使做出处理。以下是您可以通过IChannel监听的网络事件：</p>
+<ul>
+<li><code>OnConnected</code> : 当网络链接完成后会触发这个事件，事件参数为：网络频道</li>
+<li><code>OnError</code> : 当网络遇到错误时触发这个事件，事件参数为：网络频道，错误的异常</li>
+<li><code>OnMessage</code> : 当接受到完整的（被解包）的数据包后触发这个事件，事件参数为：网络频道，解包后的数据包</li>
+<li><code>OnDisconnect</code> : 当主动断开链接时触发（由于异常断开的链接不会触发），事件参数为：网络频道</li>
+<li><code>OnClosed</code> : 当链接关闭时，事件参数为：网络频道，什么异常导致的关闭（null则正常关闭）</li>
+<li><code>OnSent</code> : 当发送完成时，事件参数为：网络频道，实际发送的字节流</li>
+<li><code>OnMissHeartBeat</code> : 当丢失心跳包时，事件参数为：网络频道，丢失的次数</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">channel.OnMessage += (<span class="keyword">from</span> , packet)=&gt;&#123;</span><br><span class="line">    <span class="comment">// todo:</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>全局网络事件(通过<code>INetworkManager</code>监听)除了以上事件可以被监听外还有：</p>
+<ul>
+<li><code>OnReleased</code> ：当某个网络频道被释放时，事件参数为：被释放的网络频道</li>
+</ul>
+<blockquote>
+<p>全局网络事件意味着可以监听所有网络频道所产生的事件。</p>
+</blockquote>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">networkManager.OnClosed += (<span class="keyword">from</span> , ex)=&gt;&#123;</span><br><span class="line">    <span class="comment">// todo:</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="设定网络频道的心跳包"><a href="#设定网络频道的心跳包" class="headerlink" title="设定网络频道的心跳包"></a>设定网络频道的心跳包</h3><p>您可以通过网络频道的<code>SetHeartBeat</code>来设定心跳包的间隔，如果在这个间隔内没有网络通讯来往，则开始触发心跳丢失事件。</p>
+<p>函数所需求的参数为<code>检查间隔</code>，单位为：<code>毫秒(MS)</code></p>
+<blockquote>
+<p>注意触发心跳丢失事件本质上不会对链接有任何影响，您应该在应用层对这个事件做出正确的处理。</p>
+</blockquote>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">channel.SetHeartBeat(<span class="number">15000</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="链接到服务器"><a href="#链接到服务器" class="headerlink" title="链接到服务器"></a>链接到服务器</h3><p>您可以通过<code>Connect</code>函数来链接到服务器，由于您在<code>NSP</code>中已经提供了对端服务器的地址，所以您可以直接链接。</p>
+<p>函数返回的时一个<code>标准等待接口（IAwait）</code>您可以根据这个接口来判断是否已经完成了链接。</p>
+<p>如果IAwait提供的参数 <code>IsDone</code> 和 <code>Result</code> 均为 <code>True</code> 则完成了链接，否则 <code>Result</code> 中返回异常</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> wait = channel.Connect();</span><br></pre></td></tr></table></figure>
+<p>如果您需要更改<code>NSP</code>所提供的初始化参数，那么您可以使用<code>Connect</code>的重载来替换服务器的地址。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> wait = channel.Connect(<span class="string">"127.0.0.1"</span> , <span class="number">8888</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="断开服务器链接"><a href="#断开服务器链接" class="headerlink" title="断开服务器链接"></a>断开服务器链接</h3><p>您可以通过<code>Disconnect</code>来主动断开服务器链接。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">channel.Disconnect();</span><br></pre></td></tr></table></figure>
+<p>如果您为<code>Disconnect</code>传入一个异常那么在关闭事件中，这个异常会被附带。</p>
+<p>以异常方式断开链接会触发一些事件，事件执行顺序：</p>
+<ul>
+<li><code>OnError</code></li>
+<li><code>OnDisconnect</code></li>
+<li><code>OnClosed</code></li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">channel.Disconnect(<span class="keyword">new</span> Exception(<span class="string">"closed"</span>));</span><br></pre></td></tr></table></figure>
+<h3 id="发送数据到服务器"><a href="#发送数据到服务器" class="headerlink" title="发送数据到服务器"></a>发送数据到服务器</h3><p>您可以使用<code>Send</code>来发送数据包。</p>
+<blockquote>
+<p>注意如果<code>打包解包协议</code>无法打包那么会直接抛出一个异常。</p>
+</blockquote>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line">channel.Send(Encoding.Default.GetBytes(<span class="string">"helloworld"</span>));</span><br></pre></td></tr></table></figure>
+<h3 id="获取网络频道的名字"><a href="#获取网络频道的名字" class="headerlink" title="获取网络频道的名字"></a>获取网络频道的名字</h3><p>您可以通过<code>Name</code>属性来获取网络频道的名字</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> name = channel.Name;</span><br></pre></td></tr></table></figure>
+<h3 id="获取基础套接字"><a href="#获取基础套接字" class="headerlink" title="获取基础套接字"></a>获取基础套接字</h3><p>您可以通过<code>Socket</code>属性来获取基础套接字。</p>
+<figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> socket = channel.Socket;</span><br></pre></td></tr></table></figure>
+<h3 id="使用IPacker接口"><a href="#使用IPacker接口" class="headerlink" title="使用IPacker接口"></a>使用IPacker接口</h3><p><code>IPacker</code>为打包解包器，您可以自定义打包解包规范。接口需要3个函数：</p>
+<blockquote>
+<p><strong>int Input(byte[], out Exception)</strong><br>检查包的完整性, 如果能够得到包长，则返回包的在buffer中的长度(包含包头)，否则返回0继续等待数据。<br>如果协议有问题，则填入ex参数，当前连接会因此断开</p>
+</blockquote>
+<p><span></span></p>
+<blockquote>
+<p><strong>byte[] Encode(object, out Exception)</strong><br>序列化消息包。<br>如果协议有问题，则填入ex参数，当前连接会因此断开。<br>如果需要抛弃数据包则返回null</p>
+</blockquote>
+<p><span></span></p>
+<blockquote>
+<p><strong>object Decode(byte[], out Exception)</strong><br>反序列化消息包(包体)。<br>如果协议有问题，则填入ex参数，当前连接会因此断开<br>如果需要抛弃数据包则返回null。</p>
+</blockquote>
+<h3 id="组件依赖"><a href="#组件依赖" class="headerlink" title="组件依赖"></a>组件依赖</h3><ul>
+<li><a href="socket.html">Socket</a></li>
+<li><a href="tick.html">时钟</a></li>
+</ul>
+
+    <div class="footer">
+        
+        发现错误？想参与编辑？ 
+        <a href="https://github.com/catlib/catlib.io/blob/master/src/v1/guide/network.md" target="_blank">
+            在 Github 上编辑此页！
+        </a>
+        
+    </div>
+</article>
+
+<div class="sub-nav hiden-in-phone">
+    <dl id="sub-nav">
+        <dt>本文内容</dt>
+        <dd v-for="(ele, index) in sub_nav">
+           <a v-bind:href="ele.href">{{ ele.name }}</a>
+        </dd>
+    </dl>
+</div> 
+</div>
+
+<footer>
+    <div>
+        <p>© Copyright 2017-2018 catlib.io All Rights Reserved</p>
+        <p>喵喵喵，快来一起玩喵~</p>
+    </div>
+</footer>
+
+
+<script>
+var vm = new Vue({
+    el : '#container',
+    data: {
+        sub_nav : [ ]
+    },
+    created:function(){
+        var obj = [];
+        $("article h3").each(function(){
+            obj.push({name :  $(this).find("a").attr("title") , href : "#"+$(this).attr("id") });
+        });
+
+        this.sub_nav = obj;       
+    }
+});
+
+var isShow = false;
+$("nav").on("click","#btn-menu" , function(){
+
+    if(!isShow){
+        
+        if($(document).scrollTop() > $(".sidebar").height() - 100){
+
+            $('html, body').animate({scrollTop:0} , 300, "swing",function(){
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+            });
+        }else{
+
+                $(".sidebar").fadeIn();
+                $(".container").animate({"left" : "15rem"}, 500,"swing");
+
+        }
+
+    }else{
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+    }
+    isShow = !isShow;
+
+});
+
+$(".container").on("click" , "article" , function(){
+
+    if(isShow){
+        $(".sidebar").fadeOut();
+        $(".container").animate({"left" : "0rem"}, 500,"swing");
+        isShow = false;    
+    }
+
+});
+</script>
+        
+    </body>
+</html>
