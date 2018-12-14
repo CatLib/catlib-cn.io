@@ -28,7 +28,7 @@ public class FileSystemProvider : IServiceProvider
     public void Init(){ }
     public void Register()
     {
-        App.Singleton<FileSystem>().Alias<IFileSystem>();
+        App.Singleton<IFileSystem, FileSystem>();
     }
 }
 ```
@@ -144,7 +144,7 @@ public class FileSystemProvider : IServiceProvider
     public void Init(){ }
     public void Register()
     {
-        App.Singleton<FileSystem>().Alias<IFileSystem>();
+        App.Singleton<IFileSystem, FileSystem>();
     }
 }
 ```

@@ -38,20 +38,18 @@ var fileSystem = App.Make<IFileSystem>("params-1", "params-2");
 
 绑定服务分为以下两种类型：
 
-- `实例绑定` 每次生成都会是一个全新实例。
-- `单例绑定` 只在第一次生成实例，之后的调用都将返回这个实例。
+- `实例绑定` 每次调用都会产生一个全新实例。
+- `单例绑定` 将类或者接口绑定到服务容器，一旦单例绑定被构建，每次调用总是返回相同的实例。
 
 #### 实例绑定
 
 通过`Bind()`方法允许将服务以实例绑定的方式进行绑定。
 
 ``` csharp
-App.Bind<FileSystem>().Alias<IFileSystem>();
+App.Bind<IFileSystem, FileSystem>();
 ```
 
-我们通过上述代码将`FileSystem`这个服务绑定到了服务容器。同时赋予了`IFileSystem`的别名。
-
-这样您就可以使用使用实例名或者别名来构建服务了。
+我们通过上述代码将`IFileSystem`接口绑定到`FileSystem`实现。这样您就可以使用使用接口来构建服务了：
 
 ``` csharp
 var fileSystem1 = App.Make<IFileSystem>();
@@ -59,14 +57,12 @@ var fileSystem2 = App.Make<IFileSystem>();
 // fileSystem1 != fileSystem2
 ```
 
-> 但是请注意：一般情况下我们都建议通过`IFileSystem`来生成服务，因为我们需要面向接口编程。
-
 #### 单例绑定
 
-服务容器通过`Singleton`方法来对服务进行单例绑定。
+服务容器通过`Singleton`方法来对服务进行单例绑定，一旦单例绑定被构建，每次调用总是返回相同的实例。
 
 ``` csharp
-App.Singleton<FileSystem>().Alias<IFileSystem>();
+App.Singleton<IFileSystem, FileSystem>();
 ```
 
 ```csharp
@@ -76,6 +72,34 @@ var fileSystem2 = App.Make<IFileSystem>();
 ```
 
 > 通过[门面](facade.html)和服务容器的结合，颠覆了传统的单例实现方式，以一种更新，更易于维护的方式来实现传统的单例模式。
+
+## 绑定服务-如果不存在
+
+您可以使用`BindIf`或`SingletonIf`进行条件判断绑定，如果绑定的服务不存在，那么则执行绑定，反之则不进行任何操作。
+
+```csharp
+App.BindIf<IFileSystem, FileSystem>();
+```
+
+```csharp
+App.SingletonIf<IFileSystem, FileSystem>();
+```
+
+## 索引器
+
+服务容器支持通过索引器来绑定一些简单值，通过索引器进行的绑定总是以[Bind-实例绑定](#实例绑定)模式进行的。
+
+#### 通过索引器绑定
+
+```csharp
+container["hello"] = "world";
+```
+
+#### 通过索引器获取
+
+```csharp
+var world = container["hello"];
+```
 
 ## 构造函数注入
 
@@ -120,13 +144,19 @@ public class CustomizeService
 
 ## 服务别名
 
-`服务别名`是服务容器非常重要的一项功能，它可以提供：接口绑定指定实现的能力。
+`服务别名`是服务容器非常重要的一项功能，它可以提供：将接口绑定指定实现的能力。
 
 ``` csharp
-App.Singleton<FileSystem>().Alias<IFileSystem>();
+App.Singleton<IFileSystem, FileSystem>();
 ```
 
-通过`App.Make<IFileSystem>()`您可以获得`FileSystem`的实现，由于您面向接口编程，无需关注底层实现，从而服务可以实现无感知替换。
+或将多个接口指向到同一服务
+
+``` csharp
+App.Singleton<IFileSystem, FileSystem>().Alias<IDisk>();
+```
+
+通过`App.Make<IFileSystem>()`您可以获得`FileSystem`实现，由于您面向接口编程，无需关注底层实现，从而服务可以实现无感知替换。
 
 ## 单例服务释放
 
@@ -167,19 +197,30 @@ binder.UnBind();
 #### 基于服务的构建事件
 
 ``` csharp
-App.Singleton<FileSystem>().OnResolving((binder, instance) =>
-{
-    var fileSystem = (FileSystem)instance;
-    //todo: 对于FileSystem的实例进行修饰
-});
+App.Singleton<IFileSystem, FileSystem>()
+   .OnResolving<FileSystem>((fileSystem) =>
+   {
+       //todo: 对于FileSystem的实例进行修饰
+   });
 ```
 
 #### 基于全局的构建事件
 
+- 对全部服务进行修饰
+
 ``` csharp
-App.OnResolving((binder, instance) =>
+App.OnResolving((instance) =>
 {
     //todo: 对于所有被构建的服务进行修饰
+});
+```
+
+- 筛选指定的服务进行修饰
+
+```csharp
+App.OnResolving<IFileSystem>((fileSystem) =>
+{
+    //todo: 对所有实现IFileSystem接口的服务进行修饰
 });
 ```
 
@@ -194,19 +235,30 @@ App.OnResolving((binder, instance) =>
 #### 基于服务的构建事件之后
 
 ``` csharp
-App.Singleton<FileSystem>().OnAfterResolving((binder, instance) =>
-{
-    var fileSystem = (FileSystem)instance;
-    //todo: 对于FileSystem的实例进行校验或其他操作
-});
+App.Singleton<IFileSystem, FileSystem>()
+   .OnAfterResolving<FileSystem>((fileSystem) =>
+   {
+       //todo: 对于FileSystem的实例进行校验或其他操作
+   });
 ```
 
 #### 基于全局的构建事件之后
 
+- 对全部服务进行修饰
+
 ``` csharp
-App.OnAfterResolving((binder, instance) =>
+App.OnAfterResolving((instance) =>
 {
     //todo: 对于所有被构建的服务进行校验或其他操作
+});
+```
+
+- 筛选指定的服务进行修饰
+
+```csharp
+App.OnAfterResolving<IFileSystem>((fileSystem) =>
+{
+    //todo: 对所有实现IFileSystem接口的服务进行校验或其他操作
 });
 ```
 
@@ -227,22 +279,34 @@ App.OnAfterResolving((binder, instance) =>
 #### 基于服务的释放事件
 
 ``` csharp
-App.Singleton<FileSystem>().OnRelease((binder, instance) =>
-{
-    //todo: 对于FileSystem的单例实例释放时
-});
+App.Singleton<IFileSystem, FileSystem>()
+   .OnRelease<FileSystem>((fileSystem) =>
+   {
+       //todo: 对于FileSystem的单例实例释放时
+   });
 ```
 
 #### 基于全局服务的释放事件
 
-``` csharp
-App.OnRelease((binder, instance) =>
-{
+- 对全部服务进行修饰
 
+``` csharp
+App.OnRelease((instance) =>
+{
+    //todo: 对于所有被释放的服务进行处理
 });
 ```
 
-> 请注意：通过实例绑定的服务被释放时并不会触发这个事件。
+- 筛选指定的服务进行修饰
+
+```csharp
+App.OnRelease<IFileSystem>((fileSystem) =>
+{
+    //todo: 对所有实现IFileSystem接口的服务释放时，进行处理
+});
+```
+
+> 请注意：通过[实例绑定](#实例绑定)的服务被释放时并不会触发这个事件。
 
 ## 重定义事件
 
@@ -300,8 +364,10 @@ public class Tags
 
 - 对服务进行编组
 ``` csharp
-App.Singleton<BattleMonsterManager>().Tag(Tags.BattleManagerTags);
-App.Singleton<BattleCameraManager>().Tag(Tags.BattleManagerTags);
+App.Singleton<IBattleMonster, BattleMonsterManager>()
+   .Tag(Tags.BattleManagerTags);
+App.Singleton<IBattleMonster, BattleCameraManager>()
+   .Tag(Tags.BattleManagerTags);
 ```
 
 - 生成指定编组的服务
@@ -359,6 +425,8 @@ public class LogService
 }
 ```
 
+> 隐式映射只能以别名的形式进行。
+
 #### 通过服务提供者提供上下文服务名
 
 - 为服务设定别名
@@ -371,8 +439,8 @@ App.Singleton<LogDatabase>().Alias("logDatabase");
 - 在服务提供者中通过`Needs`和`Given`来设定上下文。
 
 ``` csharp
-App.Bind<ServiceDatabase>().Needs<ILog>().Given("logDatabase");
-App.Bind<ServiceFile>().Needs<ILog>().Given("logFile");
+App.Bind<IService, ServiceDatabase>().Needs<ILog>().Given("logDatabase");
+App.Bind<IService, ServiceFile>().Needs<ILog>().Given("logFile");
 ```
 
 这样当生成`ServiceDatabase`服务时给定的ILog实例将会是`LogDatabase` ，`ServiceFile`服务时给定的ILog实例将会是`LogFile`。
@@ -675,16 +743,16 @@ App.Make<Tight>("str");
 
 一般情况下我们推荐使用单例绑定的方式来对无依赖注入的服务进行实例。以便于能够获得更好的性能。
 
-下面的代码将进行单例绑定：
+下面的代码将进行非反射生成的单例绑定：
 
 ``` csharp
-App.Singleton<FileSystem>((binder, param)=> new FileSystem());
+App.Singleton<IFileSystem, FileSystem>((binder, param)=> new FileSystem());
 ```
 
-下面的代码将进行实例绑定：
+下面的代码将进行反射生成的单例绑定：
 
 ``` csharp
-App.Singleton<FileSystem>();
+App.Singleton<IFileSystem, FileSystem>();
 ```
 
 除了进行单例绑定外，我们还需要尽可能将服务设置为单例绑定，服务容器对于单例服务的优化要优于实例绑定的服务。
