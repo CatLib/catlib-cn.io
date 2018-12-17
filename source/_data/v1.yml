@@ -15,20 +15,23 @@ navigation:
     text: 介绍
     href: index.html
   -
-    text: 迁移指南
-    href: migration.html
-  -
-    text: 更新日志
-    href: upgrade.html
+    text: 风格指南
+    href: style.html
   -
     text: 常见问题
     href: faq.html
   -
-    text: 风格指南
-    href: style.html
+    text: 已知BUG
+    href: bug.html
   -
     text: 贡献指南
     href: contribution.html
+  -
+    text: 更新日志
+    href: upgrade.html
+  -
+    text: 迁移指南
+    href: migration.html
   -
     text: 系统架构
   -
