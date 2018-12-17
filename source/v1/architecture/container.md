@@ -346,6 +346,9 @@ App.Bind("filesystem", (container, userParams)=> new FileSystem());
 App.Instance("filesystem" , new FileSystem()); // throw LogicException
 ```
 
+> - 单例化对象不会经过[扩展服务](#扩展服务)处理。
+> - 需要单例化的实例允许为`null`值。
+
 ## 服务编组
 
 您可以为多个服务进行编组，编组后将允许您一次生成多个服务,服务编组是使用`Tag`进行编组的。
@@ -387,7 +390,7 @@ var services = App.Tagged(Tags.BattleManagerTags);
 App.Release(ref services);
 ```
 
-> 如果服务未能被释放，将会返回`false`，同时`ref service`变量中将会出现没有被释放的服务实现。
+> 如果有任何一个服务未能从容器找到，将会返回`false`，同时`ref service`变量中将会出现未能在容器中被找到的服务实现。
 
 ## 上下文绑定
 
@@ -460,6 +463,22 @@ public class LogService
 }
 ```
 
+## 扩展服务
+
+服务容器允许通过`Extend`修改一个已经被构建过的单例服务或者为尚未被构建的服务建立额外的修饰处理。
+
+如果`Extend`的是一个已经被构建的服务，那么该扩展代码即刻生效，但不会对后续的服务产生影响（指定构建的服务被释放后又被重新构建）。
+
+如果`Extend`的服务是一个尚未被构建的服务，那么该扩展对未来构建的指定服务持续生效。
+
+```csharp
+App.Extend<IFileSystem>((fileSystem) =>
+{
+    // extend fileSystem
+    return fileSystem;
+});
+```
+
 ## 绑定函数
 
 服务容器除了可以为服务进行绑定外还可以进行函数绑定，您可以通过`BindMethod`方法来为函数进行绑定，服务容器会自动对绑定函数所需求的参数进行分析，并提供合适的注入参数。
@@ -470,7 +489,12 @@ App.BindMethod("CustomizeFunction" , ()=>{
 });
 ```
 
-> 绑定的函数也支持[上下文绑定](#上下文绑定)
+如果您需要为绑定的函数参数进行[上下文绑定](#上下文绑定)，您可以这么做：
+
+``` csharp
+var binder = App.BindMethod("CustomizeFunction" , (IFileSystem fileSystem)=>{ });
+binder.Needs<IFileSystem>.Given(()=> new HttpFileSystem());
+```
 
 ## 调用绑定函数
 
