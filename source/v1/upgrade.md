@@ -16,6 +16,30 @@ title: 更新日志
 
 > 先行版本号及版本编译信息可以加到`主版本号.次版本号.修订号`的后面，作为延伸。
 
+## v1.3.0 Alpha.3
+
+**框架相关**
+
+- 修复初始化顺序不正确的异常，不同运行时环境不一致({% issues 102%} )
+- copyright 名称变更为 CatLib({% issues 106%} )
+- 为Type增加ToService扩展函数({% issues 105%} )
+- 注释中的文档地址更新为 https({% issues 108%} )
+- DebugLevels允许在Register中被使用（{% issues 109%} ）
+- 提示内容优化({% issues 117%} )
+- App门面增加IsResolved(string service)的支持({% issues 118%} )
+
+**服务容器**
+
+- 将IContainer接口缩减，缩减的接口将会被移动到扩展方法({% issues 111%} )
+-- Factory
+- 语意行为变更：Bind和Singleton相关({% issues 112%} )
+- `IContainer.Release`接口参数由`string`变更为`object`,允许通过对象实例来进行释放({% issues 115%} )
+- 优化UnresolvableException的异常提示消息 （{% issues 120%} ）
+
+**其他**
+
+- 清理了无用代码({% issues 119%} )
+
 ## v1.3.0 Alpha.2
 
 - Type2Service 将不允许为虚方法。({% issues 96%} )
