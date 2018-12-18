@@ -396,9 +396,7 @@ App.Release(ref services);
 
 有时侯我们可能有两个不同的服务使用同一个接口，但我们希望在每个服务中注入不同实现, 我们可以通过上下文绑定来解决这个问题。
 
-上下文绑定一共有三种方式，它们的优先级是：`Inject标记的上下文绑定` > `服务提供者(闭包/服务名)上下文绑定` > `隐式上下文绑定`
-
-#### 通过服务提供者提供上下文闭包
+#### 通过绑定类型名来描述上下文
 
 ```csharp
 App.Singleton<ScreenshotUpload>()
@@ -408,60 +406,17 @@ App.Singleton<ScreenshotUpload>()
 
 当截图上传服务需求一个抽象磁盘时，使用闭包来为其提供一个文件系统管理器下的磁盘。
 
-#### 通过变量名隐式映射上下文
+#### 通过绑定变量名来描述上下文
 
-我们还可以通过变量名隐式的设定上下文关系，隐式设定的上下文服务别名必须以`$`开头，并且名字必须和变量名一致(大小写敏感)
+绑定的变量名必须以`$`开头，对于变量名的大小写敏感。
 
-- 为服务设定隐式别名
-
-``` csharp
-App.Singleton<LogFile>().Alias("$logFile");
-App.Singleton<LogDatabase>().Alias("$logDatabase");
+```csharp
+App.Singleton<ScreenshotUpload>() 
+    .Needs("$disk")
+    .Given(()=> FileSystem.Disk("aliyun-oss"))
 ```
 
-``` csharp
-public class LogService
-{
-    public LogService(ILog logFile, ILog logDatabase)
-    {
-    }
-}
-```
-
-> 隐式映射只能以别名的形式进行。
-
-#### 通过服务提供者提供上下文服务名
-
-- 为服务设定别名
-
-``` csharp
-App.Singleton<LogFile>().Alias("logFile");
-App.Singleton<LogDatabase>().Alias("logDatabase");
-```
-
-- 在服务提供者中通过`Needs`和`Given`来设定上下文。
-
-``` csharp
-App.Bind<IService, ServiceDatabase>().Needs<ILog>().Given("logDatabase");
-App.Bind<IService, ServiceFile>().Needs<ILog>().Given("logFile");
-```
-
-这样当生成`ServiceDatabase`服务时给定的ILog实例将会是`LogDatabase` ，`ServiceFile`服务时给定的ILog实例将会是`LogFile`。
-
-#### 通过Inject特性来标记上下文
-
-除此以外我们还可以使用`[Inject]`标记来对注入实例指定实现，一般情况下服务容器的注入上下文绑定功能是使用就近原则的。
-
-``` csharp
-public class LogService
-{
-    [Inject("logDatabase")]
-    public ILog LogDatabase { get; set; }
-    public LogService([Inject("logFile")]ILog logFile)
-    {
-    }
-}
-```
+当构建截图上传服务时，框架查找截图上传服务构造函数中的disk变量，并为其给定指定实现。
 
 ## 扩展服务
 
@@ -760,6 +715,12 @@ App.Make<Tight>("str");
 - **GuardMethodName**: 验证函数方法名是否是有效的。
 - **GuardServiceName**: 验证函数服务名是否是有效的。
 - **GuardConstruct**: 验证当前状态是否是允许构建服务(或调用函数)的。
+- **CreateInstance**: 通过反射创建指定类型的实现。
+- **GetContextualClosure**： 根据上下文获取需求的闭包。
+- **MakeFromContextualClosure**：根据上下文闭包来构建需求的实例。
+- **GetContextualService**：根据上下文获取需求的服务名
+- **MakeFromContextualService**：根据上下文需求服务名生成服务实例。
+- **ResloveFromContextual**：通过上下文来解决服务实现。
 
 ## 性能优化相关
 

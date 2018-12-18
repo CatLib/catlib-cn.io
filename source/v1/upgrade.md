@@ -35,6 +35,9 @@ title: 更新日志
 - 语意行为变更：Bind和Singleton相关({% issues 112%} )
 - `IContainer.Release`接口参数由`string`变更为`object`,允许通过对象实例来进行释放({% issues 115%} )
 - 优化UnresolvableException的异常提示消息 （{% issues 120%} ）
+- 允许在Needs时提供需求的变量名，以支持变量名需求，改善变量名上下文关系的流程 ({% issues 122%} )
+- 服务容器的构建策略可以通过虚函数覆写（{% issues 124%} ）
+- 移除了Inject的别名支持 （{% issues 126%} ）
 
 **其他**
 
