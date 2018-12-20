@@ -205,7 +205,7 @@ namespace CatLib.FileSystem
 
 **正确的例子**
 
-- `Providers/CatLib.FileSystem/API/IFileSystem.cs`
+- `Providers/API/CatLib.FileSystem/IFileSystem.cs`
 
 ```csharp
 namespace CatLib.API.FileSystem
