@@ -27,6 +27,8 @@ title: 更新日志
 - DebugLevels允许在Register中被使用（{% issues 109%} ）
 - 提示内容优化({% issues 117%} )
 - App门面增加IsResolved(string service)的支持({% issues 118%} )
+- 移除实验的属性App.AutoInstance; 如果全局实例没有被构建则引发一个异常（{% issues 129%} ）
+- 如果在构建CatLib实例时，允许传入一个bool值决定是否应用到全局（{% issues 128%} ）
 
 **服务容器**
 
