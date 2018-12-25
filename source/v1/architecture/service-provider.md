@@ -166,9 +166,10 @@ public class ProviderFileSystem : IServiceProvider
 
 - 创建框架入口文件，`Main.cs`:
 ```csharp
-Application.New().Bootstrap();
-App.Register(new ProviderFileSystem());
-App.Init();
+var application = Application.New();
+application.Bootstrap();
+application.Register(new ProviderFileSystem());
+application.Init();
 ```
 
 - 使用服务`Main.cs`:

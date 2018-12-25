@@ -10,19 +10,19 @@ title: 应用程序
 
 ## 启动流程
 
-`App.Bootstrap` -> `App.Register` -> `App.Init`
+`Application.Bootstrap` -> `Application.Register` -> `Application.Init`
 
-- `App.Bootstrap` 一般用于引导注册服务提供者，初始配置或者一些其他资源。
-- `App.Register` 用于注册服务提供者到框架。
-- `App.Init` 激活所有服务提供者的`Init函数`，并完成框架初始化。
+- `Application.Bootstrap` 一般用于引导注册服务提供者，初始配置或者一些其他资源。
+- `Application.Register` 用于注册服务提供者到框架。
+- `Application.Init` 激活所有服务提供者的`Init函数`，并完成框架初始化。
 
 ##### 建议的调用结构：
 
 ```markdown
-- App.Bootstrap
-- - App.Register
+- Application.Bootstrap
+- - Application.Register
 - - #... more
-- App.Init
+- Application.Init
 ```
 
 > 我们一般建议在Bootstrap中调用Register注册函数。
