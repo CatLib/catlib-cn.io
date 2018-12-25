@@ -374,6 +374,8 @@ public class FileSystem
 App.Bind<FileSystem>().Alias<IFileSystem>();
 ```
 
+> 错误点：直接使用了别名，而没有对实现进行绑定主要接口。
+
 **正确的例子**
 
 ```csharp
