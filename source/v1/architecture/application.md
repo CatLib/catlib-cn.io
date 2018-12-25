@@ -58,8 +58,10 @@ public class BootstrapDebug : IBootstrap
 ```
 
 ```csharp
-App.Bootstrap(new BootstrapDebug()); // 输出: hello debug
+application.Bootstrap(new BootstrapDebug()); // 输出: hello debug
 ```
+
+> 注意这里使用的是application这个变量，而不是App全局变量。
 
 ## 注册服务提供者
 
@@ -77,12 +79,13 @@ public class ProviderDebug : IServiceProvider
 ```
 
 ```csharp
-App.Register(new ProviderDebug()); // 输出：hello register
+application.Register(new ProviderDebug()); // 输出：hello register
+// App.Register(new ProviderNetwork());    // 还可以使用App全局变量来进行注册。
 ```
 
 ## 初始化框架
 
-调用`App.Init`函数将会初始化框架，并且`激活`所有已经注册到应用程序中的服务提供者的`Init`函数。
+调用`application.Init`函数将会初始化框架，并且`激活`所有已经注册到应用程序中的服务提供者的`Init`函数。
 
 ``` csharp
 public class ProviderFileSystem : IServiceProvider
@@ -113,11 +116,11 @@ public class ProviderDebug : IServiceProvider
 ```
 
 ```csharp
-App.Register(new ProviderDebug());      // 输出：hello register [ProviderDebug]
-App.Register(new ProviderFileSystem()); // 输出：hello register [ProviderFileSystem]
+application.Register(new ProviderDebug());      // 输出：hello register [ProviderDebug]
+application.Register(new ProviderFileSystem()); // 输出：hello register [ProviderFileSystem]
 
-App.Init();                             // 输出：hello init [ProviderDebug]
-                                        // 输出：hello init [ProviderFileSystem]
+application.Init();                             // 输出：hello init [ProviderDebug]
+                                                // 输出：hello init [ProviderFileSystem]
 ```
 
 ## 终止应用程序
@@ -303,9 +306,9 @@ public class BootstrapProviders : IBootstrap
 
 - 创建框架入口文件，`Main.cs`:
 ```csharp
-Application.New();
-App.Bootstrap(new ProvidersBootstrap());
-App.Init();
+var application = Application.New();
+application.Bootstrap(new ProvidersBootstrap());
+application.Init();
 ```
 
 - 使用服务`Main.cs`:
