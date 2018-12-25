@@ -204,7 +204,7 @@ var result = Arr.Map(new[]{1, 2, 3} , (v) => v * 2);
 ##### 函数原型
 
 ```csharp
-T[] Map<T>(T[] source, Func<T, T> callback);
+TResult[] Map<T, TResult>(T[] source, Func<T, TResult> callback);
 ```
 
 | 参数                            | 描述                 |
