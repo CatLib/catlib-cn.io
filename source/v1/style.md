@@ -713,7 +713,7 @@ foreach (var index in new int[1, 2, 3, 4, 5])
 **错误的例子**
 
 ```csharp
-public virtual void GenericMethod<T1,T2>(T1 data) // 一旦虚函数被覆盖(override)会引发AOT异常
+public virtual void GenericMethod<T1,T2>(T1 data) // 一旦虚函数被覆盖(override)并调用会引发AOT异常
 {
 }
 ```
