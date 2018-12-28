@@ -683,6 +683,8 @@ namespace CatLib.Facades
 
 在循环中生成Lambda表达式，并尝试访问迭代器变量时，会导致迭代器变量不是预期值的问题。
 
+**错误的例子**
+
 ```csharp
 foreach (var index in new int[1, 2, 3, 4, 5])
 {
@@ -690,4 +692,36 @@ foreach (var index in new int[1, 2, 3, 4, 5])
 }
 ```
 
+**正确的例子**
+
+```csharp
+foreach (var index in new int[1, 2, 3, 4, 5])
+{
+    var localIndex = index;
+    closure(()=> localIndex);
+}
+```
+
 迭代器会导致index发生变化，从而使lambda表达式不能返回正确的index值。
+
+## `(D)`不要让泛型方法支持虚函数重载
+
+在静态编译(AOT)的情况下泛型方法虚函数调用非常危险，会导致下面AOT裁剪异常：
+
+`Attempting to call method 'xxxxxxxxxxxx' for which no ahead of time (AOT) code was generated.`
+
+**错误的例子**
+
+```csharp
+public virtual void GenericMethod<T1,T2>(T1 data) // 一旦虚函数被覆盖(override)会引发AOT异常
+{
+}
+```
+
+**正确的例子**
+
+```csharp
+public void GenericMethod<T1,T2>(T1 data)
+{
+}
+```
