@@ -204,12 +204,24 @@ var result = Arr.Map(new[]{1, 2, 3} , (v) => v * 2);
 ##### 函数原型
 
 ```csharp
-TResult[] Map<T, TResult>(T[] source, Func<T, TResult> callback);
+TReturn[] Map<T, TReturn>(T[] source, Func<T, TReturn> callback);
 ```
 
 | 参数                            | 描述                 |
 | -------------------------------- |:----------------------------:|
 | `source`        | 规定数组      |
+| `callback`      | 处理函数，返回值会被认为是新值  |
+
+---
+##### 函数原型
+
+```csharp
+TReturn[] Map<T, TReturn>(IEnumerable<T> source, Func<T, TReturn> callback);
+```
+
+| 参数                            | 描述                 |
+| -------------------------------- |:----------------------------:|
+| `source`        | 规定迭代器      |
 | `callback`      | 处理函数，返回值会被认为是新值  |
 
 ## Pop

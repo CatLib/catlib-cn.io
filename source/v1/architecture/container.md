@@ -426,10 +426,12 @@ App.Singleton<ScreenshotUpload>()
 
 如果`Extend`的服务是一个尚未被构建的服务，那么该扩展对未来构建的指定服务持续生效。
 
+如果`Extend`没有指定服务名称，那么全局生效，只要符合指定条件的接口，类型，即被触发。
+
 ```csharp
 App.Extend<IFileSystem>((fileSystem) =>
 {
-    // extend fileSystem
+    // 监听全部实现IFileSystem的服务
     return fileSystem;
 });
 ```
@@ -743,6 +745,7 @@ App.Make<Tight>("str");
 - **GetContextualService**：根据上下文获取需求的服务名
 - **MakeFromContextualService**：根据上下文需求服务名生成服务实例。
 - **ResloveFromContextual**：通过上下文来解决服务实现。
+- **MakeEmptyBindData**: 制作一个空的绑定数据。
 
 ## 性能优化相关
 
