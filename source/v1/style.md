@@ -379,11 +379,11 @@ App.Bind<FileSystem>().Alias<IFileSystem>();
 **正确的例子**
 
 ```csharp
-App.Bind<IFileSystem, FileSystem>(()=> new FileSystem());
+App.Bind<IFileSystem>(()=> new FileSystem());
 ```
 
 ```csharp
-App.Bind<IFileSystem, FileSystem>(()=> new FileSystem()).Alias<IDisk>();
+App.Bind<IFileSystem>(()=> new FileSystem()).Alias<IDisk>();
 ```
 
 如果存在多个接口需要指向一个服务，请使用别名功能。
