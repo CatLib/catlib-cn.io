@@ -20,32 +20,37 @@ title: 更新日志
 
 **框架相关**
 
-- 代码风格优化({% issues 135%} )
 - 修复Terminate()框架时会释放不属于自己的全局句柄({% issues 131%} )
 - Arr.Map函数的返回值会根据闭包的返回值来决定({% issues 138%} )
 - Arr.Map允许传入`null`元素将会转意为：new object[0]({% issues 140%} )
 - 修复`OnNewApplication`给定新的事件时导致关注该事件的全部事件都生效的bug({% issues 144%} )
-- 将类名调整为风格指南建议的类名 ({% issues 148%} )
 - App.cs缺失的接口补全({% issues 152%} )
 - Application的部分函数调整为protected({% issues 153%} )
 
 **容器相关**
 
-- 统一ContainerExtend的模版名转换函数({% issues 137%} )
 - `WrapperTypeBuilder` 中给定的服务名无需在进行格式化处理，服务名在传入之前就应该被处理({% issues 139%} )
 - 调整GetBindFillable由private变更为protected({% issues 141%} )
 - 调整容器Extend函数，允许进行全局监控({% issues 142%} )
 - IBindable接口增加Container属性允许获取绑定数据的容器信息({% issues 145%} )
 - 为IGivenData的泛型类增加IBindable的约束({% issues 146%} )
-- 对一些可能为空的逻辑代码进行空判断检查({% issues 149%} )
 - 修复容器未能解决时，错误指向的类型关系不正确的问题({% issues 150%} )
-- 泛型命名优化({% issues 151%} )
 - Bind和Singleton增加写法语法糖({% issues 156%} )
 - BindIf和SingletonIf增加写法语法糖({% issues 158%} )
 
 **即将被移除**
 
 - 自定义枚举类，被标记为已过时，这个类将会在2.0版本中被移除({% issues 134%} )
+
+**内部调整**
+
+- 代码风格优化({% issues 135%} )
+- 将类名调整为风格指南建议的类名 ({% issues 148%} )
+- 修正App.Factory没有扩展函数提供的Factory的问题({% issues 159%} )
+- 统一ContainerExtend的模版名转换函数({% issues 137%} )
+- 引用增加System.Core({% issues 155%} )
+- 对一些可能为空的逻辑代码进行空判断检查({% issues 149%} )
+- 泛型命名优化({% issues 151%} )
 
 ## v1.3.0 Alpha.3
 
