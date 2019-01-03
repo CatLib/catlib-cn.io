@@ -756,7 +756,7 @@ App.Make<Tight>("str");
 下面的代码将进行非反射生成的单例绑定：
 
 ``` csharp
-App.Singleton<IFileSystem, FileSystem>((binder, param)=> new FileSystem());
+App.Singleton<IFileSystem>(()=> new FileSystem());
 ```
 
 下面的代码将进行反射生成的单例绑定：
