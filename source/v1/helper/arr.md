@@ -32,7 +32,7 @@ T[] Merge<T>(params T[][] sources);
 var result = Arr.Rand(new []{"1", "2", "3"});
 ```
 
-> 不会重复获得提供的值
+> 如果获取的元素数量大于1，那么在随机过程中不会重复获得已经随机到的值
 > 如果传入的数量大于提供的元素数量，将会返回`default(T)`空值
 
 ---
@@ -63,7 +63,7 @@ var result = Arr.Shuffle(new []{"1", "2", "3"});
 var result1 = Arr.Shuffle(new []{"1", "2", "3"}, 100); // ["2", "1", "3"]
 var result2 = Arr.Shuffle(new []{"1", "2", "3"}, 100); // ["2", "1", "3"]
 ```
-> 随机种子一致，则同元素多次随机也将会一致。
+> 随机种子一致，则同元素顺序多次随机也将会一致。
 
 ---
 ##### 函数原型
@@ -204,12 +204,24 @@ var result = Arr.Map(new[]{1, 2, 3} , (v) => v * 2);
 ##### 函数原型
 
 ```csharp
-T[] Map<T>(T[] source, Func<T, T> callback);
+TReturn[] Map<T, TReturn>(T[] source, Func<T, TReturn> callback);
 ```
 
 | 参数                            | 描述                 |
 | -------------------------------- |:----------------------------:|
 | `source`        | 规定数组      |
+| `callback`      | 处理函数，返回值会被认为是新值  |
+
+---
+##### 函数原型
+
+```csharp
+TReturn[] Map<T, TReturn>(IEnumerable<T> source, Func<T, TReturn> callback);
+```
+
+| 参数                            | 描述                 |
+| -------------------------------- |:----------------------------:|
+| `source`        | 规定迭代器      |
 | `callback`      | 处理函数，返回值会被认为是新值  |
 
 ## Pop

@@ -14,13 +14,13 @@
 - clone 文档项目
 
 ```shell
-$ git clone https://github.com/CatLib/CatLib.io.git
+$ git clone https://github.com/CatLib/catlib-zh.io.git
 ```
 
 - 安装项目依赖包
 
 ```shell
-$ cd CatLib.io && npm install
+$ cd catlib-zh.io && npm install
 ```
 
 - 启动开发者服务器

@@ -10,19 +10,19 @@ title: 应用程序
 
 ## 启动流程
 
-`App.Bootstrap` -> `App.Register` -> `App.Init`
+`Application.Bootstrap` -> `Application.Register` -> `Application.Init`
 
-- `App.Bootstrap` 一般用于引导注册服务提供者，初始配置或者一些其他资源。
-- `App.Register` 用于注册服务提供者到框架。
-- `App.Init` 激活所有服务提供者的`Init函数`，并完成框架初始化。
+- `Application.Bootstrap` 一般用于引导注册服务提供者，初始配置或者一些其他资源。
+- `Application.Register` 用于注册服务提供者到框架。
+- `Application.Init` 激活所有服务提供者的`Init函数`，并完成框架初始化。
 
 ##### 建议的调用结构：
 
 ```markdown
-- App.Bootstrap
-- - App.Register
+- Application.Bootstrap
+- - Application.Register
 - - #... more
-- App.Init
+- Application.Init
 ```
 
 > 我们一般建议在Bootstrap中调用Register注册函数。
@@ -48,7 +48,7 @@ var application = new Application();
 引导程序必须继承自`CatLib.IBootstrap`接口。引导程序可以被用来引导注册服务提供者，或者其他需要在框架启动之前加载的程序。
 
 ```csharp
-public class DebugBootstrap : IBootstrap
+public class BootstrapDebug : IBootstrap
 {
     public void Bootstrap()
     {
@@ -58,15 +58,17 @@ public class DebugBootstrap : IBootstrap
 ```
 
 ```csharp
-App.Bootstrap(new DebugBootstrap()); // 输出: hello debug
+application.Bootstrap(new BootstrapDebug()); // 输出: hello debug
 ```
+
+> 注意这里使用的是application这个变量，而不是App全局变量。
 
 ## 注册服务提供者
 
 通过`App.Register`函数可以将服务提供者注册到应用程序中。服务提供者必须实现`CatLib.IServiceProvider`接口。
 
 ``` csharp
-public class DebugProvider : IServiceProvider
+public class ProviderDebug : IServiceProvider
 {
     public void Init(){ }
     public void Register()
@@ -77,47 +79,48 @@ public class DebugProvider : IServiceProvider
 ```
 
 ```csharp
-App.Register(new DebugProvider()); // 输出：hello register
+application.Register(new ProviderDebug()); // 输出：hello register
+// App.Register(new ProviderNetwork());    // 还可以使用App全局变量来进行注册。
 ```
 
 ## 初始化框架
 
-调用`App.Init`函数将会初始化框架，并且`激活`所有已经注册到应用程序中的服务提供者的`Init`函数。
+调用`application.Init`函数将会初始化框架，并且`激活`所有已经注册到应用程序中的服务提供者的`Init`函数。
 
 ``` csharp
-public class FileSystemProvider : IServiceProvider
+public class ProviderFileSystem : IServiceProvider
 {
     public void Init()
     { 
-        Console.WriteLine("hello init [FileSystemProvider]");
+        Console.WriteLine("hello init [ProviderFileSystem]");
     }
     public void Register()
     {
-        Console.WriteLine("hello register [FileSystemProvider]");
+        Console.WriteLine("hello register [ProviderFileSystem]");
     }
 }
 ```
 
 ``` csharp
-public class DebugProvider : IServiceProvider
+public class ProviderDebug : IServiceProvider
 {
     public void Init()
     { 
-        Console.WriteLine("hello init [DebugProvider]");
+        Console.WriteLine("hello init [ProviderDebug]");
     }
     public void Register()
     {
-        Console.WriteLine("hello register [DebugProvider]");
+        Console.WriteLine("hello register [ProviderDebug]");
     }
 }
 ```
 
 ```csharp
-App.Register(new DebugProvider());      // 输出：hello register [DebugProvider]
-App.Register(new FileSystemProvider()); // 输出：hello register [FileSystemProvider]
+application.Register(new ProviderDebug());      // 输出：hello register [ProviderDebug]
+application.Register(new ProviderFileSystem()); // 输出：hello register [ProviderFileSystem]
 
-App.Init();                             // 输出：hello init [DebugProvider]
-                                        // 输出：hello init [FileSystemProvider]
+application.Init();                             // 输出：hello init [ProviderDebug]
+                                                // 输出：hello init [ProviderFileSystem]
 ```
 
 ## 终止应用程序
@@ -201,7 +204,7 @@ int uuid = App.GetRuntimeId();
 通过`App.IsRegisted`可以判断服务提供者是否已经被注册到应用程序中了。
 
 ```csharp
-App.IsRegisted(new FileSystemProvider()); // return false
+App.IsRegisted(new ProviderFileSystem()); // return false
 ```
 
 ## 是否在主线程中执行
@@ -253,14 +256,14 @@ public class FileSystem : IFileSystem
 }
 ```
 
-- 创建服务提供者`FileSystem/FileSystemProvider.cs`:
+- 创建服务提供者`FileSystem/ProviderFileSystem.cs`:
 ``` csharp
-public class FileSystemProvider : IServiceProvider
+public class ProviderFileSystem : IServiceProvider
 {
     public void Init(){ }
     public void Register()
     {
-        App.Singleton<FileSystem>().Alias<IFileSystem>();
+        App.Singleton<IFileSystem, FileSystem>();
     }
 }
 ```
@@ -284,9 +287,9 @@ public static class Providers
 }
 ```
 
-- 创建引导程序`Bootstrap/ProvidersBootstrap.cs`:
+- 创建引导程序`Bootstrap/BootstrapProviders.cs`:
 ```csharp
-public class ProvidersBootstrap : IBootstrap
+public class BootstrapProviders : IBootstrap
 {
     public void Bootstrap()
     {
@@ -303,9 +306,9 @@ public class ProvidersBootstrap : IBootstrap
 
 - 创建框架入口文件，`Main.cs`:
 ```csharp
-Application.New();
-App.Bootstrap(new ProvidersBootstrap());
-App.Init();
+var application = Application.New();
+application.Bootstrap(new ProvidersBootstrap());
+application.Init();
 ```
 
 - 使用服务`Main.cs`:

@@ -18,17 +18,32 @@ title: 服务提供者
 
 ## 创建服务提供者
 
+服务提供者是用来描述一个服务如何为使用者提供服务的，这些关系常常包括：服务是否是单例的，服务在构建后如何初始化等等。
+
+服务提供者类的命名我们建议以：`Provider`开头，如：
+
+- `ProviderFileSystem.cs`
+- `ProviderNetwork.cs`
+
+#### 为什么要使用服务提供者
+
+- 服务提供者类可以从目录结构清晰的明确哪个类是服务注册类，如果不使用服务提供者类，那么开发者无法快速明确哪一个类为框架提供了服务。
+- 服务提供者类似于胶水，粘连了服务和框架，依赖注入是通过构造函数自动进行的，这样在服务的开发过程中甚至可以完全不依赖于框架进行开发。
+- 服务提供者类的存在使开发者可以更加专注于类本身的逻辑开发，而无需关注如何注册。
+
+#### 通过IServiceProvider来建立服务提供者
+
 您的服务提供者类必须实现`CatLib.IServiceProvider`接口, 接口中包含`Register()`和`Init()`2个方法。
 
 在`Register()`方法中，你`唯一`要做的事情就是`绑定服务实现`到服务容器，不要尝试在其中执行任何其它功能，否则将会引发一个`CodeStandardException`异常。
 
 ``` csharp
-public class FileSystemProvider : IServiceProvider
+public class ProviderFileSystem : IServiceProvider
 {
     public void Init(){ }
     public void Register()
     {
-        App.Singleton<FileSystem>().Alias<IFileSystem>();
+        App.Singleton<IFileSystem, FileSystem>();
     }
 }
 ```
@@ -36,7 +51,7 @@ public class FileSystemProvider : IServiceProvider
 `Init()`方法会在所有的服务提供者的`Register()`方法执行后执行，这意味着我们可以在`Init()`中访问其他服务提供者所提供的服务。
 
 ``` csharp
-public class ConfigProvider : IServiceProvider
+public class ProviderConfig : IServiceProvider
 {
     public void Init()
     { 
@@ -51,7 +66,7 @@ public class ConfigProvider : IServiceProvider
 您还可以通过继承`ServiceProvider`来简化服务提供者的构建方式：
 
 ``` csharp
-public class ConfigProvider : ServiceProvider
+public class ProviderConfig : ServiceProvider
 {
     public override void Init()
     { 
@@ -65,7 +80,7 @@ public class ConfigProvider : ServiceProvider
 如果框架的使用者想要使用某个服务，那么必须先对这个服务进行注册：
 
 ``` csharp
-App.Register(new FileSystemProvider());
+App.Register(new ProviderFileSystem());
 ```
 
 > 注册了服务提供者并不意味着服务都会被立即实例化，通常情况下很多是延迟实例化的，只有真的用到它们的时候才会实例化。
@@ -75,7 +90,7 @@ App.Register(new FileSystemProvider());
 通过`CatLib.IServiceProviderType`接口可以覆盖服务提供者，这往往在需要GUI支持的服务提供者中会非常有用。
 
 ```csharp
-public class ConfigProvider : IServiceProvider
+public class ProviderConfig : IServiceProvider
 {
     public void Init(){ }
     public void Register(){ }
@@ -83,19 +98,19 @@ public class ConfigProvider : IServiceProvider
 ```
 
 ```csharp
-public class GUIConfigProvider : IServiceProvider, IServiceProviderType
+public class ProviderGUIConfig : IServiceProvider, IServiceProviderType
 {
     public void Init(){ }
     public void Register(){ }
     public Type BaseType 
     { 
-        get{ return typeof(ConfigProvider); }
+        get{ return typeof(ProviderConfig); }
     }
 }
 ```
 
 > 例如:在Unity中GUI可视化编辑界面需要替换基础的服务提供者。
-> `GUIConfigProvider` 注册到框架后，会被框架识别为：`ConfigProvider`
+> `ProviderGUIConfig` 注册到框架后，会被框架识别为：`ProviderConfig`
 
 ## 协同初始化
 
@@ -106,7 +121,7 @@ public class GUIConfigProvider : IServiceProvider, IServiceProviderType
 > 协同初始化是扩展支持，所以需要先实现`IServiceProvider`接口。
 
 ```csharp
-public class ConfigProvider : IServiceProvider, ICoroutineInit
+public class ProviderConfig : IServiceProvider, ICoroutineInit
 {
     public void Init(){ }
     public void Register(){ }
@@ -137,23 +152,24 @@ public class FileSystem : IFileSystem
 }
 ```
 
-- 创建服务提供者`FileSystem/FileSystemProvider.cs`:
+- 创建服务提供者`FileSystem/ProviderFileSystem.cs`:
 ``` csharp
-public class FileSystemProvider : IServiceProvider
+public class ProviderFileSystem : IServiceProvider
 {
     public void Init(){ }
     public void Register()
     {
-        App.Singleton<FileSystem>().Alias<IFileSystem>();
+        App.Singleton<IFileSystem, FileSystem>();
     }
 }
 ```
 
 - 创建框架入口文件，`Main.cs`:
 ```csharp
-Application.New().Bootstrap();
-App.Register(new FileSystemProvider());
-App.Init();
+var application = Application.New();
+application.Bootstrap();
+application.Register(new ProviderFileSystem());
+application.Init();
 ```
 
 - 使用服务`Main.cs`:

@@ -205,7 +205,7 @@ namespace CatLib.FileSystem
 
 **正确的例子**
 
-- `Providers/CatLib.FileSystem/API/IFileSystem.cs`
+- `Providers/API/CatLib.FileSystem/IFileSystem.cs`
 
 ```csharp
 namespace CatLib.API.FileSystem
@@ -364,22 +364,29 @@ public class FileSystem
 }
 ```
 
-## `(B)`以类名作为服务名，而不是以接口名
+## `(B)`将接口绑定到服务，而不是为服务设定别名
 
-我们强烈建议以类名作为服务名，而不是以接口名作为服务名。接口名应该以别名的形式附加到服务名上。这样做我们能够让绑定关系更加明确。
+我们强烈建议将接口绑定到服务，而不是为服务设定别名。如果以别名的形式设定，很多事件将会无法使用，如：Watch。
 
 **错误的例子**
+
+```csharp
+App.Bind<FileSystem>().Alias<IFileSystem>();
+```
+
+> 错误点：直接使用了别名，而没有对实现进行绑定主要接口。
+
+**正确的例子**
 
 ```csharp
 App.Bind<IFileSystem>(()=> new FileSystem());
 ```
 
-**正确的例子**
-
 ```csharp
-App.Bind<FileSystem>(()=> new FileSystem())
-    .Alias<IFileSystem>();
+App.Bind<IFileSystem>(()=> new FileSystem()).Alias<IDisk>();
 ```
+
+如果存在多个接口需要指向一个服务，请使用别名功能。
 
 ## `(B)`服务内的命名规范一致
 
@@ -459,7 +466,7 @@ public class GameVideo : IGameVideo
 ```
 
 ```csharp
-App.Singleton<GameVideo>().Alias<IGameVideo>()
+App.Singleton<IGameVideo, GameVideo>()
     .Needs<IDisk>()
     .Given(()=> App.Make<IFileSystem>().Get("oss"));
 ```
@@ -476,7 +483,7 @@ App.Singleton<GameVideo>().Alias<IGameVideo>()
 ```csharp
 protected override void OnStartCompleted()
 {
-    App.Singleton<FileSystem>();
+    App.Singleton<IFileSystem, FileSystem>();
 }
 ```
 
@@ -487,7 +494,7 @@ public class ProviderFileSystem : ServiceProvider
 {
     public override void Register()
     {
-        App.Singleton<FileSystem>();
+        App.Singleton<IFileSystem, FileSystem>();
     }
 }
 ```
@@ -529,7 +536,7 @@ public class ProviderFileSystemClean : ServiceProvider
 {
     public override void Register()
     {
-        App.Singleton<FileSystem>();
+        App.Singleton<IFileSystem, FileSystem>();
     }
 }
 ```
@@ -541,7 +548,7 @@ public class ProviderFileSystem : ServiceProvider
 {
     public override void Register()
     {
-        App.Singleton<FileSystem>()
+        App.Singleton<IFileSystem, FileSystem>()
             .OnResolving((instance) =>
             {
                 var fileSystem = (FileSystem)instance;
@@ -562,7 +569,7 @@ public class ProviderFileSystem : ServiceProvider
     public bool ExtendDefaultAdapter { get; set; } = false;
     public override void Register()
     {
-        var binder = App.Singleton<FileSystem>();
+        var binder = App.Singleton<IFileSystem, FileSystem>();
         if(!ExtendDefaultAdapter)
         {
             return;
@@ -631,9 +638,52 @@ namespace CatLib.Facades
 
 > 门面作为一个特殊存在，所以我们允许其命名空间例外于其他规范。
 
+## `(C)`对外提供的接口总是放在API文件夹下
+
+我们建议对外提供服务的接口放在`Providers/API/组件名`文件夹下，这样可以达成接口即文档的意义。
+
+> 内部使用的接口可以直接放在组件实现的文件夹中，而无需放在API文件夹下。
+
+**错误的例子**
+
+```tree
+- Providers/
+- - FileSystem/
+- - - API/
+- - - - IFileSystem.cs
+- - - - IDisk.cs
+- - - FileSystem.cs
+- - - ProviderFileSystem.cs
+- - Debugger/
+- - - API/
+- - - - IDebugger.cs
+- - - Debugger.cs
+- - - ProviderDebugger.cs
+```
+
+**正确的例子**
+
+```tree
+- Providers/
+- - API/
+- - - FileSystem/
+- - - - IFileSystem.cs
+- - - - IDisk.cs
+- - - Debugger/
+- - - - IDebugger.cs
+- - FileSystem/
+- - - FileSystem.cs
+- - - ProviderFileSystem.cs
+- - Debugger/
+- - - Debugger.cs
+- - - ProviderDebugger.cs
+```
+
 ## `(D)`在循环中生成Lambda表达式，并尝试访问迭代器变量。
 
 在循环中生成Lambda表达式，并尝试访问迭代器变量时，会导致迭代器变量不是预期值的问题。
+
+**错误的例子**
 
 ```csharp
 foreach (var index in new int[1, 2, 3, 4, 5])
@@ -642,4 +692,36 @@ foreach (var index in new int[1, 2, 3, 4, 5])
 }
 ```
 
+**正确的例子**
+
+```csharp
+foreach (var index in new int[1, 2, 3, 4, 5])
+{
+    var localIndex = index;
+    closure(()=> localIndex);
+}
+```
+
 迭代器会导致index发生变化，从而使lambda表达式不能返回正确的index值。
+
+## `(D)`不要让泛型方法支持虚函数重载
+
+在静态编译(AOT)的情况下泛型方法虚函数调用非常危险，会导致下面AOT裁剪异常：
+
+`Attempting to call method 'xxxxxxxxxxxx' for which no ahead of time (AOT) code was generated.`
+
+**错误的例子**
+
+```csharp
+public virtual void GenericMethod<T1,T2>(T1 data) // 一旦虚函数被覆盖(override)并调用会引发AOT异常
+{
+}
+```
+
+**正确的例子**
+
+```csharp
+public void GenericMethod<T1,T2>(T1 data)
+{
+}
+```

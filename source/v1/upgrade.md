@@ -16,7 +16,81 @@ title: 更新日志
 
 > 先行版本号及版本编译信息可以加到`主版本号.次版本号.修订号`的后面，作为延伸。
 
-## v1.3.0 Alpha
+## v1.3.0 Beta
+
+**框架相关**
+
+- 修复Terminate()框架时会释放不属于自己的全局句柄({% issues 131%} )
+- Arr.Map函数的返回值会根据闭包的返回值来决定({% issues 138%} )
+- Arr.Map允许传入`null`元素将会转意为：new object[0]({% issues 140%} )
+- 修复`OnNewApplication`给定新的事件时导致关注该事件的全部事件都生效的bug({% issues 144%} )
+- App.cs缺失的接口补全({% issues 152%} )
+- Application的部分函数调整为protected({% issues 153%} )
+
+**容器相关**
+
+- `WrapperTypeBuilder` 中给定的服务名无需在进行格式化处理，服务名在传入之前就应该被处理({% issues 139%} )
+- 调整GetBindFillable由private变更为protected({% issues 141%} )
+- 调整容器Extend函数，允许进行全局监控({% issues 142%} )
+- IBindable接口增加Container属性允许获取绑定数据的容器信息({% issues 145%} )
+- 为IGivenData的泛型类增加IBindable的约束({% issues 146%} )
+- 修复容器未能解决时，错误指向的类型关系不正确的问题({% issues 150%} )
+- Bind和Singleton增加写法语法糖({% issues 156%} )
+- BindIf和SingletonIf增加写法语法糖({% issues 158%} )
+- Watch接口调整({% issues 163%} )
+
+**即将被移除**
+
+- 自定义枚举类，被标记为已过时，这个类将会在2.0版本中被移除({% issues 134%} )
+
+**内部调整**
+
+- 代码风格优化({% issues 135%} )
+- 将类名调整为风格指南建议的类名 ({% issues 148%} )
+- 修正App.Factory没有扩展函数提供的Factory的问题({% issues 159%} )
+- 统一ContainerExtend的模版名转换函数({% issues 137%} )
+- 引用增加System.Core({% issues 155%} )
+- 对一些可能为空的逻辑代码进行空判断检查({% issues 149%} )
+- 泛型命名优化({% issues 151%} )
+- Facade性能优化({% issues 162%} )
+
+## v1.3.0 Alpha.3
+
+**框架相关**
+
+- 修复初始化顺序不正确的异常，不同运行时环境不一致({% issues 102%} )
+- copyright 名称变更为 CatLib({% issues 106%} )
+- 为Type增加ToService扩展函数({% issues 105%} )
+- 注释中的文档地址更新为 https({% issues 108%} )
+- DebugLevels允许在Register中被使用（{% issues 109%} ）
+- 提示内容优化({% issues 117%} )
+- App门面增加IsResolved(string service)的支持({% issues 118%} )
+- 移除实验的属性App.AutoInstance; 如果全局实例没有被构建则引发一个异常（{% issues 129%} ）
+- 如果在构建CatLib实例时，允许传入一个bool值决定是否应用到全局（{% issues 128%} ）
+
+**服务容器**
+
+- 将IContainer接口缩减，缩减的接口将会被移动到扩展方法({% issues 111%} )
+-- Factory
+- 语意行为变更：Bind和Singleton相关({% issues 112%} )
+- `IContainer.Release`接口参数由`string`变更为`object`,允许通过对象实例来进行释放({% issues 115%} )
+- 优化UnresolvableException的异常提示消息 （{% issues 120%} ）
+- 允许在Needs时提供需求的变量名，以支持变量名需求，改善变量名上下文关系的流程 ({% issues 122%} )
+- 服务容器的构建策略可以通过虚函数覆写（{% issues 124%} ）
+- 移除了Inject的别名支持 （{% issues 126%} ）
+
+**其他**
+
+- 清理了无用代码({% issues 119%} )
+- 移除了上个版本被标记为已过时的代码({% issues 127%} )
+
+## v1.3.0 Alpha.2
+
+- Type2Service 将不允许为虚方法。({% issues 96%} )
+- 服务提供者的传入顺序为初始化顺序({% issues 97%} )
+- Given 允许返回一个闭包 ({% issues 98%} )
+
+## v1.3.0 Alpha.1
 
 **框架**
 
