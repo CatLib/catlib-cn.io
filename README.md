@@ -31,40 +31,6 @@ $ hexo s
 
 如果您打开浏览器并访问`http://localhost:4000`,您应该看到文档网站已启动并正在运行。
 
-## 搜索支持(可选)
-
-**环境需求: node-gyp**
-
-- 安装windows-build-tools(仅限windows)
-
-```shell
-npm install -g -production windows-build-tools
-```
-
-- 安装node-gyp
-
-```shell
-npm install -g node-gyp
-```
-
-- 重启您的命令行
-
-**安装依赖包**
-
-- 安装js-yaml
-
-```shell
-$ npm install js-yaml --save-dev
-```
-
-- 安装nodejieba
-
-```shell
-$ npm install nodejieba --save-dev
-```
-
-> 当完成依赖包安装后，搜索功能会自动生效
-
 ## 欢迎贡献
 
 我们欢迎以任何形式的贡献，您的贡献将会被列入贡献者名单。如果您想要贡献，请`fork`本库，并以`pull request`的形式提交贡献。
