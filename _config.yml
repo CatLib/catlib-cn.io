@@ -35,3 +35,13 @@ cookbook:
     anchor:
       default: core
       core: https://github.com/CatLib/Core
+  gitment:
+    enable: true
+    id: catlib-zh
+    client_id: 3620f7cdd1c50b4b6e3c
+    client_secret: 50664006a799cb29b27e8358b88a6a4580e8dc0c
+    github_owner: catlib
+    github_repository: catlib-zh.io
+    per_page: 30
+    maintainer:
+      - yb199478
