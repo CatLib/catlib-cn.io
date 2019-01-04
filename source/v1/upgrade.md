@@ -37,6 +37,7 @@ title: 更新日志
 - 修复容器未能解决时，错误指向的类型关系不正确的问题({% issues 150%} )
 - Bind和Singleton增加写法语法糖({% issues 156%} )
 - BindIf和SingletonIf增加写法语法糖({% issues 158%} )
+- Watch接口调整({% issues 163%} )
 
 **即将被移除**
 
@@ -51,6 +52,7 @@ title: 更新日志
 - 引用增加System.Core({% issues 155%} )
 - 对一些可能为空的逻辑代码进行空判断检查({% issues 149%} )
 - 泛型命名优化({% issues 151%} )
+- Facade性能优化({% issues 162%} )
 
 ## v1.3.0 Alpha.3
 
