@@ -19,7 +19,7 @@ deploy:
   github-token: $GITHUB_TOKEN
   committer-from-gh: true
   on:
-    branch: 1.2
+    branch: 1.3
 
 branches:
   only:
