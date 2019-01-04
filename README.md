@@ -1,4 +1,4 @@
-# CatLib文档 [![Build Status](https://www.travis-ci.org/CatLib/CatLib.io.svg?branch=1.3)](https://www.travis-ci.org/CatLib/CatLib.io)
+# CatLib文档 [![Build Status](https://www.travis-ci.org/CatLib/catlib-zh.io.svg?branch=1.3)](https://www.travis-ci.org/CatLib/CatLib.io)
 
 这是CatLib的文档网站，文档是使用[hexo](http://hexo.io/)构建的。 文档内容在`source`文件夹中，使用Markdown格式编写。
 
