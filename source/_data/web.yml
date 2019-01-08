@@ -2,6 +2,14 @@ navigation:
   -
     type: versions
     mobile: true
+  - 
+    type: menu
+    text: 组件库
+    mobile: true
+    list:
+      -
+        text: ILRuntime支持组件
+        href: https://ilruntime.catlib.io
 
 tool:
   editor: 
