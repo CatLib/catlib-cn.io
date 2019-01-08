@@ -8,7 +8,7 @@ navigation:
     mobile: true
     list:
       -
-        text: ILRuntime支持组件
+        text: ILRuntime支持库
         href: https://ilruntime.catlib.io
 
 tool:
