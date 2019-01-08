@@ -10,6 +10,11 @@ navigation:
       -
         text: ILRuntime支持库
         href: https://ilruntime.catlib.io
+  -
+    type: icon
+    fontawesome: github
+    href: https://github.com/CatLib/Core
+    mobile: true
 
 tool:
   editor: 
