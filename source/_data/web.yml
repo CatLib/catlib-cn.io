@@ -19,7 +19,7 @@ navigation:
 tool:
   editor: 
     text: 编辑
-    href: https://github.com/CatLib/catlib-zh.io/tree/master/
+    href: https://github.com/CatLib/catlib-zh.io/tree/1.3/
     external: true
 
 support:
