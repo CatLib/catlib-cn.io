@@ -28,6 +28,22 @@ IBindData Bind<TService, TAlias>();
 IBindData Bind<TService, TConcrete>();
 ```
 
+这意味着下面的写法应该被新的写法替换:
+
+**已过时的写法**
+
+```csharp
+App.Bind<FileSystem>().Alias<IFileSystem>();
+```
+
+**推荐写法**
+
+```csharp
+App.Bind<IFileSystem, FileSystem>();
+```
+
+> 虽然使用已过时的写法不会对项目造成明显的问题，但是存在一些功能需求上的潜在隐患，您应该尽早更换为新写法。
+
 **代码规范**
 
 如果您的代码违反了代码规范框架会抛出一个`CodeStandardException`，请根据提示更正。
