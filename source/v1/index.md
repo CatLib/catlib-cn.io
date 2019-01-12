@@ -35,6 +35,36 @@ CatLib是易于上手的。你只需要有良好的 C# 基础。你就可以非�
 - [服务门面](architecture/facade.html): 了解服务门面概念，对比常规静态方法。
 - [风格指南](style.html): 帮助开发者避免错误，降低沟通成本，解决小纠结和[反模式](anti-pattern.html)。
 
+## 安装
+
+##### 使用Nuget安装
+
+```PM
+Install-Package CatLib.Core -Version 1.3.1
+```
+
+##### 通过Unity Package Manager安装
+
+- 第一次使用时，打开文件`[项目路径]/Packages/manifest.json`,并增加：
+
+```json
+"scopedRegistries": [
+  {
+    "name": "taobao",
+    "url": "https://registry.npm.taobao.org",
+    "scopes": [
+      "com.catlib"
+    ]
+  }
+]
+```
+
+- 然后通过 unity package manager 安装包
+
+##### 直接下载发布版本
+
+下载[最新版本](https://github.com/CatLib/Core/releases)。
+
 ## 使用者
 
 <a href="http://www.ztgame.com/"><img src="../imgs/used/giant.png" width="150px"/></a> <a href="http://www.ourpalm.com/"><img src="../imgs/used/ourpalm.png" width="150px"/></a> <a href="http://www.06game.com/"><img src="../imgs/used/06game.png" width="150px"/></a> <a href="http://www.putao.com/"><img src="../imgs/used/putao.png" width="60px"/></a> <a href="http://www.app-echo.com/"><img src="../imgs/used/echo.png" width="150px"/></a> <a href="http://www.hrgame.com.cn/"><img src="../imgs/used/hrg.png" width="150px"/></a> <a href="http://www.heeking.com"><img src="../imgs/used/heeking.png" width="65px"/></a> <a href="http://www.sourcemuch.com"><img src="../imgs/used/sourcemuch.png" width="60px"/></a>
