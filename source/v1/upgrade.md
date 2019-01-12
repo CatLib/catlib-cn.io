@@ -18,9 +18,10 @@ title: 更新日志
 
 ## v1.3.1 Beta
 
-- RegisterCoreAlias 中应该使用`IApplication`作为服务名(#167 )
-- Alias的服务名不能以别名的形式来确定(#170 )
-- 修复以源码形式使用的情况下在终止框架时会引发异常的bug(#171 )
+- RegisterCoreAlias 中应该使用`IApplication`作为服务名({% issues 167%} )
+- Alias的服务名不能以别名的形式来确定({% issues 170%} )
+- 修复以源码形式使用的情况下在终止框架时会引发异常的bug({% issues 171%} )
+- 增加package.json允许通过包管理系统分发({% issues 174%} )
 
 ## v1.3.0 Beta
 
