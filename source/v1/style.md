@@ -383,7 +383,11 @@ App.Bind<IFileSystem>(()=> new FileSystem());
 ```
 
 ```csharp
-App.Bind<IFileSystem>(()=> new FileSystem()).Alias<IDisk>();
+App.Bind<IFileSystem, FileSystem>();
+```
+
+```csharp
+App.Bind<IFileSystem, FileSystem>().Alias<IDisk>();
 ```
 
 如果存在多个接口需要指向一个服务，请使用别名功能。
