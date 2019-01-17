@@ -4,7 +4,7 @@ title: 介绍
 
 # 介绍
 
-<a href="https://github.com/catlib/core/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" title="license-mit" /></a> <a href="https://www.nuget.org/packages/catlib.core/"><img src="https://badge.fury.io/nu/catlib.core.svg" title="Nuget Version" /></a> <a href="https://ci.appveyor.com/project/catlib/core"><img src="https://ci.appveyor.com/api/projects/status/tk3o571mwbw2rykj?svg=true" title="Build status"/></a> <img src="https://codecov.io/gh/CatLib/Core/branch/master/graph/badge.svg" alt="Codecov" /> <img src="https://img.shields.io/nuget/dt/CatLib.Core.svg" alt="Downloads" />
+<a href="https://github.com/catlib/core/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" title="license-mit" /></a> <a href="https://ci.appveyor.com/project/catlib/core"><img src="https://ci.appveyor.com/api/projects/status/tk3o571mwbw2rykj?svg=true" title="Build status"/></a> <img src="https://codecov.io/gh/CatLib/Core/branch/master/graph/badge.svg" alt="Codecov" /> <img src="https://img.shields.io/nuget/dt/CatLib.Core.svg" alt="Downloads" />
 
 ## CatLib是什么
 
