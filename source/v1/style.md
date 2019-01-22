@@ -308,26 +308,11 @@ Providers/
 
 ## `(B)`多级目录与类命名
 
-[类名的单词顺序](#B-类名的单词顺序)指出的问题可以通过多级目录进行解决，但是我们只推荐服务只有在非常大型的情况下(100+的类)才这么做。因为在多级目录中查找要比在单目录中查找更加花费精力，并且对于命名空间的引用将会变得复杂。
+[类名的单词顺序](#B-类名的单词顺序)指出的问题可以通过多级目录进行解决，但是我们只推荐服务只有在非常多，且种类不一的情况下才这么做。因为在多级目录中查找要比在单目录中查找更加花费精力，并且对于命名空间的引用将会变得复杂。
 
-如果您使用了多级目录来区分那么可以忽略重名部分。
+如果使用了多级目录，那么也请务必保证类的完整命名，否则将会导致在代码中的理解成本增加。
 
 **错误的例子**
-
-```tree
-Providers/
-  CatLib.LoginUI/
-    Checkbox/
-        CheckboxAgreement.cs
-    Button/
-        ButtonLogin.cs
-        ButtonRegister.cs
-    Input/
-        InputPassword.cs
-        InputText.cs
-```
-
-**正确的例子**
 
 ```tree
 Providers/
@@ -340,6 +325,21 @@ Providers/
     Input/
         Password.cs
         Text.cs
+```
+
+**正确的例子**
+
+```tree
+Providers/
+  CatLib.LoginUI/
+    Checkbox/
+        CheckboxAgreement.cs
+    Button/
+        ButtonLogin.cs
+        ButtonRegister.cs
+    Input/
+        InputPassword.cs
+        InputText.cs
 ```
 
 ## `(B)`函数名和类名大小写
