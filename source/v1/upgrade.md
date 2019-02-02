@@ -16,6 +16,11 @@ title: 更新日志
 
 > 先行版本号及版本编译信息可以加到`主版本号.次版本号.修订号`的后面，作为延伸。
 
+## v1.3.2 Beta
+
+- 修复无法对Nullable对象注入的问题({% issues 175%} )
+- StreamExtension中的AppendTo应该使用参数为空异常而不是空引用异常({% issues 182%} )
+
 ## v1.3.1 Beta
 
 - RegisterCoreAlias 中应该使用`IApplication`作为服务名({% issues 167%} )
