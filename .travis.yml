@@ -11,18 +11,7 @@ install:
 script:
   - hexo clean
   - hexo g
-  
-deploy:
-  provider: pages
-  local-dir: public
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  committer-from-gh: true
-  on:
-    branch: 1.3
 
 branches:
   only:
     - 1.2
-    - 1.3
-    - master
