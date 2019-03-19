@@ -40,7 +40,7 @@ CatLib是易于上手的。你只需要有良好的 C# 基础。你就可以非�
 ##### 使用Nuget安装
 
 ```PM
-Install-Package CatLib.Core -Version 1.3.2
+Install-Package CatLib.Core -Version 1.4.0
 ```
 
 ##### 通过Unity Package Manager安装

@@ -172,7 +172,7 @@ T[] Remove<T>(ref T[] source, Predicate<T> predicate);
 
 ## Filter
 
-输入数组中的每个值传给回调函数,如果回调函数返回 true，则把输入数组中的当前值加入结果数组中。
+输入数组中的每个值传给回调函数,如果回调函数和期望值相同，则把输入数组中的当前值加入结果数组中。
 
 ```csharp
 var result = Arr.Filter(new[]{"1", "2", "3", "4", "5"},(v) => (v % 2) == 0);
@@ -183,13 +183,14 @@ var result = Arr.Filter(new[]{"1", "2", "3", "4", "5"},(v) => (v % 2) == 0);
 ##### 函数原型
 
 ```csharp
-T[] Filter<T>(T[] source, Predicate<T> predicate);
+T[] Filter<T>(T[] source, Predicate<T> predicate, bool expected = true);
 ```
 
 | 参数                            | 描述                 |
 | -------------------------------- |:----------------------------:|
 | `source`        | 规定数组      |
-| `predicate`     | 判断函数，如果返回值为`true`则将结果加入数组  |
+| `predicate`     | 判断函数，如果返回值和期望值相同则将结果加入数组  |
+| `expected`      | 期望值 | 
 
 ## Map
 
@@ -531,3 +532,49 @@ void Cut<T>(ref T[] source, int count);
 | -------------------------------- |:----------------------------:|
 | `source`          | 规定数组      |
 | `count`           | 裁剪范围，负数为从尾部裁剪      |
+
+## Test
+
+将规定数组传递给检查器进行检查。
+
+只有当所有元素通过检查器均为`false`，那么函数返回`false`。
+
+```csharp
+var src = new string[]{ "1", "2", "3" };
+var result = Arr.Test(src, (item)=> item == "2"); // true
+```
+
+---
+##### 函数原型
+
+```csharp
+bool Test<T>(T[] source, Predicate<T> predicate);
+```
+
+| 参数                            | 描述                 |
+| -------------------------------- |:----------------------------:|
+| `source`          | 规定数组      |
+| `predicate`           | 检查器      |
+
+## Set
+
+查找规定数组中的指定元素，如果找到了则使用替代值替换，否则在规定数组尾部增加替换值。
+
+```csharp
+var set = new[] { "a", "ab", "abc", "abcd", "abcdef" };
+Arr.Set(ref set, (element) => element == "none", "hello");
+// { "a", "ab", "abc", "abcd", "abcdef", "hello" }
+```
+
+---
+##### 函数原型
+
+```csharp
+void Set<T>(ref T[] source, Predicate<T> predicate, T value);
+```
+
+| 参数                            | 描述                 |
+| -------------------------------- |:----------------------------:|
+| `source`          | 规定数组      |
+| `predicate`           | 返回true则覆盖当前元素内容      |
+| `value`  | 替换(设定)值 |
