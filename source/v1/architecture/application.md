@@ -290,7 +290,7 @@ public static class Providers
         get
         {
             return new IServiceProvider[]{
-                new FileSystemProvider()
+                new ProviderFileSystem()
             };
         }
     }
@@ -317,7 +317,7 @@ public class BootstrapProviders : IBootstrap
 - 创建框架入口文件，`Main.cs`:
 ```csharp
 var application = Application.New();
-application.Bootstrap(new ProvidersBootstrap());
+application.Bootstrap(new BootstrapProviders());
 application.Init();
 ```
 
