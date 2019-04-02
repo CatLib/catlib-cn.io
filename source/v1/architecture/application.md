@@ -297,9 +297,9 @@ public static class Providers
 }
 ```
 
-- 创建引导程序`Bootstrap/BootstrapProviders.cs`:
+- 创建引导程序`Bootstrap/BootstrapProviderRegister.cs`:
 ```csharp
-public class BootstrapProviders : IBootstrap
+public class BootstrapProviderRegister : IBootstrap
 {
     public void Bootstrap()
     {
@@ -317,7 +317,7 @@ public class BootstrapProviders : IBootstrap
 - 创建框架入口文件，`Main.cs`:
 ```csharp
 var application = Application.New();
-application.Bootstrap(new BootstrapProviders());
+application.Bootstrap(new BootstrapProviderRegister());
 application.Init();
 ```
 
