@@ -13,14 +13,3 @@ install:
 script:
   - hexo clean
   - hexo g
-  
-deploy:
-  provider: pages
-  local-dir: public
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  committer-from-gh: true
-
-branches:
-  only:
-    - 1.4
