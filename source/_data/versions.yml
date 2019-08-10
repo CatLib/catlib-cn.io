@@ -4,3 +4,8 @@ versions:
     name: v1.4
     active: Latest(v1.4)
     data: v1
+  -
+    test: ^v2\/
+    name: v2.0
+    active: Latest(v2.0)
+    data: v2

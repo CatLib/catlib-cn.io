@@ -1,0 +1,89 @@
+navigation:
+  -
+    levels:
+      -
+        text : CatLib
+        href : /
+      -
+        text: 核心库
+        href : index.html
+  -
+    divider: true
+  -
+    text: 起步
+  -
+    text: 介绍
+    href: index.html
+  -
+    text: 风格指南
+    href: style.html
+  -
+    text: 常见问题
+    href: faq.html
+  -
+    text: 已知BUG
+    href: bug.html
+  -
+    text: 贡献指南
+    href: contribution.html
+  -
+    text: 更新日志
+    href: upgrade.html
+  -
+    text: 迁移指南
+    href: migration.html
+  -
+    text: 系统架构
+  -
+    text: 服务提供者
+    href: architecture/service-provider.html
+  -
+    text: 应用程序
+    href: architecture/application.html
+  -
+    text: 服务容器
+    href: architecture/container.html
+  -
+    text: 服务门面
+    href: architecture/facade.html
+  -
+    text: 框架组件
+  -
+    text: 事件系统
+    href: components/event.html
+  -
+    text: 辅助函数
+  -
+    text: 数组
+    href: helper/arr.html
+  -
+    text: 字符串
+    href: helper/str.html
+  -
+    text: 守卫
+    href: helper/guard.html
+  -
+    text: 数据结构
+  -
+    text: 有序集
+    href: data-structure/sort-set.html
+  -
+    text: 流
+  -
+    text: 环型缓冲流
+    href: stream/ring-buffer-stream.html
+  -
+    text: 包装流
+    href: stream/wrapper-stream.html
+  -
+    text: 组合流
+    href: stream/combine-stream.html
+  -
+    text: 分片流
+    href: stream/segment-stream.html
+  -
+    divider : true
+  -
+    text: Power by CatLib
+    href: https://github.com/CatLib
+    external: true

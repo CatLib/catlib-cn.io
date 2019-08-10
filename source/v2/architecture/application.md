@@ -1,0 +1,224 @@
+---
+title: 应用程序
+---
+
+# 应用程序
+
+`Application`是CatLib程序的核心，也是所谓的程序入口。应用程序通过引导来加载服务提供者和其他一些必须的资源。应用程序在一般情况下只允许启动一个，且只能在主线程中启动。
+
+在任何位置，您可以通过`App`全局变量访问应用程序。
+
+## 启动流程
+
+`Application.Bootstrap` -> `Application.Register` -> `Application.Init`
+
+- `Application.Bootstrap` 一般用于引导注册服务提供者，初始配置或者一些其他资源。
+- `Application.Register` 用于注册服务提供者到框架。
+- `Application.Init` 激活所有服务提供者的`Init函数`，并完成框架初始化。
+
+##### 建议的调用结构：
+
+```markdown
+- Application.Bootstrap
+- - Application.Register
+- - #... more
+- Application.Init
+```
+
+> 我们一般建议在Bootstrap中调用Register注册函数。
+
+## 生命周期
+
+<div style="padding-left:10%"><img src="../imgs/life-cycle.svg" alt="life-cycle" style="max-width:1000px;"></div>
+
+## 创建框架实例
+
+- 通过`Application.New`来创建框架实例
+```csharp
+Application.New();
+```
+
+- 通过手动实例化创建框架实例
+```csharp
+var application = new Application();
+```
+
+## 引导程序
+
+引导程序必须继承自`CatLib.IBootstrap`接口。引导程序可以被用来引导注册服务提供者，或者其他需要在框架启动之前加载的程序。
+
+```csharp
+public class BootstrapDebug : IBootstrap
+{
+    public void Bootstrap()
+    {
+        Console.WriteLine("hello debug");
+    }
+}
+```
+
+```csharp
+application.Bootstrap(new BootstrapDebug()); // 输出: hello debug
+```
+
+> 注意这里使用的是application这个变量，而不是App全局变量。
+
+## 注册服务提供者
+
+通过`App.Register`函数可以将服务提供者注册到应用程序中。服务提供者必须实现`CatLib.IServiceProvider`接口。
+
+``` csharp
+public class ProviderDebug : IServiceProvider
+{
+    public void Init(){ }
+    public void Register()
+    {
+        Console.WriteLine("hello register");
+    }
+}
+```
+
+```csharp
+application.Register(new ProviderDebug()); // 输出：hello register
+// App.Register(new ProviderNetwork());    // 还可以使用App全局变量来进行注册。
+```
+
+## 初始化框架
+
+调用`application.Init`函数将会初始化框架，并且`激活`所有已经注册到应用程序中的服务提供者的`Init`函数。
+
+``` csharp
+public class ProviderFileSystem : IServiceProvider
+{
+    public void Init()
+    { 
+        Console.WriteLine("hello init [ProviderFileSystem]");
+    }
+    public void Register()
+    {
+        Console.WriteLine("hello register [ProviderFileSystem]");
+    }
+}
+```
+
+``` csharp
+public class ProviderDebug : IServiceProvider
+{
+    public void Init()
+    { 
+        Console.WriteLine("hello init [ProviderDebug]");
+    }
+    public void Register()
+    {
+        Console.WriteLine("hello register [ProviderDebug]");
+    }
+}
+```
+
+```csharp
+application.Register(new ProviderDebug());      // 输出：hello register [ProviderDebug]
+application.Register(new ProviderFileSystem()); // 输出：hello register [ProviderFileSystem]
+
+application.Init();                             // 输出：hello init [ProviderDebug]
+                                                // 输出：hello init [ProviderFileSystem]
+```
+
+## 终止应用程序
+
+当程序退出时，您需要调用`App.Terminate`方法来终止框架运行，这样框架中注册的服务都会被有序释放,释放顺序请参考[生命周期图](#生命周期)。
+
+```csharp
+App.Terminate();
+```
+
+## 框架事件
+
+下面的事件已经内嵌到应用程序内，满足条件时会自动触发，事件名都被放在`ApplicationEvents`中。
+
+关于事件系统，详细文档请参考：[事件系统](../components/event.html)
+
+```csharp
+var dispatcher = App.Make<IEventDispatcher>();
+dispatcher.AddListener(ApplicationEvents.OnStartCompleted, ()=>{
+    // todo:
+});
+```
+
+| 事件名                            |  事件对象                   | 描述                    |
+|:--------------------------------:|:---------------------------:|:-----------------------:|
+| `OnBeforeBoot`                   | `BeforeBootEventArgs`       | 在框架引导开始之前。      |
+| `OnBooting`                      | `BootingEventArgs`          | 在框架引导进行中。        |
+| `OnAfterBoot`                    | `AfterBootEventArgs`        | 在框架引导完成之后。      |
+| `OnRegisterProvider`             | `RegisterProviderEventArgs` | 在注册服务提供者时。      |
+| `OnBeforeInit`                   | `BeforeInitEventArgs`       | 在框架初始化之前。      |
+| `OnInitProvider`                 | `InitProviderEventArgs`     | 在服务提供者初始化启动之后。 |
+| `OnAfterInit`                    | `AfterInitEventArgs`        | 在框架初始化完成后。      |
+| `OnStartCompleted`               | `StartCompletedEventArgs`   | 在框架进入运行状态后触发。开发者可以接受这个事件来进入自己的业务代码。      |
+| `OnBeforeTerminate`              | `BeforeTerminateEventArgs`  | 在框架终止之前。      |
+| `OnAfterTerminate`               | `AfterTerminateEventArgs`   | 在框架终止之后。      |
+  
+# 当框架被新创建时
+
+通过`App.OnNewApplication`您可以捕获Application的创建事件，这对于一些在Application被创建前就已经执行的程序或者需要监听应用程序变化的程序非常有用。
+
+``` csharp
+App.OnNewApplication += (app)=>{
+    // todo:
+};
+```
+
+> `App.OnNewApplication`在`new Application`之前可以被使用
+
+## 设定框架的调试等级
+
+您可以通过`App.DebugLevel`来设定框架的调试等级，所有的组件都可以识别这个调试等级来做出对应的处理。
+
+```csharp
+App.DebugLevel = DebugLevels.Production; // Production，Staging，Development
+```
+
+> 调试等级的默认值为:`DebugLevels.Production`
+
+## 获取运行期间的唯一Id
+
+在应用程序生命周期内，您可以使用`App.GetRuntimeId`函数来获取运行时的唯一Id，该函数多线程安全。
+
+```csharp
+int rid = App.GetRuntimeId();
+```
+
+## 判断服务是否被注册
+
+通过`App.IsRegistered`可以判断服务提供者是否已经被注册到应用程序中了。
+
+```csharp
+App.IsRegistered(new ProviderFileSystem()); // return false
+```
+
+## 是否在主线程中执行
+
+您可以通过`App.IsMainThread`来判断是否处于主线程中，该函数多线程安全。
+
+``` csharp
+App.IsMainThread;
+```
+
+> 创建应用程序的线程会被认为是主线程
+
+## 获取当前框架的版本
+
+通过`App.Version`可以获取当前框架的版本，框架版本遵循[语义化版本](../upgrade.html)
+
+```csharp
+string version = App.Version;
+```
+
+## 比较框架版本
+
+某些场景需要比较当前运行时的框架版本，这时您可以通过`App.Compare`函数来比较版本。
+
+```csharp
+// App.Version 2.0.0
+App.Compare("1.2.3"); // return 1
+App.Compare("2.2.3"); // return -1
+```
