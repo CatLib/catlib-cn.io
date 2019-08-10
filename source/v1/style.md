@@ -59,7 +59,7 @@ namespace CatLib.FileSystem
 
 ## `(A)`服务的命名空间必须和服务的父级文件夹名一致
 
-所有的服务(由多个类组成)命名空间必须和其父文件夹名字保持一致，以避免通过目录检索时无法明确服务位置，同时可以避免现在以及未来的类名相冲突。
+所有的服务(由多个类组成)命名空间必须和其父文件夹名字保持一致（对于根文件夹可以不包含在命名空间中，如:Providers），以避免通过目录检索时无法明确服务位置，同时可以避免现在以及未来的类名相冲突。
 
 **错误的例子**
 
@@ -308,26 +308,11 @@ Providers/
 
 ## `(B)`多级目录与类命名
 
-[类名的单词顺序](#B-类名的单词顺序)指出的问题可以通过多级目录进行解决，但是我们只推荐服务只有在非常大型的情况下(100+的类)才这么做。因为在多级目录中查找要比在单目录中查找更加花费精力，并且对于命名空间的引用将会变得复杂。
+[类名的单词顺序](#B-类名的单词顺序)指出的问题可以通过多级目录进行解决，但是我们只推荐服务只有在非常多，且种类不一的情况下才这么做。因为在多级目录中查找要比在单目录中查找更加花费精力，并且对于命名空间的引用将会变得复杂。
 
-如果您使用了多级目录来区分那么可以忽略重名部分。
+如果使用了多级目录，那么也请务必保证类的完整命名，否则将会导致在代码中的理解成本增加。
 
 **错误的例子**
-
-```tree
-Providers/
-  CatLib.LoginUI/
-    Checkbox/
-        CheckboxAgreement.cs
-    Button/
-        ButtonLogin.cs
-        ButtonRegister.cs
-    Input/
-        InputPassword.cs
-        InputText.cs
-```
-
-**正确的例子**
 
 ```tree
 Providers/
@@ -340,6 +325,21 @@ Providers/
     Input/
         Password.cs
         Text.cs
+```
+
+**正确的例子**
+
+```tree
+Providers/
+  CatLib.LoginUI/
+    Checkbox/
+        CheckboxAgreement.cs
+    Button/
+        ButtonLogin.cs
+        ButtonRegister.cs
+    Input/
+        InputPassword.cs
+        InputText.cs
 ```
 
 ## `(B)`函数名和类名大小写
@@ -383,7 +383,11 @@ App.Bind<IFileSystem>(()=> new FileSystem());
 ```
 
 ```csharp
-App.Bind<IFileSystem>(()=> new FileSystem()).Alias<IDisk>();
+App.Bind<IFileSystem, FileSystem>();
+```
+
+```csharp
+App.Bind<IFileSystem, FileSystem>().Alias<IDisk>();
 ```
 
 如果存在多个接口需要指向一个服务，请使用别名功能。
@@ -706,7 +710,7 @@ foreach (var index in new int[1, 2, 3, 4, 5])
 
 ## `(D)`不要让泛型方法支持虚函数重载
 
-在静态编译(AOT)的情况下泛型方法虚函数调用非常危险，会导致下面AOT裁剪异常：
+在一些平台下（如：unity3d）使用的静态编译(AOT)技术会导致泛型方法虚函数调用非常危险，会导致下面AOT裁剪异常：
 
 `Attempting to call method 'xxxxxxxxxxxx' for which no ahead of time (AOT) code was generated.`
 

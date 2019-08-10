@@ -4,7 +4,7 @@ title: 介绍
 
 # 介绍
 
-<a href="https://github.com/catlib/core/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" title="license-mit" /></a> <a href="https://www.nuget.org/packages/catlib.core/"><img src="https://badge.fury.io/nu/catlib.core.svg" title="Nuget Version" /></a> <a href="https://ci.appveyor.com/project/catlib/core"><img src="https://ci.appveyor.com/api/projects/status/tk3o571mwbw2rykj?svg=true" title="Build status"/></a> <img src="https://codecov.io/gh/CatLib/Core/branch/master/graph/badge.svg" alt="Codecov" /> <img src="https://img.shields.io/nuget/dt/CatLib.Core.svg" alt="Downloads" />
+<a href="https://github.com/catlib/core/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" title="license-mit" /></a> <a href="https://ci.appveyor.com/project/catlib/core"><img src="https://ci.appveyor.com/api/projects/status/tk3o571mwbw2rykj?svg=true" title="Build status"/></a> <img src="https://img.shields.io/nuget/dt/CatLib.Core.svg" alt="Downloads" />
 
 ## CatLib是什么
 
@@ -29,11 +29,40 @@ CatLib 是一套`渐进式`的`服务提供者框架`。框架为客户端提供
 CatLib是易于上手的。你只需要有良好的 C# 基础。你就可以非常快速地通过阅读这份 指南 投入开发。
 
 - [服务提供者](architecture/service-provider.html): 了解服务提供者的基本概念，以及系统架构。
-- [核心框架](architecture/framework.html): 了解核心框架的运行生命周期，以及具备的功能。
+- [应用程序](architecture/application.html): 了解核心框架的运行生命周期，以及具备的功能。
 - [服务容器](architecture/container.html): 了解核心容器的运行原理以及可用方法。
-- [服务接口](architecture/api.html): 了解服务接口概念，对比门面的区别。
 - [服务门面](architecture/facade.html): 了解服务门面概念，对比常规静态方法。
 - [风格指南](style.html): 帮助开发者避免错误，降低沟通成本，解决小纠结和[反模式](anti-pattern.html)。
+
+## 安装
+
+##### 使用Nuget安装
+
+```PM
+Install-Package CatLib.Core -Version 1.4.0
+```
+
+##### 通过Unity Package Manager安装
+
+- 第一次使用时，打开文件`[项目路径]/Packages/manifest.json`,并增加：
+
+```json
+"scopedRegistries": [
+  {
+    "name": "taobao",
+    "url": "https://registry.npm.taobao.org",
+    "scopes": [
+      "com.catlib"
+    ]
+  }
+]
+```
+
+- 然后通过 `unity package manager` 安装 `CatLib.Unity` 组件包
+
+##### 直接下载发布版本
+
+下载[最新版本](https://github.com/CatLib/Core/releases)。
 
 ## 使用者
 

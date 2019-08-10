@@ -43,6 +43,10 @@ var result = Str.Is("he*d" , "helloworld"); // true
 string Is(string pattern, string value);
 ```
 
+```csharp
+bool Is<T>(string[] patterns, T source);
+```
+
 | 参数                            | 描述                 |
 | -------------------------------- |:----------------------------:|
 | `pattern`            | 匹配表达式      |
@@ -212,12 +216,17 @@ var result = Str.Pad("hello", 10, "wor", PadTypes.Both);
 
 ```csharp
 string Pad(string str, int length, string padStr = null, PadTypes type = PadTypes.Right);
+// 该函数原型即将在v2.0版本中弃用
+```
+
+```csharp
+string Pad(int length, string str, string padStr = null, PadTypes type = PadTypes.Right);
 ```
 
 | 参数                            | 描述                 |
 | -------------------------------- |:----------------------------:|
-| `str`            | 规定字符串      |
 | `length`         | 规定字符串新的字符串长度，如果该值小于规定字符串的原始长度，则不进行任何操作。      |
+| `str`            | 规定字符串      |
 | `padStr`         | 规定供填充使用的字符串。默认是空白。注释：空白不是空字符串,而是` `(空白) |
 | `type`           | 填充的方向`Both`,`Left`,`Right` |
 
@@ -377,3 +386,70 @@ string Truncate(string str, int length, object separator = null, string mission 
 | `length`              | 截断长度(含缺省字符长度)      |
 | `separator`           | 临近的分隔符，如果设定则，截断长度为距离截断长度最近的分隔符位置,如果传入的是一个正则表达式那么则使用正则进行匹配。 |
 | `mission`             | 缺省字符，默认是`...` |
+
+## JoinList
+
+返回给定数组的所有顺序组合。
+
+```csharp
+v[0] = "hello"
+v[1] = "world"
+var result = Str.JoinList(v, "/"); 
+result[0] == "hello";
+result[1] == "hello/world";
+```
+
+---
+##### 函数原型
+
+```csharp
+string[] JoinList(string[] source, string separator = null);
+```
+
+```csharp
+string[] JoinList(string[] source, char separator);
+```
+
+| 参数                            | 描述                 |
+| -------------------------------- |:----------------------------:|
+| `source`              | 源数组      |
+| `separator`                | 分割字符（串）      |
+
+## Levenshtein
+
+计算两个字符串之间的相似度。
+
+> [https://en.wikipedia.org/wiki/Levenshtein_distance](https://en.wikipedia.org/wiki/Levenshtein_distance)
+
+```csharp
+Str.Levenshtein("hello", "world"); // 4
+Str.Levenshtein("hello", "catlib"); // 5
+Str.Levenshtein("hello", "catlib-world"); // 10
+```
+
+---
+##### 函数原型
+
+```csharp
+int Levenshtein(string str1, string str2);
+```
+
+| 参数                            | 描述                 |
+| -------------------------------- |:----------------------------:|
+| `str1`              | 字符串1      |
+| `str2`                | 字符串2      |
+
+## Space
+
+表示了一个带有空格的空字符串。
+
+```csharp
+var space = Str.Space; // " "
+```
+
+---
+##### 常量原型
+
+```csharp
+const string Space = " ";;
+```

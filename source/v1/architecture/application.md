@@ -169,6 +169,16 @@ App.On(ApplicationEvents.OnStartCompleted, ()=>{
 | `OnTerminate`            | 在框架终止之前。      |
 | `OnTerminated`           | 在框架终止之后。      |
 
+> 注意，`OnTerminated`事件只允许使用`Action`的形式监听。因为这时框架已经被完全释放，不再具备依赖注入的功能，否则将会导致一个异常。
+
+```csharp
+App.On(ApplicationEvents.OnTerminated, OnTerminated);
+```
+
+```csharp
+private void OnTerminated();
+```
+
 # 当框架被新创建时
 
 通过`App.OnNewApplication`您可以捕获Application的创建事件，这对于一些在Application被创建前就已经执行的程序或者需要监听应用程序变化的程序非常有用。
@@ -280,16 +290,16 @@ public static class Providers
         get
         {
             return new IServiceProvider[]{
-                new FileSystemProvider()
+                new ProviderFileSystem()
             };
         }
     }
 }
 ```
 
-- 创建引导程序`Bootstrap/BootstrapProviders.cs`:
+- 创建引导程序`Bootstrap/BootstrapProviderRegister.cs`:
 ```csharp
-public class BootstrapProviders : IBootstrap
+public class BootstrapProviderRegister : IBootstrap
 {
     public void Bootstrap()
     {
@@ -307,7 +317,7 @@ public class BootstrapProviders : IBootstrap
 - 创建框架入口文件，`Main.cs`:
 ```csharp
 var application = Application.New();
-application.Bootstrap(new ProvidersBootstrap());
+application.Bootstrap(new BootstrapProviderRegister());
 application.Init();
 ```
 

@@ -35,6 +35,21 @@ CatLib 强烈鼓励使用 GitHub 的 `pull requests` (以下简称PR)，来提�
 - 重要的新特性是要被提交到 master 分支的。
 - 如果你不确定是重要特性还是次要特性，请在`calib.slack`或`QQ群`中咨询。
 
+## 合并请求描述
+
+合并请求描述需要附带下面表格，并完善表格中对应的信息：
+
+| Q | A |
+|----|----|
+| Branch? |  \<version\>  |
+| Bug fix? | \<yes \| no\> |
+| New feature? | \<yes \| no\> |
+| Deprecations? | \<yes \| no\> |
+| Tests pass? | \<yes \| no \| n/a\> |
+| License? | \<license-name \| n/a\> |
+  
+\<合并请求修改内容的描述\>
+
 ## 框架设计者
 
 - [喵喵大人](https://github.com/yb199478)

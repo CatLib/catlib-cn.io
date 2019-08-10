@@ -28,6 +28,7 @@ node_sass:
    - node_modules
 
 cookbook:
+  favicon: favicon.ico
   partials:
     index:
       - _layout/index.ejs
