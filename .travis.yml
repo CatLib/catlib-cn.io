@@ -20,10 +20,7 @@ deploy:
   skip-cleanup: true
   github-token: $GITHUB_TOKEN
   committer-from-gh: true
-  on:
-    branch: 1.4
 
 branches:
   only:
     - 1.4
-    - master
