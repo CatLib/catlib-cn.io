@@ -22,8 +22,3 @@ deploy:
   committer-from-gh: true
   on:
     branch: 2.0
-
-branches:
-  only:
-    - 2.0
-    - master
