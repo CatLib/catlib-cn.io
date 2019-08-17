@@ -50,10 +50,7 @@ CatLib事件系统支持实现一个`IStoppableEvent`接口来决定是否来终
 ``` csharp
 public class FooEventArgs : EventArgs, IStoppableEvent
 {
-    public bool IsPropagationStopped()
-    {
-        return true;
-    }
+    public bool IsPropagationStopped => true;
 }
 ```
 
