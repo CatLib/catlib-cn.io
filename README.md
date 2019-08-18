@@ -1,4 +1,4 @@
-# CatLib文档 [![Build Status](https://www.travis-ci.com/CatLib/catlib-zh.io.svg?branch=2.0)](https://www.travis-ci.com/CatLib/catlib-zh.io)
+# CatLib文档 [![Build Status](https://www.travis-ci.com/CatLib/catlib-cn.io.svg?branch=2.0)](https://www.travis-ci.com/CatLib/catlib-cn.io)
 
 这是CatLib的文档网站，文档是使用[hexo](http://hexo.io/)构建的。 文档内容在`source`文件夹中，使用Markdown格式编写。
 
@@ -14,13 +14,13 @@
 - clone 文档项目
 
 ```shell
-$ git clone https://github.com/CatLib/catlib-zh.io.git
+$ git clone https://github.com/CatLib/catlib-cn.io.git
 ```
 
 - 安装项目依赖包
 
 ```shell
-$ cd catlib-zh.io && npm install && npm install -g hexo-cli
+$ cd catlib-cn.io && npm install && npm install -g hexo-cli
 ```
 
 - 启动开发者服务器
