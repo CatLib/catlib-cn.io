@@ -2,7 +2,7 @@
 
 这是CatLib的文档网站，文档是使用[hexo](http://hexo.io/)构建的。 文档内容在`source`文件夹中，使用Markdown格式编写。
 
-文档地址: [catlib.io](https://catlib.io)
+文档地址: [zh.catlib.io](https://zh.catlib.io)
 
 ## 环境需求
 
