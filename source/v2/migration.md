@@ -37,7 +37,7 @@ title: 迁移指南
 | `事件系统`                | `CatLib`                | `CatLib.EventDispatcher`   |
 | `通用异常`                | `CatLib`                | `CatLib.Exception`         |
 | `实用程序`                | `CatLib.Support`        | `CatLib.Util`              |
-| `流`                |     `CatLib.Support`        | `CatLib.IO`              |
+| `流(Stream)`                |     `CatLib.Support`        | `CatLib.IO`              |
 
 #### 其他
 
