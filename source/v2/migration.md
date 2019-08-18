@@ -8,13 +8,11 @@ title: 迁移指南
 
 ## 从 1.4 迁移到 2.0
 
-1.4 到 2.0 是一个大版本更新，更新中存在不向下兼容的部分。
+1.4 到 2.0 是一个大版本更新，更新中存在不向下兼容的部分。涉及到类更替，命名空间结构调整，过时类删除等。
 
 #### 事件系统
 
 我们对事件系统进行了重构，对于事件系统的命名发生了变化。
-
-事件系统的命名空间调整到：`CatLib.Events` 下。
 
 | 1.x 事件名                | 2.0 事件名                 |    2.0 事件对象              |
 | ------------------------ |:--------------------------:|:---------------------------:|
@@ -37,8 +35,8 @@ title: 迁移指南
 | ------------------------ | ------------------------ |:--------------------------:|
 | `依赖注入容器`             | `CatLib`                | `CatLib.Container`         |
 | `事件系统`                | `CatLib`                | `CatLib.EventDispatcher`   |
-| `核心事件`                | `CatLib`                | `CatLib.Events`            |
 | `通用异常`                | `CatLib`                | `CatLib.Exception`         |
+| `实用程序`                | `CatLib.Support`        | `CatLib.Util`              |
 
 #### 其他
 
@@ -52,22 +50,22 @@ title: 迁移指南
 
 #### 被移除，且没有替代品
 
-- `ISortSet` 接口
+- `ISortSet` 接口，因为接口不具备实现价值
 - `Application.Compare` 版本比较方法
 - `Version`版本类
 - `Template` 模版支持
 - `FilterChain` 过滤器支持
-- `Enum` 类支持
-- `Container.Flash` 方法
-- `Arr.Flash` 方法
-- `Dict` 助手类
+- `Enum` 移除类支持，理由是计划中的移除
+- `Container.Flash` 方法，理由是因为过于凌乱
+- `Arr.Flash` 方法，理由是因为过于凌乱
+- `Dict` 助手类，理由是因为过于凌乱
 - `ThreadStatic` 助手类
-- `QuickList` 快速列表
-- `Storage` 内存存储支持
-- `SystemTime` 系统时间助手类
-- `ICoroutineInit` 迭代器初始化
+- `QuickList` 移除快速列表，理由是因为使用量过少。
+- `Storage` 移除内存存储支持，理由是因为使用量过少。
+- `SystemTime` 移除系统时间助手类，理由是因为过于凌乱
+- `ICoroutineInit` 移除迭代器初始化，因为Task可以更加合适的方式进行异步操作
 - `priority` 凌乱的优先级概念被移除，加载顺序即优先级顺序
-- `Util` 助手类被移除
-- `Str.Encoding` 字段被移除
-- `IServiceProviderType` 接口被移除
-- `PipelineStream` 被移除
+- `Util` 通用助手类被移除，转变为内部使用的Helper。
+- `Str.Encoding` 属性被移除
+- `IServiceProviderType` 接口被移除，核心类不再提供，迁移到引导库中
+- `PipelineStream` 被移除，这是一个实验类，没有达到预期目的。
