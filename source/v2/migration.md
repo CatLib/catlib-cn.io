@@ -69,3 +69,7 @@ title: 迁移指南
 - `Str.Encoding` 属性被移除
 - `IServiceProviderType` 接口被移除，核心类不再提供，迁移到引导库中
 - `PipelineStream` 被移除，这是一个实验类，没有达到预期目的。
+
+## 1.x 迁移指南
+
+如果您正在使用低版本的CatLib，请访问：[1.x 迁移指南](../v1/migration.html)
