@@ -9,7 +9,7 @@ timezone: UTC
 
 # URL
 ## If your site is put in a subdirectory, set url as 'https://seed.catlib.io/child' and root as '/child/'
-url: https://zh.catlib.io
+url: https://cn.catlib.io
 root: /
 
 # Writing
