@@ -11,6 +11,11 @@ navigation:
         text: ILRuntime支持库
         href: https://ilruntime.catlib.io
   -
+    type: normal
+    text: English
+    href: https://catlib.io/lasted/index.html
+    mobile: true
+  -
     type: icon
     fontawesome: github
     href: https://github.com/CatLib/Core

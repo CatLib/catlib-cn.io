@@ -1,3 +1,3 @@
 ---
-redirect: v1/index.html
+redirect: v2/index.html
 ---
