@@ -24,7 +24,7 @@ navigation:
 tool:
   editor: 
     text: 编辑
-    href: https://github.com/CatLib/catlib-zh.io/tree/2.0/
+    href: https://github.com/CatLib/catlib-cn.io/tree/2.0/
     external: true
 
 support:
@@ -32,5 +32,5 @@ support:
     - '在文档中没有找到您需要的内容？'
     - '尝试在左侧搜索栏中搜索，或者{text}'
   text: 在GitHub中发起提问
-  href: https://github.com/CatLib/catlib-zh.io/issues
+  href: https://github.com/CatLib/catlib-cn.io/issues
   external: true
