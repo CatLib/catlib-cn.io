@@ -179,25 +179,6 @@ string Reverse(string str);
 | -------------------------------- |:----------------------------:|
 | `str`            | 规定字符串      |
 
-## Reverse
-
-反转规定字符串
-
-```csharp 
-var result = Str.Reverse("helloworld");
-// result : dlrowolleh
-```
-
----
-##### 函数原型
-
-```csharp
-string Reverse(string str);
-```
-
-| 参数                            | 描述                 |
-| -------------------------------- |:----------------------------:|
-| `str`            | 规定字符串      |
 
 ## Pad
 
