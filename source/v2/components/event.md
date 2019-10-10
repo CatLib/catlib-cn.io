@@ -29,10 +29,10 @@ dispatcher.AddListener("event.name", (EventArgs args) =>
 
 ## 触发事件
 
-如果要触发事件，您可以通过`Dispatch`来触发事件。这个函数将会把事件分发到它所有已经注册的监听器上。
+如果要触发事件，您可以通过`Raise`来触发事件。这个函数将会把事件分发到它所有已经注册的监听器上。
 
 ``` csharp
-dispatcher.Dispatch("event.name", userParams);
+dispatcher.Raise("event.name", userParams);
 ```
 
 ## 判断监听器是否存在
