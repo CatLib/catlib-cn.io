@@ -588,6 +588,28 @@ public class ProviderFileSystem : ServiceProvider
 }
 ```
 
+## `(C)` 避免使用 protected 变量
+
+关系密切的概念应该互相靠近，否则就会导致在某个类中进行摸索，一个函数跳到另外一个函数，上下求索，弄清这些函数如何操作，如何互相关系，或是了解变量与函数的继承链条，所以除非有很好的理由，否则就不要把关系密切的概念放到不同的文件之中，这也是我们不建议使用protected变量的原因，因为它会破坏这一关系。
+
+**错误的例子**
+
+```csharp
+public class Foo
+{
+    protected string foo;
+}
+```
+
+**正确的例子**
+
+```csharp
+public class Foo
+{
+    private string foo;
+}
+```
+
 ## `(C)`可拆分单词的命名
 
 有些时候我们可能纠结于可拆分单词如何进行命名，如：`username`可以被拆分为`user`和`name`。虽然这些单词可以被拆分但是我们需要注意`username`为英文中的一个整体单词。所以我们应该视作为一个单词。
