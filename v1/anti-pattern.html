@@ -1,0 +1,410 @@
+<!doctype html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0">
+
+    
+
+    
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="/styles/cookbook.css">
+    <link rel="stylesheet" href="/styles/fontawesome.css">
+    
+      <link rel="stylesheet" href="/styles/gitment.css">
+    
+
+    <!-- favicon -->
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+
+    
+
+    
+
+    <title>CatLib - 反模式 </title>
+  </head>
+
+  <body>
+    
+    
+    <div id="cookbook" :class="{'with-summary' : withSummary}" v-cloak>
+    <div class="cookbook-summary">
+    
+    <search placeholder="Type to search" :versions="versions" :root="root" v-model="searched" v-on:submit="searchSubmit" :disable="searchDisabled" v-on:disabled="setSearchDisabled"></search>
+    <navigation :data="navigation" :web="web" :versions="versions" :root="root" active="v1/anti-pattern.html" :subnavdata="contentNavigation" :value="contentOffset" :searchdisabled="searchDisabled"></navigation>
+    
+</div>    <div class="cookbook-content" ref="content">
+    
+    <div class="cookbook-header" role="navigation">
+        <header-tool :web="web" path="v1/anti-pattern.html" editor v-model="withSummary"></header-tool>
+        <header-navigation :web="web" :versions="versions" :root="root"></header-navigation>
+    </div>
+    <div class="content-wrapper" @click="hidenSummary" :style="minHeightStyle">
+        <checkout :navigation="navigation" :web="web" :versions="versions" v-model="checkout"></checkout>
+        <div v-if="checkout" class="cookbook-search-results">
+            <div id="search-noresults" v-show="searched == null">
+                <section ref="section" class="markdown-section">
+                    <h1 id="反模式"><a href="#反模式" class="headerlink" title="反模式"></a>反模式</h1><p>在软件工程中，一个反面模式（anti-pattern或antipattern）指的是在实践中明显出现但又低效或是有待优化的设计模式，是用来解决问题的带有共同性的不良方法。它们已经经过研究并分类，以防止日后重蹈覆辙，并能在研发尚未投产的系统时辨认出来。</p>
+<blockquote>
+<p>引用自: <a href="https://zh.wikipedia.org/wiki/%E5%8F%8D%E9%9D%A2%E6%A8%A1%E5%BC%8F" target="_blank" rel="noopener">wiki百科-反面模式</a></p>
+</blockquote>
+<h2 id="软件设计"><a href="#软件设计" class="headerlink" title="软件设计"></a>软件设计</h2><ul>
+<li><code>抽象倒置</code>（Abstraction inversion）：不把用户需要的功能直接提供出来，导致他们要用更上层的函数来重复实现</li>
+<li><code>用意不明</code>（Ambiguous viewpoint）：给出一个模型（通常是OOAD，面向对象分析与设计）却没有指出用意何在</li>
+<li><code>大泥球</code>（Big ball of mud）：没有清晰结构的系统</li>
+<li><code>数据库式进程间通信</code>（Database-as-IPC）：使用数据库进行进程间通信，而不使用更轻量级的合适的机制。或者说，对于常规的进程间通信，不是去采用轻量得多的合适机制，而是将数据库用作消息队列。</li>
+<li><code>镀金</code>（Gold plating）：在项目达到最高价值后还继续工作。</li>
+<li><code>内部平台效应</code>（Inner-platform effect）：系统可自定义的太多，以至于成为一个软件开发平台的蹩脚的复制品。</li>
+<li><code>输入问题</code>（Input kludge）：无法确定和实现对异常输入的处理</li>
+<li><code>接口膨胀</code>（Interface bloat）：把一个接口做得过于强大以至于极其难以实现</li>
+<li><code>魔力按键</code>（Magic pushbutton）：直接在接口的代码里编写实现，而不使用抽象</li>
+<li><code>竞争风险</code>（Race hazard）：输出结果受到事件执行顺序和时机的影响，在多线程环境和分布式系统中可能发生</li>
+<li><code>烟囱系统</code>（Stovepipe system）：过度聚集数据和功能，忽视了与其他系统和模块的共享</li>
+</ul>
+<h2 id="面向对象设计"><a href="#面向对象设计" class="headerlink" title="面向对象设计"></a>面向对象设计</h2><ul>
+<li><code>贫血的域模型</code>（Anemic Domain Model）：仅因为每个对象都要有属性和方法，而在使用域模型的时候没有加入非OOP的业务逻辑</li>
+<li><code>基类</code>（BaseBean）：继承一个工具类的功能，而不是委托给它</li>
+<li><code>调用父类</code>（Call super）：需要子类调用父类被重定义的方法</li>
+<li><code>圆还是椭圆问题</code>（Circle-ellipse problem）：基于变量的子类化关系进行子类化</li>
+<li><code>循环依赖</code>（Circular dependency）：在对象或软件模块中，直接或间接引入循环依赖。</li>
+<li><code>常量接口</code>（Constant interface）：使用接口定义常量</li>
+<li><code>上帝对象</code>（God object）：在设计的单一部分（某个类）集中了过多的功能</li>
+<li><code>对象粪池</code>（Object cesspool）：复用那些不满足复用条件的对象。对象池是一种管理对象的方法，在重复使用对象前，需要针对对象进行初始化，以避免上次使用后的状态等数据影响下次的使用</li>
+<li><code>不羁的对象</code>（Object orgy）：没有成功封装对象，外部可以不受限制地访问它的内部</li>
+<li><code>幽灵</code>（Poltergeists）：指这样一些对象，它们唯一的作用就是把信息传给其它对象</li>
+<li><code>顺序耦合</code>（Sequential coupling）：指这样一些对象，它们的方法必须要按某种特定顺序调用</li>
+<li><code>悠悠问题</code>（Yo-yo problem）：一个结构（例如继承）因为过度碎片化而变得难于理解</li>
+</ul>
+<h2 id="编程"><a href="#编程" class="headerlink" title="编程"></a>编程</h2><ul>
+<li><code>偶然复杂度</code>（Accidental complexity）：向一个方案中引入不必要的复杂度</li>
+<li><code>远隔作用</code>（Action at distance）：意料之外的在系统分离的部分之间交互</li>
+<li><code>盲目信任</code>（Blind faith）：缺乏对bugfix的校验或对子函数返回值的正确性检查</li>
+<li><code>船锚</code>（Boat anchor）：在系统中保留无用的部分</li>
+<li><code>忙等待</code>（Busy waiting）：在等待的时候不断占用CPU，通常是因为采用了重复检查而不是适当的消息机制</li>
+<li><code>缓存失败</code>（Caching failure）：错误被修正后忘记把错误标志复位</li>
+<li><code>拜物编程</code>（Cargo cult programming）：由于对模式的盲目崇拜，在不理解的情况下就使用模式和方法，企图得到好的结果</li>
+<li><code>靠异常编程</code>（Coding by exception）：当有特例被发现时才添加新代码去解决</li>
+<li><code>隐藏错误</code>（Error hiding）：在显示给用户之前捕捉到错误信息，要么什么都不显示，要么显示无意义的信息</li>
+<li><code>硬编码</code>（Hard code）：将对系统环境的假设写入实现中</li>
+<li><code>熔岩流</code>（Lava flow）：保留不想要的（冗余的或是低质量的）代码，仅因为除去这些代码的代价太高或是会带来不可预期的结果</li>
+<li><code>循环-switch序列</code>（Loop-switch sequence）在循环结构中使用switch语句来编写连续步骤</li>
+<li><code>魔术数字</code>（Magic numbers）：在算法里直接使用数字，而不解释含义</li>
+<li><code>魔幻字符串</code>（Magic strings）：直接在代码里使用常量字符串，例如用来比较，或是作为事件代码</li>
+<li><code>自我复制</code>（Repeating yourself）：通过不断复制已有代码的模式或代码段进行编码；而非采用once and only once（抽取原则）</li>
+<li><code>软代码</code>（Soft code）：在配置文件里保存业务逻辑而不是在代码中</li>
+<li><code>面条代码</code>（Spaghetti code）：指那些结构上完全不可理解的系统，尤其是因为误用代码结构</li>
+<li><code>霰弹枪手术</code>（Shotgun surgery）：开发人员一次性在一个多个实现的代码基中增加功能</li>
+</ul>
+<h2 id="方法论"><a href="#方法论" class="headerlink" title="方法论"></a>方法论</h2><ul>
+<li><code>拷贝粘贴编程</code>（Copy and paste programming）：拷贝（然后修改）现有的代码而不是构造通用的解决方案</li>
+<li><code>黄金大锤</code>（Golden hammer）：认为自己最喜欢的解决方案是到处通用的（参见：银弹）</li>
+<li><code>不可能因素</code>（Improbability factor）：认为已知的错误不可能发生</li>
+<li><code>非我所创</code>（Not invented here）：拒绝使用组织外的主意或方案，但这也可能是出于版权等原因</li>
+<li><code>这里发明的</code>（invented here）：拒绝组织内部实现的创新或解决方案，通常因为对成员没有信心</li>
+<li><code>不成熟的优化</code>（Premature optimization）：在编码的早期追求代码的效率，牺牲了好的设计、可维护性、有时甚至是现实世界的效率</li>
+<li><code>转换编程法或巧合编程</code>（Programming by permutation or programming by accident）：试图通过连续修改代码再看是否工作的方式来解决问题</li>
+<li><code>重新发明方的轮子</code>（Reinventing the square wheel）：已经有一个很好的方案了，又再搞一个烂方案来替代它</li>
+<li><code>银弹</code>（Silver bullet）：认为自己最喜欢的技术方案能解决一个更大的问题</li>
+<li><code>测试人员驱动开发</code>（Tester driven development）：需求来自bug报告的软件工程</li>
+<li><code>殒石式驱动开发</code>（Meteorite driven development）：需求来自任性的不具备专业知识及尊重的上层，以牺牲底层员工生活品质及削弱精神为主轴的开发方式，需求如陨石一般来自天上而不可回避</li>
+</ul>
+<h2 id="配置管理"><a href="#配置管理" class="headerlink" title="配置管理"></a>配置管理</h2><ul>
+<li><code>依赖地狱</code>（Dependency hell）：所依赖产品的版本所导致的问题</li>
+<li><code>DLL地狱</code>（DLL hell）：不同版本DLL所带来的问题，包括DLL可见性和多版本问题，在微软的Windows上尤为突出</li>
+<li><code>扩展冲突</code>（Extension conflict）：苹果系统在Mac OS X版本之前的不同扩展的问题</li>
+<li><code>JAR地狱</code>（JAR hell）：JAR文件不同版本或路径带来的问题，通常是由于不懂类加载模型导致的</li>
+</ul>
+<h2 id="项目管理"><a href="#项目管理" class="headerlink" title="项目管理"></a>项目管理</h2><ul>
+<li><code>雪崩模型</code>（Avalanche）：不合理地混搭或者说混合使用瀑布模型与敏捷开发方法。</li>
+<li><code>死亡征途</code>（Death march，死亡之旅）：除了CEO，每个人都知道这个项目会成为一场灾难，但是真相却被隐瞒下来，以免项目被立即取消。（尽管CEO通常知道并且仍然继续试图最大化利润。）然而，真相被隐藏起来，直到大限来临（”Big Bang”）。另一种定义：雇员由于不合理的deadline，被迫在深夜和周末加班。</li>
+<li><code>团队思维</code>（Groupthink）：在团队思维中，团队成员避免提出在一致观点之外的思维。</li>
+<li><code>九九定律</code>（Ninety-ninety rule）：当项目“几近完成”时，低估完成项目所需时间的倾向。</li>
+<li><code>过度设计</code>（Overengineering）：花费资源完成比实际需要的还要鲁棒和复杂的工程</li>
+<li><code>障眼法</code>（Smoke and mirrors）：展示还没实现的功能，就像它们已经实现了一样</li>
+<li><code>软件膨胀</code>（Software bloat）：允许系统的后续版本使用更多的资源</li>
+</ul>
+<h2 id="分析方式"><a href="#分析方式" class="headerlink" title="分析方式"></a>分析方式</h2><ul>
+<li><code>旁观冷漠</code>（Bystander apathy）：一个需求或者设计是错的，注意到这一点的人却不指出，因为这影响的是其他人。</li>
+</ul>
+<h2 id="组织结构"><a href="#组织结构" class="headerlink" title="组织结构"></a>组织结构</h2><ul>
+<li><code>从天而降的责任</code>（Accidental Ownership）：雇员们接手了一个与当前系统完全无关的系统，在没有合适的训练、学习或关心下就得维护它</li>
+<li><code>分析瘫痪</code>（Analysis paralysis）：花费太多精力在项目的分析阶段</li>
+<li><code>血刃</code>（Bleeding edge，刀锋）：采用一些未经测试和/或尚不稳定的前沿技术来运营，从而导致成本超支、表现/性能不佳，和/或交付延期。</li>
+<li><code>摇钱树</code>（cash cow）：盈利的老产品通常会导致对新产品的自负</li>
+<li><code>委员会设计</code>（Design by committee）：很多人同时进行设计，却没有统一的看法</li>
+<li><code>承诺升级</code>（Escalation of commitment）：明知错了还不能收回之前的决定</li>
+<li><code>独裁管理</code>（Management by perkele）：用完全听不进异议的独裁作风进行管理</li>
+<li><code>目标管理</code>（Management by objectives）：通过数字管理，过于关注非本质而或不易取得的数字指标</li>
+<li><code>道德风险</code>（Moral hazard）：不让做决定的人知道他的决定会带来什么结果</li>
+<li><code>蘑菇管理</code>（Mushroom management）：不通知或是错误地通知雇员信息。雇员像蘑菇一样在黑暗中吸取养分，自生自灭</li>
+<li><code>海鸥式管理</code>（Seagull management）：只有当出现问题的时候管理人员才会跟雇员进行接触和互动的管理模式。典型的场景就是，海鸥式的管理人员“飞”过来，嘁嘁喳喳，是人都批评一通，尔后“飞”走了！</li>
+<li><code>烟囱式管理</code>（Stovepipe or Silos，竖井式/发射井式/谷仓式管理）：组织结构是由若干彼此孤立的团队组成，并且整个组织结构的范围内，上下沟通交流能够有效进行，而水平/横向的则不然。结构上支持数据主要在上下方面的流动，却禁止跨部门的通信。</li>
+<li><code>厂商陷阱</code>（Vendor lock-in，供应商套牢，供应商陷阱，厂商泥潭）：使一个系统过于依赖于外部所提供的组件/部件。</li>
+</ul>
+
+                </section>
+
+                
+                    <div ref="comments" id="gitment-container"></div>
+                
+                
+                <support :web="web" visiable></support>
+            </div>
+            <div v-if="searched != null" id="search-result" class="search-result" v-cloak>
+                <p v-if="searched.results.length > 0" class="search-title">
+                    与"{{ searched.keyword }}"相关的内容{{searched.results.length}}条
+                </p>
+                <p v-else class="search-title">无搜索结果可以匹配"{{ searched.keyword }}"</p>
+                <div v-for="(record) in searched.results" class="searched-line">
+                    <h3>
+                        <a :href="'/' + record.href + '#!' + encodeURI(anchorEscaping(record.hash))" @click="clearSearch">
+                            {{ record.hash }}
+                        </a>
+                    </h3>
+                    <ul>
+                        <li><i>{{ record.page }} <span v-if="record.page_title != ''">- {{ record.page_title }}</span></i> <i>score:<span>{{ record.score }}</span></i></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div></div>
+
+<script>
+window.onload = function(){  
+    new Vue({
+        el : '#cookbook',
+        data: { 
+            navigation : {"navigation":[{"levels":[{"text":"CatLib","href":"/"},{"text":"核心库","href":"index.html"}]},{"divider":true},{"text":"起步"},{"text":"介绍","href":"index.html"},{"text":"风格指南","href":"style.html"},{"text":"常见问题","href":"faq.html"},{"text":"已知BUG","href":"bug.html"},{"text":"贡献指南","href":"contribution.html"},{"text":"更新日志","href":"upgrade.html"},{"text":"迁移指南","href":"migration.html"},{"text":"系统架构"},{"text":"服务提供者","href":"architecture/service-provider.html"},{"text":"应用程序","href":"architecture/application.html"},{"text":"服务容器","href":"architecture/container.html"},{"text":"服务门面","href":"architecture/facade.html"},{"text":"框架组件"},{"text":"事件系统","href":"components/event.html"},{"text":"管理器模版","href":"components/template.html"},{"text":"辅助函数"},{"text":"数组","href":"helper/arr.html"},{"text":"字符串","href":"helper/str.html"},{"text":"字典","href":"helper/dict.html"},{"text":"时间","href":"helper/system-time.html"},{"text":"线程静态","href":"helper/thread-static.html"},{"text":"通用","href":"helper/util.html"},{"text":"数据结构"},{"text":"有序集","href":"data-structure/sort-set.html"},{"text":"快速列表","href":"data-structure/quick-list.html"},{"text":"环型缓冲区","href":"data-structure/ring-buffer.html"},{"text":"内存存储","href":"data-structure/memory-storage.html"},{"text":"过滤器链","href":"data-structure/filter-chain.html"},{"text":"流"},{"text":"包装流","href":"stream/wrapper-stream.html"},{"text":"管道流","href":"stream/pipeline-stream.html"},{"text":"存储流","href":"stream/storage-stream.html"},{"text":"组合流","href":"stream/combine-stream.html"},{"text":"分片流","href":"stream/segment-stream.html"},{"divider":true},{"text":"Power by CatLib","href":"https://github.com/CatLib","external":true}]},
+            web : {"navigation":[{"type":"versions","mobile":true},{"type":"menu","text":"组件库","mobile":true,"list":[{"text":"ILRuntime支持库","href":"https://ilruntime.catlib.io"}]},{"type":"normal","text":"English","href":"https://catlib.io/lasted/index.html","mobile":true},{"type":"icon","fontawesome":"github","href":"https://github.com/CatLib/Core","mobile":true}],"tool":{"editor":{"text":"编辑","href":"https://github.com/CatLib/catlib-cn.io/tree/2.0/","external":true}},"support":{"label":["在文档中没有找到您需要的内容？","尝试在左侧搜索栏中搜索，或者{text}"],"text":"在GitHub中发起提问","href":"https://github.com/CatLib/catlib-cn.io/issues","external":true}},
+            versions: {
+                current :  {"test":"^v1\\/","name":"v1.4","active":"Latest(v1.4)","data":"v1"},
+                list: [{"test":"^v1\\/","name":"v1.4","active":"Latest(v1.4)","data":"v1"},{"test":"^v2\\/","name":"v2.0","active":"Latest(v2.0)","data":"v2"}]
+            },
+            withSummary : true,
+            isPC : null,
+            checkout: false,
+            root: "/",
+            contentNavigation: [],
+            contentOffset : { 'offsetTop' : 0, 'height' : 0 },
+            searched: null,
+            searchDisabled: localStorage.getItem("search-input-disabled") == 'true',
+            clientHeight : 0
+        },
+        methods :{
+            testPC : function(){ 
+                var userAgentInfo = navigator.userAgent;
+                var deviceReg = [
+                    /(MI(\s+)|2013022|2013023|HM|2014011|2014501|2014813|2014811|2014812|2014817|2014818|2014819|2014502|2015|xiaomi).*/i,
+                    /(MI(.*|\s*)PAD).*/i,
+                    /(iPhone | iPod).*/i,
+                    /(iPad).*/i,
+                    /(Android).*/i,
+                    /(iPhone|iPad|iPod|iOS).*/i,
+                    /(windows(.*|\s*)phone).*/i
+                ];
+                var flag = true;
+                for (var v = 0; v < deviceReg.length; v++) {
+                    if (deviceReg[v].test(userAgentInfo)) {
+                        flag = false;
+                        break;
+                    }
+                }
+                
+                return flag;
+            },
+            hidenSummary : function(){
+                if(!this.isPC)
+                {
+                    this.withSummary = false;
+                }
+            },
+            bindMinHeight: function(){
+                var vue = this;
+                window.addEventListener("resize", function(){
+                    vue.clientHeight = document.documentElement.clientHeight - 50;
+                }, false);
+                this.clientHeight = document.documentElement.clientHeight - 50;
+            },
+            bindAnchor : function(){
+                if(this.$refs.section == undefined){
+                    return;
+                }
+                window.addEventListener("hashchange", this.hashChange, false);
+                window.addEventListener("resize", this.refreshContentNavigation, false);
+                var elements = this.$refs.section.getElementsByTagName("a");
+                var vue = this;
+                for(var index = 0; index < elements.length; index++){
+                    let element = elements[index];
+                    let href = element.getAttribute("href");
+                    if(href.length <= 0 || href[0] != "#"){
+                        continue;
+                    }
+
+                    element.addEventListener('click', function(event){
+                        location.hash = "!" + encodeURI(decodeURI(vue.anchorEscaping(element.hash.substring(1))));
+                        event.preventDefault();
+                    }, false);
+                }
+
+                this.refreshContentNavigation();
+            },
+            refreshContentNavigation : function(){
+                if(this.$refs.section == undefined || !this.supportSubnav()){
+                    return;
+                }
+                var subnavIndex = 0;
+                var elements = this.$refs.section.getElementsByClassName("headerlink");
+                var subnav = [];
+                for(var index=0; index < elements.length; index++){
+                    var element = elements[index];
+                    if(element.parentElement.nodeName == "H2"){
+                        subnav[subnavIndex++] = {'text' : element.title , 'hash' : "!" + element.hash.substring(1), 'offsetTop' : element.offsetTop};
+                    }
+                }
+                this.contentNavigation = subnav;
+            },
+            hashChange : function(){
+                var locationHash = location.hash.replace(/^#!/ig, "#");
+                if(locationHash == ''){
+                    return;
+                }
+                locationHash = decodeURI(locationHash);
+                var hashes = this.$refs.section.getElementsByClassName("headerlink");
+                var target = null;
+                for(var index=0; index < hashes.length; index++){
+                    var hash = hashes[index];
+                    if(decodeURI(hash.hash) == locationHash){
+                        target = hash;
+                        break;
+                    }
+                }
+                
+                if(target == null){
+                    return;
+                }
+
+                var top = target.offsetTop - 20; 
+                
+                if(top > 0)
+                {
+                    var vue = this;
+                    $('.cookbook-content').animate({scrollTop:top}, 500, function(){
+                        if(!vue.isPC){
+                            vue.withSummary = false;
+                        }
+                    });
+                }        
+            },
+            bindScroll : function(){
+                if(!this.supportSubnav()){
+                    return;
+                }
+                this.$refs.content.addEventListener("scroll", this.scrollChange, false);
+            },
+            scrollChange : function(e){
+                this.contentOffset = { 
+                    'offsetTop' : this.$refs.content.scrollTop,
+                    'height' : this.$refs.content.scrollHeight - this.$refs.content.offsetHeight
+                };
+            },
+            supportSubnav : function(){
+                if(this.navigation.subnav != undefined && this.navigation.subnav == false){
+                    return false;
+                }
+                return true;
+            },
+            clearSearch: function(){
+                this.searched = null;
+                this.$nextTick(function(){
+                    this.hashChange();
+                });
+            },
+            searchSubmit: function(){
+                if(!this.isPC)
+                {
+                    this.withSummary = false;
+                }
+            },
+            anchorEscaping : function(str){
+                return str.replace(' ', '-').replace('.', '-');
+            },
+            setSearchDisabled : function(value){
+                this.searchDisabled = value;
+            },
+            initComments : function(){
+                
+                    var vue = this;
+                    var theme = {
+                        render : function(state, instance) {
+                            var container = document.createElement('div');
+                            container.lang = "en-US";
+                            container.className = 'gitment-container gitment-root-container';
+                            container.appendChild(instance.renderHeader(state, instance));
+                            container.appendChild(instance.renderComments(state, instance));
+                            container.appendChild(instance.renderEditor(state, instance));
+                            return container;
+                        },
+                    }
+
+                    var gitment = new Gitment({
+                        id : 'catlib-cn:v1/anti-pattern.html',
+                        owner: 'catlib',
+                        repo: 'catlib-cn.io',
+                        oauth: {
+                            client_id: '3620f7cdd1c50b4b6e3c',
+                            client_secret: '50664006a799cb29b27e8358b88a6a4580e8dc0c',
+                            cross_server: 'https://31225080.ap-southeast-1.fc.aliyuncs.com/2016-08-15/proxy/gitment/gitment-cross/',
+                        },
+                        labels : [
+                            'CatLib'
+                        ],
+                        link: 'https://cn.catlib.io/v1/anti-pattern.html',
+                        maintainer: ["yb199478"],
+                        theme : theme,
+                        perPage : 30,
+                    });
+
+                    gitment.render(this.$refs.comments);
+                
+            },
+        },mounted : function() {
+            this.isPC = this.withSummary = this.testPC();
+            this.$nextTick(function(){
+                this.bindScroll();
+                this.bindAnchor();
+                this.hashChange();
+                this.initComments();
+                this.bindMinHeight();
+            });
+        },
+        watch: {
+            searched : function(){
+                $('.cookbook-content').animate({scrollTop:0}, 0);
+            }
+        },
+        computed:{
+            minHeightStyle : function()
+            {
+                return { 'min-height' : this.clientHeight + "px" }
+            }
+        }
+    });
+};
+</script>
+    
+
+    
+    <script src="/scripts/cookbook.js"></script>
+    
+      <script src="/scripts/gitment.js"></script>
+    
+    
+    
+  </body>
+</html>

@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0">
+
+    
+
+    
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="/styles/cookbook.css">
+    <link rel="stylesheet" href="/styles/fontawesome.css">
+    
+      <link rel="stylesheet" href="/styles/gitment.css">
+    
+
+    <!-- favicon -->
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+
+    
+
+    
+
+    <title>CatLib - 贡献指南 </title>
+  </head>
+
+  <body>
+    
+    
+    <div id="cookbook" :class="{'with-summary' : withSummary}" v-cloak>
+    <div class="cookbook-summary">
+    
+    <search placeholder="Type to search" :versions="versions" :root="root" v-model="searched" v-on:submit="searchSubmit" :disable="searchDisabled" v-on:disabled="setSearchDisabled"></search>
+    <navigation :data="navigation" :web="web" :versions="versions" :root="root" active="v1/contribution.html" :subnavdata="contentNavigation" :value="contentOffset" :searchdisabled="searchDisabled"></navigation>
+    
+</div>    <div class="cookbook-content" ref="content">
+    
+    <div class="cookbook-header" role="navigation">
+        <header-tool :web="web" path="v1/contribution.html" editor v-model="withSummary"></header-tool>
+        <header-navigation :web="web" :versions="versions" :root="root"></header-navigation>
+    </div>
+    <div class="content-wrapper" @click="hidenSummary" :style="minHeightStyle">
+        <checkout :navigation="navigation" :web="web" :versions="versions" v-model="checkout"></checkout>
+        <div v-if="checkout" class="cookbook-search-results">
+            <div id="search-noresults" v-show="searched == null">
+                <section ref="section" class="markdown-section">
+                    <h1 id="贡献指南"><a href="#贡献指南" class="headerlink" title="贡献指南"></a>贡献指南</h1><p>本文档描述了如何对框架提供贡献及框架，组件，文档，bug fixed的贡献情况。</p>
+<h2 id="缺陷报告"><a href="#缺陷报告" class="headerlink" title="缺陷报告"></a>缺陷报告</h2><p>CatLib 强烈鼓励使用 GitHub 的 <code>pull requests</code> (以下简称PR)，来提供缺陷报告。“缺陷报告”也可以通过一个包含失败断言的 pull requests 的方式提交。 </p>
+<p>如果你以文件的方式提交缺陷报告，你的问题应该包含一个标题和对该问题的明确说明，还要包含尽可能多的相关信息以及论证该问题的代码样板，缺陷报告的目的是为了让你自己和其他人更方便的重现缺陷并对其进行修复。</p>
+<h2 id="开发讨论"><a href="#开发讨论" class="headerlink" title="开发讨论"></a>开发讨论</h2><p>你可以在<code>issue</code>上提议新功能或者优化已有功能，如果是新功能的话请至少实现部分代码以便完成新功能开发。</p>
+<h2 id="Pull-Request"><a href="#Pull-Request" class="headerlink" title="Pull Request"></a>Pull Request</h2><ul>
+<li>不要进行较大内容的PR ， 除非它是一个全新的组件</li>
+<li>每个PR只做一件事情</li>
+<li>确保PR的代码能够通过编译</li>
+<li>提交PR时，请务必保证针对代码的所有测试都必须通过</li>
+<li>提交PR时，请务必记录好PR的原因</li>
+<li>提交的PR，请务必保证单元测试尽可能的覆盖（核心组件90%,常规组件75%）</li>
+<li>如果提交的PR不能完成覆盖，请描述其原因。</li>
+<li>所有的PR的单元测试都必须能在VS(MSTest)和Unity(NUnit)中运行</li>
+<li>请按照代码<a href="style.html">风格指南</a>正确规范的编写代码</li>
+</ul>
+<h2 id="提交到的分支"><a href="#提交到的分支" class="headerlink" title="提交到的分支"></a>提交到的分支</h2><ul>
+<li>所有的 bug 修复应该被提交到最新的稳定分支，永远不要把 bug 修复提交到 master 分支，除非它们能够修复下个发行版本中才存在的特性。</li>
+<li>当前版本中完全向后兼容的次要特性也可以提交到最新的稳定分支。</li>
+<li>重要的新特性是要被提交到 master 分支的。</li>
+<li>如果你不确定是重要特性还是次要特性，请在<code>calib.slack</code>或<code>QQ群</code>中咨询。</li>
+</ul>
+<h2 id="合并请求描述"><a href="#合并请求描述" class="headerlink" title="合并请求描述"></a>合并请求描述</h2><p>合并请求描述需要附带下面表格，并完善表格中对应的信息：</p>
+<table>
+<thead>
+<tr>
+<th>Q</th>
+<th>A</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Branch?</td>
+<td>\&lt;version></td>
+</tr>
+<tr>
+<td>Bug fix?</td>
+<td>\&lt;yes \</td>
+<td>no></td>
+</tr>
+<tr>
+<td>New feature?</td>
+<td>\&lt;yes \</td>
+<td>no></td>
+</tr>
+<tr>
+<td>Deprecations?</td>
+<td>\&lt;yes \</td>
+<td>no></td>
+</tr>
+<tr>
+<td>Tests pass?</td>
+<td>\&lt;yes \</td>
+<td>no \</td>
+<td>n/a></td>
+</tr>
+<tr>
+<td>License?</td>
+<td>\&lt;license-name \</td>
+<td>n/a></td>
+</tr>
+</tbody>
+</table>
+<p>\&lt;合并请求修改内容的描述></p>
+<h2 id="框架设计者"><a href="#框架设计者" class="headerlink" title="框架设计者"></a>框架设计者</h2><ul>
+<li><a href="https://github.com/yb199478" target="_blank" rel="noopener">喵喵大人</a></li>
+</ul>
+<h2 id="组件贡献者"><a href="#组件贡献者" class="headerlink" title="组件贡献者"></a>组件贡献者</h2><blockquote>
+<p>虚以待位</p>
+</blockquote>
+<h2 id="其他贡献者"><a href="#其他贡献者" class="headerlink" title="其他贡献者"></a>其他贡献者</h2><ul>
+<li>A:<a href="https://github.com/AlianBlank" target="_blank" rel="noopener">AlianBlank</a></li>
+<li>D:<a href="https://github.com/DawnKing" target="_blank" rel="noopener">DawnKing</a></li>
+<li>I:<a href="https://github.com/iamthekk" target="_blank" rel="noopener">iamthekk</a> <a href="https://github.com/views63" target="_blank" rel="noopener">idle</a></li>
+<li>L:<a href="https://github.com/liiir1985" target="_blank" rel="noopener">liiir1985</a> <a href="https://github.com/LrvingCong" target="_blank" rel="noopener">LrvingCong</a></li>
+<li>S:<a href="https://github.com/silingfei" target="_blank" rel="noopener">silingfei</a></li>
+</ul>
+
+                </section>
+
+                
+                    <div ref="comments" id="gitment-container"></div>
+                
+                
+                <support :web="web" visiable></support>
+            </div>
+            <div v-if="searched != null" id="search-result" class="search-result" v-cloak>
+                <p v-if="searched.results.length > 0" class="search-title">
+                    与"{{ searched.keyword }}"相关的内容{{searched.results.length}}条
+                </p>
+                <p v-else class="search-title">无搜索结果可以匹配"{{ searched.keyword }}"</p>
+                <div v-for="(record) in searched.results" class="searched-line">
+                    <h3>
+                        <a :href="'/' + record.href + '#!' + encodeURI(anchorEscaping(record.hash))" @click="clearSearch">
+                            {{ record.hash }}
+                        </a>
+                    </h3>
+                    <ul>
+                        <li><i>{{ record.page }} <span v-if="record.page_title != ''">- {{ record.page_title }}</span></i> <i>score:<span>{{ record.score }}</span></i></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div></div>
+
+<script>
+window.onload = function(){  
+    new Vue({
+        el : '#cookbook',
+        data: { 
+            navigation : {"navigation":[{"levels":[{"text":"CatLib","href":"/"},{"text":"核心库","href":"index.html"}]},{"divider":true},{"text":"起步"},{"text":"介绍","href":"index.html"},{"text":"风格指南","href":"style.html"},{"text":"常见问题","href":"faq.html"},{"text":"已知BUG","href":"bug.html"},{"text":"贡献指南","href":"contribution.html"},{"text":"更新日志","href":"upgrade.html"},{"text":"迁移指南","href":"migration.html"},{"text":"系统架构"},{"text":"服务提供者","href":"architecture/service-provider.html"},{"text":"应用程序","href":"architecture/application.html"},{"text":"服务容器","href":"architecture/container.html"},{"text":"服务门面","href":"architecture/facade.html"},{"text":"框架组件"},{"text":"事件系统","href":"components/event.html"},{"text":"管理器模版","href":"components/template.html"},{"text":"辅助函数"},{"text":"数组","href":"helper/arr.html"},{"text":"字符串","href":"helper/str.html"},{"text":"字典","href":"helper/dict.html"},{"text":"时间","href":"helper/system-time.html"},{"text":"线程静态","href":"helper/thread-static.html"},{"text":"通用","href":"helper/util.html"},{"text":"数据结构"},{"text":"有序集","href":"data-structure/sort-set.html"},{"text":"快速列表","href":"data-structure/quick-list.html"},{"text":"环型缓冲区","href":"data-structure/ring-buffer.html"},{"text":"内存存储","href":"data-structure/memory-storage.html"},{"text":"过滤器链","href":"data-structure/filter-chain.html"},{"text":"流"},{"text":"包装流","href":"stream/wrapper-stream.html"},{"text":"管道流","href":"stream/pipeline-stream.html"},{"text":"存储流","href":"stream/storage-stream.html"},{"text":"组合流","href":"stream/combine-stream.html"},{"text":"分片流","href":"stream/segment-stream.html"},{"divider":true},{"text":"Power by CatLib","href":"https://github.com/CatLib","external":true}]},
+            web : {"navigation":[{"type":"versions","mobile":true},{"type":"menu","text":"组件库","mobile":true,"list":[{"text":"ILRuntime支持库","href":"https://ilruntime.catlib.io"}]},{"type":"normal","text":"English","href":"https://catlib.io/lasted/index.html","mobile":true},{"type":"icon","fontawesome":"github","href":"https://github.com/CatLib/Core","mobile":true}],"tool":{"editor":{"text":"编辑","href":"https://github.com/CatLib/catlib-cn.io/tree/2.0/","external":true}},"support":{"label":["在文档中没有找到您需要的内容？","尝试在左侧搜索栏中搜索，或者{text}"],"text":"在GitHub中发起提问","href":"https://github.com/CatLib/catlib-cn.io/issues","external":true}},
+            versions: {
+                current :  {"test":"^v1\\/","name":"v1.4","active":"Latest(v1.4)","data":"v1"},
+                list: [{"test":"^v1\\/","name":"v1.4","active":"Latest(v1.4)","data":"v1"},{"test":"^v2\\/","name":"v2.0","active":"Latest(v2.0)","data":"v2"}]
+            },
+            withSummary : true,
+            isPC : null,
+            checkout: false,
+            root: "/",
+            contentNavigation: [],
+            contentOffset : { 'offsetTop' : 0, 'height' : 0 },
+            searched: null,
+            searchDisabled: localStorage.getItem("search-input-disabled") == 'true',
+            clientHeight : 0
+        },
+        methods :{
+            testPC : function(){ 
+                var userAgentInfo = navigator.userAgent;
+                var deviceReg = [
+                    /(MI(\s+)|2013022|2013023|HM|2014011|2014501|2014813|2014811|2014812|2014817|2014818|2014819|2014502|2015|xiaomi).*/i,
+                    /(MI(.*|\s*)PAD).*/i,
+                    /(iPhone | iPod).*/i,
+                    /(iPad).*/i,
+                    /(Android).*/i,
+                    /(iPhone|iPad|iPod|iOS).*/i,
+                    /(windows(.*|\s*)phone).*/i
+                ];
+                var flag = true;
+                for (var v = 0; v < deviceReg.length; v++) {
+                    if (deviceReg[v].test(userAgentInfo)) {
+                        flag = false;
+                        break;
+                    }
+                }
+                
+                return flag;
+            },
+            hidenSummary : function(){
+                if(!this.isPC)
+                {
+                    this.withSummary = false;
+                }
+            },
+            bindMinHeight: function(){
+                var vue = this;
+                window.addEventListener("resize", function(){
+                    vue.clientHeight = document.documentElement.clientHeight - 50;
+                }, false);
+                this.clientHeight = document.documentElement.clientHeight - 50;
+            },
+            bindAnchor : function(){
+                if(this.$refs.section == undefined){
+                    return;
+                }
+                window.addEventListener("hashchange", this.hashChange, false);
+                window.addEventListener("resize", this.refreshContentNavigation, false);
+                var elements = this.$refs.section.getElementsByTagName("a");
+                var vue = this;
+                for(var index = 0; index < elements.length; index++){
+                    let element = elements[index];
+                    let href = element.getAttribute("href");
+                    if(href.length <= 0 || href[0] != "#"){
+                        continue;
+                    }
+
+                    element.addEventListener('click', function(event){
+                        location.hash = "!" + encodeURI(decodeURI(vue.anchorEscaping(element.hash.substring(1))));
+                        event.preventDefault();
+                    }, false);
+                }
+
+                this.refreshContentNavigation();
+            },
+            refreshContentNavigation : function(){
+                if(this.$refs.section == undefined || !this.supportSubnav()){
+                    return;
+                }
+                var subnavIndex = 0;
+                var elements = this.$refs.section.getElementsByClassName("headerlink");
+                var subnav = [];
+                for(var index=0; index < elements.length; index++){
+                    var element = elements[index];
+                    if(element.parentElement.nodeName == "H2"){
+                        subnav[subnavIndex++] = {'text' : element.title , 'hash' : "!" + element.hash.substring(1), 'offsetTop' : element.offsetTop};
+                    }
+                }
+                this.contentNavigation = subnav;
+            },
+            hashChange : function(){
+                var locationHash = location.hash.replace(/^#!/ig, "#");
+                if(locationHash == ''){
+                    return;
+                }
+                locationHash = decodeURI(locationHash);
+                var hashes = this.$refs.section.getElementsByClassName("headerlink");
+                var target = null;
+                for(var index=0; index < hashes.length; index++){
+                    var hash = hashes[index];
+                    if(decodeURI(hash.hash) == locationHash){
+                        target = hash;
+                        break;
+                    }
+                }
+                
+                if(target == null){
+                    return;
+                }
+
+                var top = target.offsetTop - 20; 
+                
+                if(top > 0)
+                {
+                    var vue = this;
+                    $('.cookbook-content').animate({scrollTop:top}, 500, function(){
+                        if(!vue.isPC){
+                            vue.withSummary = false;
+                        }
+                    });
+                }        
+            },
+            bindScroll : function(){
+                if(!this.supportSubnav()){
+                    return;
+                }
+                this.$refs.content.addEventListener("scroll", this.scrollChange, false);
+            },
+            scrollChange : function(e){
+                this.contentOffset = { 
+                    'offsetTop' : this.$refs.content.scrollTop,
+                    'height' : this.$refs.content.scrollHeight - this.$refs.content.offsetHeight
+                };
+            },
+            supportSubnav : function(){
+                if(this.navigation.subnav != undefined && this.navigation.subnav == false){
+                    return false;
+                }
+                return true;
+            },
+            clearSearch: function(){
+                this.searched = null;
+                this.$nextTick(function(){
+                    this.hashChange();
+                });
+            },
+            searchSubmit: function(){
+                if(!this.isPC)
+                {
+                    this.withSummary = false;
+                }
+            },
+            anchorEscaping : function(str){
+                return str.replace(' ', '-').replace('.', '-');
+            },
+            setSearchDisabled : function(value){
+                this.searchDisabled = value;
+            },
+            initComments : function(){
+                
+                    var vue = this;
+                    var theme = {
+                        render : function(state, instance) {
+                            var container = document.createElement('div');
+                            container.lang = "en-US";
+                            container.className = 'gitment-container gitment-root-container';
+                            container.appendChild(instance.renderHeader(state, instance));
+                            container.appendChild(instance.renderComments(state, instance));
+                            container.appendChild(instance.renderEditor(state, instance));
+                            return container;
+                        },
+                    }
+
+                    var gitment = new Gitment({
+                        id : 'catlib-cn:v1/contribution.html',
+                        owner: 'catlib',
+                        repo: 'catlib-cn.io',
+                        oauth: {
+                            client_id: '3620f7cdd1c50b4b6e3c',
+                            client_secret: '50664006a799cb29b27e8358b88a6a4580e8dc0c',
+                            cross_server: 'https://31225080.ap-southeast-1.fc.aliyuncs.com/2016-08-15/proxy/gitment/gitment-cross/',
+                        },
+                        labels : [
+                            'CatLib'
+                        ],
+                        link: 'https://cn.catlib.io/v1/contribution.html',
+                        maintainer: ["yb199478"],
+                        theme : theme,
+                        perPage : 30,
+                    });
+
+                    gitment.render(this.$refs.comments);
+                
+            },
+        },mounted : function() {
+            this.isPC = this.withSummary = this.testPC();
+            this.$nextTick(function(){
+                this.bindScroll();
+                this.bindAnchor();
+                this.hashChange();
+                this.initComments();
+                this.bindMinHeight();
+            });
+        },
+        watch: {
+            searched : function(){
+                $('.cookbook-content').animate({scrollTop:0}, 0);
+            }
+        },
+        computed:{
+            minHeightStyle : function()
+            {
+                return { 'min-height' : this.clientHeight + "px" }
+            }
+        }
+    });
+};
+</script>
+    
+
+    
+    <script src="/scripts/cookbook.js"></script>
+    
+      <script src="/scripts/gitment.js"></script>
+    
+    
+    
+  </body>
+</html>

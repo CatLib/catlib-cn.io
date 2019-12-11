@@ -1,0 +1,454 @@
+<!doctype html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0">
+
+    
+
+    
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="/styles/cookbook.css">
+    <link rel="stylesheet" href="/styles/fontawesome.css">
+    
+      <link rel="stylesheet" href="/styles/gitment.css">
+    
+
+    <!-- favicon -->
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+
+    
+
+    
+
+    <title>CatLib - 迁移指南 </title>
+  </head>
+
+  <body>
+    
+    
+    <div id="cookbook" :class="{'with-summary' : withSummary}" v-cloak>
+    <div class="cookbook-summary">
+    
+    <search placeholder="Type to search" :versions="versions" :root="root" v-model="searched" v-on:submit="searchSubmit" :disable="searchDisabled" v-on:disabled="setSearchDisabled"></search>
+    <navigation :data="navigation" :web="web" :versions="versions" :root="root" active="v2/migration.html" :subnavdata="contentNavigation" :value="contentOffset" :searchdisabled="searchDisabled"></navigation>
+    
+</div>    <div class="cookbook-content" ref="content">
+    
+    <div class="cookbook-header" role="navigation">
+        <header-tool :web="web" path="v2/migration.html" editor v-model="withSummary"></header-tool>
+        <header-navigation :web="web" :versions="versions" :root="root"></header-navigation>
+    </div>
+    <div class="content-wrapper" @click="hidenSummary" :style="minHeightStyle">
+        <checkout :navigation="navigation" :web="web" :versions="versions" v-model="checkout"></checkout>
+        <div v-if="checkout" class="cookbook-search-results">
+            <div id="search-noresults" v-show="searched == null">
+                <section ref="section" class="markdown-section">
+                    <h1 id="迁移指南"><a href="#迁移指南" class="headerlink" title="迁移指南"></a>迁移指南</h1><p><a href="https://www.ietf.org/rfc/rfc2199.txt" target="_blank" rel="noopener">RFC 2119</a> 中的必须(MUST)，不可(MUST NOT)，建议(SHOULD)，不建议(SHOULD NOT)，可以/可能(MAY)等关键词将在本节用来做一些解释性的描述。</p>
+<h2 id="从-1-4-迁移到-2-0"><a href="#从-1-4-迁移到-2-0" class="headerlink" title="从 1.4 迁移到 2.0"></a>从 1.4 迁移到 2.0</h2><p>1.4 到 2.0 是一个大版本更新，更新中存在不向下兼容的部分。涉及到类更替，命名空间结构调整，过时类删除等。</p>
+<h4 id="事件系统"><a href="#事件系统" class="headerlink" title="事件系统"></a>事件系统</h4><p>我们对事件系统进行了重构，对于事件系统的命名发生了变化。</p>
+<table>
+<thead>
+<tr>
+<th>1.x 事件名</th>
+<th style="text-align:center">2.0 事件名</th>
+<th style="text-align:center">2.0 事件对象</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>OnBootstrap</code></td>
+<td style="text-align:center"><code>OnBeforeBoot</code></td>
+<td style="text-align:center"><code>BeforeBootEventArgs</code></td>
+</tr>
+<tr>
+<td><code>Bootstrapping</code></td>
+<td style="text-align:center"><code>OnBooting</code></td>
+<td style="text-align:center"><code>BootingEventArgs</code></td>
+</tr>
+<tr>
+<td><code>OnBootstraped</code></td>
+<td style="text-align:center"><code>OnAfterBoot</code></td>
+<td style="text-align:center"><code>AfterBootEventArgs</code></td>
+</tr>
+<tr>
+<td><code>OnRegisterProvider</code></td>
+<td style="text-align:center"><code>OnRegisterProvider</code></td>
+<td style="text-align:center"><code>RegisterProviderEventArgs</code></td>
+</tr>
+<tr>
+<td><code>OnInit</code></td>
+<td style="text-align:center"><code>OnBeforeInit</code></td>
+<td style="text-align:center"><code>BeforeInitEventArgs</code></td>
+</tr>
+<tr>
+<td><code>OnIniting</code></td>
+<td style="text-align:center">没有替代品</td>
+<td style="text-align:center">无</td>
+</tr>
+<tr>
+<td><code>OnProviderInit</code></td>
+<td style="text-align:center"><code>OnInitProvider</code></td>
+<td style="text-align:center"><code>InitProviderEventArgs</code></td>
+</tr>
+<tr>
+<td><code>OnProviderInited</code></td>
+<td style="text-align:center">没有替代品</td>
+<td style="text-align:center">无</td>
+</tr>
+<tr>
+<td><code>OnInited</code></td>
+<td style="text-align:center"><code>OnAfterInit</code></td>
+<td style="text-align:center"><code>AfterInitEventArgs</code></td>
+</tr>
+<tr>
+<td><code>OnStartCompleted</code></td>
+<td style="text-align:center"><code>OnStartCompleted</code></td>
+<td style="text-align:center"><code>StartCompletedEventArgs</code></td>
+</tr>
+<tr>
+<td><code>OnTerminate</code></td>
+<td style="text-align:center"><code>OnBeforeTerminate</code></td>
+<td style="text-align:center"><code>BeforeTerminateEventArgs</code></td>
+</tr>
+<tr>
+<td><code>OnTerminated</code></td>
+<td style="text-align:center"><code>OnAfterTerminate</code></td>
+<td style="text-align:center"><code>AfterTerminateEventArgs</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="命名空间迁移"><a href="#命名空间迁移" class="headerlink" title="命名空间迁移"></a>命名空间迁移</h4><table>
+<thead>
+<tr>
+<th>组件名称</th>
+<th>1.x 命名空间</th>
+<th style="text-align:center">2.0 命名空间</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>依赖注入容器</code></td>
+<td><code>CatLib</code></td>
+<td style="text-align:center"><code>CatLib.Container</code></td>
+</tr>
+<tr>
+<td><code>事件系统</code></td>
+<td><code>CatLib</code></td>
+<td style="text-align:center"><code>CatLib.EventDispatcher</code></td>
+</tr>
+<tr>
+<td><code>通用异常</code></td>
+<td><code>CatLib</code></td>
+<td style="text-align:center"><code>CatLib.Exception</code></td>
+</tr>
+<tr>
+<td><code>实用程序</code></td>
+<td><code>CatLib.Support</code></td>
+<td style="text-align:center"><code>CatLib.Util</code></td>
+</tr>
+<tr>
+<td><code>流(Stream)</code></td>
+<td><code>CatLib.Support</code></td>
+<td style="text-align:center"><code>CatLib.IO</code></td>
+</tr>
+</tbody>
+</table>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><ul>
+<li><code>App.Handler</code> 被重命名为 <code>App.That</code></li>
+<li><code>App.IsRegisted</code> 被重命名为 <code>App.IsRegistered</code></li>
+<li><code>Application.IsRegisted</code> 被重命名为 <code>Application.IsRegistered</code></li>
+<li><code>IVariant</code> 被 <code>VariantAttribute</code> 特性替代</li>
+<li><code>RingBuffer</code> 被 <code>RingBufferStream</code> 替代</li>
+<li><code>ExcludeFromCodeCoverageAttribute</code> 被系统 <code>ExcludeFromCodeCoverageAttribute</code> 替代</li>
+<li><code>IAwait</code> 接口被系统<code>Task</code>替代</li>
+</ul>
+<h4 id="被移除，且没有替代品"><a href="#被移除，且没有替代品" class="headerlink" title="被移除，且没有替代品"></a>被移除，且没有替代品</h4><ul>
+<li><code>ISortSet</code> 接口，因为接口不具备实现价值</li>
+<li><code>Application.Compare</code> 版本比较方法</li>
+<li><code>Version</code>版本类</li>
+<li><code>Template</code> 模版支持</li>
+<li><code>FilterChain</code> 过滤器支持</li>
+<li><code>Enum</code> 移除类支持，理由是计划中的移除</li>
+<li><code>Container.Flash</code> 方法，理由是因为过于凌乱</li>
+<li><code>Arr.Flash</code> 方法，理由是因为过于凌乱</li>
+<li><code>Dict</code> 助手类，理由是因为过于凌乱</li>
+<li><code>ThreadStatic</code> 助手类</li>
+<li><code>QuickList</code> 移除快速列表，理由是因为使用量过少。</li>
+<li><code>Storage</code> 移除内存存储支持，理由是因为使用量过少。</li>
+<li><code>SystemTime</code> 移除系统时间助手类，理由是因为过于凌乱</li>
+<li><code>ICoroutineInit</code> 移除迭代器初始化，因为Task可以更加合适的方式进行异步操作</li>
+<li><code>priority</code> 凌乱的优先级概念被移除，加载顺序即优先级顺序</li>
+<li><code>Util</code> 通用助手类被移除，转变为内部使用的Helper。</li>
+<li><code>Str.Encoding</code> 属性被移除</li>
+<li><code>IServiceProviderType</code> 接口被移除，核心类不再提供，迁移到引导库中</li>
+<li><code>PipelineStream</code> 被移除，这是一个实验类，没有达到预期目的。</li>
+</ul>
+<h2 id="1-x-迁移指南"><a href="#1-x-迁移指南" class="headerlink" title="1.x 迁移指南"></a>1.x 迁移指南</h2><p>如果您正在使用低版本的CatLib，请访问：<a href="../v1/migration.html">1.x 迁移指南</a></p>
+
+                </section>
+
+                
+                    <div ref="comments" id="gitment-container"></div>
+                
+                
+                <support :web="web" visiable></support>
+            </div>
+            <div v-if="searched != null" id="search-result" class="search-result" v-cloak>
+                <p v-if="searched.results.length > 0" class="search-title">
+                    与"{{ searched.keyword }}"相关的内容{{searched.results.length}}条
+                </p>
+                <p v-else class="search-title">无搜索结果可以匹配"{{ searched.keyword }}"</p>
+                <div v-for="(record) in searched.results" class="searched-line">
+                    <h3>
+                        <a :href="'/' + record.href + '#!' + encodeURI(anchorEscaping(record.hash))" @click="clearSearch">
+                            {{ record.hash }}
+                        </a>
+                    </h3>
+                    <ul>
+                        <li><i>{{ record.page }} <span v-if="record.page_title != ''">- {{ record.page_title }}</span></i> <i>score:<span>{{ record.score }}</span></i></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div></div>
+
+<script>
+window.onload = function(){  
+    new Vue({
+        el : '#cookbook',
+        data: { 
+            navigation : {"navigation":[{"levels":[{"text":"CatLib","href":"/"},{"text":"核心库","href":"index.html"}]},{"divider":true},{"text":"起步"},{"text":"介绍","href":"index.html"},{"text":"风格指南","href":"style.html"},{"text":"常见问题","href":"faq.html"},{"text":"已知BUG","href":"bug.html"},{"text":"贡献指南","href":"contribution.html"},{"text":"更新日志","href":"upgrade.html"},{"text":"迁移指南","href":"migration.html"},{"text":"系统架构"},{"text":"服务提供者","href":"architecture/service-provider.html"},{"text":"应用程序","href":"architecture/application.html"},{"text":"服务容器","href":"architecture/container.html"},{"text":"服务门面","href":"architecture/facade.html"},{"text":"框架组件"},{"text":"事件系统","href":"components/event.html"},{"text":"辅助函数"},{"text":"数组","href":"helper/arr.html"},{"text":"字符串","href":"helper/str.html"},{"text":"守卫","href":"helper/guard.html"},{"text":"数据结构"},{"text":"有序集","href":"data-structure/sort-set.html"},{"text":"流"},{"text":"环型缓冲流","href":"stream/ring-buffer-stream.html"},{"text":"包装流","href":"stream/wrapper-stream.html"},{"text":"组合流","href":"stream/combine-stream.html"},{"text":"分片流","href":"stream/segment-stream.html"},{"divider":true},{"text":"Power by CatLib","href":"https://github.com/CatLib","external":true}]},
+            web : {"navigation":[{"type":"versions","mobile":true},{"type":"menu","text":"组件库","mobile":true,"list":[{"text":"ILRuntime支持库","href":"https://ilruntime.catlib.io"}]},{"type":"normal","text":"English","href":"https://catlib.io/lasted/index.html","mobile":true},{"type":"icon","fontawesome":"github","href":"https://github.com/CatLib/Core","mobile":true}],"tool":{"editor":{"text":"编辑","href":"https://github.com/CatLib/catlib-cn.io/tree/2.0/","external":true}},"support":{"label":["在文档中没有找到您需要的内容？","尝试在左侧搜索栏中搜索，或者{text}"],"text":"在GitHub中发起提问","href":"https://github.com/CatLib/catlib-cn.io/issues","external":true}},
+            versions: {
+                current :  {"test":"^v2\\/","name":"v2.0","active":"Latest(v2.0)","data":"v2"},
+                list: [{"test":"^v1\\/","name":"v1.4","active":"Latest(v1.4)","data":"v1"},{"test":"^v2\\/","name":"v2.0","active":"Latest(v2.0)","data":"v2"}]
+            },
+            withSummary : true,
+            isPC : null,
+            checkout: false,
+            root: "/",
+            contentNavigation: [],
+            contentOffset : { 'offsetTop' : 0, 'height' : 0 },
+            searched: null,
+            searchDisabled: localStorage.getItem("search-input-disabled") == 'true',
+            clientHeight : 0
+        },
+        methods :{
+            testPC : function(){ 
+                var userAgentInfo = navigator.userAgent;
+                var deviceReg = [
+                    /(MI(\s+)|2013022|2013023|HM|2014011|2014501|2014813|2014811|2014812|2014817|2014818|2014819|2014502|2015|xiaomi).*/i,
+                    /(MI(.*|\s*)PAD).*/i,
+                    /(iPhone | iPod).*/i,
+                    /(iPad).*/i,
+                    /(Android).*/i,
+                    /(iPhone|iPad|iPod|iOS).*/i,
+                    /(windows(.*|\s*)phone).*/i
+                ];
+                var flag = true;
+                for (var v = 0; v < deviceReg.length; v++) {
+                    if (deviceReg[v].test(userAgentInfo)) {
+                        flag = false;
+                        break;
+                    }
+                }
+                
+                return flag;
+            },
+            hidenSummary : function(){
+                if(!this.isPC)
+                {
+                    this.withSummary = false;
+                }
+            },
+            bindMinHeight: function(){
+                var vue = this;
+                window.addEventListener("resize", function(){
+                    vue.clientHeight = document.documentElement.clientHeight - 50;
+                }, false);
+                this.clientHeight = document.documentElement.clientHeight - 50;
+            },
+            bindAnchor : function(){
+                if(this.$refs.section == undefined){
+                    return;
+                }
+                window.addEventListener("hashchange", this.hashChange, false);
+                window.addEventListener("resize", this.refreshContentNavigation, false);
+                var elements = this.$refs.section.getElementsByTagName("a");
+                var vue = this;
+                for(var index = 0; index < elements.length; index++){
+                    let element = elements[index];
+                    let href = element.getAttribute("href");
+                    if(href.length <= 0 || href[0] != "#"){
+                        continue;
+                    }
+
+                    element.addEventListener('click', function(event){
+                        location.hash = "!" + encodeURI(decodeURI(vue.anchorEscaping(element.hash.substring(1))));
+                        event.preventDefault();
+                    }, false);
+                }
+
+                this.refreshContentNavigation();
+            },
+            refreshContentNavigation : function(){
+                if(this.$refs.section == undefined || !this.supportSubnav()){
+                    return;
+                }
+                var subnavIndex = 0;
+                var elements = this.$refs.section.getElementsByClassName("headerlink");
+                var subnav = [];
+                for(var index=0; index < elements.length; index++){
+                    var element = elements[index];
+                    if(element.parentElement.nodeName == "H2"){
+                        subnav[subnavIndex++] = {'text' : element.title , 'hash' : "!" + element.hash.substring(1), 'offsetTop' : element.offsetTop};
+                    }
+                }
+                this.contentNavigation = subnav;
+            },
+            hashChange : function(){
+                var locationHash = location.hash.replace(/^#!/ig, "#");
+                if(locationHash == ''){
+                    return;
+                }
+                locationHash = decodeURI(locationHash);
+                var hashes = this.$refs.section.getElementsByClassName("headerlink");
+                var target = null;
+                for(var index=0; index < hashes.length; index++){
+                    var hash = hashes[index];
+                    if(decodeURI(hash.hash) == locationHash){
+                        target = hash;
+                        break;
+                    }
+                }
+                
+                if(target == null){
+                    return;
+                }
+
+                var top = target.offsetTop - 20; 
+                
+                if(top > 0)
+                {
+                    var vue = this;
+                    $('.cookbook-content').animate({scrollTop:top}, 500, function(){
+                        if(!vue.isPC){
+                            vue.withSummary = false;
+                        }
+                    });
+                }        
+            },
+            bindScroll : function(){
+                if(!this.supportSubnav()){
+                    return;
+                }
+                this.$refs.content.addEventListener("scroll", this.scrollChange, false);
+            },
+            scrollChange : function(e){
+                this.contentOffset = { 
+                    'offsetTop' : this.$refs.content.scrollTop,
+                    'height' : this.$refs.content.scrollHeight - this.$refs.content.offsetHeight
+                };
+            },
+            supportSubnav : function(){
+                if(this.navigation.subnav != undefined && this.navigation.subnav == false){
+                    return false;
+                }
+                return true;
+            },
+            clearSearch: function(){
+                this.searched = null;
+                this.$nextTick(function(){
+                    this.hashChange();
+                });
+            },
+            searchSubmit: function(){
+                if(!this.isPC)
+                {
+                    this.withSummary = false;
+                }
+            },
+            anchorEscaping : function(str){
+                return str.replace(' ', '-').replace('.', '-');
+            },
+            setSearchDisabled : function(value){
+                this.searchDisabled = value;
+            },
+            initComments : function(){
+                
+                    var vue = this;
+                    var theme = {
+                        render : function(state, instance) {
+                            var container = document.createElement('div');
+                            container.lang = "en-US";
+                            container.className = 'gitment-container gitment-root-container';
+                            container.appendChild(instance.renderHeader(state, instance));
+                            container.appendChild(instance.renderComments(state, instance));
+                            container.appendChild(instance.renderEditor(state, instance));
+                            return container;
+                        },
+                    }
+
+                    var gitment = new Gitment({
+                        id : 'catlib-cn:v2/migration.html',
+                        owner: 'catlib',
+                        repo: 'catlib-cn.io',
+                        oauth: {
+                            client_id: '3620f7cdd1c50b4b6e3c',
+                            client_secret: '50664006a799cb29b27e8358b88a6a4580e8dc0c',
+                            cross_server: 'https://31225080.ap-southeast-1.fc.aliyuncs.com/2016-08-15/proxy/gitment/gitment-cross/',
+                        },
+                        labels : [
+                            'CatLib'
+                        ],
+                        link: 'https://cn.catlib.io/v2/migration.html',
+                        maintainer: ["yb199478"],
+                        theme : theme,
+                        perPage : 30,
+                    });
+
+                    gitment.render(this.$refs.comments);
+                
+            },
+        },mounted : function() {
+            this.isPC = this.withSummary = this.testPC();
+            this.$nextTick(function(){
+                this.bindScroll();
+                this.bindAnchor();
+                this.hashChange();
+                this.initComments();
+                this.bindMinHeight();
+            });
+        },
+        watch: {
+            searched : function(){
+                $('.cookbook-content').animate({scrollTop:0}, 0);
+            }
+        },
+        computed:{
+            minHeightStyle : function()
+            {
+                return { 'min-height' : this.clientHeight + "px" }
+            }
+        }
+    });
+};
+</script>
+    
+
+    
+    <script src="/scripts/cookbook.js"></script>
+    
+      <script src="/scripts/gitment.js"></script>
+    
+    
+    
+  </body>
+</html>

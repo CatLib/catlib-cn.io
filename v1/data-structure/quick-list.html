@@ -1,0 +1,549 @@
+<!doctype html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0">
+
+    
+
+    
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="/styles/cookbook.css">
+    <link rel="stylesheet" href="/styles/fontawesome.css">
+    
+      <link rel="stylesheet" href="/styles/gitment.css">
+    
+
+    <!-- favicon -->
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+
+    
+
+    
+
+    <title>CatLib - 快速列表 </title>
+  </head>
+
+  <body>
+    
+    
+    <div id="cookbook" :class="{'with-summary' : withSummary}" v-cloak>
+    <div class="cookbook-summary">
+    
+    <search placeholder="Type to search" :versions="versions" :root="root" v-model="searched" v-on:submit="searchSubmit" :disable="searchDisabled" v-on:disabled="setSearchDisabled"></search>
+    <navigation :data="navigation" :web="web" :versions="versions" :root="root" active="v1/data-structure/quick-list.html" :subnavdata="contentNavigation" :value="contentOffset" :searchdisabled="searchDisabled"></navigation>
+    
+</div>    <div class="cookbook-content" ref="content">
+    
+    <div class="cookbook-header" role="navigation">
+        <header-tool :web="web" path="v1/data-structure/quick-list.html" editor v-model="withSummary"></header-tool>
+        <header-navigation :web="web" :versions="versions" :root="root"></header-navigation>
+    </div>
+    <div class="content-wrapper" @click="hidenSummary" :style="minHeightStyle">
+        <checkout :navigation="navigation" :web="web" :versions="versions" v-model="checkout"></checkout>
+        <div v-if="checkout" class="cookbook-search-results">
+            <div id="search-noresults" v-show="searched == null">
+                <section ref="section" class="markdown-section">
+                    <h1 id="快速列表"><a href="#快速列表" class="headerlink" title="快速列表"></a>快速列表</h1><p>快速列表按照插入顺序排序。你可以添加一个元素导列表的头部（左边）或者尾部（右边）。</p>
+<p>快速列表宏观上是一个双向链表，微观为数组。相对于传统列表(List)，避免了修改造成的大规模的数据迁移。</p>
+<blockquote>
+<p>快速列表实现接口:<code>IQuickList</code><br>所有示例中，<code>TElement</code>为<code>string</code></p>
+</blockquote>
+<h2 id="构造快速列表"><a href="#构造快速列表" class="headerlink" title="构造快速列表"></a>构造快速列表</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> quicklist = <span class="keyword">new</span> QuickList&lt;TElement&gt;();</span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型"><a href="#函数原型" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">QuickList(<span class="keyword">int</span> fill = <span class="number">128</span>);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fill</code></td>
+<td style="text-align:center">每个结点中元素的最大数量</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Count"><a href="#Count" class="headerlink" title="Count"></a>Count</h2><p>获取列表元素的数量。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = quicklist.Count;</span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-1"><a href="#函数原型-1" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> Count &#123; <span class="keyword">get</span>; &#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="Length"><a href="#Length" class="headerlink" title="Length"></a>Length</h2><p>快速列表中的结点数量。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> length = quicklist.Length;</span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-2"><a href="#函数原型-2" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> Length &#123; <span class="keyword">get</span>; &#125;;</span><br></pre></td></tr></table></figure>
+<h2 id="Add"><a href="#Add" class="headerlink" title="Add"></a>Add</h2><p>将元素插入到列表尾部(<code>Push</code>别名函数)。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "123" ]</span></span><br><span class="line">quicklist.Add(<span class="string">"hello world"</span>);</span><br><span class="line"><span class="comment">// [ "123", "hello world" ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-3"><a href="#函数原型-3" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Add</span>(<span class="params">TElement element</span>)</span>;;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>element</code></td>
+<td style="text-align:center">需要添加的元素</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Push"><a href="#Push" class="headerlink" title="Push"></a>Push</h2><p>将元素插入到列表尾部。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "123" ]</span></span><br><span class="line">quicklist.Push(<span class="string">"hello world"</span>);</span><br><span class="line"><span class="comment">// [ "123", "hello world" ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-4"><a href="#函数原型-4" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Push</span>(<span class="params">TElement element</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>element</code></td>
+<td style="text-align:center">需要添加的元素</td>
+</tr>
+</tbody>
+</table>
+<h2 id="UnShift"><a href="#UnShift" class="headerlink" title="UnShift"></a>UnShift</h2><p>将元素插入到列表头部。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "123" ]</span></span><br><span class="line">quicklist.UnShift(<span class="string">"hello world"</span>);</span><br><span class="line"><span class="comment">// [ "hello world", "123" ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-5"><a href="#函数原型-5" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">UnShift</span>(<span class="params">TElement element</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>element</code></td>
+<td style="text-align:center">需要添加的元素</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Pop"><a href="#Pop" class="headerlink" title="Pop"></a>Pop</h2><p>移除并返回列表的尾部元素。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "hello world", "123" ]</span></span><br><span class="line"><span class="keyword">var</span> element = quicklist.Pop();</span><br><span class="line"><span class="comment">// element : "123"</span></span><br><span class="line"><span class="comment">// [ "hello world" ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-6"><a href="#函数原型-6" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TElement <span class="title">Pop</span>(<span class="params"></span>)</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="Shift"><a href="#Shift" class="headerlink" title="Shift"></a>Shift</h2><p>移除并返回列表头部的元素。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "hello world", "123" ]</span></span><br><span class="line"><span class="keyword">var</span> element = quicklist.Shift();</span><br><span class="line"><span class="comment">// element : "hello world"</span></span><br><span class="line"><span class="comment">// [ "123" ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-7"><a href="#函数原型-7" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TElement <span class="title">Shift</span>(<span class="params"></span>)</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="Trim"><a href="#Trim" class="headerlink" title="Trim"></a>Trim</h2><p>对列表进行修剪，只保留下标范围内的元素。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "1", "2", "3", "4", "5" ]</span></span><br><span class="line"><span class="keyword">var</span> count = quicklist.Trim(<span class="number">1</span>, <span class="number">3</span>); </span><br><span class="line"><span class="comment">// count: 2</span></span><br><span class="line"><span class="comment">// [ "2", "3", "4" ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-8"><a href="#函数原型-8" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Trim</span>(<span class="params"><span class="keyword">int</span> start, <span class="keyword">int</span> end</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>start</code></td>
+<td style="text-align:center">起始下标(包含)，0为底</td>
+</tr>
+<tr>
+<td><code>end</code></td>
+<td style="text-align:center">结束下标(包含)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Remove"><a href="#Remove" class="headerlink" title="Remove"></a>Remove</h2><p>移除指定的元素，如果给定了<code>count</code>那么则移除不多于<code>count</code>的指定元素。返回值为实际移除的元素数量</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a", "b", "a", "b", "a" ]</span></span><br><span class="line"><span class="keyword">var</span> num = quicklist.Remove(<span class="string">"a"</span>, <span class="number">2</span>);</span><br><span class="line"><span class="comment">// num : 2</span></span><br><span class="line"><span class="comment">// [ "b", "b", "a" ]</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a", "b", "a", "b", "a" ]</span></span><br><span class="line"><span class="keyword">var</span> num = quicklist.Remove(<span class="string">"a"</span>, <span class="number">-2</span>);</span><br><span class="line"><span class="comment">// num : 2</span></span><br><span class="line"><span class="comment">// [ "a", "b", "b" ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-9"><a href="#函数原型-9" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Remove</span>(<span class="params">TElement element, <span class="keyword">int</span> count = <span class="number">0</span></span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>element</code></td>
+<td style="text-align:center">规定元素</td>
+</tr>
+<tr>
+<td><code>count</code></td>
+<td style="text-align:center">移除的数量，为<code>0</code>则移除全部元素，正数则从表头搜索，负数从表尾搜索</td>
+</tr>
+</tbody>
+</table>
+<h2 id="GetRange"><a href="#GetRange" class="headerlink" title="GetRange"></a>GetRange</h2><p>获取区间内的所有元素。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a", "a", "c", "d", "e"]</span></span><br><span class="line"><span class="keyword">var</span> elements = quicklist.GetRange(<span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line"><span class="comment">// elements: [ "a", "c", "d" ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-10"><a href="#函数原型-10" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TElement[] <span class="title">GetRange</span>(<span class="params"><span class="keyword">int</span> start, <span class="keyword">int</span> end</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>start</code></td>
+<td style="text-align:center">起始位置(包含)</td>
+</tr>
+<tr>
+<td><code>end</code></td>
+<td style="text-align:center">结束位置(包含)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="this-int"><a href="#this-int" class="headerlink" title="this[int]"></a>this[int]</h2><p>通过下标访问元素,如果传入的是一个负数下标那么从末尾开始查找。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a", "b", "c", "d", "e"]</span></span><br><span class="line"><span class="keyword">var</span> element = quicklist[<span class="number">2</span>];</span><br><span class="line"><span class="comment">// element : "c"</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-11"><a href="#函数原型-11" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TElement <span class="keyword">this</span>[<span class="keyword">int</span> index] &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>index</code></td>
+<td style="text-align:center">下标，负数则从末尾查找。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="InsertAfter"><a href="#InsertAfter" class="headerlink" title="InsertAfter"></a>InsertAfter</h2><p>在指定元素之后插入。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a", "b", "b", "c", "d" ]</span></span><br><span class="line">quicklist.InsertAfter(<span class="string">"b"</span>, <span class="string">"abc"</span>);</span><br><span class="line"><span class="comment">// [ "a", "b", "abc", "b", "c", "d" ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-12"><a href="#函数原型-12" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InsertAfter</span>(<span class="params">TElement finder, TElement insert</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>finder</code></td>
+<td style="text-align:center">查找的元素。</td>
+</tr>
+<tr>
+<td><code>insert</code></td>
+<td style="text-align:center">插入的元素。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="InsertBefore"><a href="#InsertBefore" class="headerlink" title="InsertBefore"></a>InsertBefore</h2><p>在指定元素之前插入。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a", "b", "b", "c", "d" ]</span></span><br><span class="line">quicklist.InsertAfter(<span class="string">"b"</span>, <span class="string">"abc"</span>);</span><br><span class="line"><span class="comment">// [ "a", ""abc"", "b", "b", "c", "d" ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-13"><a href="#函数原型-13" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InsertAfter</span>(<span class="params">TElement finder, TElement insert</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>finder</code></td>
+<td style="text-align:center">查找的元素。</td>
+</tr>
+<tr>
+<td><code>insert</code></td>
+<td style="text-align:center">插入的元素。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ReverseIterator"><a href="#ReverseIterator" class="headerlink" title="ReverseIterator"></a>ReverseIterator</h2><p>反转迭代顺序（不是从物理上反转整个列表）</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 物理顺序：[ 'a', "b", "c" ]</span></span><br><span class="line"><span class="comment">// foreach迭代：[ 'a', "b", "c" ]</span></span><br><span class="line">quicklist.ReverseIterator();</span><br><span class="line"><span class="comment">// 物理顺序：[ 'a', "b", "c" ]</span></span><br><span class="line"><span class="comment">// foreach迭代：[ 'c', "b", "a" ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-14"><a href="#函数原型-14" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ReverseIterator</span>(<span class="params"></span>)</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="Clear"><a href="#Clear" class="headerlink" title="Clear"></a>Clear</h2><p>清空快速列表。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a", "b", "c" ]</span></span><br><span class="line">quicklist.Clear();</span><br><span class="line"><span class="comment">// [ ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-15"><a href="#函数原型-15" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Clear</span>(<span class="params"></span>)</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="First"><a href="#First" class="headerlink" title="First"></a>First</h2><p>获取第一个元素。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a", "b", "c" ]</span></span><br><span class="line"><span class="keyword">var</span> element = quicklist.First();</span><br><span class="line"><span class="comment">// element : "a"</span></span><br><span class="line"><span class="comment">// [ "a", "b", "c" ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-16"><a href="#函数原型-16" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TElement <span class="title">First</span>(<span class="params"></span>)</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="Last"><a href="#Last" class="headerlink" title="Last"></a>Last</h2><p>获取最后一个元素。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a", "b", "c" ]</span></span><br><span class="line"><span class="keyword">var</span> element = quicklist.Last();</span><br><span class="line"><span class="comment">// element : "c"</span></span><br><span class="line"><span class="comment">// [ "a", "b", "c" ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-17"><a href="#函数原型-17" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TElement <span class="title">Last</span>(<span class="params"></span>)</span>;</span><br></pre></td></tr></table></figure>
+                </section>
+
+                
+                    <div ref="comments" id="gitment-container"></div>
+                
+                
+                <support :web="web" visiable></support>
+            </div>
+            <div v-if="searched != null" id="search-result" class="search-result" v-cloak>
+                <p v-if="searched.results.length > 0" class="search-title">
+                    与"{{ searched.keyword }}"相关的内容{{searched.results.length}}条
+                </p>
+                <p v-else class="search-title">无搜索结果可以匹配"{{ searched.keyword }}"</p>
+                <div v-for="(record) in searched.results" class="searched-line">
+                    <h3>
+                        <a :href="'/' + record.href + '#!' + encodeURI(anchorEscaping(record.hash))" @click="clearSearch">
+                            {{ record.hash }}
+                        </a>
+                    </h3>
+                    <ul>
+                        <li><i>{{ record.page }} <span v-if="record.page_title != ''">- {{ record.page_title }}</span></i> <i>score:<span>{{ record.score }}</span></i></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div></div>
+
+<script>
+window.onload = function(){  
+    new Vue({
+        el : '#cookbook',
+        data: { 
+            navigation : {"navigation":[{"levels":[{"text":"CatLib","href":"/"},{"text":"核心库","href":"index.html"}]},{"divider":true},{"text":"起步"},{"text":"介绍","href":"index.html"},{"text":"风格指南","href":"style.html"},{"text":"常见问题","href":"faq.html"},{"text":"已知BUG","href":"bug.html"},{"text":"贡献指南","href":"contribution.html"},{"text":"更新日志","href":"upgrade.html"},{"text":"迁移指南","href":"migration.html"},{"text":"系统架构"},{"text":"服务提供者","href":"architecture/service-provider.html"},{"text":"应用程序","href":"architecture/application.html"},{"text":"服务容器","href":"architecture/container.html"},{"text":"服务门面","href":"architecture/facade.html"},{"text":"框架组件"},{"text":"事件系统","href":"components/event.html"},{"text":"管理器模版","href":"components/template.html"},{"text":"辅助函数"},{"text":"数组","href":"helper/arr.html"},{"text":"字符串","href":"helper/str.html"},{"text":"字典","href":"helper/dict.html"},{"text":"时间","href":"helper/system-time.html"},{"text":"线程静态","href":"helper/thread-static.html"},{"text":"通用","href":"helper/util.html"},{"text":"数据结构"},{"text":"有序集","href":"data-structure/sort-set.html"},{"text":"快速列表","href":"data-structure/quick-list.html"},{"text":"环型缓冲区","href":"data-structure/ring-buffer.html"},{"text":"内存存储","href":"data-structure/memory-storage.html"},{"text":"过滤器链","href":"data-structure/filter-chain.html"},{"text":"流"},{"text":"包装流","href":"stream/wrapper-stream.html"},{"text":"管道流","href":"stream/pipeline-stream.html"},{"text":"存储流","href":"stream/storage-stream.html"},{"text":"组合流","href":"stream/combine-stream.html"},{"text":"分片流","href":"stream/segment-stream.html"},{"divider":true},{"text":"Power by CatLib","href":"https://github.com/CatLib","external":true}]},
+            web : {"navigation":[{"type":"versions","mobile":true},{"type":"menu","text":"组件库","mobile":true,"list":[{"text":"ILRuntime支持库","href":"https://ilruntime.catlib.io"}]},{"type":"normal","text":"English","href":"https://catlib.io/lasted/index.html","mobile":true},{"type":"icon","fontawesome":"github","href":"https://github.com/CatLib/Core","mobile":true}],"tool":{"editor":{"text":"编辑","href":"https://github.com/CatLib/catlib-cn.io/tree/2.0/","external":true}},"support":{"label":["在文档中没有找到您需要的内容？","尝试在左侧搜索栏中搜索，或者{text}"],"text":"在GitHub中发起提问","href":"https://github.com/CatLib/catlib-cn.io/issues","external":true}},
+            versions: {
+                current :  {"test":"^v1\\/","name":"v1.4","active":"Latest(v1.4)","data":"v1"},
+                list: [{"test":"^v1\\/","name":"v1.4","active":"Latest(v1.4)","data":"v1"},{"test":"^v2\\/","name":"v2.0","active":"Latest(v2.0)","data":"v2"}]
+            },
+            withSummary : true,
+            isPC : null,
+            checkout: false,
+            root: "/",
+            contentNavigation: [],
+            contentOffset : { 'offsetTop' : 0, 'height' : 0 },
+            searched: null,
+            searchDisabled: localStorage.getItem("search-input-disabled") == 'true',
+            clientHeight : 0
+        },
+        methods :{
+            testPC : function(){ 
+                var userAgentInfo = navigator.userAgent;
+                var deviceReg = [
+                    /(MI(\s+)|2013022|2013023|HM|2014011|2014501|2014813|2014811|2014812|2014817|2014818|2014819|2014502|2015|xiaomi).*/i,
+                    /(MI(.*|\s*)PAD).*/i,
+                    /(iPhone | iPod).*/i,
+                    /(iPad).*/i,
+                    /(Android).*/i,
+                    /(iPhone|iPad|iPod|iOS).*/i,
+                    /(windows(.*|\s*)phone).*/i
+                ];
+                var flag = true;
+                for (var v = 0; v < deviceReg.length; v++) {
+                    if (deviceReg[v].test(userAgentInfo)) {
+                        flag = false;
+                        break;
+                    }
+                }
+                
+                return flag;
+            },
+            hidenSummary : function(){
+                if(!this.isPC)
+                {
+                    this.withSummary = false;
+                }
+            },
+            bindMinHeight: function(){
+                var vue = this;
+                window.addEventListener("resize", function(){
+                    vue.clientHeight = document.documentElement.clientHeight - 50;
+                }, false);
+                this.clientHeight = document.documentElement.clientHeight - 50;
+            },
+            bindAnchor : function(){
+                if(this.$refs.section == undefined){
+                    return;
+                }
+                window.addEventListener("hashchange", this.hashChange, false);
+                window.addEventListener("resize", this.refreshContentNavigation, false);
+                var elements = this.$refs.section.getElementsByTagName("a");
+                var vue = this;
+                for(var index = 0; index < elements.length; index++){
+                    let element = elements[index];
+                    let href = element.getAttribute("href");
+                    if(href.length <= 0 || href[0] != "#"){
+                        continue;
+                    }
+
+                    element.addEventListener('click', function(event){
+                        location.hash = "!" + encodeURI(decodeURI(vue.anchorEscaping(element.hash.substring(1))));
+                        event.preventDefault();
+                    }, false);
+                }
+
+                this.refreshContentNavigation();
+            },
+            refreshContentNavigation : function(){
+                if(this.$refs.section == undefined || !this.supportSubnav()){
+                    return;
+                }
+                var subnavIndex = 0;
+                var elements = this.$refs.section.getElementsByClassName("headerlink");
+                var subnav = [];
+                for(var index=0; index < elements.length; index++){
+                    var element = elements[index];
+                    if(element.parentElement.nodeName == "H2"){
+                        subnav[subnavIndex++] = {'text' : element.title , 'hash' : "!" + element.hash.substring(1), 'offsetTop' : element.offsetTop};
+                    }
+                }
+                this.contentNavigation = subnav;
+            },
+            hashChange : function(){
+                var locationHash = location.hash.replace(/^#!/ig, "#");
+                if(locationHash == ''){
+                    return;
+                }
+                locationHash = decodeURI(locationHash);
+                var hashes = this.$refs.section.getElementsByClassName("headerlink");
+                var target = null;
+                for(var index=0; index < hashes.length; index++){
+                    var hash = hashes[index];
+                    if(decodeURI(hash.hash) == locationHash){
+                        target = hash;
+                        break;
+                    }
+                }
+                
+                if(target == null){
+                    return;
+                }
+
+                var top = target.offsetTop - 20; 
+                
+                if(top > 0)
+                {
+                    var vue = this;
+                    $('.cookbook-content').animate({scrollTop:top}, 500, function(){
+                        if(!vue.isPC){
+                            vue.withSummary = false;
+                        }
+                    });
+                }        
+            },
+            bindScroll : function(){
+                if(!this.supportSubnav()){
+                    return;
+                }
+                this.$refs.content.addEventListener("scroll", this.scrollChange, false);
+            },
+            scrollChange : function(e){
+                this.contentOffset = { 
+                    'offsetTop' : this.$refs.content.scrollTop,
+                    'height' : this.$refs.content.scrollHeight - this.$refs.content.offsetHeight
+                };
+            },
+            supportSubnav : function(){
+                if(this.navigation.subnav != undefined && this.navigation.subnav == false){
+                    return false;
+                }
+                return true;
+            },
+            clearSearch: function(){
+                this.searched = null;
+                this.$nextTick(function(){
+                    this.hashChange();
+                });
+            },
+            searchSubmit: function(){
+                if(!this.isPC)
+                {
+                    this.withSummary = false;
+                }
+            },
+            anchorEscaping : function(str){
+                return str.replace(' ', '-').replace('.', '-');
+            },
+            setSearchDisabled : function(value){
+                this.searchDisabled = value;
+            },
+            initComments : function(){
+                
+                    var vue = this;
+                    var theme = {
+                        render : function(state, instance) {
+                            var container = document.createElement('div');
+                            container.lang = "en-US";
+                            container.className = 'gitment-container gitment-root-container';
+                            container.appendChild(instance.renderHeader(state, instance));
+                            container.appendChild(instance.renderComments(state, instance));
+                            container.appendChild(instance.renderEditor(state, instance));
+                            return container;
+                        },
+                    }
+
+                    var gitment = new Gitment({
+                        id : 'catlib-cn:v1/data-structure/quick-list.html',
+                        owner: 'catlib',
+                        repo: 'catlib-cn.io',
+                        oauth: {
+                            client_id: '3620f7cdd1c50b4b6e3c',
+                            client_secret: '50664006a799cb29b27e8358b88a6a4580e8dc0c',
+                            cross_server: 'https://31225080.ap-southeast-1.fc.aliyuncs.com/2016-08-15/proxy/gitment/gitment-cross/',
+                        },
+                        labels : [
+                            'CatLib'
+                        ],
+                        link: 'https://cn.catlib.io/v1/data-structure/quick-list.html',
+                        maintainer: ["yb199478"],
+                        theme : theme,
+                        perPage : 30,
+                    });
+
+                    gitment.render(this.$refs.comments);
+                
+            },
+        },mounted : function() {
+            this.isPC = this.withSummary = this.testPC();
+            this.$nextTick(function(){
+                this.bindScroll();
+                this.bindAnchor();
+                this.hashChange();
+                this.initComments();
+                this.bindMinHeight();
+            });
+        },
+        watch: {
+            searched : function(){
+                $('.cookbook-content').animate({scrollTop:0}, 0);
+            }
+        },
+        computed:{
+            minHeightStyle : function()
+            {
+                return { 'min-height' : this.clientHeight + "px" }
+            }
+        }
+    });
+};
+</script>
+    
+
+    
+    <script src="/scripts/cookbook.js"></script>
+    
+      <script src="/scripts/gitment.js"></script>
+    
+    
+    
+  </body>
+</html>

@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0">
+
+    
+
+    
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="/styles/cookbook.css">
+    <link rel="stylesheet" href="/styles/fontawesome.css">
+    
+      <link rel="stylesheet" href="/styles/gitment.css">
+    
+
+    <!-- favicon -->
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+
+    
+
+    
+
+    <title>CatLib - 更新日志 </title>
+  </head>
+
+  <body>
+    
+    
+    <div id="cookbook" :class="{'with-summary' : withSummary}" v-cloak>
+    <div class="cookbook-summary">
+    
+    <search placeholder="Type to search" :versions="versions" :root="root" v-model="searched" v-on:submit="searchSubmit" :disable="searchDisabled" v-on:disabled="setSearchDisabled"></search>
+    <navigation :data="navigation" :web="web" :versions="versions" :root="root" active="v2/upgrade.html" :subnavdata="contentNavigation" :value="contentOffset" :searchdisabled="searchDisabled"></navigation>
+    
+</div>    <div class="cookbook-content" ref="content">
+    
+    <div class="cookbook-header" role="navigation">
+        <header-tool :web="web" path="v2/upgrade.html" editor v-model="withSummary"></header-tool>
+        <header-navigation :web="web" :versions="versions" :root="root"></header-navigation>
+    </div>
+    <div class="content-wrapper" @click="hidenSummary" :style="minHeightStyle">
+        <checkout :navigation="navigation" :web="web" :versions="versions" v-model="checkout"></checkout>
+        <div v-if="checkout" class="cookbook-search-results">
+            <div id="search-noresults" v-show="searched == null">
+                <section ref="section" class="markdown-section">
+                    <h1 id="更新日志"><a href="#更新日志" class="headerlink" title="更新日志"></a>更新日志</h1><blockquote>
+<p>CatLib的版本标准是采用：<a href="http://semver.org/lang/zh-CN/" target="_blank" rel="noopener">Semver语义化版本标准</a></p>
+</blockquote>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>版本格式：主版本号.次版本号.修订号，版本号递增规则如下：</p>
+<ul>
+<li>主版本号：当你做了不兼容的 API 修改，</li>
+<li>次版本号：当你做了向下兼容的功能性新增，</li>
+<li>修订号：当你做了向下兼容的问题修正。</li>
+</ul>
+<blockquote>
+<p>先行版本号及版本编译信息可以加到<code>主版本号.次版本号.修订号</code>的后面，作为延伸。</p>
+</blockquote>
+<h2 id="v2-0-0-unreleased"><a href="#v2-0-0-unreleased" class="headerlink" title="v2.0.0 (unreleased)"></a><a href="https://github.com/CatLib/Core/releases/tag/v2.0.0" target="_blank" rel="noopener">v2.0.0 (unreleased)</a></h2><h4 id="Added"><a href="#Added" class="headerlink" title="Added"></a>Added</h4><ul>
+<li><code>Inject</code> allowed to be set to optional.(<a href="https://github.com/CatLib/Core/issues/253" target="_blank">#253</a> )</li>
+</ul>
+<h4 id="Changed"><a href="#Changed" class="headerlink" title="Changed"></a>Changed</h4><ul>
+<li>Comments translated from Chinese into English(<a href="https://github.com/CatLib/Core/issues/133" target="_blank">#133</a> )</li>
+<li>Defined Container.Build as a virtual function(<a href="https://github.com/CatLib/Core/issues/210" target="_blank">#210</a> )</li>
+<li>Optimizes the constructor of <code>MethodContainer</code>(<a href="https://github.com/CatLib/Core/issues/218" target="_blank">#218</a> )</li>
+<li>The default project uses the .net standard 2.0(<a href="https://github.com/CatLib/Core/issues/225" target="_blank">#225</a> )</li>
+<li>Rename Util helper class to Helper class Change access level to internal.(<a href="https://github.com/CatLib/Core/issues/230" target="_blank">#230</a> )</li>
+<li><code>Application.IsRegisted</code> changed(rename) to <code>IsRegistered</code>(<a href="https://github.com/CatLib/Core/issues/226" target="_blank">#226</a> ) </li>
+<li>Use <code>VariantAttribute</code> to mark variable types instead of <code>IVariant</code>(<a href="https://github.com/CatLib/Core/issues/232" target="_blank">#232</a> )</li>
+<li><code>Guard</code> Will be expandable with <code>Guard.That</code>(<a href="https://github.com/CatLib/Core/issues/233" target="_blank">#233</a> )</li>
+<li>Fixed the problem of container exception stack loss(<a href="https://github.com/CatLib/Core/issues/234" target="_blank">#234</a> )</li>
+<li>Adjusted the internal file structure to make it clearer(<a href="https://github.com/CatLib/Core/issues/236" target="_blank">#236</a> ).</li>
+<li>Add code analyzers (<a href="https://github.com/CatLib/Core/issues/206" target="_blank">#206</a> )</li>
+<li>Refactoring event system (<a href="https://github.com/CatLib/Core/issues/177" target="_blank">#177</a> )</li>
+<li>Refactoring <code>RingBuffer</code> make it inherit from <code>Stream</code>.(<a href="https://github.com/CatLib/Core/issues/238" target="_blank">#238</a> )</li>
+<li>Namespace structure adjustment(optimization).(<a href="https://github.com/CatLib/Core/issues/241" target="_blank">#241</a> )</li>
+<li><code>App</code> can be extended by <code>That</code> (Handler rename to that) and removed <code>HasHandler</code> API (<a href="https://github.com/CatLib/Core/issues/242" target="_blank">#242</a> )</li>
+<li>Unnecessary inheritance: WrappedStream(<a href="https://github.com/CatLib/Core/issues/247" target="_blank">#247</a> )</li>
+<li>Clean up useless comment(<a href="https://github.com/CatLib/Core/issues/249" target="_blank">#249</a> ).</li>
+<li><code>Guard.Require</code> can set error messages and internal exceptions(<a href="/issues/undefined" target="_blank">#undefined</a> ).</li>
+<li>Refactoring unit test, import moq.(<a href="https://github.com/CatLib/Core/issues/255" target="_blank">#255</a> )</li>
+<li><code>CodeStandardException</code> replaces to <code>LogicException</code>(<a href="https://github.com/CatLib/Core/issues/257" target="_blank">#257</a> )</li>
+<li>Exception move to namespace <code>CatLib.Exception</code>(<a href="https://github.com/CatLib/Core/issues/258" target="_blank">#258</a> )</li>
+<li><code>Facade&lt;&gt;.Instance</code> changed to <code>Facade&lt;&gt;.That</code>(<a href="https://github.com/CatLib/Core/issues/259" target="_blank">#259</a> )</li>
+<li><code>Application.StartProcess</code> migrate to <code>StartProcess</code>(<a href="https://github.com/CatLib/Core/issues/260" target="_blank">#260</a> )</li>
+<li><code>Arr</code> optimization, lifting some unnecessary restrictions (<a href="https://github.com/CatLib/Core/issues/263" target="_blank">#263</a> )</li>
+<li><code>Str</code> optimization, lifting some unnecessary restrictions (<a href="https://github.com/CatLib/Core/issues/264" target="_blank">#264</a> )</li>
+<li>Refactoring <code>SortSet</code>(<a href="https://github.com/CatLib/Core/issues/265" target="_blank">#265</a> )</li>
+<li>Removed global params in application constructor. use Application.New() instead.(<a href="https://github.com/CatLib/Core/issues/267" target="_blank">#267</a> )</li>
+<li>Containers are no longer thread-safe by default(<a href="https://github.com/CatLib/Core/issues/270" target="_blank">#270</a> )</li>
+</ul>
+<h4 id="Fixed"><a href="#Fixed" class="headerlink" title="Fixed"></a>Fixed</h4><ul>
+<li>Fixed a bug that caused <code>Arr.Fill</code> to not work properly under special circumstances. (<a href="https://github.com/CatLib/Core/issues/255" target="_blank">#255</a> )</li>
+</ul>
+<h4 id="Removed"><a href="#Removed" class="headerlink" title="Removed"></a>Removed</h4><ul>
+<li>Removed <code>ExcludeFromCodeCoverageAttribute</code> (<a href="https://github.com/CatLib/Core/issues/229" target="_blank">#229</a> )</li>
+<li>Removed unnecessary interface design <code>ISortSet</code>(<a href="https://github.com/CatLib/Core/issues/211" target="_blank">#211</a> ).</li>
+<li>Removed <code>Version</code> classes and <code>Application.Compare</code> method.(<a href="https://github.com/CatLib/Core/issues/212" target="_blank">#212</a> ).</li>
+<li>Removed <code>Template</code>  supported(<a href="https://github.com/CatLib/Core/issues/213" target="_blank">#213</a> ).</li>
+<li>Removed <code>FilterChain</code> supported(<a href="https://github.com/CatLib/Core/issues/214" target="_blank">#214</a> ).</li>
+<li>Removed <code>Enum</code> supported(<a href="https://github.com/CatLib/Core/issues/215" target="_blank">#215</a> ).</li>
+<li>Removed <code>IAwait</code> interface(<a href="https://github.com/CatLib/Core/issues/217" target="_blank">#217</a> ).</li>
+<li>Removed <code>Container.Flash</code>  api(<a href="https://github.com/CatLib/Core/issues/219" target="_blank">#219</a> ).</li>
+<li>Removed <code>Arr.Flash</code> method(<a href="https://github.com/CatLib/Core/issues/220" target="_blank">#220</a> ).</li>
+<li>Removed <code>Dict</code> helper class(<a href="https://github.com/CatLib/Core/issues/221" target="_blank">#221</a> ).</li>
+<li>Removed <code>ThreadStatic</code> helper class(<a href="https://github.com/CatLib/Core/issues/223" target="_blank">#223</a> ).</li>
+<li>Removed <code>QuickList</code> supported(<a href="https://github.com/CatLib/Core/issues/224" target="_blank">#224</a> ).</li>
+<li>Removed <code>Storage</code> supported(<a href="https://github.com/CatLib/Core/issues/228" target="_blank">#228</a> )</li>
+<li>Removed <code>SystemTime</code> class(<a href="https://github.com/CatLib/Core/issues/235" target="_blank">#235</a> ).</li>
+<li>Removed <code>ICoroutineInit</code> feature from core library(<a href="https://github.com/CatLib/Core/issues/243" target="_blank">#243</a> ).</li>
+<li>Removed the priority attribute, depending on the loading order(<a href="https://github.com/CatLib/Core/issues/244" target="_blank">#244</a> ).</li>
+<li>Removed <code>Util.Encoding</code> (<a href="https://github.com/CatLib/Core/issues/245" target="_blank">#245</a> ).</li>
+<li>Removed <code>Str.Encoding</code>(<a href="https://github.com/CatLib/Core/issues/246" target="_blank">#246</a> )</li>
+<li>Removed <code>IServiceProviderType</code> feature in core library(<a href="https://github.com/CatLib/Core/issues/246" target="_blank">#246</a> ).</li>
+<li>Removed unnecessary extension functions(<a href="https://github.com/CatLib/Core/issues/247" target="_blank">#247</a> ).</li>
+<li>Removed <code>PipelineStream</code> stream.(<a href="https://github.com/CatLib/Core/issues/256" target="_blank">#256</a> )</li>
+<li>Removed all <code>Obsolete</code> method and clean code.(<a href="https://github.com/CatLib/Core/issues/261" target="_blank">#261</a> )</li>
+<li>Removed <code>App.Version</code>.(<a href="https://github.com/CatLib/Core/issues/266" target="_blank">#266</a> )</li>
+</ul>
+<h2 id="1-x"><a href="#1-x" class="headerlink" title="1.x"></a>1.x</h2><blockquote>
+<p>关于 1.x 更新记录请切换至 1.x 版本</p>
+</blockquote>
+
+                </section>
+
+                
+                    <div ref="comments" id="gitment-container"></div>
+                
+                
+                <support :web="web" visiable></support>
+            </div>
+            <div v-if="searched != null" id="search-result" class="search-result" v-cloak>
+                <p v-if="searched.results.length > 0" class="search-title">
+                    与"{{ searched.keyword }}"相关的内容{{searched.results.length}}条
+                </p>
+                <p v-else class="search-title">无搜索结果可以匹配"{{ searched.keyword }}"</p>
+                <div v-for="(record) in searched.results" class="searched-line">
+                    <h3>
+                        <a :href="'/' + record.href + '#!' + encodeURI(anchorEscaping(record.hash))" @click="clearSearch">
+                            {{ record.hash }}
+                        </a>
+                    </h3>
+                    <ul>
+                        <li><i>{{ record.page }} <span v-if="record.page_title != ''">- {{ record.page_title }}</span></i> <i>score:<span>{{ record.score }}</span></i></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div></div>
+
+<script>
+window.onload = function(){  
+    new Vue({
+        el : '#cookbook',
+        data: { 
+            navigation : {"navigation":[{"levels":[{"text":"CatLib","href":"/"},{"text":"核心库","href":"index.html"}]},{"divider":true},{"text":"起步"},{"text":"介绍","href":"index.html"},{"text":"风格指南","href":"style.html"},{"text":"常见问题","href":"faq.html"},{"text":"已知BUG","href":"bug.html"},{"text":"贡献指南","href":"contribution.html"},{"text":"更新日志","href":"upgrade.html"},{"text":"迁移指南","href":"migration.html"},{"text":"系统架构"},{"text":"服务提供者","href":"architecture/service-provider.html"},{"text":"应用程序","href":"architecture/application.html"},{"text":"服务容器","href":"architecture/container.html"},{"text":"服务门面","href":"architecture/facade.html"},{"text":"框架组件"},{"text":"事件系统","href":"components/event.html"},{"text":"辅助函数"},{"text":"数组","href":"helper/arr.html"},{"text":"字符串","href":"helper/str.html"},{"text":"守卫","href":"helper/guard.html"},{"text":"数据结构"},{"text":"有序集","href":"data-structure/sort-set.html"},{"text":"流"},{"text":"环型缓冲流","href":"stream/ring-buffer-stream.html"},{"text":"包装流","href":"stream/wrapper-stream.html"},{"text":"组合流","href":"stream/combine-stream.html"},{"text":"分片流","href":"stream/segment-stream.html"},{"divider":true},{"text":"Power by CatLib","href":"https://github.com/CatLib","external":true}]},
+            web : {"navigation":[{"type":"versions","mobile":true},{"type":"menu","text":"组件库","mobile":true,"list":[{"text":"ILRuntime支持库","href":"https://ilruntime.catlib.io"}]},{"type":"normal","text":"English","href":"https://catlib.io/lasted/index.html","mobile":true},{"type":"icon","fontawesome":"github","href":"https://github.com/CatLib/Core","mobile":true}],"tool":{"editor":{"text":"编辑","href":"https://github.com/CatLib/catlib-cn.io/tree/2.0/","external":true}},"support":{"label":["在文档中没有找到您需要的内容？","尝试在左侧搜索栏中搜索，或者{text}"],"text":"在GitHub中发起提问","href":"https://github.com/CatLib/catlib-cn.io/issues","external":true}},
+            versions: {
+                current :  {"test":"^v2\\/","name":"v2.0","active":"Latest(v2.0)","data":"v2"},
+                list: [{"test":"^v1\\/","name":"v1.4","active":"Latest(v1.4)","data":"v1"},{"test":"^v2\\/","name":"v2.0","active":"Latest(v2.0)","data":"v2"}]
+            },
+            withSummary : true,
+            isPC : null,
+            checkout: false,
+            root: "/",
+            contentNavigation: [],
+            contentOffset : { 'offsetTop' : 0, 'height' : 0 },
+            searched: null,
+            searchDisabled: localStorage.getItem("search-input-disabled") == 'true',
+            clientHeight : 0
+        },
+        methods :{
+            testPC : function(){ 
+                var userAgentInfo = navigator.userAgent;
+                var deviceReg = [
+                    /(MI(\s+)|2013022|2013023|HM|2014011|2014501|2014813|2014811|2014812|2014817|2014818|2014819|2014502|2015|xiaomi).*/i,
+                    /(MI(.*|\s*)PAD).*/i,
+                    /(iPhone | iPod).*/i,
+                    /(iPad).*/i,
+                    /(Android).*/i,
+                    /(iPhone|iPad|iPod|iOS).*/i,
+                    /(windows(.*|\s*)phone).*/i
+                ];
+                var flag = true;
+                for (var v = 0; v < deviceReg.length; v++) {
+                    if (deviceReg[v].test(userAgentInfo)) {
+                        flag = false;
+                        break;
+                    }
+                }
+                
+                return flag;
+            },
+            hidenSummary : function(){
+                if(!this.isPC)
+                {
+                    this.withSummary = false;
+                }
+            },
+            bindMinHeight: function(){
+                var vue = this;
+                window.addEventListener("resize", function(){
+                    vue.clientHeight = document.documentElement.clientHeight - 50;
+                }, false);
+                this.clientHeight = document.documentElement.clientHeight - 50;
+            },
+            bindAnchor : function(){
+                if(this.$refs.section == undefined){
+                    return;
+                }
+                window.addEventListener("hashchange", this.hashChange, false);
+                window.addEventListener("resize", this.refreshContentNavigation, false);
+                var elements = this.$refs.section.getElementsByTagName("a");
+                var vue = this;
+                for(var index = 0; index < elements.length; index++){
+                    let element = elements[index];
+                    let href = element.getAttribute("href");
+                    if(href.length <= 0 || href[0] != "#"){
+                        continue;
+                    }
+
+                    element.addEventListener('click', function(event){
+                        location.hash = "!" + encodeURI(decodeURI(vue.anchorEscaping(element.hash.substring(1))));
+                        event.preventDefault();
+                    }, false);
+                }
+
+                this.refreshContentNavigation();
+            },
+            refreshContentNavigation : function(){
+                if(this.$refs.section == undefined || !this.supportSubnav()){
+                    return;
+                }
+                var subnavIndex = 0;
+                var elements = this.$refs.section.getElementsByClassName("headerlink");
+                var subnav = [];
+                for(var index=0; index < elements.length; index++){
+                    var element = elements[index];
+                    if(element.parentElement.nodeName == "H2"){
+                        subnav[subnavIndex++] = {'text' : element.title , 'hash' : "!" + element.hash.substring(1), 'offsetTop' : element.offsetTop};
+                    }
+                }
+                this.contentNavigation = subnav;
+            },
+            hashChange : function(){
+                var locationHash = location.hash.replace(/^#!/ig, "#");
+                if(locationHash == ''){
+                    return;
+                }
+                locationHash = decodeURI(locationHash);
+                var hashes = this.$refs.section.getElementsByClassName("headerlink");
+                var target = null;
+                for(var index=0; index < hashes.length; index++){
+                    var hash = hashes[index];
+                    if(decodeURI(hash.hash) == locationHash){
+                        target = hash;
+                        break;
+                    }
+                }
+                
+                if(target == null){
+                    return;
+                }
+
+                var top = target.offsetTop - 20; 
+                
+                if(top > 0)
+                {
+                    var vue = this;
+                    $('.cookbook-content').animate({scrollTop:top}, 500, function(){
+                        if(!vue.isPC){
+                            vue.withSummary = false;
+                        }
+                    });
+                }        
+            },
+            bindScroll : function(){
+                if(!this.supportSubnav()){
+                    return;
+                }
+                this.$refs.content.addEventListener("scroll", this.scrollChange, false);
+            },
+            scrollChange : function(e){
+                this.contentOffset = { 
+                    'offsetTop' : this.$refs.content.scrollTop,
+                    'height' : this.$refs.content.scrollHeight - this.$refs.content.offsetHeight
+                };
+            },
+            supportSubnav : function(){
+                if(this.navigation.subnav != undefined && this.navigation.subnav == false){
+                    return false;
+                }
+                return true;
+            },
+            clearSearch: function(){
+                this.searched = null;
+                this.$nextTick(function(){
+                    this.hashChange();
+                });
+            },
+            searchSubmit: function(){
+                if(!this.isPC)
+                {
+                    this.withSummary = false;
+                }
+            },
+            anchorEscaping : function(str){
+                return str.replace(' ', '-').replace('.', '-');
+            },
+            setSearchDisabled : function(value){
+                this.searchDisabled = value;
+            },
+            initComments : function(){
+                
+                    var vue = this;
+                    var theme = {
+                        render : function(state, instance) {
+                            var container = document.createElement('div');
+                            container.lang = "en-US";
+                            container.className = 'gitment-container gitment-root-container';
+                            container.appendChild(instance.renderHeader(state, instance));
+                            container.appendChild(instance.renderComments(state, instance));
+                            container.appendChild(instance.renderEditor(state, instance));
+                            return container;
+                        },
+                    }
+
+                    var gitment = new Gitment({
+                        id : 'catlib-cn:v2/upgrade.html',
+                        owner: 'catlib',
+                        repo: 'catlib-cn.io',
+                        oauth: {
+                            client_id: '3620f7cdd1c50b4b6e3c',
+                            client_secret: '50664006a799cb29b27e8358b88a6a4580e8dc0c',
+                            cross_server: 'https://31225080.ap-southeast-1.fc.aliyuncs.com/2016-08-15/proxy/gitment/gitment-cross/',
+                        },
+                        labels : [
+                            'CatLib'
+                        ],
+                        link: 'https://cn.catlib.io/v2/upgrade.html',
+                        maintainer: ["yb199478"],
+                        theme : theme,
+                        perPage : 30,
+                    });
+
+                    gitment.render(this.$refs.comments);
+                
+            },
+        },mounted : function() {
+            this.isPC = this.withSummary = this.testPC();
+            this.$nextTick(function(){
+                this.bindScroll();
+                this.bindAnchor();
+                this.hashChange();
+                this.initComments();
+                this.bindMinHeight();
+            });
+        },
+        watch: {
+            searched : function(){
+                $('.cookbook-content').animate({scrollTop:0}, 0);
+            }
+        },
+        computed:{
+            minHeightStyle : function()
+            {
+                return { 'min-height' : this.clientHeight + "px" }
+            }
+        }
+    });
+};
+</script>
+    
+
+    
+    <script src="/scripts/cookbook.js"></script>
+    
+      <script src="/scripts/gitment.js"></script>
+    
+    
+    
+  </body>
+</html>

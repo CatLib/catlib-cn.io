@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0">
+
+    
+
+    
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="/styles/cookbook.css">
+    <link rel="stylesheet" href="/styles/fontawesome.css">
+    
+      <link rel="stylesheet" href="/styles/gitment.css">
+    
+
+    <!-- favicon -->
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+
+    
+
+    
+
+    <title>CatLib - 风格指南 </title>
+  </head>
+
+  <body>
+    
+    
+    <div id="cookbook" :class="{'with-summary' : withSummary}" v-cloak>
+    <div class="cookbook-summary">
+    
+    <search placeholder="Type to search" :versions="versions" :root="root" v-model="searched" v-on:submit="searchSubmit" :disable="searchDisabled" v-on:disabled="setSearchDisabled"></search>
+    <navigation :data="navigation" :web="web" :versions="versions" :root="root" active="v1/style.html" :subnavdata="contentNavigation" :value="contentOffset" :searchdisabled="searchDisabled"></navigation>
+    
+</div>    <div class="cookbook-content" ref="content">
+    
+    <div class="cookbook-header" role="navigation">
+        <header-tool :web="web" path="v1/style.html" editor v-model="withSummary"></header-tool>
+        <header-navigation :web="web" :versions="versions" :root="root"></header-navigation>
+    </div>
+    <div class="content-wrapper" @click="hidenSummary" :style="minHeightStyle">
+        <checkout :navigation="navigation" :web="web" :versions="versions" v-model="checkout"></checkout>
+        <div v-if="checkout" class="cookbook-search-results">
+            <div id="search-noresults" v-show="searched == null">
+                <section ref="section" class="markdown-section">
+                    <h1 id="风格指南"><a href="#风格指南" class="headerlink" title="风格指南"></a>风格指南</h1><p>这是CatLib特有的代码风格指南，如果您在您的项目中使用CatLib，为了避免错误，降低沟通成本，小纠结和<a href="anti-pattern.html">反模式</a>，阅读本指南是一份不错的选择。</p>
+<p>我们不能保证风格指南中的所有内容，对于所有工程和团队都是理想的，所以根据项目环境，周围技术环境，风格出现偏差是可行的。</p>
+<p>我们应该尽可能的遵守本风格指南提出的建议。</p>
+<p>根据周围技术堆栈对于命名规范相关我们建议您阅读微软提供的：<a href="https://docs.microsoft.com/zh-cn/dotnet/standard/design-guidelines/index" target="_blank" rel="noopener">框架设计指南</a></p>
+<h2 id="优先级定义"><a href="#优先级定义" class="headerlink" title="优先级定义"></a>优先级定义</h2><h4 id="A-必须"><a href="#A-必须" class="headerlink" title="(A)必须"></a>(A)必须</h4><p>这些规范会帮你规避错误，您必须准守这些规范。这里可以存在例外，但是应该非常少见，只有您非常熟悉c#和周围技术栈且具备充足理由的情况下可以进行例外。</p>
+<h4 id="B-强烈建议"><a href="#B-强烈建议" class="headerlink" title="(B)强烈建议"></a>(B)强烈建议</h4><p>这些规范能够在绝大多数项目中改善可读性和程序优雅度。即使你违反了，代码还是能照常运行，可以存在例外，但例外应该尽可能少且有合理的理由。</p>
+<h4 id="C-建议"><a href="#C-建议" class="headerlink" title="(C)建议"></a>(C)建议</h4><p>在这些规则里，我们提出一个默认的建议，如果理由充分，你可以随意在你的代码库中做出不同的选择。</p>
+<h4 id="D-不建议"><a href="#D-不建议" class="headerlink" title="(D)不建议"></a>(D)不建议</h4><p>这些规则会导致代码变得难以维护甚至出现bug。这些规则列出了存在的潜在技术风险，并说明了它们什么时候不应该被使用。</p>
+<h2 id="A-项目名始终作为命名空间的开头"><a href="#A-项目名始终作为命名空间的开头" class="headerlink" title="(A)项目名始终作为命名空间的开头"></a><code>(A)</code>项目名始终作为命名空间的开头</h2><p>命名空间的第一个片段为项目的名字。这样做可以避免不同的第三方服务提供者提供的类发生冲突。</p>
+<p><strong>错误的例子</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">FileSystem</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">FileSystem</span></span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>正确的例子</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">CatLib.FileSystem</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">FileSystem</span></span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="A-服务的命名空间必须和服务的父级文件夹名一致"><a href="#A-服务的命名空间必须和服务的父级文件夹名一致" class="headerlink" title="(A)服务的命名空间必须和服务的父级文件夹名一致"></a><code>(A)</code>服务的命名空间必须和服务的父级文件夹名一致</h2><p>所有的服务(由多个类组成)命名空间必须和其父文件夹名字保持一致（对于根文件夹可以不包含在命名空间中，如:Providers），以避免通过目录检索时无法明确服务位置，同时可以避免现在以及未来的类名相冲突。</p>
+<p><strong>错误的例子</strong></p>
+<ul>
+<li><code>Providers/CatLib.FileSystem/AdapterLocal.cs</code></li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">CatLib.IO</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AdapterLocal</span></span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>Providers/CatLib.FileSystem/OSS/AdapterAliyunOSS.cs</code></li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">CatLib.IO.OSS</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AdapterAliyunOSS</span></span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>正确的例子</strong></p>
+<ul>
+<li><code>Providers/CatLib.FileSystem/AdapterLocal.cs</code></li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">CatLib.FileSystem</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AdapterLocal</span></span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>Providers/CatLib.FileSystem/OSS/AdapterAliyunOSS.cs</code></li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">CatLib.FileSystem.OSS</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AdapterAliyunOSS</span></span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="A-文件名必须与类名一致"><a href="#A-文件名必须与类名一致" class="headerlink" title="(A)文件名必须与类名一致"></a><code>(A)</code>文件名必须与类名一致</h2><p>所有的类名必须和文件名一致，以避免通过目录来检索类时出现不一致的问题（这意味着我们不能将两个类写在同一个文件中，除非它是内部类）。</p>
+<p><strong>错误的例子</strong></p>
+<ul>
+<li><code>Providers/CatLib.FileSystem/AdapterLocal.cs</code></li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Local</span></span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>正确的例子</strong></p>
+<ul>
+<li><code>Providers/CatLib.FileSystem/AdapterLocal.cs</code></li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">AdapterLocal</span></span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="A-内部类的访问级别不能高于protected"><a href="#A-内部类的访问级别不能高于protected" class="headerlink" title="(A)内部类的访问级别不能高于protected"></a><code>(A)</code>内部类的访问级别不能高于protected</h2><p>所有的内部类，不允许将访问级别设定为<code>public</code>或<code>internal</code>，因为如果内部类可以被外部访问，将会出现不可预测的问题。</p>
+<p><strong>错误的例子</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">FileSystem</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Disk</span></span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>正确的例子</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">FileSystem</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">class</span> <span class="title">Disk</span></span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="A-对待编译器警告视同错误"><a href="#A-对待编译器警告视同错误" class="headerlink" title="(A)对待编译器警告视同错误"></a><code>(A)</code>对待编译器警告视同错误</h2><p>所有的编译器警告都应该被处理，忽略编译器警告可能会导致一些隐藏的bug。</p>
+<p><strong>错误的例子</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span>(a == <span class="literal">null</span>) <span class="comment">// 引发一个编译器警告</span></span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>正确的例子</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> a = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">if</span>(a == <span class="number">0</span>)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>示例中会导致完全不同的两种结果。</p>
+<h2 id="A-对外服务的接口放在API命名空间下"><a href="#A-对外服务的接口放在API命名空间下" class="headerlink" title="(A)对外服务的接口放在API命名空间下"></a><code>(A)</code>对外服务的接口放在API命名空间下</h2><p>对外服务的接口放在API命名空间下，这样在IED using的时候可以避免错误的使用实现代码而发生耦合。</p>
+<p>一般来说我们放置在:<code>项目名</code>.<code>API</code>.<code>组件名</code>的命名空间下</p>
+<p><strong>错误的例子</strong></p>
+<ul>
+<li><code>Providers/CatLib.FileSystem/API/IFileSystem.cs</code></li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">CatLib.FileSystem</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IFileSystem</span></span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>正确的例子</strong></p>
+<ul>
+<li><code>Providers/API/CatLib.FileSystem/IFileSystem.cs</code></li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">CatLib.API.FileSystem</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IFileSystem</span></span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="B-完整单词的类名"><a href="#B-完整单词的类名" class="headerlink" title="(B)完整单词的类名"></a><code>(B)</code>完整单词的类名</h2><p>类名应该倾向于完整单词，而不是单词的缩写。</p>
+<p>代码编辑器的自动补全功能已经让书写长类名的成本变得非常的低，而其带来的的明确性是非常宝贵的，我们不应该使用缩写来代替长类名。</p>
+<p><strong>错误的例子</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Providers/</span><br><span class="line">  CatLib.FileSystem/</span><br><span class="line">    ManagerFS.cs</span><br><span class="line">    OptsFS.cs</span><br></pre></td></tr></table></figure>
+<p><strong>正确的例子</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Providers/</span><br><span class="line">  CatLib.FileSystem/</span><br><span class="line">    ManagerFileSystem.cs</span><br><span class="line">    OptionsFileSystem.cs</span><br></pre></td></tr></table></figure>
+<h2 id="B-紧密耦合的类名"><a href="#B-紧密耦合的类名" class="headerlink" title="(B)紧密耦合的类名"></a><code>(B)</code>紧密耦合的类名</h2><p>如果一个类只在另外一个类的场景下有意义，这层关系应该体现在类名(包括文件名)上。因为编辑器通常会按字母顺序组织文件，所以这样做可以把相关联的文件排在一起。</p>
+<p><strong>错误的例子</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Providers/</span><br><span class="line">  CatLib.FileSystem/</span><br><span class="line">    Handler.cs</span><br><span class="line">    DirectoryHandler.cs</span><br><span class="line">    FileForHandler.cs</span><br></pre></td></tr></table></figure>
+<p><strong>正确的例子</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Providers/</span><br><span class="line">  CatLib.FileSystem/</span><br><span class="line">    Handler.cs</span><br><span class="line">    HandlerDirectory.cs</span><br><span class="line">    HandlerFile.cs</span><br></pre></td></tr></table></figure>
+<h2 id="B-类名的单词顺序"><a href="#B-类名的单词顺序" class="headerlink" title="(B)类名的单词顺序"></a><code>(B)</code>类名的单词顺序</h2><p>类名应该以<code>高级别</code>的 (通常是一般化描述的) 单词开头，以描述性的修饰词结尾。</p>
+<h4 id="为什么不遵循自然语意"><a href="#为什么不遵循自然语意" class="headerlink" title="为什么不遵循自然语意"></a>为什么不遵循自然语意</h4><p>在自然的英文里，形容词和其它描述语通常都出现在名词之前，否则需要使用连接词。</p>
+<ul>
+<li>coffee with sugar</li>
+</ul>
+<p>如果你愿意，你完全可以在类名里包含这些连接词，但是单词的顺序很重要。</p>
+<p>在你的类名中，所谓的<code>高级别</code>一般和语境有关，比如对于一个登录界面来说它可能包含下面这些类：</p>
+<p><strong>错误的例子</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Providers/</span><br><span class="line">  CatLib.LoginUI/</span><br><span class="line">    AgreementCheckbox.cs</span><br><span class="line">    LoginButton.cs</span><br><span class="line">    PasswordInput.cs</span><br><span class="line">    RegisterButton.cs</span><br><span class="line">    TextInput.cs</span><br></pre></td></tr></table></figure>
+<p>我们可以发现我们很难发现那些类是针对<code>输入</code>这个功能的。现在我们根据单词顺序进行重命名：</p>
+<p><strong>正确的例子</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Providers/</span><br><span class="line">  CatLib.LoginUI/</span><br><span class="line">    ButtonLogin.cs</span><br><span class="line">    ButtonRegister.cs</span><br><span class="line">    CheckboxAgreement.cs</span><br><span class="line">    InputText.cs</span><br><span class="line">    InputPassword.cs</span><br></pre></td></tr></table></figure>
+<p>因为编辑器通常会按字母顺序组织文件，所以将高级别的单词排在前类之间的重要关系一目了然。</p>
+<h2 id="B-多级目录与类命名"><a href="#B-多级目录与类命名" class="headerlink" title="(B)多级目录与类命名"></a><code>(B)</code>多级目录与类命名</h2><p><a href="#B-类名的单词顺序">类名的单词顺序</a>指出的问题可以通过多级目录进行解决，但是我们只推荐服务只有在非常多，且种类不一的情况下才这么做。因为在多级目录中查找要比在单目录中查找更加花费精力，并且对于命名空间的引用将会变得复杂。</p>
+<p>如果使用了多级目录，那么也请务必保证类的完整命名，否则将会导致在代码中的理解成本增加。</p>
+<p><strong>错误的例子</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Providers/</span><br><span class="line">  CatLib.LoginUI/</span><br><span class="line">    Checkbox/</span><br><span class="line">        Agreement.cs</span><br><span class="line">    Button/</span><br><span class="line">        Login.cs</span><br><span class="line">        Register.cs</span><br><span class="line">    Input/</span><br><span class="line">        Password.cs</span><br><span class="line">        Text.cs</span><br></pre></td></tr></table></figure>
+<p><strong>正确的例子</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Providers/</span><br><span class="line">  CatLib.LoginUI/</span><br><span class="line">    Checkbox/</span><br><span class="line">        CheckboxAgreement.cs</span><br><span class="line">    Button/</span><br><span class="line">        ButtonLogin.cs</span><br><span class="line">        ButtonRegister.cs</span><br><span class="line">    Input/</span><br><span class="line">        InputPassword.cs</span><br><span class="line">        InputText.cs</span><br></pre></td></tr></table></figure>
+<h2 id="B-函数名和类名大小写"><a href="#B-函数名和类名大小写" class="headerlink" title="(B)函数名和类名大小写"></a><code>(B)</code>函数名和类名大小写</h2><p>在声明函数和类的时候，其命名始终使用CamelCase。</p>
+<p>我们遵循了微软提供的<a href="https://docs.microsoft.com/zh-cn/dotnet/standard/design-guidelines/index" target="_blank" rel="noopener">框架设计指南</a>来确保 API 的一致性和易用性。</p>
+<p><strong>错误的例子</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">fileSystem</span></span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>正确的例子</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">FileSystem</span></span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="B-将接口绑定到服务，而不是为服务设定别名"><a href="#B-将接口绑定到服务，而不是为服务设定别名" class="headerlink" title="(B)将接口绑定到服务，而不是为服务设定别名"></a><code>(B)</code>将接口绑定到服务，而不是为服务设定别名</h2><p>我们强烈建议将接口绑定到服务，而不是为服务设定别名。如果以别名的形式设定，很多事件将会无法使用，如：Watch。</p>
+<p><strong>错误的例子</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">App.Bind&lt;FileSystem&gt;().Alias&lt;IFileSystem&gt;();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>错误点：直接使用了别名，而没有对实现进行绑定主要接口。</p>
+</blockquote>
+<p><strong>正确的例子</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">App.Bind&lt;IFileSystem&gt;(()=&gt; <span class="keyword">new</span> FileSystem());</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">App.Bind&lt;IFileSystem, FileSystem&gt;();</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">App.Bind&lt;IFileSystem, FileSystem&gt;().Alias&lt;IDisk&gt;();</span><br></pre></td></tr></table></figure>
+<p>如果存在多个接口需要指向一个服务，请使用别名功能。</p>
+<h2 id="B-服务内的命名规范一致"><a href="#B-服务内的命名规范一致" class="headerlink" title="(B)服务内的命名规范一致"></a><code>(B)</code>服务内的命名规范一致</h2><p>对于一个服务中的命名规范强烈建议一致，例如：要么变量是<code>_</code>开头要么始终是<code>m_</code>开头（或者其他统一的规范，如：无标示符开头）。而不能交叉混用。</p>
+<p>交叉混用会导致团队一致性下降，从而提高理解成本。单个组件一般由2-3人协同开发。我们强烈建议以服务为最小单元统一代码命名规范。</p>
+<p><strong>错误的例子</strong></p>
+<ul>
+<li><code>Providers/CatLib.FileSystem/FileSystem.cs</code></li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">FileSystem</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">string</span> defaultDiskName;</span><br><span class="line">    <span class="keyword">private</span> IDictionary&lt;<span class="keyword">string</span>, IDisk&gt; m_disks;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>Providers/CatLib.FileSystem/Disk.cs</code></li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Disk</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">string</span> _diskName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>正确的例子</strong></p>
+<ul>
+<li><code>Providers/CatLib.FileSystem/FileSystem.cs</code></li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">FileSystem</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">string</span> defaultDiskName;</span><br><span class="line">    <span class="keyword">private</span> IDictionary&lt;<span class="keyword">string</span>, IDisk&gt; disks;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>Providers/CatLib.FileSystem/Disk.cs</code></li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Disk</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">string</span> diskName;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="C-使用上下文关系来处理不同实例相同接口的服务"><a href="#C-使用上下文关系来处理不同实例相同接口的服务" class="headerlink" title="(C)使用上下文关系来处理不同实例相同接口的服务"></a><code>(C)</code>使用上下文关系来处理不同实例相同接口的服务</h2><p>我们建议使用上下文关系来处理不同实例相同接口的服务，而不是使用在具体实现构造函数中通过获取指定服务。如果在实际的实现中获取服务实例，将会和框架耦合，并产生公共耦合。</p>
+<p>而将这些关系定义在服务提供者中将会避免这些问题。</p>
+<p><strong>错误的例子</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">GameVideo</span> : <span class="title">IGameVideo</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">GameVideo</span>(<span class="params">IFileSystem fileSystem</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">var</span> disk = fileSystem.Get(<span class="string">"oss"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>正确的例子</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">GameVideo</span> : <span class="title">IGameVideo</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">GameVideo</span>(<span class="params">IDisk disk</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">App.Singleton&lt;IGameVideo, GameVideo&gt;()</span><br><span class="line">    .Needs&lt;IDisk&gt;()</span><br><span class="line">    .Given(()=&gt; App.Make&lt;IFileSystem&gt;().Get(<span class="string">"oss"</span>));</span><br></pre></td></tr></table></figure>
+<h2 id="C-总是在服务提供者中来注册服务"><a href="#C-总是在服务提供者中来注册服务" class="headerlink" title="(C)总是在服务提供者中来注册服务"></a><code>(C)</code>总是在服务提供者中来注册服务</h2><p>我们建议服务在服务提供者中进行绑定，而不是在<code>Register</code>以外的其他地方。</p>
+<p><strong>错误的例子</strong></p>
+<ul>
+<li>在<code>Register</code>之外的其他地方</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">OnStartCompleted</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    App.Singleton&lt;IFileSystem, FileSystem&gt;();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>正确的例子</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ProviderFileSystem</span> : <span class="title">ServiceProvider</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Register</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        App.Singleton&lt;IFileSystem, FileSystem&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="C-字符串常量的值，可以映射到实际类型"><a href="#C-字符串常量的值，可以映射到实际类型" class="headerlink" title="(C)字符串常量的值，可以映射到实际类型"></a><code>(C)</code>字符串常量的值，可以映射到实际类型</h2><p>我们建议字符串常量，可以映射到实际有效的类型或者该常量本身。这样在未来需要通过常量值来分析时可以快速定位具体的类。</p>
+<p><strong>错误的例子</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ApplicationEvents</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">const</span> <span class="keyword">string</span> Bootstrapping = <span class="string">"bootstrapping"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>正确的例子</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ApplicationEvents</span> </span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">const</span> <span class="keyword">string</span> Bootstrapping = <span class="string">"ApplicationEvents.Bootstrapping"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="C-一个服务只提供一个服务提供者"><a href="#C-一个服务只提供一个服务提供者" class="headerlink" title="(C)一个服务只提供一个服务提供者"></a><code>(C)</code>一个服务只提供一个服务提供者</h2><p>一个服务只提供一个服务提供者。如果一个服务提供了多个服务提供者将会导致沟通成本的上升，使用者无法了解不同服务提供者之间的区别或不知道该如何使用。</p>
+<p>我们建议使用变量控制的方式来处理这个问题。</p>
+<p><strong>错误的例子</strong></p>
+<ul>
+<li><code>Providers/CatLib.FileSystem/ProviderFileSystemClean.cs</code></li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ProviderFileSystemClean</span> : <span class="title">ServiceProvider</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Register</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        App.Singleton&lt;IFileSystem, FileSystem&gt;();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>Providers/CatLib.FileSystem/ProviderFileSystem.cs</code></li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ProviderFileSystem</span> : <span class="title">ServiceProvider</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Register</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        App.Singleton&lt;IFileSystem, FileSystem&gt;()</span><br><span class="line">            .OnResolving((instance) =&gt;</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">var</span> fileSystem = (FileSystem)instance;</span><br><span class="line">                fileSystem.Extend(()=&gt; <span class="keyword">new</span> Disk(<span class="keyword">new</span> AdapterLocal()), <span class="string">"local"</span>);</span><br><span class="line">                fileSystem.Extend(()=&gt; <span class="keyword">new</span> Disk(<span class="keyword">new</span> AdapterHttp()), <span class="string">"http"</span>);</span><br><span class="line">            &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>正确的例子</strong></p>
+<ul>
+<li><code>Providers/CatLib.FileSystem/ProviderFileSystem.cs</code></li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ProviderFileSystem</span> : <span class="title">ServiceProvider</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">bool</span> ExtendDefaultAdapter &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125; = <span class="literal">false</span>;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">override</span> <span class="keyword">void</span> <span class="title">Register</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">var</span> binder = App.Singleton&lt;IFileSystem, FileSystem&gt;();</span><br><span class="line">        <span class="keyword">if</span>(!ExtendDefaultAdapter)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        binder.OnResolving((instance) =&gt;</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">var</span> fileSystem = (FileSystem)instance;</span><br><span class="line">            fileSystem.Extend(()=&gt; <span class="keyword">new</span> Disk(<span class="keyword">new</span> AdapterLocal()), <span class="string">"local"</span>);</span><br><span class="line">            fileSystem.Extend(()=&gt; <span class="keyword">new</span> Disk(<span class="keyword">new</span> AdapterHttp()), <span class="string">"http"</span>);</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="C-可拆分单词的命名"><a href="#C-可拆分单词的命名" class="headerlink" title="(C)可拆分单词的命名"></a><code>(C)</code>可拆分单词的命名</h2><p>有些时候我们可能纠结于可拆分单词如何进行命名，如：<code>username</code>可以被拆分为<code>user</code>和<code>name</code>。虽然这些单词可以被拆分但是我们需要注意<code>username</code>为英文中的一个整体单词。所以我们应该视作为一个单词。</p>
+<p><strong>错误的例子</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">LoginUI</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">string</span> userName; <span class="comment">// UserName, _userName 都是错误的例子</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>正确的例子</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">LoginUI</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">string</span> username; <span class="comment">// Username, _username 都是正确的例子</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="C-门面应该放置在Facades命名空间下"><a href="#C-门面应该放置在Facades命名空间下" class="headerlink" title="(C)门面应该放置在Facades命名空间下"></a><code>(C)</code>门面应该放置在Facades命名空间下</h2><p>属于<a href="architecture/facade.html">门面</a>的代码应该被放置在<code>项目名.Facades</code>的命名空间下。</p>
+<p><strong>错误的例子</strong></p>
+<ul>
+<li><code>Providers/CatLib.FileSystem/Facades/FileSystem.cs</code></li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">CatLib.FileSystem</span></span><br><span class="line">&#123;</span><br><span class="line">    public class FileSystem : Facade&lt;IFileSystem&gt;</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>正确的例子</strong></p>
+<ul>
+<li><code>Providers/CatLib.FileSystem/Facades/FileSystem.cs</code></li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> <span class="title">CatLib.Facades</span></span><br><span class="line">&#123;</span><br><span class="line">    public class FileSystem : Facade&lt;IFileSystem&gt;</span><br><span class="line">    &#123;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>门面作为一个特殊存在，所以我们允许其命名空间例外于其他规范。</p>
+</blockquote>
+<h2 id="C-对外提供的接口总是放在API文件夹下"><a href="#C-对外提供的接口总是放在API文件夹下" class="headerlink" title="(C)对外提供的接口总是放在API文件夹下"></a><code>(C)</code>对外提供的接口总是放在API文件夹下</h2><p>我们建议对外提供服务的接口放在<code>Providers/API/组件名</code>文件夹下，这样可以达成接口即文档的意义。</p>
+<blockquote>
+<p>内部使用的接口可以直接放在组件实现的文件夹中，而无需放在API文件夹下。</p>
+</blockquote>
+<p><strong>错误的例子</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">- Providers/</span><br><span class="line">- - FileSystem/</span><br><span class="line">- - - API/</span><br><span class="line">- - - - IFileSystem.cs</span><br><span class="line">- - - - IDisk.cs</span><br><span class="line">- - - FileSystem.cs</span><br><span class="line">- - - ProviderFileSystem.cs</span><br><span class="line">- - Debugger/</span><br><span class="line">- - - API/</span><br><span class="line">- - - - IDebugger.cs</span><br><span class="line">- - - Debugger.cs</span><br><span class="line">- - - ProviderDebugger.cs</span><br></pre></td></tr></table></figure>
+<p><strong>正确的例子</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">- Providers/</span><br><span class="line">- - API/</span><br><span class="line">- - - FileSystem/</span><br><span class="line">- - - - IFileSystem.cs</span><br><span class="line">- - - - IDisk.cs</span><br><span class="line">- - - Debugger/</span><br><span class="line">- - - - IDebugger.cs</span><br><span class="line">- - FileSystem/</span><br><span class="line">- - - FileSystem.cs</span><br><span class="line">- - - ProviderFileSystem.cs</span><br><span class="line">- - Debugger/</span><br><span class="line">- - - Debugger.cs</span><br><span class="line">- - - ProviderDebugger.cs</span><br></pre></td></tr></table></figure>
+<h2 id="D-在循环中生成Lambda表达式，并尝试访问迭代器变量。"><a href="#D-在循环中生成Lambda表达式，并尝试访问迭代器变量。" class="headerlink" title="(D)在循环中生成Lambda表达式，并尝试访问迭代器变量。"></a><code>(D)</code>在循环中生成Lambda表达式，并尝试访问迭代器变量。</h2><p>在循环中生成Lambda表达式，并尝试访问迭代器变量时，会导致迭代器变量不是预期值的问题。</p>
+<p><strong>错误的例子</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">foreach</span> (<span class="keyword">var</span> index <span class="keyword">in</span> <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line">&#123;</span><br><span class="line">    closure(()=&gt; index); <span class="comment">// index 为预期外的值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>正确的例子</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">foreach</span> (<span class="keyword">var</span> index <span class="keyword">in</span> <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>])</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">var</span> localIndex = index;</span><br><span class="line">    closure(()=&gt; localIndex);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>迭代器会导致index发生变化，从而使lambda表达式不能返回正确的index值。</p>
+<h2 id="D-不要让泛型方法支持虚函数重载"><a href="#D-不要让泛型方法支持虚函数重载" class="headerlink" title="(D)不要让泛型方法支持虚函数重载"></a><code>(D)</code>不要让泛型方法支持虚函数重载</h2><p>在一些平台下（如：unity3d）使用的静态编译(AOT)技术会导致泛型方法虚函数调用非常危险，会导致下面AOT裁剪异常：</p>
+<p><code>Attempting to call method &#39;xxxxxxxxxxxx&#39; for which no ahead of time (AOT) code was generated.</code></p>
+<p><strong>错误的例子</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">virtual</span> <span class="keyword">void</span> GenericMethod&lt;T1,T2&gt;(T1 data) <span class="comment">// 一旦虚函数被覆盖(override)并调用会引发AOT异常</span></span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>正确的例子</strong></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">void</span> GenericMethod&lt;T1,T2&gt;(T1 data)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+                </section>
+
+                
+                    <div ref="comments" id="gitment-container"></div>
+                
+                
+                <support :web="web" visiable></support>
+            </div>
+            <div v-if="searched != null" id="search-result" class="search-result" v-cloak>
+                <p v-if="searched.results.length > 0" class="search-title">
+                    与"{{ searched.keyword }}"相关的内容{{searched.results.length}}条
+                </p>
+                <p v-else class="search-title">无搜索结果可以匹配"{{ searched.keyword }}"</p>
+                <div v-for="(record) in searched.results" class="searched-line">
+                    <h3>
+                        <a :href="'/' + record.href + '#!' + encodeURI(anchorEscaping(record.hash))" @click="clearSearch">
+                            {{ record.hash }}
+                        </a>
+                    </h3>
+                    <ul>
+                        <li><i>{{ record.page }} <span v-if="record.page_title != ''">- {{ record.page_title }}</span></i> <i>score:<span>{{ record.score }}</span></i></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div></div>
+
+<script>
+window.onload = function(){  
+    new Vue({
+        el : '#cookbook',
+        data: { 
+            navigation : {"navigation":[{"levels":[{"text":"CatLib","href":"/"},{"text":"核心库","href":"index.html"}]},{"divider":true},{"text":"起步"},{"text":"介绍","href":"index.html"},{"text":"风格指南","href":"style.html"},{"text":"常见问题","href":"faq.html"},{"text":"已知BUG","href":"bug.html"},{"text":"贡献指南","href":"contribution.html"},{"text":"更新日志","href":"upgrade.html"},{"text":"迁移指南","href":"migration.html"},{"text":"系统架构"},{"text":"服务提供者","href":"architecture/service-provider.html"},{"text":"应用程序","href":"architecture/application.html"},{"text":"服务容器","href":"architecture/container.html"},{"text":"服务门面","href":"architecture/facade.html"},{"text":"框架组件"},{"text":"事件系统","href":"components/event.html"},{"text":"管理器模版","href":"components/template.html"},{"text":"辅助函数"},{"text":"数组","href":"helper/arr.html"},{"text":"字符串","href":"helper/str.html"},{"text":"字典","href":"helper/dict.html"},{"text":"时间","href":"helper/system-time.html"},{"text":"线程静态","href":"helper/thread-static.html"},{"text":"通用","href":"helper/util.html"},{"text":"数据结构"},{"text":"有序集","href":"data-structure/sort-set.html"},{"text":"快速列表","href":"data-structure/quick-list.html"},{"text":"环型缓冲区","href":"data-structure/ring-buffer.html"},{"text":"内存存储","href":"data-structure/memory-storage.html"},{"text":"过滤器链","href":"data-structure/filter-chain.html"},{"text":"流"},{"text":"包装流","href":"stream/wrapper-stream.html"},{"text":"管道流","href":"stream/pipeline-stream.html"},{"text":"存储流","href":"stream/storage-stream.html"},{"text":"组合流","href":"stream/combine-stream.html"},{"text":"分片流","href":"stream/segment-stream.html"},{"divider":true},{"text":"Power by CatLib","href":"https://github.com/CatLib","external":true}]},
+            web : {"navigation":[{"type":"versions","mobile":true},{"type":"menu","text":"组件库","mobile":true,"list":[{"text":"ILRuntime支持库","href":"https://ilruntime.catlib.io"}]},{"type":"normal","text":"English","href":"https://catlib.io/lasted/index.html","mobile":true},{"type":"icon","fontawesome":"github","href":"https://github.com/CatLib/Core","mobile":true}],"tool":{"editor":{"text":"编辑","href":"https://github.com/CatLib/catlib-cn.io/tree/2.0/","external":true}},"support":{"label":["在文档中没有找到您需要的内容？","尝试在左侧搜索栏中搜索，或者{text}"],"text":"在GitHub中发起提问","href":"https://github.com/CatLib/catlib-cn.io/issues","external":true}},
+            versions: {
+                current :  {"test":"^v1\\/","name":"v1.4","active":"Latest(v1.4)","data":"v1"},
+                list: [{"test":"^v1\\/","name":"v1.4","active":"Latest(v1.4)","data":"v1"},{"test":"^v2\\/","name":"v2.0","active":"Latest(v2.0)","data":"v2"}]
+            },
+            withSummary : true,
+            isPC : null,
+            checkout: false,
+            root: "/",
+            contentNavigation: [],
+            contentOffset : { 'offsetTop' : 0, 'height' : 0 },
+            searched: null,
+            searchDisabled: localStorage.getItem("search-input-disabled") == 'true',
+            clientHeight : 0
+        },
+        methods :{
+            testPC : function(){ 
+                var userAgentInfo = navigator.userAgent;
+                var deviceReg = [
+                    /(MI(\s+)|2013022|2013023|HM|2014011|2014501|2014813|2014811|2014812|2014817|2014818|2014819|2014502|2015|xiaomi).*/i,
+                    /(MI(.*|\s*)PAD).*/i,
+                    /(iPhone | iPod).*/i,
+                    /(iPad).*/i,
+                    /(Android).*/i,
+                    /(iPhone|iPad|iPod|iOS).*/i,
+                    /(windows(.*|\s*)phone).*/i
+                ];
+                var flag = true;
+                for (var v = 0; v < deviceReg.length; v++) {
+                    if (deviceReg[v].test(userAgentInfo)) {
+                        flag = false;
+                        break;
+                    }
+                }
+                
+                return flag;
+            },
+            hidenSummary : function(){
+                if(!this.isPC)
+                {
+                    this.withSummary = false;
+                }
+            },
+            bindMinHeight: function(){
+                var vue = this;
+                window.addEventListener("resize", function(){
+                    vue.clientHeight = document.documentElement.clientHeight - 50;
+                }, false);
+                this.clientHeight = document.documentElement.clientHeight - 50;
+            },
+            bindAnchor : function(){
+                if(this.$refs.section == undefined){
+                    return;
+                }
+                window.addEventListener("hashchange", this.hashChange, false);
+                window.addEventListener("resize", this.refreshContentNavigation, false);
+                var elements = this.$refs.section.getElementsByTagName("a");
+                var vue = this;
+                for(var index = 0; index < elements.length; index++){
+                    let element = elements[index];
+                    let href = element.getAttribute("href");
+                    if(href.length <= 0 || href[0] != "#"){
+                        continue;
+                    }
+
+                    element.addEventListener('click', function(event){
+                        location.hash = "!" + encodeURI(decodeURI(vue.anchorEscaping(element.hash.substring(1))));
+                        event.preventDefault();
+                    }, false);
+                }
+
+                this.refreshContentNavigation();
+            },
+            refreshContentNavigation : function(){
+                if(this.$refs.section == undefined || !this.supportSubnav()){
+                    return;
+                }
+                var subnavIndex = 0;
+                var elements = this.$refs.section.getElementsByClassName("headerlink");
+                var subnav = [];
+                for(var index=0; index < elements.length; index++){
+                    var element = elements[index];
+                    if(element.parentElement.nodeName == "H2"){
+                        subnav[subnavIndex++] = {'text' : element.title , 'hash' : "!" + element.hash.substring(1), 'offsetTop' : element.offsetTop};
+                    }
+                }
+                this.contentNavigation = subnav;
+            },
+            hashChange : function(){
+                var locationHash = location.hash.replace(/^#!/ig, "#");
+                if(locationHash == ''){
+                    return;
+                }
+                locationHash = decodeURI(locationHash);
+                var hashes = this.$refs.section.getElementsByClassName("headerlink");
+                var target = null;
+                for(var index=0; index < hashes.length; index++){
+                    var hash = hashes[index];
+                    if(decodeURI(hash.hash) == locationHash){
+                        target = hash;
+                        break;
+                    }
+                }
+                
+                if(target == null){
+                    return;
+                }
+
+                var top = target.offsetTop - 20; 
+                
+                if(top > 0)
+                {
+                    var vue = this;
+                    $('.cookbook-content').animate({scrollTop:top}, 500, function(){
+                        if(!vue.isPC){
+                            vue.withSummary = false;
+                        }
+                    });
+                }        
+            },
+            bindScroll : function(){
+                if(!this.supportSubnav()){
+                    return;
+                }
+                this.$refs.content.addEventListener("scroll", this.scrollChange, false);
+            },
+            scrollChange : function(e){
+                this.contentOffset = { 
+                    'offsetTop' : this.$refs.content.scrollTop,
+                    'height' : this.$refs.content.scrollHeight - this.$refs.content.offsetHeight
+                };
+            },
+            supportSubnav : function(){
+                if(this.navigation.subnav != undefined && this.navigation.subnav == false){
+                    return false;
+                }
+                return true;
+            },
+            clearSearch: function(){
+                this.searched = null;
+                this.$nextTick(function(){
+                    this.hashChange();
+                });
+            },
+            searchSubmit: function(){
+                if(!this.isPC)
+                {
+                    this.withSummary = false;
+                }
+            },
+            anchorEscaping : function(str){
+                return str.replace(' ', '-').replace('.', '-');
+            },
+            setSearchDisabled : function(value){
+                this.searchDisabled = value;
+            },
+            initComments : function(){
+                
+                    var vue = this;
+                    var theme = {
+                        render : function(state, instance) {
+                            var container = document.createElement('div');
+                            container.lang = "en-US";
+                            container.className = 'gitment-container gitment-root-container';
+                            container.appendChild(instance.renderHeader(state, instance));
+                            container.appendChild(instance.renderComments(state, instance));
+                            container.appendChild(instance.renderEditor(state, instance));
+                            return container;
+                        },
+                    }
+
+                    var gitment = new Gitment({
+                        id : 'catlib-cn:v1/style.html',
+                        owner: 'catlib',
+                        repo: 'catlib-cn.io',
+                        oauth: {
+                            client_id: '3620f7cdd1c50b4b6e3c',
+                            client_secret: '50664006a799cb29b27e8358b88a6a4580e8dc0c',
+                            cross_server: 'https://31225080.ap-southeast-1.fc.aliyuncs.com/2016-08-15/proxy/gitment/gitment-cross/',
+                        },
+                        labels : [
+                            'CatLib'
+                        ],
+                        link: 'https://cn.catlib.io/v1/style.html',
+                        maintainer: ["yb199478"],
+                        theme : theme,
+                        perPage : 30,
+                    });
+
+                    gitment.render(this.$refs.comments);
+                
+            },
+        },mounted : function() {
+            this.isPC = this.withSummary = this.testPC();
+            this.$nextTick(function(){
+                this.bindScroll();
+                this.bindAnchor();
+                this.hashChange();
+                this.initComments();
+                this.bindMinHeight();
+            });
+        },
+        watch: {
+            searched : function(){
+                $('.cookbook-content').animate({scrollTop:0}, 0);
+            }
+        },
+        computed:{
+            minHeightStyle : function()
+            {
+                return { 'min-height' : this.clientHeight + "px" }
+            }
+        }
+    });
+};
+</script>
+    
+
+    
+    <script src="/scripts/cookbook.js"></script>
+    
+      <script src="/scripts/gitment.js"></script>
+    
+    
+    
+  </body>
+</html>

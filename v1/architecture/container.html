@@ -1,0 +1,632 @@
+<!doctype html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0">
+
+    
+
+    
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="/styles/cookbook.css">
+    <link rel="stylesheet" href="/styles/fontawesome.css">
+    
+      <link rel="stylesheet" href="/styles/gitment.css">
+    
+
+    <!-- favicon -->
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+
+    
+
+    
+
+    <title>CatLib - 服务容器 </title>
+  </head>
+
+  <body>
+    
+    
+    <div id="cookbook" :class="{'with-summary' : withSummary}" v-cloak>
+    <div class="cookbook-summary">
+    
+    <search placeholder="Type to search" :versions="versions" :root="root" v-model="searched" v-on:submit="searchSubmit" :disable="searchDisabled" v-on:disabled="setSearchDisabled"></search>
+    <navigation :data="navigation" :web="web" :versions="versions" :root="root" active="v1/architecture/container.html" :subnavdata="contentNavigation" :value="contentOffset" :searchdisabled="searchDisabled"></navigation>
+    
+</div>    <div class="cookbook-content" ref="content">
+    
+    <div class="cookbook-header" role="navigation">
+        <header-tool :web="web" path="v1/architecture/container.html" editor v-model="withSummary"></header-tool>
+        <header-navigation :web="web" :versions="versions" :root="root"></header-navigation>
+    </div>
+    <div class="content-wrapper" @click="hidenSummary" :style="minHeightStyle">
+        <checkout :navigation="navigation" :web="web" :versions="versions" v-model="checkout"></checkout>
+        <div v-if="checkout" class="cookbook-search-results">
+            <div id="search-noresults" v-show="searched == null">
+                <section ref="section" class="markdown-section">
+                    <h1 id="服务容器"><a href="#服务容器" class="headerlink" title="服务容器"></a>服务容器</h1><p>Container 服务容器是一个用于管理<code>类的依赖</code>和<code>执行依赖注入</code>的强大工具。其实质是通过反射来对<code>构造函数</code>或者标记为<code>[Inject]</code>特性的属性选择器进行注入。</p>
+<h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>几乎所有的服务绑定都是在服务提供者中完成。如果一个<code>服务</code>没有基于任何接口那么就没有必要将其绑定到容器(除非他是组件内部使用的类)。</p>
+<p>容器并不需要被告知如何构建对象，因为它会使用反射技术自动解析出具体的对象实例。</p>
+<p>在服务提供者中我们可以使用<code>Bind()</code>或者<code>Singleton()</code>方法来注册一个<code>服务</code>的绑定。</p>
+<p>在CatLib核心库中<a href="application.html">应用程序</a>继承自服务容器，所以在任何位置，您可以通过<code>App</code>全局变量访问容器。</p>
+<h2 id="构建服务"><a href="#构建服务" class="headerlink" title="构建服务"></a>构建服务</h2><p>您可以通过<code>Make()</code>方法来构建服务。如果通过容器去生成一个没有被绑定的服务，那么容器会根据策略尝试解决需要被生成的服务，如果尝试解决失败，那么将会抛出一个<code>UnresolvableException</code>异常。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fileSystem = App.Make&lt;IFileSystem&gt;();</span><br></pre></td></tr></table></figure>
+<h4 id="构建服务时传入自定义参数"><a href="#构建服务时传入自定义参数" class="headerlink" title="构建服务时传入自定义参数"></a>构建服务时传入自定义参数</h4><p>CatLib支持在构建一个服务时为其提供自定义的参数，您只需要这样做：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fileSystem = App.Make&lt;IFileSystem&gt;(<span class="string">"params-1"</span>, <span class="string">"params-2"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="绑定服务"><a href="#绑定服务" class="headerlink" title="绑定服务"></a>绑定服务</h2><p>要使用服务容器的强大特性您首先需要将服务绑定到服务容器，如果您不进行绑定,那么您将没有任何服务可用，这些绑定一般都是在<a href="service-provider.html">服务提供者</a>中完成的。</p>
+<p>绑定服务分为以下两种类型：</p>
+<ul>
+<li><code>实例绑定</code> 每次调用都会产生一个全新实例。</li>
+<li><code>单例绑定</code> 将类或者接口绑定到服务容器，一旦单例绑定被构建，每次调用总是返回相同的实例。</li>
+</ul>
+<h4 id="实例绑定"><a href="#实例绑定" class="headerlink" title="实例绑定"></a>实例绑定</h4><p>通过<code>Bind()</code>方法允许将服务以实例绑定的方式进行绑定。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">App.Bind&lt;IFileSystem, FileSystem&gt;();</span><br></pre></td></tr></table></figure>
+<p>我们通过上述代码将<code>IFileSystem</code>接口绑定到<code>FileSystem</code>实现。这样您就可以使用使用接口来构建服务了：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fileSystem1 = App.Make&lt;IFileSystem&gt;();</span><br><span class="line"><span class="keyword">var</span> fileSystem2 = App.Make&lt;IFileSystem&gt;();</span><br><span class="line"><span class="comment">// fileSystem1 != fileSystem2</span></span><br></pre></td></tr></table></figure>
+<h4 id="单例绑定"><a href="#单例绑定" class="headerlink" title="单例绑定"></a>单例绑定</h4><p>服务容器通过<code>Singleton</code>方法来对服务进行单例绑定，一旦单例绑定被构建，每次调用总是返回相同的实例。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">App.Singleton&lt;IFileSystem, FileSystem&gt;();</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> fileSystem1 = App.Make&lt;IFileSystem&gt;();</span><br><span class="line"><span class="keyword">var</span> fileSystem2 = App.Make&lt;IFileSystem&gt;();</span><br><span class="line"><span class="comment">// fileSystem1 == fileSystem2</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>通过<a href="facade.html">门面</a>和服务容器的结合，颠覆了传统的单例实现方式，以一种更新，更易于维护的方式来实现传统的单例模式。</p>
+</blockquote>
+<h2 id="绑定服务-如果不存在"><a href="#绑定服务-如果不存在" class="headerlink" title="绑定服务-如果不存在"></a>绑定服务-如果不存在</h2><p>您可以使用<code>BindIf</code>或<code>SingletonIf</code>进行条件判断绑定，如果绑定的服务不存在，那么则执行绑定，反之则不进行任何操作。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">App.BindIf&lt;IFileSystem, FileSystem&gt;();</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">App.SingletonIf&lt;IFileSystem, FileSystem&gt;();</span><br></pre></td></tr></table></figure>
+<h2 id="索引器"><a href="#索引器" class="headerlink" title="索引器"></a>索引器</h2><p>服务容器支持通过索引器来绑定一些简单值，通过索引器进行的绑定总是以<a href="#实例绑定">Bind-实例绑定</a>模式进行的。</p>
+<h4 id="通过索引器绑定"><a href="#通过索引器绑定" class="headerlink" title="通过索引器绑定"></a>通过索引器绑定</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">container[<span class="string">"hello"</span>] = <span class="string">"world"</span>;</span><br></pre></td></tr></table></figure>
+<h4 id="通过索引器获取"><a href="#通过索引器获取" class="headerlink" title="通过索引器获取"></a>通过索引器获取</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> world = container[<span class="string">"hello"</span>];</span><br></pre></td></tr></table></figure>
+<h2 id="构造函数注入"><a href="#构造函数注入" class="headerlink" title="构造函数注入"></a>构造函数注入</h2><p>在您简单的<code>Make()</code>操作中，服务容器已经对绑定的服务进行了一系列复杂操作（服务关系转换，服务构建，服务推测，上下文关系处理，依赖注入，服务修饰，单例化…），这一切对于开发者的您来说完全是透明的无感知的。</p>
+<p>服务容器能够自动识别您构造函数中的参数，并为其注入合适的服务实例。注入方案请参考：<a href="#依赖注入规则">依赖注入规则</a></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CustomizeService</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Service</span>(<span class="params">IFileSystem fileSystem</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="comment">// fileSystem 会被自动注入实现</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">// 如果您没有在服务容器中绑定过 IFileSystem 服务</span></span><br><span class="line">        <span class="comment">// 那么会抛出一个UnresolvableException异常</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意,只有构造函数为<code>public</code>才能够被注入<br>简而言之，您只需要向服务容器绑定好您开发的服务，服务容器将会在您生成服务时自动处理好您的服务依赖关系。</p>
+</blockquote>
+<h2 id="属性选择器注入"><a href="#属性选择器注入" class="headerlink" title="属性选择器注入"></a>属性选择器注入</h2><p>服务容器采用<code>特性标记(Attribute)</code>的方法来识别哪些<code>属性选择器</code>是允许被注入的。</p>
+<p>任何可以被注入的属性选择器必须满足以下规则：</p>
+<ul>
+<li>属性选择器必须标记<code>[Inject]</code>特性</li>
+<li>属性选择器<code>set;</code>的访问级别必须为<code>public</code>。</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">CustomizeService</span></span><br><span class="line">&#123;</span><br><span class="line">    [<span class="meta">Inject</span>]</span><br><span class="line">    <span class="keyword">public</span> IFileSystem FileSystem &#123; <span class="keyword">get</span>; <span class="keyword">set</span>; &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意，您不能在<code>构造函数</code>中访问(调用)被标记为注入的<code>属性选择器</code>的实例，因为属性选择器的注入流程会在构造函数之后进行，如果您在构造函数中访问了标记为注入的属性选择器，这将会导致一个<code>NullReferenceException</code>异常。</p>
+</blockquote>
+<h2 id="服务别名"><a href="#服务别名" class="headerlink" title="服务别名"></a>服务别名</h2><p><code>服务别名</code>是服务容器非常重要的一项功能，它可以提供：将接口绑定指定实现的能力。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">App.Singleton&lt;IFileSystem, FileSystem&gt;();</span><br></pre></td></tr></table></figure>
+<p>或将多个接口指向到同一服务</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">App.Singleton&lt;IFileSystem, FileSystem&gt;().Alias&lt;IDisk&gt;();</span><br></pre></td></tr></table></figure>
+<p>通过<code>App.Make&lt;IFileSystem&gt;()</code>您可以获得<code>FileSystem</code>实现，由于您面向接口编程，无需关注底层实现，从而服务可以实现无感知替换。</p>
+<h2 id="单例服务释放"><a href="#单例服务释放" class="headerlink" title="单例服务释放"></a>单例服务释放</h2><p>容器允许您使用<code>Release</code>方法为已经生成的<code>单例服务</code>进行释放。释放后会触发<a href="#服务释放事件">服务释放事件</a></p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">App.Release&lt;IFileSystem&gt;();</span><br></pre></td></tr></table></figure>
+<h4 id="IDisposable-释放接口"><a href="#IDisposable-释放接口" class="headerlink" title="IDisposable 释放接口"></a>IDisposable 释放接口</h4><p>对于已经生成的单例服务进行释放，会检查服务实现是否实现了<code>IDisposable</code>接口。如果实现了该接口将会自动调用。</p>
+<blockquote>
+<p>如果服务未能在容器中找到，那么会<code>Release</code>函数会返回<code>false</code></p>
+</blockquote>
+<h2 id="解除服务绑定"><a href="#解除服务绑定" class="headerlink" title="解除服务绑定"></a>解除服务绑定</h2><p>您可以通过<code>UnBind()</code>来对已经绑定的服务进行解除绑定。如果被绑定的类是单例化的且已经被构建，那么解除绑定时会自动释放已经被生成的单例，同时触发<a href="#服务释放事件">服务释放事件</a>。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> binder = App.Singleton&lt;FileSystem&gt;();</span><br><span class="line">binder.UnBind();</span><br></pre></td></tr></table></figure>
+<h2 id="服务构建事件"><a href="#服务构建事件" class="headerlink" title="服务构建事件"></a>服务构建事件</h2><p>服务容器在每一次新构建对象时都会触发服务构建的事件，可以使用<code>OnResolving()</code>方法监听该事件。</p>
+<p>该事件可以对构建的服务进行修饰处理或参数配置，并允许你在服务对象被传递给开发者之前，为其设置额外属性。</p>
+<p>构建事件分为2种类型，<code>局部构建事件</code>将会优于<code>全局构建事件</code>被调用，构建事件的特性如下：</p>
+<ul>
+<li>基于指定服务的构建事件，只有当指定服务被构建时才会被触发。</li>
+<li>基于全局的构建事件，在任何服务被构建时都会触发。</li>
+<li>单例服务的构建事件只会在第一次构建时触发一次。</li>
+<li>使用<code>Instance()</code>直接设定服务实例会触发服务构建事件。</li>
+</ul>
+<h4 id="基于服务的构建事件"><a href="#基于服务的构建事件" class="headerlink" title="基于服务的构建事件"></a>基于服务的构建事件</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">App.Singleton&lt;IFileSystem, FileSystem&gt;()</span><br><span class="line">   .OnResolving&lt;FileSystem&gt;((fileSystem) =&gt;</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="comment">//todo: 对于FileSystem的实例进行修饰</span></span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="基于全局的构建事件"><a href="#基于全局的构建事件" class="headerlink" title="基于全局的构建事件"></a>基于全局的构建事件</h4><ul>
+<li>对全部服务进行修饰</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">App.OnResolving((instance) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//todo: 对于所有被构建的服务进行修饰</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>筛选指定的服务进行修饰</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">App.OnResolving&lt;IFileSystem&gt;((fileSystem) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//todo: 对所有实现IFileSystem接口的服务进行修饰</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="服务构建事件之后"><a href="#服务构建事件之后" class="headerlink" title="服务构建事件之后"></a>服务构建事件之后</h2><p>服务容器在每一次触发服务构建的事件后会引发<code>服务构建事件之后</code>事件，您可以使用<code>OnAfterResolving()</code>方法监听该事件。</p>
+<p>同样，服务构建事件之后也包括<code>局部构建事件之后</code>和<code>全局构建事件之后</code>。</p>
+<p>服务构建事件之后，对于一些需要在解决事件之后进行校验的程序非常有用。</p>
+<h4 id="基于服务的构建事件之后"><a href="#基于服务的构建事件之后" class="headerlink" title="基于服务的构建事件之后"></a>基于服务的构建事件之后</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">App.Singleton&lt;IFileSystem, FileSystem&gt;()</span><br><span class="line">   .OnAfterResolving&lt;FileSystem&gt;((fileSystem) =&gt;</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="comment">//todo: 对于FileSystem的实例进行校验或其他操作</span></span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="基于全局的构建事件之后"><a href="#基于全局的构建事件之后" class="headerlink" title="基于全局的构建事件之后"></a>基于全局的构建事件之后</h4><ul>
+<li>对全部服务进行修饰</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">App.OnAfterResolving((instance) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//todo: 对于所有被构建的服务进行校验或其他操作</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>筛选指定的服务进行修饰</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">App.OnAfterResolving&lt;IFileSystem&gt;((fileSystem) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//todo: 对所有实现IFileSystem接口的服务进行校验或其他操作</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="服务释放事件"><a href="#服务释放事件" class="headerlink" title="服务释放事件"></a>服务释放事件</h2><p>当容器使用<code>Release</code>方法或其他释放方法(UnBind解除绑定, Instance替换实例,Flash暂存,Flush重置)为已经生成的单例服务进行释放，会触发服务释放事件。</p>
+<p>在释放事件中，您可以对服务进行最后的处理（如：资源释放，关闭关联服务）。</p>
+<p>释放事件分为2种类型，<code>局部释放事件</code>将会优于<code>全局释放事件</code>被调用，您可以使用<code>OnRelease()</code>方法监听该事件。以下行为都可能引发释放事件:</p>
+<ul>
+<li>通过<code>Instance()</code>为单例服务赋予一个全新的服务，老的服务将会被触发释放事件。</li>
+<li>通过<code>Release()</code>直接释放单例服务。</li>
+<li>通过<code>Unbind()</code>解除服务绑定关系。</li>
+<li>当容器发生<code>Flush()</code>时会触发释放事件。</li>
+<li><code>Flash</code>时的单例对象。</li>
+</ul>
+<h4 id="基于服务的释放事件"><a href="#基于服务的释放事件" class="headerlink" title="基于服务的释放事件"></a>基于服务的释放事件</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">App.Singleton&lt;IFileSystem, FileSystem&gt;()</span><br><span class="line">   .OnRelease&lt;FileSystem&gt;((fileSystem) =&gt;</span><br><span class="line">   &#123;</span><br><span class="line">       <span class="comment">//todo: 对于FileSystem的单例实例释放时</span></span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
+<h4 id="基于全局服务的释放事件"><a href="#基于全局服务的释放事件" class="headerlink" title="基于全局服务的释放事件"></a>基于全局服务的释放事件</h4><ul>
+<li>对全部服务进行修饰</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">App.OnRelease((instance) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//todo: 对于所有被释放的服务进行处理</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>筛选指定的服务进行修饰</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">App.OnRelease&lt;IFileSystem&gt;((fileSystem) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//todo: 对所有实现IFileSystem接口的服务释放时，进行处理</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>请注意：通过<a href="#实例绑定">实例绑定</a>的服务被释放时并不会触发这个事件。</p>
+</blockquote>
+<h2 id="重定义事件"><a href="#重定义事件" class="headerlink" title="重定义事件"></a>重定义事件</h2><p>当服务实现发生变化时会触发重定义事件，通过关注这个事件将可以获得服务的变化，重定义事件对单例绑定和实例绑定的服务均有效，下面这些行为将会触发重定义事件：</p>
+<ul>
+<li>对一个已经绑定，并且被构建过的服务重新绑定时。</li>
+<li>使用<code>Instance()</code>更改已经被构建的单例服务实现。</li>
+</ul>
+<p>下面行为将不会引发重定义事件：</p>
+<ul>
+<li>对从来没有被构建的服务进行重绑定时不会引发重定义事件</li>
+<li>当单例服务实例被释放时</li>
+</ul>
+<p>您可以通过 <code>OnRebound</code> 或者 <code>Watch</code> 方法对服务重定义进行关注，Watch方法为OnRebound的扩展别名方法。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">App.Watch&lt;IFileSystem&gt;((instance)=&gt;&#123;</span><br><span class="line">    <span class="comment">// instance 为新的服务实现</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>通过重定义事件可以让您的程序始终使用最新的服务实现。</li>
+<li>通过<a href="facade.html">门面</a>获得的服务实现永远是最新的。</li>
+</ul>
+</blockquote>
+<h2 id="单例化对象"><a href="#单例化对象" class="headerlink" title="单例化对象"></a>单例化对象</h2><p>服务容器可以通过<code>Instance</code>单例化您自己生成的实例，随后通过容器获取该实例总是返回被托管的实例。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">App.Instance(<span class="string">"filesystem"</span> , <span class="keyword">new</span> FileSystem());</span><br></pre></td></tr></table></figure>
+<p>需要注意的是，如果您使用了<code>Bind</code>为指定的服务进行实例绑定，那么如果您尝试将这个实例单例化，服务容器将会抛出一个<code>LogicException</code>异常:</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">App.Bind(<span class="string">"filesystem"</span>, (container, userParams)=&gt; <span class="keyword">new</span> FileSystem());</span><br><span class="line">App.Instance(<span class="string">"filesystem"</span> , <span class="keyword">new</span> FileSystem()); <span class="comment">// throw LogicException</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<ul>
+<li>单例化对象不会经过<a href="#扩展服务">扩展服务</a>处理。</li>
+<li>需要单例化的实例允许为<code>null</code>值。</li>
+</ul>
+</blockquote>
+<h2 id="服务编组"><a href="#服务编组" class="headerlink" title="服务编组"></a>服务编组</h2><p>您可以为多个服务进行编组，编组后将允许您一次生成多个服务,服务编组是使用<code>Tag</code>进行编组的。</p>
+<p>这在一些场景中是非常有用的比如：</p>
+<ul>
+<li>游戏战场内所需要的模块，可以通过服务编组统一加载和统一释放</li>
+<li>日志将会被记录到文件日志服务和网络日志服务</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Tags</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">const</span> BattleManagerTags = <span class="string">"BattleManagerTags"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>对服务进行编组</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">App.Singleton&lt;IBattleMonster, BattleMonsterManager&gt;()</span><br><span class="line">   .Tag(Tags.BattleManagerTags);</span><br><span class="line">App.Singleton&lt;IBattleMonster, BattleCameraManager&gt;()</span><br><span class="line">   .Tag(Tags.BattleManagerTags);</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>生成指定编组的服务</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">App.Tagged(Tags.BattleManagerTags); <span class="comment">// object[]&#123; BattleMonsterManager, BattleCameraManager &#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="释放服务编组"><a href="#释放服务编组" class="headerlink" title="释放服务编组"></a>释放服务编组</h4><p>您可以通过<code>Release</code>方法为编组的对象进行释放，这在一些场景下可能非常方便，比如:退出游戏战场时统一释放游戏战场的单例对象。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> services = App.Tagged(Tags.BattleManagerTags);</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">App.Release(<span class="keyword">ref</span> services);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果有任何一个服务未能从容器找到，将会返回<code>false</code>，同时<code>ref service</code>变量中将会出现未能在容器中被找到的服务实现。</p>
+</blockquote>
+<h2 id="上下文绑定"><a href="#上下文绑定" class="headerlink" title="上下文绑定"></a>上下文绑定</h2><p>有时侯我们可能有两个不同的服务使用同一个接口，但我们希望在每个服务中注入不同实现, 我们可以通过上下文绑定来解决这个问题。</p>
+<h4 id="通过绑定类型名来描述上下文"><a href="#通过绑定类型名来描述上下文" class="headerlink" title="通过绑定类型名来描述上下文"></a>通过绑定类型名来描述上下文</h4><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">App.Singleton&lt;ScreenshotUpload&gt;()</span><br><span class="line">    .Needs&lt;IDisk&gt;()</span><br><span class="line">    .Given(()=&gt; FileSystem.Disk(<span class="string">"aliyun-oss"</span>))</span><br></pre></td></tr></table></figure>
+<p>当截图上传服务需求一个抽象磁盘时，使用闭包来为其提供一个文件系统管理器下的磁盘。</p>
+<h4 id="通过绑定变量名来描述上下文"><a href="#通过绑定变量名来描述上下文" class="headerlink" title="通过绑定变量名来描述上下文"></a>通过绑定变量名来描述上下文</h4><p>绑定的变量名必须以<code>$</code>开头，对于变量名的大小写敏感。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">App.Singleton&lt;ScreenshotUpload&gt;() </span><br><span class="line">    .Needs(<span class="string">"$disk"</span>)</span><br><span class="line">    .Given(()=&gt; FileSystem.Disk(<span class="string">"aliyun-oss"</span>))</span><br></pre></td></tr></table></figure>
+<p>当构建截图上传服务时，框架查找截图上传服务构造函数中的disk变量，并为其给定指定实现。</p>
+<h2 id="扩展服务"><a href="#扩展服务" class="headerlink" title="扩展服务"></a>扩展服务</h2><p>服务容器允许通过<code>Extend</code>修改一个已经被构建过的单例服务或者为尚未被构建的服务建立额外的修饰处理。</p>
+<p>如果<code>Extend</code>的是一个已经被构建的服务，那么该扩展代码即刻生效，但不会对后续的服务产生影响（指定构建的服务被释放后又被重新构建）。</p>
+<p>如果<code>Extend</code>的服务是一个尚未被构建的服务，那么该扩展对未来构建的指定服务持续生效。</p>
+<p>如果<code>Extend</code>没有指定服务名称，那么全局生效，只要符合指定条件的接口，类型，即被触发。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">App.Extend&lt;IFileSystem&gt;((fileSystem) =&gt;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 监听全部实现IFileSystem的服务</span></span><br><span class="line">    <span class="keyword">return</span> fileSystem;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="绑定函数"><a href="#绑定函数" class="headerlink" title="绑定函数"></a>绑定函数</h2><p>服务容器除了可以为服务进行绑定外还可以进行函数绑定，您可以通过<code>BindMethod</code>方法来为函数进行绑定，服务容器会自动对绑定函数所需求的参数进行分析，并提供合适的注入参数。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">App.BindMethod(<span class="string">"CustomizeFunction"</span> , ()=&gt;&#123;</span><br><span class="line">    <span class="comment">// todo: 你的函数行为</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>如果您需要为绑定的函数参数进行<a href="#上下文绑定">上下文绑定</a>，您可以这么做：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> binder = App.BindMethod(<span class="string">"CustomizeFunction"</span> , (IFileSystem fileSystem)=&gt;&#123; &#125;);</span><br><span class="line">binder.Needs&lt;IFileSystem&gt;.Given(()=&gt; <span class="keyword">new</span> HttpFileSystem());</span><br></pre></td></tr></table></figure>
+<h2 id="调用绑定函数"><a href="#调用绑定函数" class="headerlink" title="调用绑定函数"></a>调用绑定函数</h2><p>通过<code>Invoke</code>方法可以调用一个被绑定的函数。您可以为调用的函数传入自定义的参数，这些参数会根据服务容器的<a href="#依赖注入规则">依赖注入规则</a>选择合适的实例注入到函数参数中，如果函数参数存在不能被解决的参数，那么将会抛出一个<code>UnresolvableException</code>异常。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">App.Invoke(<span class="string">"CustomizeFunction"</span>, <span class="comment">/* Your params*/</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="解除绑定函数"><a href="#解除绑定函数" class="headerlink" title="解除绑定函数"></a>解除绑定函数</h2><p>通过<code>UnbindMethod</code>方法可以解除一个绑定函数，该方法支持以下几种解除方式：</p>
+<ul>
+<li>如果传入参数为字符串(<code>string</code>)则作为方法名解除对应方法名的函数。</li>
+<li>如果传入参数为方法绑定对象(<code>IMethodBind</code>)则解除对应函数。</li>
+<li>如果传入参数为其他对象(<code>object</code>)则作为调用目标,解除所有基于这个调用目标的函数</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">App.UnbindMethod(<span class="string">"CustomizeFunction"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="依赖注入调用方法"><a href="#依赖注入调用方法" class="headerlink" title="依赖注入调用方法"></a>依赖注入调用方法</h2><p>通过<code>Call</code>方法可以对任何<code>函数</code>或者<code>Lambda</code>发起依赖注入调用，容器将会根据<a href="#依赖注入规则">依赖注入规则</a>自动解决函数所需求的参数。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">App.Call((IFileSystem fileSystem)=&gt;&#123;</span><br><span class="line">    <span class="comment">// todo</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="当查询类型时"><a href="#当查询类型时" class="headerlink" title="当查询类型时"></a>当查询类型时</h2><p>当容器尝试去推测一个没有被绑定过的服务时，会通过遍历<code>OnFindType()</code>注册的查询函数来查询服务的<code>Type</code>。</p>
+<p>一般情况下，这种使用场景多数用于跨程序集的Type查找。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">App.OnFindType((finder)=&gt; &#123; </span><br><span class="line">    <span class="keyword">return</span> Type.GetType(finder); </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><code>OnFindType()</code> 允许传入一个优先级，优先级高的会被优先调用。<br>注意，当生成的服务依赖于<code>OnFindType()</code>来推测服务时，服务构建将会使用c#的反射服务，这一过程对性能的损耗非常严重。所以您应该尽可能使用单例绑定而不是依赖推测来动态生成。</p>
+</blockquote>
+<h2 id="暂时性托管-deprecated"><a href="#暂时性托管-deprecated" class="headerlink" title="暂时性托管(deprecated)"></a>暂时性托管(deprecated)</h2><p>服务容器允许您使用<code>Flash</code>方法来临时托管服务实例，在回调区间完成后这些临时的托管实例将会被释放。</p>
+<blockquote>
+<p>该方法将会在2.0版本中被移除</p>
+</blockquote>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">App.Flash(()=&gt;&#123;</span><br><span class="line"></span><br><span class="line">&#125;, <span class="comment">/* Service name */</span>, <span class="comment">/* Your service instance */</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>由暂时性托管的单例实现被释放时会引发<a href="#服务释放事件">服务释放事件</a></p>
+</blockquote>
+<h2 id="可变类型"><a href="#可变类型" class="headerlink" title="可变类型"></a>可变类型</h2><p>使用<code>IVariant</code>接口标记的类将会被容器认为是可变类型，可变类型允许容器将开发者传入的基础类型参数进行转换为可变类型。</p>
+<p>默认的基础类型参数为：<code>Boolean</code>,<code>Byte</code>,<code>SByte</code>,<code>Int16</code>,<code>Int32</code>,<code>UInt32</code>,<code>Int64</code>,<code>IntPtr</code>,<code>UIntPtr</code>,<code>Char</code>,<code>Double</code>,<code>Single</code>,<code>String</code>.</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ItemModel</span> : <span class="title">IVariant</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">string</span> itemName;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ItemModel</span>(<span class="params"><span class="keyword">int</span> itemId</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="keyword">this</span>.itemName = (itemId == <span class="number">10</span>) ? <span class="string">"连衣裙"</span> : <span class="string">"手套"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ItemUI</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ItemUI</span>(<span class="params"><span class="keyword">string</span> name, ItemModel model</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="comment">// name : 道具详情</span></span><br><span class="line">        <span class="comment">// model.itemName : 连衣裙</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">App.Make&lt;ItemUI&gt;(<span class="string">"道具详情"</span>, <span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>使用可变类型，您将可以隐藏繁琐的转换操作，框架将会自动完成类型间的转换。</p>
+</blockquote>
+<h2 id="IConvertible转换"><a href="#IConvertible转换" class="headerlink" title="IConvertible转换"></a>IConvertible转换</h2><p>服务容器支持对于实现<code>IConvertible</code>接口对象的转换。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">ItemUI</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ItemUI</span>(<span class="params"><span class="keyword">string</span> name</span>)</span></span><br><span class="line"><span class="function"></span>    &#123;</span><br><span class="line">        <span class="comment">// name : 10</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">App.Make&lt;ItemUI&gt;(<span class="number">10</span>);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>框架将会优先判定可变类型的转换，即如果可以通过可变类型转换，将优先使用可变类型转换。</p>
+</blockquote>
+<h2 id="重置服务容器"><a href="#重置服务容器" class="headerlink" title="重置服务容器"></a>重置服务容器</h2><p>您可以使用<code>Flush</code>来重置服务容器，清除服务容器中的一切数据，恢复到初始状态，这是一个危险操作所以我们将API隐藏在Handler中。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">App.Handler.Flush();</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在Flush重置容器的过程中,如果是单例服务，将会引发<a href="#服务释放事件">服务释放事件</a>。</p>
+</blockquote>
+<h2 id="参数表-参数匹配器"><a href="#参数表-参数匹配器" class="headerlink" title="参数表/参数匹配器"></a>参数表/参数匹配器</h2><p>服务容器允许开发者传入参数表来对依赖注入的对象进行参数匹配，如果您需要使用参数表，那么在<code>Make</code>服务时需要提供实现<code>IParams</code>接口的数据结构。</p>
+<p>框架已经提供了默认的参数表结构：<code>Params</code>，默认参数表是按照<code>变量名</code>进行匹配且大小写敏感。</p>
+<ul>
+<li>参数表触发顺序为传入的参数表顺序。</li>
+<li>参数表的匹配是最优先进行的。</li>
+<li>参数表提供的参数类型如果和注入参数类型不一致则会尝试进行参数类型转换，如果转换失败则会使用<a href="#依赖注入规则">依赖注入规则</a>。</li>
+</ul>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">FileSystem</span> : <span class="title">IFileSystem</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">FileSystem</span>(<span class="params">IDisk disk</span>)</span></span><br><span class="line"><span class="function"></span>    &#123; </span><br><span class="line">        <span class="comment">// disk = new LocalDisk();    </span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">App.Make&lt;IFileSystem&gt;(<span class="keyword">new</span> Params()&#123;</span><br><span class="line">    &#123; <span class="string">"disk"</span> , <span class="keyword">new</span> LocalDisk() &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="紧缩参数注入"><a href="#紧缩参数注入" class="headerlink" title="紧缩参数注入"></a>紧缩参数注入</h2><p>服务容器允许通过特殊类型<code>object</code>或<code>object[]</code>来一次性接受用户传入的全部参数。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Tight</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Tight</span>(<span class="params"><span class="keyword">object</span>[] paramsObjects</span>)</span></span><br><span class="line"><span class="function"></span>    &#123; </span><br><span class="line">        <span class="comment">// paramsObjects[0] == 1</span></span><br><span class="line">        <span class="comment">// paramsObjects[1] == "str"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">App.Make&lt;Tight&gt;(<span class="number">1</span>, <span class="string">"str"</span>);</span><br></pre></td></tr></table></figure>
+<p>如果接收类型为<code>object</code>，且传入参数个数为1个，那么参数将会被自动解构,否则将会是一个<code>object[]</code>数组。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Tight</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Tight</span>(<span class="params"><span class="keyword">object</span> paramsObject</span>)</span></span><br><span class="line"><span class="function"></span>    &#123; </span><br><span class="line">        <span class="comment">// paramsObject == "str"</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">App.Make&lt;Tight&gt;(<span class="string">"str"</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="依赖注入规则"><a href="#依赖注入规则" class="headerlink" title="依赖注入规则"></a>依赖注入规则</h2><ul>
+<li><strong>执行构造函数注入</strong></li>
+<li>如果是通过闭包来构建实现，则立即通过闭包来构建实现，并跳转到：<code>执行实例的特性注入</code>继续执行。</li>
+<li>遍历参数列表:<br>– <strong>通过参数匹配器获取可以用于被注入的参数</strong><br>—– 默认匹配器通过参数名和传入的匹配表进行匹配，返回一个有效的结果。<br>– <strong>检查是否为紧缩注入参数(<code>object</code>或<code>object[]</code>)，并且可以进行紧缩注入：</strong><br>—– 是：将用户传入的参数紧缩注入，清空用户传入的参数。<br>– <strong>从剩余的用户传入的参数中挑选并弹出合适的参数。</strong><br>– 使用依赖注入容器进行分析：<br>—– <strong>如果是：类，接口注入：</strong><br>——— 通过上下文闭包进行构建<br>————- 传入需求接口名(类名)，存在闭包则构建。<br>————- 传入参数变量名，存在闭包则构建。<br>——— 通过上下文服务名进行构建<br>————- 传入需求接口名(类名)，存在上下文服务名，则使用上下文服务名进行构建。<br>————- 传入参数变量名，存在上下文服务名，则使用上下文服务名进行构建。<br>——— 通过需求接口名（类名）构建。<br>——— 检查是否可以使用默认值，可以使用则使用默认值返回。<br>——— 如果均失败：抛出<code>UnresolvableException</code>异常<br>—– <strong>如果是基础类型注入：</strong><br>——— 通过上下文闭包进行构建<br>————- 传入需求接口名(类名)，存在闭包则构建。<br>————- 传入参数变量名，存在闭包则构建。<br>——— 通过上下文服务名进行构建<br>————- 传入需求接口名(类名)，存在上下文服务名，则使用上下文服务名进行构建。<br>————- 传入参数变量名，存在上下文服务名，则使用上下文服务名进行构建。<br>——— 通过需求接口名（类名）构建。<br>——— 检查是否可以使用默认值，可以使用则使用默认值返回。<br>——— 如果均失败：抛出<code>UnresolvableException</code>异常</li>
+<li><strong>执行实例的特性注入</strong></li>
+<li>遍历参数列表:<br>– <strong>检查可读写状态，不可写则跳过</strong><br>– 使用依赖注入容器进行分析：<br>—– <strong>如果是：类，接口注入：</strong><br>——— 通过上下文闭包进行构建<br>————- 传入需求接口名(类名)，存在闭包则构建。<br>————- 传入属性名，存在闭包则构建。<br>——— 通过上下文服务名进行构建<br>————- 传入需求接口名(类名)，存在上下文服务名，则使用上下文服务名进行构建。<br>————- 传入属性名，存在上下文服务名，则使用上下文服务名进行构建。<br>——— 通过需求接口名（类名）构建。<br>——— 如果均失败：抛出<code>UnresolvableException</code>异常<br>—– <strong>如果是基础类型注入：</strong><br>——— 通过上下文闭包进行构建<br>————- 传入需求接口名(类名)，存在闭包则构建。<br>————- 传入属性名，存在闭包则构建。<br>——— 通过上下文服务名进行构建<br>————- 传入需求接口名(类名)，存在上下文服务名，则使用上下文服务名进行构建。<br>————- 传入属性名，存在上下文服务名，则使用上下文服务名进行构建。<br>——— 通过需求接口名（类名）构建。<br>——— 如果均失败：抛出<code>UnresolvableException</code>异常</li>
+<li>注入完成</li>
+</ul>
+<h2 id="其他常规函数"><a href="#其他常规函数" class="headerlink" title="其他常规函数"></a>其他常规函数</h2><ul>
+<li><strong>Type2Service(type)</strong> 将类型转为服务名 </li>
+<li><strong>GetBind(service)</strong> 获取服务的绑定数据,如果绑定不存在则返回null</li>
+<li><strong>HasBind(service)</strong> 是否已经绑定了服务</li>
+<li><strong>HasInstance(service)</strong> : 是否存在单例化实例</li>
+<li><strong>IsResolved(service)</strong> : 服务是否已经被解决过</li>
+<li><strong>CanMake(service)</strong> 是否可以生成服务</li>
+<li><strong>IsStatic(service)</strong> 服务是否是单例化的,如果服务不存在也将返回false</li>
+<li><strong>IsAlias(service)</strong> 服务名是否是别名</li>
+<li><strong>BindIf(service, concrete)</strong> 当服务不存在时才绑定(实例绑定)</li>
+<li><strong>SingletonIf(service, concrete)</strong> 当服务不存在时才绑定(单例绑定)</li>
+<li><strong>Wrap(lambda,params)</strong> 包装一个触发可以以依赖注入形式调用的方法</li>
+<li><strong>Factory(service)</strong> 包装一个触发可以获得指定服务的方法</li>
+</ul>
+<h2 id="容器行为定制"><a href="#容器行为定制" class="headerlink" title="容器行为定制"></a>容器行为定制</h2><p>当开发者需要深度定制容器行为时可以重构下面提供的虚方法来调整容器默认行为。容器行为定制只有您非常了解虚函数对应的行为才能操作。</p>
+<ul>
+<li><strong>IsBasicType</strong>：是否为默认的基础类型（默认情况下为：原始类型+string）</li>
+<li><strong>IsUnableType</strong>：是否是无法被构建的类型</li>
+<li><strong>WrapperTypeBuilder</strong>：包装一个类型，可以被用来生成服务</li>
+<li><strong>GetDependenciesFromUserParams</strong>：从用户传入的参数中获取合适的参数进行注入。</li>
+<li><strong>ChangeType</strong>：转换类型到指定类型。</li>
+<li><strong>GetPropertyNeedsService</strong>：传入一个属性选择器对象(<code>PropertyInfo</code>)获取对应对象需求的服务名。</li>
+<li><strong>GetParamNeedsService</strong>：传入一个参数对象(<code>ParameterInfo</code>)获取对应的参数需求的服务名</li>
+<li><strong>ResolveAttrPrimitive</strong>：当解决属性选择器的基础类型时，返回值为需求的服务实例。</li>
+<li><strong>ResloveAttrClass</strong>：当解决属性选择器类或者接口类型时，返回值为需求的服务实例。</li>
+<li><strong>ResolvePrimitive</strong>：当解决构造函数的基础类型时，返回值为需求的服务实例。</li>
+<li><strong>ResloveClass</strong>：当解决构造函数的类或者接口类型时，返回值为需求的服务实例。</li>
+<li><strong>SpeculationServiceByParamName</strong>：根据一个参数信息来推测服务。返回值为需求的服务实例。</li>
+<li><strong>GetBuildStackDebugMessage</strong>：获取编译堆栈的调试信息。</li>
+<li><strong>MakeBuildFaildException</strong>：构建一个编译失败的异常。</li>
+<li><strong>MakeUnresolvablePrimitiveException</strong>：构建一个未能解决基础参数的异常。</li>
+<li><strong>MakeCircularDependencyException</strong>：构建一个循环依赖异常。</li>
+<li><strong>FormatService</strong>：格式化(标准化)服务名。</li>
+<li><strong>CanInject</strong>：检查实例是否可以被注入。</li>
+<li><strong>GuardUserParamsCount</strong>：限制用户传入的参数数量。</li>
+<li><strong>GuardResolveInstance</strong>：限制解决实例的有效条件。</li>
+<li><strong>SpeculatedServiceType</strong>：根据服务名推测指定的服务类型。</li>
+<li><strong>AttributeInject</strong>：对指定的实例进行属性注入。</li>
+<li><strong>CheckCompactInjectUserParams</strong>：检查是否可以紧缩注入用户传入的参数。</li>
+<li><strong>GetParamsMatcher</strong>：获取一个参数匹配器，参数匹配器匹配到的有效结果将作为最优参数值。</li>
+<li><strong>GetCompactInjectUserParams</strong>：获取紧缩注入的用户参数。</li>
+<li><strong>GetDependencies</strong>：获取指定参数列表的依赖注入结果。</li>
+<li><strong>GetConstructorsInjectParams</strong>：选择一个合适的构造函数并且获取指定需要注入的参数。</li>
+<li><strong>GuardMethodName</strong>: 验证函数方法名是否是有效的。</li>
+<li><strong>GuardServiceName</strong>: 验证函数服务名是否是有效的。</li>
+<li><strong>GuardConstruct</strong>: 验证当前状态是否是允许构建服务(或调用函数)的。</li>
+<li><strong>CreateInstance</strong>: 通过反射创建指定类型的实现。</li>
+<li><strong>GetContextualClosure</strong>： 根据上下文获取需求的闭包。</li>
+<li><strong>MakeFromContextualClosure</strong>：根据上下文闭包来构建需求的实例。</li>
+<li><strong>GetContextualService</strong>：根据上下文获取需求的服务名</li>
+<li><strong>MakeFromContextualService</strong>：根据上下文需求服务名生成服务实例。</li>
+<li><strong>ResloveFromContextual</strong>：通过上下文来解决服务实现。</li>
+<li><strong>MakeEmptyBindData</strong>: 制作一个空的绑定数据。</li>
+</ul>
+<h2 id="性能优化相关"><a href="#性能优化相关" class="headerlink" title="性能优化相关"></a>性能优化相关</h2><p>最优的方案是使用<a href="facade.html">Facade</a>来访问单例绑定的服务，这样您将获得和源生代码直接访问差距不大的访问性能。</p>
+<p>一般情况下我们推荐使用单例绑定的方式来对无依赖注入的服务进行实例。以便于能够获得更好的性能。</p>
+<p>下面的代码将进行非反射生成的单例绑定：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">App.Singleton&lt;IFileSystem&gt;(()=&gt; <span class="keyword">new</span> FileSystem());</span><br></pre></td></tr></table></figure>
+<p>下面的代码将进行反射生成的单例绑定：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">App.Singleton&lt;IFileSystem, FileSystem&gt;();</span><br></pre></td></tr></table></figure>
+<p>除了进行单例绑定外，我们还需要尽可能将服务设置为单例绑定，服务容器对于单例服务的优化要优于实例绑定的服务。</p>
+<p>我们已经测试了服务生成调用所花费的时间以供您参考，所有的测试均建立于：<code>100万</code>次服务生成测试（测试<code>100次</code>的平均值），和<code>Debug</code>编译的程序集上。</p>
+<ul>
+<li>非反射生成(单例): <code>68 ms</code></li>
+<li><code>(常用)</code> 反射生成(单例，依赖注入): <code>68 ms</code> (1ms = 14705次调用Make)</li>
+<li>反射生成(单例，无注入): <code>62 ms</code></li>
+<li>非反射生成(实例): <code>745 ms</code></li>
+<li>反射生成(实例，依赖注入): <code>4959 ms</code></li>
+<li>反射生成(实例，无注入): <code>1599 ms</code></li>
+<li><code>(常用)</code> Facade(门面)(单例，依赖注入): <code>61 ms</code> (1ms = 16393次调用Facade)</li>
+<li>Facade(门面)(实例，依赖注入): <code>5419 ms</code></li>
+<li>Facade(门面)(实例，无注入): <code>2144 ms</code></li>
+</ul>
+<blockquote>
+<p>在测试环境下，原生单例模版访问的速度为：<code>21 ms</code> (1ms = 47619次原生调用)</p>
+</blockquote>
+
+                </section>
+
+                
+                    <div ref="comments" id="gitment-container"></div>
+                
+                
+                <support :web="web" visiable></support>
+            </div>
+            <div v-if="searched != null" id="search-result" class="search-result" v-cloak>
+                <p v-if="searched.results.length > 0" class="search-title">
+                    与"{{ searched.keyword }}"相关的内容{{searched.results.length}}条
+                </p>
+                <p v-else class="search-title">无搜索结果可以匹配"{{ searched.keyword }}"</p>
+                <div v-for="(record) in searched.results" class="searched-line">
+                    <h3>
+                        <a :href="'/' + record.href + '#!' + encodeURI(anchorEscaping(record.hash))" @click="clearSearch">
+                            {{ record.hash }}
+                        </a>
+                    </h3>
+                    <ul>
+                        <li><i>{{ record.page }} <span v-if="record.page_title != ''">- {{ record.page_title }}</span></i> <i>score:<span>{{ record.score }}</span></i></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div></div>
+
+<script>
+window.onload = function(){  
+    new Vue({
+        el : '#cookbook',
+        data: { 
+            navigation : {"navigation":[{"levels":[{"text":"CatLib","href":"/"},{"text":"核心库","href":"index.html"}]},{"divider":true},{"text":"起步"},{"text":"介绍","href":"index.html"},{"text":"风格指南","href":"style.html"},{"text":"常见问题","href":"faq.html"},{"text":"已知BUG","href":"bug.html"},{"text":"贡献指南","href":"contribution.html"},{"text":"更新日志","href":"upgrade.html"},{"text":"迁移指南","href":"migration.html"},{"text":"系统架构"},{"text":"服务提供者","href":"architecture/service-provider.html"},{"text":"应用程序","href":"architecture/application.html"},{"text":"服务容器","href":"architecture/container.html"},{"text":"服务门面","href":"architecture/facade.html"},{"text":"框架组件"},{"text":"事件系统","href":"components/event.html"},{"text":"管理器模版","href":"components/template.html"},{"text":"辅助函数"},{"text":"数组","href":"helper/arr.html"},{"text":"字符串","href":"helper/str.html"},{"text":"字典","href":"helper/dict.html"},{"text":"时间","href":"helper/system-time.html"},{"text":"线程静态","href":"helper/thread-static.html"},{"text":"通用","href":"helper/util.html"},{"text":"数据结构"},{"text":"有序集","href":"data-structure/sort-set.html"},{"text":"快速列表","href":"data-structure/quick-list.html"},{"text":"环型缓冲区","href":"data-structure/ring-buffer.html"},{"text":"内存存储","href":"data-structure/memory-storage.html"},{"text":"过滤器链","href":"data-structure/filter-chain.html"},{"text":"流"},{"text":"包装流","href":"stream/wrapper-stream.html"},{"text":"管道流","href":"stream/pipeline-stream.html"},{"text":"存储流","href":"stream/storage-stream.html"},{"text":"组合流","href":"stream/combine-stream.html"},{"text":"分片流","href":"stream/segment-stream.html"},{"divider":true},{"text":"Power by CatLib","href":"https://github.com/CatLib","external":true}]},
+            web : {"navigation":[{"type":"versions","mobile":true},{"type":"menu","text":"组件库","mobile":true,"list":[{"text":"ILRuntime支持库","href":"https://ilruntime.catlib.io"}]},{"type":"normal","text":"English","href":"https://catlib.io/lasted/index.html","mobile":true},{"type":"icon","fontawesome":"github","href":"https://github.com/CatLib/Core","mobile":true}],"tool":{"editor":{"text":"编辑","href":"https://github.com/CatLib/catlib-cn.io/tree/2.0/","external":true}},"support":{"label":["在文档中没有找到您需要的内容？","尝试在左侧搜索栏中搜索，或者{text}"],"text":"在GitHub中发起提问","href":"https://github.com/CatLib/catlib-cn.io/issues","external":true}},
+            versions: {
+                current :  {"test":"^v1\\/","name":"v1.4","active":"Latest(v1.4)","data":"v1"},
+                list: [{"test":"^v1\\/","name":"v1.4","active":"Latest(v1.4)","data":"v1"},{"test":"^v2\\/","name":"v2.0","active":"Latest(v2.0)","data":"v2"}]
+            },
+            withSummary : true,
+            isPC : null,
+            checkout: false,
+            root: "/",
+            contentNavigation: [],
+            contentOffset : { 'offsetTop' : 0, 'height' : 0 },
+            searched: null,
+            searchDisabled: localStorage.getItem("search-input-disabled") == 'true',
+            clientHeight : 0
+        },
+        methods :{
+            testPC : function(){ 
+                var userAgentInfo = navigator.userAgent;
+                var deviceReg = [
+                    /(MI(\s+)|2013022|2013023|HM|2014011|2014501|2014813|2014811|2014812|2014817|2014818|2014819|2014502|2015|xiaomi).*/i,
+                    /(MI(.*|\s*)PAD).*/i,
+                    /(iPhone | iPod).*/i,
+                    /(iPad).*/i,
+                    /(Android).*/i,
+                    /(iPhone|iPad|iPod|iOS).*/i,
+                    /(windows(.*|\s*)phone).*/i
+                ];
+                var flag = true;
+                for (var v = 0; v < deviceReg.length; v++) {
+                    if (deviceReg[v].test(userAgentInfo)) {
+                        flag = false;
+                        break;
+                    }
+                }
+                
+                return flag;
+            },
+            hidenSummary : function(){
+                if(!this.isPC)
+                {
+                    this.withSummary = false;
+                }
+            },
+            bindMinHeight: function(){
+                var vue = this;
+                window.addEventListener("resize", function(){
+                    vue.clientHeight = document.documentElement.clientHeight - 50;
+                }, false);
+                this.clientHeight = document.documentElement.clientHeight - 50;
+            },
+            bindAnchor : function(){
+                if(this.$refs.section == undefined){
+                    return;
+                }
+                window.addEventListener("hashchange", this.hashChange, false);
+                window.addEventListener("resize", this.refreshContentNavigation, false);
+                var elements = this.$refs.section.getElementsByTagName("a");
+                var vue = this;
+                for(var index = 0; index < elements.length; index++){
+                    let element = elements[index];
+                    let href = element.getAttribute("href");
+                    if(href.length <= 0 || href[0] != "#"){
+                        continue;
+                    }
+
+                    element.addEventListener('click', function(event){
+                        location.hash = "!" + encodeURI(decodeURI(vue.anchorEscaping(element.hash.substring(1))));
+                        event.preventDefault();
+                    }, false);
+                }
+
+                this.refreshContentNavigation();
+            },
+            refreshContentNavigation : function(){
+                if(this.$refs.section == undefined || !this.supportSubnav()){
+                    return;
+                }
+                var subnavIndex = 0;
+                var elements = this.$refs.section.getElementsByClassName("headerlink");
+                var subnav = [];
+                for(var index=0; index < elements.length; index++){
+                    var element = elements[index];
+                    if(element.parentElement.nodeName == "H2"){
+                        subnav[subnavIndex++] = {'text' : element.title , 'hash' : "!" + element.hash.substring(1), 'offsetTop' : element.offsetTop};
+                    }
+                }
+                this.contentNavigation = subnav;
+            },
+            hashChange : function(){
+                var locationHash = location.hash.replace(/^#!/ig, "#");
+                if(locationHash == ''){
+                    return;
+                }
+                locationHash = decodeURI(locationHash);
+                var hashes = this.$refs.section.getElementsByClassName("headerlink");
+                var target = null;
+                for(var index=0; index < hashes.length; index++){
+                    var hash = hashes[index];
+                    if(decodeURI(hash.hash) == locationHash){
+                        target = hash;
+                        break;
+                    }
+                }
+                
+                if(target == null){
+                    return;
+                }
+
+                var top = target.offsetTop - 20; 
+                
+                if(top > 0)
+                {
+                    var vue = this;
+                    $('.cookbook-content').animate({scrollTop:top}, 500, function(){
+                        if(!vue.isPC){
+                            vue.withSummary = false;
+                        }
+                    });
+                }        
+            },
+            bindScroll : function(){
+                if(!this.supportSubnav()){
+                    return;
+                }
+                this.$refs.content.addEventListener("scroll", this.scrollChange, false);
+            },
+            scrollChange : function(e){
+                this.contentOffset = { 
+                    'offsetTop' : this.$refs.content.scrollTop,
+                    'height' : this.$refs.content.scrollHeight - this.$refs.content.offsetHeight
+                };
+            },
+            supportSubnav : function(){
+                if(this.navigation.subnav != undefined && this.navigation.subnav == false){
+                    return false;
+                }
+                return true;
+            },
+            clearSearch: function(){
+                this.searched = null;
+                this.$nextTick(function(){
+                    this.hashChange();
+                });
+            },
+            searchSubmit: function(){
+                if(!this.isPC)
+                {
+                    this.withSummary = false;
+                }
+            },
+            anchorEscaping : function(str){
+                return str.replace(' ', '-').replace('.', '-');
+            },
+            setSearchDisabled : function(value){
+                this.searchDisabled = value;
+            },
+            initComments : function(){
+                
+                    var vue = this;
+                    var theme = {
+                        render : function(state, instance) {
+                            var container = document.createElement('div');
+                            container.lang = "en-US";
+                            container.className = 'gitment-container gitment-root-container';
+                            container.appendChild(instance.renderHeader(state, instance));
+                            container.appendChild(instance.renderComments(state, instance));
+                            container.appendChild(instance.renderEditor(state, instance));
+                            return container;
+                        },
+                    }
+
+                    var gitment = new Gitment({
+                        id : 'catlib-cn:v1/architecture/container.html',
+                        owner: 'catlib',
+                        repo: 'catlib-cn.io',
+                        oauth: {
+                            client_id: '3620f7cdd1c50b4b6e3c',
+                            client_secret: '50664006a799cb29b27e8358b88a6a4580e8dc0c',
+                            cross_server: 'https://31225080.ap-southeast-1.fc.aliyuncs.com/2016-08-15/proxy/gitment/gitment-cross/',
+                        },
+                        labels : [
+                            'CatLib'
+                        ],
+                        link: 'https://cn.catlib.io/v1/architecture/container.html',
+                        maintainer: ["yb199478"],
+                        theme : theme,
+                        perPage : 30,
+                    });
+
+                    gitment.render(this.$refs.comments);
+                
+            },
+        },mounted : function() {
+            this.isPC = this.withSummary = this.testPC();
+            this.$nextTick(function(){
+                this.bindScroll();
+                this.bindAnchor();
+                this.hashChange();
+                this.initComments();
+                this.bindMinHeight();
+            });
+        },
+        watch: {
+            searched : function(){
+                $('.cookbook-content').animate({scrollTop:0}, 0);
+            }
+        },
+        computed:{
+            minHeightStyle : function()
+            {
+                return { 'min-height' : this.clientHeight + "px" }
+            }
+        }
+    });
+};
+</script>
+    
+
+    
+    <script src="/scripts/cookbook.js"></script>
+    
+      <script src="/scripts/gitment.js"></script>
+    
+    
+    
+  </body>
+</html>

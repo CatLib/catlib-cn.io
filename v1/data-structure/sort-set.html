@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0">
+
+    
+
+    
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="/styles/cookbook.css">
+    <link rel="stylesheet" href="/styles/fontawesome.css">
+    
+      <link rel="stylesheet" href="/styles/gitment.css">
+    
+
+    <!-- favicon -->
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+
+    
+
+    
+
+    <title>CatLib - 有序集 </title>
+  </head>
+
+  <body>
+    
+    
+    <div id="cookbook" :class="{'with-summary' : withSummary}" v-cloak>
+    <div class="cookbook-summary">
+    
+    <search placeholder="Type to search" :versions="versions" :root="root" v-model="searched" v-on:submit="searchSubmit" :disable="searchDisabled" v-on:disabled="setSearchDisabled"></search>
+    <navigation :data="navigation" :web="web" :versions="versions" :root="root" active="v1/data-structure/sort-set.html" :subnavdata="contentNavigation" :value="contentOffset" :searchdisabled="searchDisabled"></navigation>
+    
+</div>    <div class="cookbook-content" ref="content">
+    
+    <div class="cookbook-header" role="navigation">
+        <header-tool :web="web" path="v1/data-structure/sort-set.html" editor v-model="withSummary"></header-tool>
+        <header-navigation :web="web" :versions="versions" :root="root"></header-navigation>
+    </div>
+    <div class="content-wrapper" @click="hidenSummary" :style="minHeightStyle">
+        <checkout :navigation="navigation" :web="web" :versions="versions" v-model="checkout"></checkout>
+        <div v-if="checkout" class="cookbook-search-results">
+            <div id="search-noresults" v-show="searched == null">
+                <section ref="section" class="markdown-section">
+                    <h1 id="有序集"><a href="#有序集" class="headerlink" title="有序集"></a>有序集</h1><p>有序集合和集合一样也是元素的集合,且不允许重复的成员。不同的是每个元素都会关联一个可以被排序的分数。</p>
+<p>有序集合是通过分数来为集合中的成员进行从小到大的排序。有序集合的成员是唯一的,但分数却可以重复。</p>
+<blockquote>
+<p>下面的示例代码中:<code>abc/10</code>表示<code>TElement</code>为<code>abc</code>,<code>TSource</code>为<code>10</code></p>
+</blockquote>
+<h2 id="构造有序集"><a href="#构造有序集" class="headerlink" title="构造有序集"></a>构造有序集</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> sorset = <span class="keyword">new</span> SortSet&lt;<span class="keyword">string</span>, <span class="keyword">int</span>&gt;();</span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型"><a href="#函数原型" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SortSet&lt;TElement,TSource&gt;(<span class="keyword">double</span> probable = <span class="number">0.25</span>, <span class="keyword">int</span> maxLevel = <span class="number">32</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SortSet&lt;TElement,TSource&gt;(IComparer&lt;TScore&gt; comparer, <span class="keyword">double</span> probable = <span class="number">0.25</span>, <span class="keyword">int</span> maxLevel = <span class="number">32</span>);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>probable</code></td>
+<td style="text-align:center">可能出现层数的概率系数(0-1之间的数)(如：0.25即是25%)</td>
+</tr>
+<tr>
+<td><code>maxLevel</code></td>
+<td style="text-align:center">最大层级，默认值<code>32</code></td>
+</tr>
+<tr>
+<td><code>comparer</code></td>
+<td style="text-align:center">自定义比较器，用于比较<code>TSource</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="Count"><a href="#Count" class="headerlink" title="Count"></a>Count</h2><p>获取有序集中元素的数量。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = sorset.Count;</span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-1"><a href="#函数原型-1" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> Count &#123; <span class="keyword">get</span>; &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="SyncRoot"><a href="#SyncRoot" class="headerlink" title="SyncRoot"></a>SyncRoot</h2><p>同步锁。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">lock</span>(sortset.SyncRoot)</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-2"><a href="#函数原型-2" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">object</span> SyncRoot &#123; <span class="keyword">get</span>; &#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Clear"><a href="#Clear" class="headerlink" title="Clear"></a>Clear</h2><p>清空有序集</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "1/0", "2/1", "3/2"]</span></span><br><span class="line">sortset.Clear();</span><br><span class="line"><span class="comment">// [ ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-3"><a href="#函数原型-3" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Clear</span>(<span class="params"></span>)</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="Add"><a href="#Add" class="headerlink" title="Add"></a>Add</h2><p>添加一个元素到有序集合，或者如果它已经存在则更新其分数，并排序到正确的位置上。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "1/0", "2/5", "3/10" ]</span></span><br><span class="line">sortset.Add(<span class="string">"abc"</span>, <span class="number">3</span>);</span><br><span class="line"><span class="comment">// [ "1/0", "abc/3", "2/5", "3/10" ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-4"><a href="#函数原型-4" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Add</span>(<span class="params">TElement element, TScore score</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>element</code></td>
+<td style="text-align:center">插入的元素</td>
+</tr>
+<tr>
+<td><code>score</code></td>
+<td style="text-align:center">用于排序的分数</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Contains"><a href="#Contains" class="headerlink" title="Contains"></a>Contains</h2><p>判断有序集中是否存在指定元素。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a/0", "b/5", "c/10" ]</span></span><br><span class="line"><span class="keyword">var</span> exists = sortset.Contains(<span class="string">"b"</span>);</span><br><span class="line"><span class="comment">// exists : true</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-5"><a href="#函数原型-5" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Contains</span>(<span class="params">TElement element</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>element</code></td>
+<td style="text-align:center">指定元素</td>
+</tr>
+</tbody>
+</table>
+<h2 id="GetScore"><a href="#GetScore" class="headerlink" title="GetScore"></a>GetScore</h2><p>返回有序集中指定元素的分数，如果元素不存在则引发<code>KeyNotFoundException</code>。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a/0", "b/5", "c/10" ]</span></span><br><span class="line"><span class="keyword">var</span> score = sortset.GetScore(<span class="string">"b"</span>);</span><br><span class="line"><span class="comment">// score : 5</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-6"><a href="#函数原型-6" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TScore <span class="title">GetScore</span>(<span class="params">TElement element</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>element</code></td>
+<td style="text-align:center">指定元素</td>
+</tr>
+</tbody>
+</table>
+<h2 id="GetRangeCount"><a href="#GetRangeCount" class="headerlink" title="GetRangeCount"></a>GetRangeCount</h2><p>获取分数区间内的元素数量。(包含<code>min</code>或<code>max</code>)</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a/0", "b/10", "c/95", "d/101" ]</span></span><br><span class="line"><span class="keyword">var</span> num = sortset.GetRangeCount(<span class="number">10</span>, <span class="number">100</span>);</span><br><span class="line"><span class="comment">// num : 2</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-7"><a href="#函数原型-7" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">GetRangeCount</span>(<span class="params">TScore start, TScore end</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>start</code></td>
+<td style="text-align:center">起始分数(包含)</td>
+</tr>
+<tr>
+<td><code>end</code></td>
+<td style="text-align:center">结束分数(包含)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Remove"><a href="#Remove" class="headerlink" title="Remove"></a>Remove</h2><p>移除有序集合中的指定的元素，如果移除失败则返回<code>false</code>。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a/0", "b/10", "c/95", "d/101" ]</span></span><br><span class="line"><span class="keyword">var</span> result = sorset.Remove(<span class="string">"c"</span>);</span><br><span class="line"><span class="comment">// result : true</span></span><br><span class="line"><span class="comment">// [ "a/0", "b/10", "d/101" ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-8"><a href="#函数原型-8" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">Remove</span>(<span class="params">TElement element</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>element</code></td>
+<td style="text-align:center">指定元素</td>
+</tr>
+</tbody>
+</table>
+<h2 id="RemoveRangeByRank"><a href="#RemoveRangeByRank" class="headerlink" title="RemoveRangeByRank"></a>RemoveRangeByRank</h2><p>根据指定的<code>排名范围</code>移除范围内的所有元素，并返回移除元素的数量。(包含<code>startRank</code>或<code>stopRank</code>)</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a/0", "b/10", "c/95", "d/101" ]</span></span><br><span class="line"><span class="keyword">var</span> count = sorset.RemoveRangeByRank(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line"><span class="comment">// count : 2</span></span><br><span class="line"><span class="comment">// [ "a/0", "d/101" ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-9"><a href="#函数原型-9" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">RemoveRangeByRank</span>(<span class="params"><span class="keyword">int</span> startRank, <span class="keyword">int</span> stopRank</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>startRank</code></td>
+<td style="text-align:center">起始排名，以0为底，包含自身起始排名</td>
+</tr>
+<tr>
+<td><code>stopRank</code></td>
+<td style="text-align:center">结束排名，以0为底，包含自身结束排名</td>
+</tr>
+</tbody>
+</table>
+<h2 id="RemoveRangeByScore"><a href="#RemoveRangeByScore" class="headerlink" title="RemoveRangeByScore"></a>RemoveRangeByScore</h2><p>根据指定的<code>分数范围</code>移除范围内的所有元素，并返回移除元素的数量。(包含<code>startScore</code>或<code>stopScore</code>)</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a/0", "b/10", "c/95", "d/101" ]</span></span><br><span class="line"><span class="keyword">var</span> count = sorset.RemoveRangeByRank(<span class="number">10</span>, <span class="number">100</span>);</span><br><span class="line"><span class="comment">// count : 2</span></span><br><span class="line"><span class="comment">// [ "a/0", "d/101" ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-10"><a href="#函数原型-10" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">RemoveRangeByScore</span>(<span class="params">TScore startScore, TScore stopScore</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>startScore</code></td>
+<td style="text-align:center">起始分数，包含起始分数</td>
+</tr>
+<tr>
+<td><code>stopScore</code></td>
+<td style="text-align:center">结束分数，包含结束分数</td>
+</tr>
+</tbody>
+</table>
+<h2 id="GetRank"><a href="#GetRank" class="headerlink" title="GetRank"></a>GetRank</h2><p>获取指定元素的排名 , 有序集成员默认按照Score<code>从小到大</code>排序（如果自定义比较函数则按照自定义比较函数顺序为主）。如果返回<code>-1</code>则表示没有找到元素。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a/0", "b/10", "c/95", "d/101" ]</span></span><br><span class="line"><span class="keyword">var</span> rank = sorset.GetRank(<span class="string">"c"</span>);</span><br><span class="line"><span class="comment">// rank : 2</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-11"><a href="#函数原型-11" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">GetRank</span>(<span class="params">TElement element</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>element</code></td>
+<td style="text-align:center">指定元素</td>
+</tr>
+</tbody>
+</table>
+<h2 id="GetRevRank"><a href="#GetRevRank" class="headerlink" title="GetRevRank"></a>GetRevRank</h2><p>获取指定元素的反向排名 , 有序集成员默认按照Score<code>从大到小</code>排序（如果自定义比较函数则按照自定义比较函数的反向顺序为主）。如果返回<code>-1</code>则表示没有找到元素。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a/0", "b/10", "c/95", "d/101" ]</span></span><br><span class="line"><span class="keyword">var</span> rank = sorset.GetRevRank(<span class="string">"c"</span>);</span><br><span class="line"><span class="comment">// rank : 1</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-12"><a href="#函数原型-12" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">GetRevRank</span>(<span class="params">TElement element</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>element</code></td>
+<td style="text-align:center">指定元素</td>
+</tr>
+</tbody>
+</table>
+<h2 id="GetElementRangeByRank"><a href="#GetElementRangeByRank" class="headerlink" title="GetElementRangeByRank"></a>GetElementRangeByRank</h2><p>根据<code>排名</code>获取范围内的元素列表，排序按照排名从小到大（给定自定义比较函数则按照自定义比较函数顺序）。(包含<code>startRank</code>或<code>stopRank</code>)</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a/0", "b/10", "c/95", "d/101" ]</span></span><br><span class="line"><span class="keyword">var</span> elements = sorset.GetElementRangeByRank(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line"><span class="comment">// elements[0] : "b/10"</span></span><br><span class="line"><span class="comment">// elements[1] : "c/95"</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-13"><a href="#函数原型-13" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TElement[] <span class="title">GetElementRangeByRank</span>(<span class="params"><span class="keyword">int</span> startRank, <span class="keyword">int</span> stopRank</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>startRank</code></td>
+<td style="text-align:center">起始的排名，排名以0为底，包含自身</td>
+</tr>
+<tr>
+<td><code>stopRank</code></td>
+<td style="text-align:center">结束的排名，排名以0为底，包含自身</td>
+</tr>
+</tbody>
+</table>
+<h2 id="GetElementRangeByScore"><a href="#GetElementRangeByScore" class="headerlink" title="GetElementRangeByScore"></a>GetElementRangeByScore</h2><p>根据<code>分数</code>获取范围内的元素列表，排序按照排名从小到大（给定自定义比较函数则按照自定义比较函数顺序）。(包含<code>startScore</code>或<code>stopScore</code>)</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a/0", "b/10", "c/95", "d/101" ]</span></span><br><span class="line"><span class="keyword">var</span> elements = sorset.GetElementRangeByScore(<span class="number">10</span>, <span class="number">100</span>);</span><br><span class="line"><span class="comment">// elements[0] : "b/10"</span></span><br><span class="line"><span class="comment">// elements[1] : "c/95"</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-14"><a href="#函数原型-14" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TElement[] <span class="title">GetElementRangeByScore</span>(<span class="params">TScore startScore, TScore stopScore</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>startScore</code></td>
+<td style="text-align:center">起始的分数，包含自身</td>
+</tr>
+<tr>
+<td><code>stopScore</code></td>
+<td style="text-align:center">结束的分数，包含自身</td>
+</tr>
+</tbody>
+</table>
+<h2 id="GetElementByRank"><a href="#GetElementByRank" class="headerlink" title="GetElementByRank"></a>GetElementByRank</h2><p>根据排名获取元素，排序按照排名从小到大（给定自定义比较函数则按照自定义比较函数顺序）</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a/0", "b/10", "c/95", "d/101" ]</span></span><br><span class="line"><span class="keyword">var</span> element = sorset.GetElementByRank(<span class="number">2</span>);</span><br><span class="line"><span class="comment">// element : "c/95"</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-15"><a href="#函数原型-15" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TElement <span class="title">GetElementByRank</span>(<span class="params"><span class="keyword">int</span> rank</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>rank</code></td>
+<td style="text-align:center">排名，排名以0为底</td>
+</tr>
+</tbody>
+</table>
+<h2 id="GetElementByRevRank"><a href="#GetElementByRevRank" class="headerlink" title="GetElementByRevRank"></a>GetElementByRevRank</h2><p>根据排名获取元素，排序按照排名从大到小（给定自定义比较函数则按照自定义比较函数的相反顺序）</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a/0", "b/10", "c/95", "d/101" ]</span></span><br><span class="line"><span class="keyword">var</span> element = sorset.GetElementByRevRank(<span class="number">2</span>);</span><br><span class="line"><span class="comment">// element : "b/10"</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-16"><a href="#函数原型-16" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TElement <span class="title">GetElementByRevRank</span>(<span class="params"><span class="keyword">int</span> rank</span>)</span>;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>rank</code></td>
+<td style="text-align:center">排名，排名以0为底</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ReverseIterator"><a href="#ReverseIterator" class="headerlink" title="ReverseIterator"></a>ReverseIterator</h2><p>反转迭代器迭代顺序，并不是反转整个物理存储顺序。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 物理顺序：[ "a/0", "b/10", "c/95", "d/101" ]</span></span><br><span class="line"><span class="comment">// foreach顺序：[ "a/0", "b/10", "c/95", "d/101" ]</span></span><br><span class="line">sorset.ReverseIterator();</span><br><span class="line"><span class="comment">// 物理顺序：[ "a/0", "b/10", "c/95", "d/101" ]</span></span><br><span class="line"><span class="comment">// foreach顺序：[ "d/101", "c/95", "b/10", "a/0" ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-17"><a href="#函数原型-17" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ReverseIterator</span>(<span class="params"></span>)</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="First"><a href="#First" class="headerlink" title="First"></a>First</h2><p>获取第一个元素。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a/0", "b/10", "c/95", "d/101" ]</span></span><br><span class="line"><span class="keyword">var</span> element = sorset.First();</span><br><span class="line"><span class="comment">// element : "a/0"</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-18"><a href="#函数原型-18" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TElement <span class="title">First</span>(<span class="params"></span>)</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="Last"><a href="#Last" class="headerlink" title="Last"></a>Last</h2><p>获取最后一个元素。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a/0", "b/10", "c/95", "d/101" ]</span></span><br><span class="line"><span class="keyword">var</span> element = sorset.Last();</span><br><span class="line"><span class="comment">// element : "d/101"</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-19"><a href="#函数原型-19" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TElement <span class="title">Last</span>(<span class="params"></span>)</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="Shift"><a href="#Shift" class="headerlink" title="Shift"></a>Shift</h2><p>移除并返回有序集头部的元素。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a/0", "b/10", "c/95", "d/101" ]</span></span><br><span class="line"><span class="keyword">var</span> element = sorset.Shift();</span><br><span class="line"><span class="comment">// element : "a/0"</span></span><br><span class="line"><span class="comment">// [ "b/10", "c/95", "d/101" ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-20"><a href="#函数原型-20" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TElement <span class="title">Shift</span>(<span class="params"></span>)</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="Pop"><a href="#Pop" class="headerlink" title="Pop"></a>Pop</h2><p>移除并返回有序集尾部的元素。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a/0", "b/10", "c/95", "d/101" ]</span></span><br><span class="line"><span class="keyword">var</span> element = sorset.Pop();</span><br><span class="line"><span class="comment">// element : "d/101"</span></span><br><span class="line"><span class="comment">// [ "a/0", "b/10", "c/95" ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-21"><a href="#函数原型-21" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TElement <span class="title">Pop</span>(<span class="params"></span>)</span>;</span><br></pre></td></tr></table></figure>
+<h2 id="this-int"><a href="#this-int" class="headerlink" title="this[int]"></a>this[int]</h2><p>获取指定排名的元素。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a/0", "b/10", "c/95", "d/101" ]</span></span><br><span class="line"><span class="keyword">var</span> element = sorset[<span class="number">2</span>];</span><br><span class="line"><span class="comment">// element : "b/10"</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-22"><a href="#函数原型-22" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TElement <span class="keyword">this</span>[<span class="keyword">int</span> rank] &#123; <span class="keyword">get</span>; &#125;</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>rank</code></td>
+<td style="text-align:center">排名，排名以0为底</td>
+</tr>
+</tbody>
+</table>
+<h2 id="ToArray"><a href="#ToArray" class="headerlink" title="ToArray"></a>ToArray</h2><p>将有序集转为数组。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// [ "a/0", "b/10", "c/95", "d/101" ]</span></span><br><span class="line"><span class="keyword">var</span> elements = sorset.ToArray();</span><br><span class="line"><span class="comment">// elements : [ "a", "b", "c", "d" ]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-23"><a href="#函数原型-23" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">TElement[] <span class="title">ToArray</span>(<span class="params"></span>)</span>;</span><br></pre></td></tr></table></figure>
+                </section>
+
+                
+                    <div ref="comments" id="gitment-container"></div>
+                
+                
+                <support :web="web" visiable></support>
+            </div>
+            <div v-if="searched != null" id="search-result" class="search-result" v-cloak>
+                <p v-if="searched.results.length > 0" class="search-title">
+                    与"{{ searched.keyword }}"相关的内容{{searched.results.length}}条
+                </p>
+                <p v-else class="search-title">无搜索结果可以匹配"{{ searched.keyword }}"</p>
+                <div v-for="(record) in searched.results" class="searched-line">
+                    <h3>
+                        <a :href="'/' + record.href + '#!' + encodeURI(anchorEscaping(record.hash))" @click="clearSearch">
+                            {{ record.hash }}
+                        </a>
+                    </h3>
+                    <ul>
+                        <li><i>{{ record.page }} <span v-if="record.page_title != ''">- {{ record.page_title }}</span></i> <i>score:<span>{{ record.score }}</span></i></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div></div>
+
+<script>
+window.onload = function(){  
+    new Vue({
+        el : '#cookbook',
+        data: { 
+            navigation : {"navigation":[{"levels":[{"text":"CatLib","href":"/"},{"text":"核心库","href":"index.html"}]},{"divider":true},{"text":"起步"},{"text":"介绍","href":"index.html"},{"text":"风格指南","href":"style.html"},{"text":"常见问题","href":"faq.html"},{"text":"已知BUG","href":"bug.html"},{"text":"贡献指南","href":"contribution.html"},{"text":"更新日志","href":"upgrade.html"},{"text":"迁移指南","href":"migration.html"},{"text":"系统架构"},{"text":"服务提供者","href":"architecture/service-provider.html"},{"text":"应用程序","href":"architecture/application.html"},{"text":"服务容器","href":"architecture/container.html"},{"text":"服务门面","href":"architecture/facade.html"},{"text":"框架组件"},{"text":"事件系统","href":"components/event.html"},{"text":"管理器模版","href":"components/template.html"},{"text":"辅助函数"},{"text":"数组","href":"helper/arr.html"},{"text":"字符串","href":"helper/str.html"},{"text":"字典","href":"helper/dict.html"},{"text":"时间","href":"helper/system-time.html"},{"text":"线程静态","href":"helper/thread-static.html"},{"text":"通用","href":"helper/util.html"},{"text":"数据结构"},{"text":"有序集","href":"data-structure/sort-set.html"},{"text":"快速列表","href":"data-structure/quick-list.html"},{"text":"环型缓冲区","href":"data-structure/ring-buffer.html"},{"text":"内存存储","href":"data-structure/memory-storage.html"},{"text":"过滤器链","href":"data-structure/filter-chain.html"},{"text":"流"},{"text":"包装流","href":"stream/wrapper-stream.html"},{"text":"管道流","href":"stream/pipeline-stream.html"},{"text":"存储流","href":"stream/storage-stream.html"},{"text":"组合流","href":"stream/combine-stream.html"},{"text":"分片流","href":"stream/segment-stream.html"},{"divider":true},{"text":"Power by CatLib","href":"https://github.com/CatLib","external":true}]},
+            web : {"navigation":[{"type":"versions","mobile":true},{"type":"menu","text":"组件库","mobile":true,"list":[{"text":"ILRuntime支持库","href":"https://ilruntime.catlib.io"}]},{"type":"normal","text":"English","href":"https://catlib.io/lasted/index.html","mobile":true},{"type":"icon","fontawesome":"github","href":"https://github.com/CatLib/Core","mobile":true}],"tool":{"editor":{"text":"编辑","href":"https://github.com/CatLib/catlib-cn.io/tree/2.0/","external":true}},"support":{"label":["在文档中没有找到您需要的内容？","尝试在左侧搜索栏中搜索，或者{text}"],"text":"在GitHub中发起提问","href":"https://github.com/CatLib/catlib-cn.io/issues","external":true}},
+            versions: {
+                current :  {"test":"^v1\\/","name":"v1.4","active":"Latest(v1.4)","data":"v1"},
+                list: [{"test":"^v1\\/","name":"v1.4","active":"Latest(v1.4)","data":"v1"},{"test":"^v2\\/","name":"v2.0","active":"Latest(v2.0)","data":"v2"}]
+            },
+            withSummary : true,
+            isPC : null,
+            checkout: false,
+            root: "/",
+            contentNavigation: [],
+            contentOffset : { 'offsetTop' : 0, 'height' : 0 },
+            searched: null,
+            searchDisabled: localStorage.getItem("search-input-disabled") == 'true',
+            clientHeight : 0
+        },
+        methods :{
+            testPC : function(){ 
+                var userAgentInfo = navigator.userAgent;
+                var deviceReg = [
+                    /(MI(\s+)|2013022|2013023|HM|2014011|2014501|2014813|2014811|2014812|2014817|2014818|2014819|2014502|2015|xiaomi).*/i,
+                    /(MI(.*|\s*)PAD).*/i,
+                    /(iPhone | iPod).*/i,
+                    /(iPad).*/i,
+                    /(Android).*/i,
+                    /(iPhone|iPad|iPod|iOS).*/i,
+                    /(windows(.*|\s*)phone).*/i
+                ];
+                var flag = true;
+                for (var v = 0; v < deviceReg.length; v++) {
+                    if (deviceReg[v].test(userAgentInfo)) {
+                        flag = false;
+                        break;
+                    }
+                }
+                
+                return flag;
+            },
+            hidenSummary : function(){
+                if(!this.isPC)
+                {
+                    this.withSummary = false;
+                }
+            },
+            bindMinHeight: function(){
+                var vue = this;
+                window.addEventListener("resize", function(){
+                    vue.clientHeight = document.documentElement.clientHeight - 50;
+                }, false);
+                this.clientHeight = document.documentElement.clientHeight - 50;
+            },
+            bindAnchor : function(){
+                if(this.$refs.section == undefined){
+                    return;
+                }
+                window.addEventListener("hashchange", this.hashChange, false);
+                window.addEventListener("resize", this.refreshContentNavigation, false);
+                var elements = this.$refs.section.getElementsByTagName("a");
+                var vue = this;
+                for(var index = 0; index < elements.length; index++){
+                    let element = elements[index];
+                    let href = element.getAttribute("href");
+                    if(href.length <= 0 || href[0] != "#"){
+                        continue;
+                    }
+
+                    element.addEventListener('click', function(event){
+                        location.hash = "!" + encodeURI(decodeURI(vue.anchorEscaping(element.hash.substring(1))));
+                        event.preventDefault();
+                    }, false);
+                }
+
+                this.refreshContentNavigation();
+            },
+            refreshContentNavigation : function(){
+                if(this.$refs.section == undefined || !this.supportSubnav()){
+                    return;
+                }
+                var subnavIndex = 0;
+                var elements = this.$refs.section.getElementsByClassName("headerlink");
+                var subnav = [];
+                for(var index=0; index < elements.length; index++){
+                    var element = elements[index];
+                    if(element.parentElement.nodeName == "H2"){
+                        subnav[subnavIndex++] = {'text' : element.title , 'hash' : "!" + element.hash.substring(1), 'offsetTop' : element.offsetTop};
+                    }
+                }
+                this.contentNavigation = subnav;
+            },
+            hashChange : function(){
+                var locationHash = location.hash.replace(/^#!/ig, "#");
+                if(locationHash == ''){
+                    return;
+                }
+                locationHash = decodeURI(locationHash);
+                var hashes = this.$refs.section.getElementsByClassName("headerlink");
+                var target = null;
+                for(var index=0; index < hashes.length; index++){
+                    var hash = hashes[index];
+                    if(decodeURI(hash.hash) == locationHash){
+                        target = hash;
+                        break;
+                    }
+                }
+                
+                if(target == null){
+                    return;
+                }
+
+                var top = target.offsetTop - 20; 
+                
+                if(top > 0)
+                {
+                    var vue = this;
+                    $('.cookbook-content').animate({scrollTop:top}, 500, function(){
+                        if(!vue.isPC){
+                            vue.withSummary = false;
+                        }
+                    });
+                }        
+            },
+            bindScroll : function(){
+                if(!this.supportSubnav()){
+                    return;
+                }
+                this.$refs.content.addEventListener("scroll", this.scrollChange, false);
+            },
+            scrollChange : function(e){
+                this.contentOffset = { 
+                    'offsetTop' : this.$refs.content.scrollTop,
+                    'height' : this.$refs.content.scrollHeight - this.$refs.content.offsetHeight
+                };
+            },
+            supportSubnav : function(){
+                if(this.navigation.subnav != undefined && this.navigation.subnav == false){
+                    return false;
+                }
+                return true;
+            },
+            clearSearch: function(){
+                this.searched = null;
+                this.$nextTick(function(){
+                    this.hashChange();
+                });
+            },
+            searchSubmit: function(){
+                if(!this.isPC)
+                {
+                    this.withSummary = false;
+                }
+            },
+            anchorEscaping : function(str){
+                return str.replace(' ', '-').replace('.', '-');
+            },
+            setSearchDisabled : function(value){
+                this.searchDisabled = value;
+            },
+            initComments : function(){
+                
+                    var vue = this;
+                    var theme = {
+                        render : function(state, instance) {
+                            var container = document.createElement('div');
+                            container.lang = "en-US";
+                            container.className = 'gitment-container gitment-root-container';
+                            container.appendChild(instance.renderHeader(state, instance));
+                            container.appendChild(instance.renderComments(state, instance));
+                            container.appendChild(instance.renderEditor(state, instance));
+                            return container;
+                        },
+                    }
+
+                    var gitment = new Gitment({
+                        id : 'catlib-cn:v1/data-structure/sort-set.html',
+                        owner: 'catlib',
+                        repo: 'catlib-cn.io',
+                        oauth: {
+                            client_id: '3620f7cdd1c50b4b6e3c',
+                            client_secret: '50664006a799cb29b27e8358b88a6a4580e8dc0c',
+                            cross_server: 'https://31225080.ap-southeast-1.fc.aliyuncs.com/2016-08-15/proxy/gitment/gitment-cross/',
+                        },
+                        labels : [
+                            'CatLib'
+                        ],
+                        link: 'https://cn.catlib.io/v1/data-structure/sort-set.html',
+                        maintainer: ["yb199478"],
+                        theme : theme,
+                        perPage : 30,
+                    });
+
+                    gitment.render(this.$refs.comments);
+                
+            },
+        },mounted : function() {
+            this.isPC = this.withSummary = this.testPC();
+            this.$nextTick(function(){
+                this.bindScroll();
+                this.bindAnchor();
+                this.hashChange();
+                this.initComments();
+                this.bindMinHeight();
+            });
+        },
+        watch: {
+            searched : function(){
+                $('.cookbook-content').animate({scrollTop:0}, 0);
+            }
+        },
+        computed:{
+            minHeightStyle : function()
+            {
+                return { 'min-height' : this.clientHeight + "px" }
+            }
+        }
+    });
+};
+</script>
+    
+
+    
+    <script src="/scripts/cookbook.js"></script>
+    
+      <script src="/scripts/gitment.js"></script>
+    
+    
+    
+  </body>
+</html>

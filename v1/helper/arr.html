@@ -1,0 +1,904 @@
+<!doctype html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0">
+
+    
+
+    
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="/styles/cookbook.css">
+    <link rel="stylesheet" href="/styles/fontawesome.css">
+    
+      <link rel="stylesheet" href="/styles/gitment.css">
+    
+
+    <!-- favicon -->
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+
+    
+
+    
+
+    <title>CatLib - 数组 </title>
+  </head>
+
+  <body>
+    
+    
+    <div id="cookbook" :class="{'with-summary' : withSummary}" v-cloak>
+    <div class="cookbook-summary">
+    
+    <search placeholder="Type to search" :versions="versions" :root="root" v-model="searched" v-on:submit="searchSubmit" :disable="searchDisabled" v-on:disabled="setSearchDisabled"></search>
+    <navigation :data="navigation" :web="web" :versions="versions" :root="root" active="v1/helper/arr.html" :subnavdata="contentNavigation" :value="contentOffset" :searchdisabled="searchDisabled"></navigation>
+    
+</div>    <div class="cookbook-content" ref="content">
+    
+    <div class="cookbook-header" role="navigation">
+        <header-tool :web="web" path="v1/helper/arr.html" editor v-model="withSummary"></header-tool>
+        <header-navigation :web="web" :versions="versions" :root="root"></header-navigation>
+    </div>
+    <div class="content-wrapper" @click="hidenSummary" :style="minHeightStyle">
+        <checkout :navigation="navigation" :web="web" :versions="versions" v-model="checkout"></checkout>
+        <div v-if="checkout" class="cookbook-search-results">
+            <div id="search-noresults" v-show="searched == null">
+                <section ref="section" class="markdown-section">
+                    <h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>数组方法库允许您通过简单的方式访问和操作数组。</p>
+<h2 id="Merge"><a href="#Merge" class="headerlink" title="Merge"></a>Merge</h2><p>将多个数组合并成一个数组。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Arr.Merge(<span class="keyword">new</span> []&#123;<span class="string">"1"</span>,<span class="string">"2"</span>&#125; , <span class="keyword">new</span> []&#123;<span class="string">"3"</span>&#125;); <span class="comment">// ["1" , "2" , "3"]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型"><a href="#函数原型" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T[] Merge&lt;T&gt;(<span class="keyword">params</span> T[][] sources);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sources</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Rand"><a href="#Rand" class="headerlink" title="Rand"></a>Rand</h2><p>从规定数组中获取一个或者指定数量的随机值。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Arr.Rand(<span class="keyword">new</span> []&#123;<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>&#125;);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>如果获取的元素数量大于1，那么在随机过程中不会重复获得已经随机到的值<br>如果传入的数量大于提供的元素数量，将会返回<code>default(T)</code>空值</p>
+</blockquote>
+<hr>
+<h5 id="函数原型-1"><a href="#函数原型-1" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T[] Rand&lt;T&gt;(T[] source, <span class="keyword">int</span> number = <span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sources</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+<tr>
+<td><code>number</code></td>
+<td style="text-align:center">需要获取的元素数量</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Shuffle"><a href="#Shuffle" class="headerlink" title="Shuffle"></a>Shuffle</h2><p>将规定数组中的元素打乱(洗牌算法)。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Arr.Shuffle(<span class="keyword">new</span> []&#123;<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>&#125;);</span><br></pre></td></tr></table></figure>
+<p>给定随机种子：</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result1 = Arr.Shuffle(<span class="keyword">new</span> []&#123;<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>&#125;, <span class="number">100</span>); <span class="comment">// ["2", "1", "3"]</span></span><br><span class="line"><span class="keyword">var</span> result2 = Arr.Shuffle(<span class="keyword">new</span> []&#123;<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>&#125;, <span class="number">100</span>); <span class="comment">// ["2", "1", "3"]</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>随机种子一致，则同元素顺序多次随机也将会一致。</p>
+</blockquote>
+<hr>
+<h5 id="函数原型-2"><a href="#函数原型-2" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T[] Shuffle&lt;T&gt;(T[] source, <span class="keyword">int</span>? seed = <span class="literal">null</span>)</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sources</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+<tr>
+<td><code>seed</code></td>
+<td style="text-align:center">给定的随机种子</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Splice"><a href="#Splice" class="headerlink" title="Splice"></a>Splice</h2><p>从数组中移除指定长度的元素，如果给定了替换数组参数，那么替换数组中的元素将会从起始位置开始插入。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="keyword">new</span> []&#123;<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> count = Arr.Splice(<span class="keyword">ref</span> data , <span class="number">1</span> , <span class="number">1</span>, <span class="keyword">new</span> []&#123;<span class="string">"4"</span>, <span class="string">"5"</span>&#125;);</span><br><span class="line"><span class="comment">// data : ["1", "4", "5", "3"]</span></span><br><span class="line"><span class="comment">// count : 4</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-3"><a href="#函数原型-3" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T[] Splice&lt;T&gt;(<span class="keyword">ref</span> T[] source, <span class="keyword">int</span> start, <span class="keyword">int</span>? length = <span class="literal">null</span>, T[] replSource = <span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sources</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td style="text-align:center">删除元素的开始位置。如果为负数则从后向前计算。</td>
+</tr>
+<tr>
+<td><code>length</code></td>
+<td style="text-align:center">删除元素的个数，也是被返回数组的长度。如果为负数则保留到结尾指定元素数量，如：-1则意味着删除到数组的倒数第一个元素前。</td>
+</tr>
+<tr>
+<td><code>replSource</code></td>
+<td style="text-align:center">在删除起始位置插入的元素。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Chunk"><a href="#Chunk" class="headerlink" title="Chunk"></a>Chunk</h2><p>将数组分为新的数组块,其中每个数组的单元数目由大小参数决定。最后一个数组的单元数目可能会少几个。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Arr.Chunk(<span class="keyword">new</span> []&#123;<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>&#125;, <span class="number">2</span>);</span><br><span class="line"><span class="comment">// result : [["1", "2"], ["3"]]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-4"><a href="#函数原型-4" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T[][] Chunk&lt;T&gt;(T[] source, <span class="keyword">int</span> size);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+<tr>
+<td><code>size</code></td>
+<td style="text-align:center">每个分块的大小</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Fill"><a href="#Fill" class="headerlink" title="Fill"></a>Fill</h2><p>对数组进行填充，如果传入了规定数组，那么会在规定数组的基础上进行填充</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Arr.Fill(<span class="number">2</span>, <span class="number">3</span>, <span class="string">"100"</span>, <span class="keyword">new</span> []&#123;<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>&#125;);</span><br><span class="line"><span class="comment">// result : ["1","2","100","100","100","3"]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-5"><a href="#函数原型-5" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T[] Fill&lt;T&gt;(<span class="keyword">int</span> start, <span class="keyword">int</span> length, T <span class="keyword">value</span>, T[] source = <span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>start</code></td>
+<td style="text-align:center">起始下标</td>
+</tr>
+<tr>
+<td><code>length</code></td>
+<td style="text-align:center">填充长度</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td style="text-align:center">填充的值</td>
+</tr>
+<tr>
+<td><code>source</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Remove"><a href="#Remove" class="headerlink" title="Remove"></a>Remove</h2><p>将数组每个值传给回调函数，如果回调函数返回 true，则移除数组中对应的元素，并返回被移除的元素</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="keyword">new</span> <span class="keyword">string</span>[]&#123;<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> result = Arr.Remove(<span class="keyword">ref</span> data,(v) =&gt; v == <span class="string">"2"</span>);</span><br><span class="line"><span class="comment">// result : ["2"]</span></span><br><span class="line"><span class="comment">// data: ["1", "3"]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-6"><a href="#函数原型-6" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T[] Remove&lt;T&gt;(<span class="keyword">ref</span> T[] source, Predicate&lt;T&gt; predicate);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+<tr>
+<td><code>predicate</code></td>
+<td style="text-align:center">判断函数，如果返回值为<code>true</code>则被删除</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Filter"><a href="#Filter" class="headerlink" title="Filter"></a>Filter</h2><p>输入数组中的每个值传给回调函数,如果回调函数和期望值相同，则把输入数组中的当前值加入结果数组中。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Arr.Filter(<span class="keyword">new</span>[]&#123;<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"4"</span>, <span class="string">"5"</span>&#125;,(v) =&gt; (v % <span class="number">2</span>) == <span class="number">0</span>);</span><br><span class="line"><span class="comment">// result : ["2", "4"]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-7"><a href="#函数原型-7" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T[] Filter&lt;T&gt;(T[] source, Predicate&lt;T&gt; predicate, <span class="keyword">bool</span> expected = <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+<tr>
+<td><code>predicate</code></td>
+<td style="text-align:center">判断函数，如果返回值和期望值相同则将结果加入数组</td>
+</tr>
+<tr>
+<td><code>expected</code></td>
+<td style="text-align:center">期望值</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h2><p>将数组值传入用户自定义函数，自定义函数返回的值作为新的数组值加入到结果集，该操作不会导致原始数组的值发生修改。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Arr.Map(<span class="keyword">new</span>[]&#123;<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>&#125; , (v) =&gt; v * <span class="number">2</span>);</span><br><span class="line"><span class="comment">// result : [2, 4, 6]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-8"><a href="#函数原型-8" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TReturn[] Map&lt;T, TReturn&gt;(T[] source, Func&lt;T, TReturn&gt; callback);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+<tr>
+<td><code>callback</code></td>
+<td style="text-align:center">处理函数，返回值会被认为是新值</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h5 id="函数原型-9"><a href="#函数原型-9" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TReturn[] Map&lt;T, TReturn&gt;(IEnumerable&lt;T&gt; source, Func&lt;T, TReturn&gt; callback);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td style="text-align:center">规定迭代器</td>
+</tr>
+<tr>
+<td><code>callback</code></td>
+<td style="text-align:center">处理函数，返回值会被认为是新值</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Pop"><a href="#Pop" class="headerlink" title="Pop"></a>Pop</h2><p>删除数组中的最后一个元素，并将删除的元素作为返回值返回</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="keyword">new</span> []&#123;<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> result = Arr.Pop(<span class="keyword">ref</span> data);</span><br><span class="line"><span class="comment">// result : "3"</span></span><br><span class="line"><span class="comment">// data.Length : 2</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-10"><a href="#函数原型-10" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T Pop&lt;T&gt;(<span class="keyword">ref</span> T[] source);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Push"><a href="#Push" class="headerlink" title="Push"></a>Push</h2><p>将一个或多个元素加入数组尾端。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="keyword">new</span> []&#123;<span class="string">"1"</span>,<span class="string">"2"</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> count = Arr.Push(<span class="keyword">ref</span> data, <span class="string">"3"</span>,<span class="string">"4"</span>,<span class="string">"5"</span>);</span><br><span class="line"><span class="comment">// data : ["1","2","3","4" ,"5"]</span></span><br><span class="line"><span class="comment">// count : 5</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-11"><a href="#函数原型-11" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> Push&lt;T&gt;(<span class="keyword">ref</span> T[] source, <span class="keyword">params</span> T[] elements);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+<tr>
+<td><code>elements</code></td>
+<td style="text-align:center">需要添加到尾端的元素</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Reduce"><a href="#Reduce" class="headerlink" title="Reduce"></a>Reduce</h2><p>向用户自定义函数发送数组中的值，并返回一个字符串。<br>如果数组是空的且未传递初始化参数，该函数返回 null。<br>如果指定了初始化参数，则该参数将被当成是数组中的第一个值来处理，如果数组为空的话就作为最终返回值(string)。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Arr.Reduce(<span class="keyword">new</span> []&#123;<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>&#125;,(v1, v2)=&gt; v1 + <span class="string">"-"</span> + v2, <span class="string">"0"</span>);</span><br><span class="line"><span class="comment">// result : 0-1-2-3</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-12"><a href="#函数原型-12" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Reduce&lt;T&gt;(T[] source, Func&lt;<span class="keyword">object</span>, T, <span class="keyword">string</span>&gt; callback, <span class="keyword">object</span> initial = <span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+<tr>
+<td><code>callback</code></td>
+<td style="text-align:center">自定义处理函数，第一个参数为前序处理的结果值，第二个参数为规定数组元素，返回值为字符串</td>
+</tr>
+<tr>
+<td><code>initial</code></td>
+<td style="text-align:center">第一次触发自定义处理函数时，提供的前序处理的初始值</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Slice"><a href="#Slice" class="headerlink" title="Slice"></a>Slice</h2><p>在数组中根据条件取出一段值，并返回。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Arr.Slice(<span class="keyword">new</span> []&#123;<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"4"</span>, <span class="string">"5"</span>&#125;,<span class="number">1</span>,<span class="number">3</span>);</span><br><span class="line"><span class="comment">// result : ["2", "3", "4"]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-13"><a href="#函数原型-13" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T[] Slice&lt;T&gt;(T[] source, <span class="keyword">int</span> start, <span class="keyword">int</span>? length = <span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td style="text-align:center">起始位置，如果为负数则从后向前获取起始位置</td>
+</tr>
+<tr>
+<td><code>length</code></td>
+<td style="text-align:center">截取的长度，如果为负数则从后向前计算终止的位置。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Shift"><a href="#Shift" class="headerlink" title="Shift"></a>Shift</h2><p>删除数组中第一个元素，并返回被删除元素的值</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="keyword">new</span> []&#123;<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> result = Arr.Shift(<span class="keyword">ref</span> data);</span><br><span class="line"><span class="comment">// result : "1"</span></span><br><span class="line"><span class="comment">// data.Length : 2</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-14"><a href="#函数原型-14" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T Shift&lt;T&gt;(<span class="keyword">ref</span> T[] source);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Unshift"><a href="#Unshift" class="headerlink" title="Unshift"></a>Unshift</h2><p>向数组插入新元素。新数组的值将被插入到数组的开头。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="keyword">new</span> []&#123;<span class="string">"2"</span>,<span class="string">"3"</span>&#125;;</span><br><span class="line"><span class="keyword">var</span> count = Arr.Unshift(<span class="keyword">ref</span> data, <span class="string">"0"</span>, <span class="string">"1"</span>);</span><br><span class="line"><span class="comment">// count : 4</span></span><br><span class="line"><span class="comment">// data ["0", "1", "2", "3"]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-15"><a href="#函数原型-15" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> Unshift&lt;T&gt;(<span class="keyword">ref</span> T[] source, <span class="keyword">params</span> T[] elements);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+<tr>
+<td><code>elements</code></td>
+<td style="text-align:center">需要被插入到数组开头的元素</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Reverse"><a href="#Reverse" class="headerlink" title="Reverse"></a>Reverse</h2><p>以相反的顺序返回数组。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Arr.Reverse(<span class="keyword">new</span> []&#123;<span class="string">"1"</span>, <span class="string">"2"</span>,<span class="string">"3"</span>&#125;);</span><br><span class="line"><span class="comment">// result : ["3", "2", "1"]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-16"><a href="#函数原型-16" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T[] Reverse&lt;T&gt;(T[] source, <span class="keyword">int</span> start = <span class="number">0</span>, <span class="keyword">int</span>? length = <span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+<tr>
+<td><code>start</code></td>
+<td style="text-align:center">起始位置，如果为负数则从后向前获取起始位置</td>
+</tr>
+<tr>
+<td><code>length</code></td>
+<td style="text-align:center">处理的长度(终止位置)，如果为负数则从后向前计算终止的位置。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="IndexOf"><a href="#IndexOf" class="headerlink" title="IndexOf"></a>IndexOf</h2><p>从数组中检索指定的值并返回所在的下标，如果返回-1则代表没有出现</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Arr.IndexOf(<span class="keyword">new</span> []&#123;<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"4"</span>, <span class="string">"5"</span>&#125; , <span class="keyword">new</span> []&#123; <span class="string">"2"</span>, <span class="string">"3"</span> &#125;);</span><br><span class="line"><span class="comment">// result : 1</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-17"><a href="#函数原型-17" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> IndexOf&lt;T&gt;(T[] source, <span class="keyword">params</span> T[] match);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+<tr>
+<td><code>match</code></td>
+<td style="text-align:center">要匹配的值，如果有多个，只有全部的匹配才算匹配</td>
+</tr>
+</tbody>
+</table>
+<h2 id="IndexOfAny"><a href="#IndexOfAny" class="headerlink" title="IndexOfAny"></a>IndexOfAny</h2><p>从数组中检索指定的值并返回所在的下标，如果返回-1则代表没有出现，与<code>IndexOf</code>相比，只要有一个元素匹配则认为匹配成功。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Arr.IndexOfAny(<span class="keyword">new</span> []&#123;<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"4"</span>, <span class="string">"5"</span>&#125; , <span class="keyword">new</span> []&#123; <span class="string">"5"</span>, <span class="string">"2"</span> &#125;);</span><br><span class="line"><span class="comment">// result : 1</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-18"><a href="#函数原型-18" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> IndexOfAny&lt;T&gt;(T[] source, <span class="keyword">params</span> T[] match);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+<tr>
+<td><code>match</code></td>
+<td style="text-align:center">要匹配的值，有一个元素匹配则认为匹配成功</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Difference"><a href="#Difference" class="headerlink" title="Difference"></a>Difference</h2><p>从数组中排除指定的值</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> result = Arr.Difference(<span class="keyword">new</span> []&#123;<span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span>, <span class="string">"4"</span>, <span class="string">"5"</span>&#125; , <span class="keyword">new</span> []&#123; <span class="string">"2"</span>, <span class="string">"3"</span> &#125;);</span><br><span class="line"><span class="comment">// result : ["1", "4", "5"]</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-19"><a href="#函数原型-19" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T[] Difference&lt;T&gt;(T[] source, <span class="keyword">params</span> T[] match);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+<tr>
+<td><code>match</code></td>
+<td style="text-align:center">需要排除掉的值</td>
+</tr>
+</tbody>
+</table>
+<h2 id="RemoveAt"><a href="#RemoveAt" class="headerlink" title="RemoveAt"></a>RemoveAt</h2><p>从数组中移除并返回指定下标的元素。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> src = <span class="keyword">new</span> <span class="keyword">object</span>[]&#123; <span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> result = Arr.RemoveAt(<span class="keyword">ref</span> src, <span class="number">1</span>); <span class="comment">// 2</span></span><br><span class="line"><span class="comment">// src : object[] &#123; "1", "3" &#125;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-20"><a href="#函数原型-20" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">T RemoveAt&lt;T&gt;(<span class="keyword">ref</span> T[] source, <span class="keyword">int</span> index);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+<tr>
+<td><code>index</code></td>
+<td style="text-align:center">移除的元素下标</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Flash"><a href="#Flash" class="headerlink" title="Flash"></a>Flash</h2><p>临时性的回调元素，如果遇到异常或者完成回调后会进行回滚元素回调</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> src = <span class="keyword">new</span> <span class="keyword">object</span>[]&#123; <span class="string">"a"</span>, <span class="string">"b"</span>, <span class="string">"c"</span> &#125;;</span><br><span class="line">Arr.Flash(src,</span><br><span class="line">(element)=&gt; Console.WriteLine(<span class="string">"start:"</span> + element),</span><br><span class="line">(element)=&gt; Console.WriteLine(<span class="string">"rollback:"</span> + element), </span><br><span class="line">()=&gt; &#123; Console.WriteLine(<span class="string">"Completed"</span>); &#125;);</span><br><span class="line"><span class="comment">// start:a</span></span><br><span class="line"><span class="comment">// start:b</span></span><br><span class="line"><span class="comment">// start:c</span></span><br><span class="line"><span class="comment">// Completed</span></span><br><span class="line"><span class="comment">// rollback:c</span></span><br><span class="line"><span class="comment">// rollback:b</span></span><br><span class="line"><span class="comment">// rollback:a</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-21"><a href="#函数原型-21" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> Flash&lt;T&gt;(T[] source, Action&lt;T&gt; process, Action&lt;T&gt; rollback, Action completed);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+<tr>
+<td><code>process</code></td>
+<td style="text-align:center">将规定数组顺序回调</td>
+</tr>
+<tr>
+<td><code>rollback</code></td>
+<td style="text-align:center">如果顺序回调出现异常则触发，回滚回调</td>
+</tr>
+<tr>
+<td><code>completed</code></td>
+<td style="text-align:center">只有完全没有异常才触发的回调完成</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Cut"><a href="#Cut" class="headerlink" title="Cut"></a>Cut</h2><p>裁剪指定的数组，正数为从前向后裁剪，负数为从尾部裁剪</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="keyword">new</span> <span class="keyword">char</span>[] &#123; <span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>, <span class="string">'5'</span> &#125;;</span><br><span class="line">Arr.Cut(<span class="keyword">ref</span> data, <span class="number">1</span>);</span><br><span class="line"><span class="comment">// data[0] == '2'</span></span><br></pre></td></tr></table></figure>
+<p>尾部裁剪<br><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = <span class="keyword">new</span> <span class="keyword">char</span>[] &#123; <span class="string">'1'</span>, <span class="string">'2'</span>, <span class="string">'3'</span>, <span class="string">'4'</span>, <span class="string">'5'</span> &#125;;</span><br><span class="line">Arr.Cut(<span class="keyword">ref</span> data, <span class="number">-2</span>);</span><br><span class="line"><span class="comment">// data[0] == '1'</span></span><br><span class="line"><span class="comment">// data[1] == '2'</span></span><br><span class="line"><span class="comment">// data[2] == '3'</span></span><br><span class="line"><span class="comment">// data.length = 3</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<h5 id="函数原型-22"><a href="#函数原型-22" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> Cut&lt;T&gt;(<span class="keyword">ref</span> T[] source, <span class="keyword">int</span> count);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+<tr>
+<td><code>count</code></td>
+<td style="text-align:center">裁剪范围，负数为从尾部裁剪</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Test"><a href="#Test" class="headerlink" title="Test"></a>Test</h2><p>将规定数组传递给检查器进行检查。</p>
+<p>只有当所有元素通过检查器均为<code>false</code>，那么函数返回<code>false</code>。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> src = <span class="keyword">new</span> <span class="keyword">string</span>[]&#123; <span class="string">"1"</span>, <span class="string">"2"</span>, <span class="string">"3"</span> &#125;;</span><br><span class="line"><span class="keyword">var</span> result = Arr.Test(src, (item)=&gt; item == <span class="string">"2"</span>); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-23"><a href="#函数原型-23" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> Test&lt;T&gt;(T[] source, Predicate&lt;T&gt; predicate);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+<tr>
+<td><code>predicate</code></td>
+<td style="text-align:center">检查器</td>
+</tr>
+</tbody>
+</table>
+<h2 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h2><p>查找规定数组中的指定元素，如果找到了则使用替代值替换，否则在规定数组尾部增加替换值。</p>
+<figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> <span class="keyword">set</span> = <span class="keyword">new</span>[] &#123; <span class="string">"a"</span>, <span class="string">"ab"</span>, <span class="string">"abc"</span>, <span class="string">"abcd"</span>, <span class="string">"abcdef"</span> &#125;;</span><br><span class="line">Arr.Set(<span class="keyword">ref</span> <span class="keyword">set</span>, (element) =&gt; element == <span class="string">"none"</span>, <span class="string">"hello"</span>);</span><br><span class="line"><span class="comment">// &#123; "a", "ab", "abc", "abcd", "abcdef", "hello" &#125;</span></span><br></pre></td></tr></table></figure>
+<hr>
+<h5 id="函数原型-24"><a href="#函数原型-24" class="headerlink" title="函数原型"></a>函数原型</h5><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">void</span> Set&lt;T&gt;(<span class="keyword">ref</span> T[] source, Predicate&lt;T&gt; predicate, T <span class="keyword">value</span>);</span><br></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th style="text-align:center">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>source</code></td>
+<td style="text-align:center">规定数组</td>
+</tr>
+<tr>
+<td><code>predicate</code></td>
+<td style="text-align:center">返回true则覆盖当前元素内容</td>
+</tr>
+<tr>
+<td><code>value</code></td>
+<td style="text-align:center">替换(设定)值</td>
+</tr>
+</tbody>
+</table>
+
+                </section>
+
+                
+                    <div ref="comments" id="gitment-container"></div>
+                
+                
+                <support :web="web" visiable></support>
+            </div>
+            <div v-if="searched != null" id="search-result" class="search-result" v-cloak>
+                <p v-if="searched.results.length > 0" class="search-title">
+                    与"{{ searched.keyword }}"相关的内容{{searched.results.length}}条
+                </p>
+                <p v-else class="search-title">无搜索结果可以匹配"{{ searched.keyword }}"</p>
+                <div v-for="(record) in searched.results" class="searched-line">
+                    <h3>
+                        <a :href="'/' + record.href + '#!' + encodeURI(anchorEscaping(record.hash))" @click="clearSearch">
+                            {{ record.hash }}
+                        </a>
+                    </h3>
+                    <ul>
+                        <li><i>{{ record.page }} <span v-if="record.page_title != ''">- {{ record.page_title }}</span></i> <i>score:<span>{{ record.score }}</span></i></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div></div>
+
+<script>
+window.onload = function(){  
+    new Vue({
+        el : '#cookbook',
+        data: { 
+            navigation : {"navigation":[{"levels":[{"text":"CatLib","href":"/"},{"text":"核心库","href":"index.html"}]},{"divider":true},{"text":"起步"},{"text":"介绍","href":"index.html"},{"text":"风格指南","href":"style.html"},{"text":"常见问题","href":"faq.html"},{"text":"已知BUG","href":"bug.html"},{"text":"贡献指南","href":"contribution.html"},{"text":"更新日志","href":"upgrade.html"},{"text":"迁移指南","href":"migration.html"},{"text":"系统架构"},{"text":"服务提供者","href":"architecture/service-provider.html"},{"text":"应用程序","href":"architecture/application.html"},{"text":"服务容器","href":"architecture/container.html"},{"text":"服务门面","href":"architecture/facade.html"},{"text":"框架组件"},{"text":"事件系统","href":"components/event.html"},{"text":"管理器模版","href":"components/template.html"},{"text":"辅助函数"},{"text":"数组","href":"helper/arr.html"},{"text":"字符串","href":"helper/str.html"},{"text":"字典","href":"helper/dict.html"},{"text":"时间","href":"helper/system-time.html"},{"text":"线程静态","href":"helper/thread-static.html"},{"text":"通用","href":"helper/util.html"},{"text":"数据结构"},{"text":"有序集","href":"data-structure/sort-set.html"},{"text":"快速列表","href":"data-structure/quick-list.html"},{"text":"环型缓冲区","href":"data-structure/ring-buffer.html"},{"text":"内存存储","href":"data-structure/memory-storage.html"},{"text":"过滤器链","href":"data-structure/filter-chain.html"},{"text":"流"},{"text":"包装流","href":"stream/wrapper-stream.html"},{"text":"管道流","href":"stream/pipeline-stream.html"},{"text":"存储流","href":"stream/storage-stream.html"},{"text":"组合流","href":"stream/combine-stream.html"},{"text":"分片流","href":"stream/segment-stream.html"},{"divider":true},{"text":"Power by CatLib","href":"https://github.com/CatLib","external":true}]},
+            web : {"navigation":[{"type":"versions","mobile":true},{"type":"menu","text":"组件库","mobile":true,"list":[{"text":"ILRuntime支持库","href":"https://ilruntime.catlib.io"}]},{"type":"normal","text":"English","href":"https://catlib.io/lasted/index.html","mobile":true},{"type":"icon","fontawesome":"github","href":"https://github.com/CatLib/Core","mobile":true}],"tool":{"editor":{"text":"编辑","href":"https://github.com/CatLib/catlib-cn.io/tree/2.0/","external":true}},"support":{"label":["在文档中没有找到您需要的内容？","尝试在左侧搜索栏中搜索，或者{text}"],"text":"在GitHub中发起提问","href":"https://github.com/CatLib/catlib-cn.io/issues","external":true}},
+            versions: {
+                current :  {"test":"^v1\\/","name":"v1.4","active":"Latest(v1.4)","data":"v1"},
+                list: [{"test":"^v1\\/","name":"v1.4","active":"Latest(v1.4)","data":"v1"},{"test":"^v2\\/","name":"v2.0","active":"Latest(v2.0)","data":"v2"}]
+            },
+            withSummary : true,
+            isPC : null,
+            checkout: false,
+            root: "/",
+            contentNavigation: [],
+            contentOffset : { 'offsetTop' : 0, 'height' : 0 },
+            searched: null,
+            searchDisabled: localStorage.getItem("search-input-disabled") == 'true',
+            clientHeight : 0
+        },
+        methods :{
+            testPC : function(){ 
+                var userAgentInfo = navigator.userAgent;
+                var deviceReg = [
+                    /(MI(\s+)|2013022|2013023|HM|2014011|2014501|2014813|2014811|2014812|2014817|2014818|2014819|2014502|2015|xiaomi).*/i,
+                    /(MI(.*|\s*)PAD).*/i,
+                    /(iPhone | iPod).*/i,
+                    /(iPad).*/i,
+                    /(Android).*/i,
+                    /(iPhone|iPad|iPod|iOS).*/i,
+                    /(windows(.*|\s*)phone).*/i
+                ];
+                var flag = true;
+                for (var v = 0; v < deviceReg.length; v++) {
+                    if (deviceReg[v].test(userAgentInfo)) {
+                        flag = false;
+                        break;
+                    }
+                }
+                
+                return flag;
+            },
+            hidenSummary : function(){
+                if(!this.isPC)
+                {
+                    this.withSummary = false;
+                }
+            },
+            bindMinHeight: function(){
+                var vue = this;
+                window.addEventListener("resize", function(){
+                    vue.clientHeight = document.documentElement.clientHeight - 50;
+                }, false);
+                this.clientHeight = document.documentElement.clientHeight - 50;
+            },
+            bindAnchor : function(){
+                if(this.$refs.section == undefined){
+                    return;
+                }
+                window.addEventListener("hashchange", this.hashChange, false);
+                window.addEventListener("resize", this.refreshContentNavigation, false);
+                var elements = this.$refs.section.getElementsByTagName("a");
+                var vue = this;
+                for(var index = 0; index < elements.length; index++){
+                    let element = elements[index];
+                    let href = element.getAttribute("href");
+                    if(href.length <= 0 || href[0] != "#"){
+                        continue;
+                    }
+
+                    element.addEventListener('click', function(event){
+                        location.hash = "!" + encodeURI(decodeURI(vue.anchorEscaping(element.hash.substring(1))));
+                        event.preventDefault();
+                    }, false);
+                }
+
+                this.refreshContentNavigation();
+            },
+            refreshContentNavigation : function(){
+                if(this.$refs.section == undefined || !this.supportSubnav()){
+                    return;
+                }
+                var subnavIndex = 0;
+                var elements = this.$refs.section.getElementsByClassName("headerlink");
+                var subnav = [];
+                for(var index=0; index < elements.length; index++){
+                    var element = elements[index];
+                    if(element.parentElement.nodeName == "H2"){
+                        subnav[subnavIndex++] = {'text' : element.title , 'hash' : "!" + element.hash.substring(1), 'offsetTop' : element.offsetTop};
+                    }
+                }
+                this.contentNavigation = subnav;
+            },
+            hashChange : function(){
+                var locationHash = location.hash.replace(/^#!/ig, "#");
+                if(locationHash == ''){
+                    return;
+                }
+                locationHash = decodeURI(locationHash);
+                var hashes = this.$refs.section.getElementsByClassName("headerlink");
+                var target = null;
+                for(var index=0; index < hashes.length; index++){
+                    var hash = hashes[index];
+                    if(decodeURI(hash.hash) == locationHash){
+                        target = hash;
+                        break;
+                    }
+                }
+                
+                if(target == null){
+                    return;
+                }
+
+                var top = target.offsetTop - 20; 
+                
+                if(top > 0)
+                {
+                    var vue = this;
+                    $('.cookbook-content').animate({scrollTop:top}, 500, function(){
+                        if(!vue.isPC){
+                            vue.withSummary = false;
+                        }
+                    });
+                }        
+            },
+            bindScroll : function(){
+                if(!this.supportSubnav()){
+                    return;
+                }
+                this.$refs.content.addEventListener("scroll", this.scrollChange, false);
+            },
+            scrollChange : function(e){
+                this.contentOffset = { 
+                    'offsetTop' : this.$refs.content.scrollTop,
+                    'height' : this.$refs.content.scrollHeight - this.$refs.content.offsetHeight
+                };
+            },
+            supportSubnav : function(){
+                if(this.navigation.subnav != undefined && this.navigation.subnav == false){
+                    return false;
+                }
+                return true;
+            },
+            clearSearch: function(){
+                this.searched = null;
+                this.$nextTick(function(){
+                    this.hashChange();
+                });
+            },
+            searchSubmit: function(){
+                if(!this.isPC)
+                {
+                    this.withSummary = false;
+                }
+            },
+            anchorEscaping : function(str){
+                return str.replace(' ', '-').replace('.', '-');
+            },
+            setSearchDisabled : function(value){
+                this.searchDisabled = value;
+            },
+            initComments : function(){
+                
+                    var vue = this;
+                    var theme = {
+                        render : function(state, instance) {
+                            var container = document.createElement('div');
+                            container.lang = "en-US";
+                            container.className = 'gitment-container gitment-root-container';
+                            container.appendChild(instance.renderHeader(state, instance));
+                            container.appendChild(instance.renderComments(state, instance));
+                            container.appendChild(instance.renderEditor(state, instance));
+                            return container;
+                        },
+                    }
+
+                    var gitment = new Gitment({
+                        id : 'catlib-cn:v1/helper/arr.html',
+                        owner: 'catlib',
+                        repo: 'catlib-cn.io',
+                        oauth: {
+                            client_id: '3620f7cdd1c50b4b6e3c',
+                            client_secret: '50664006a799cb29b27e8358b88a6a4580e8dc0c',
+                            cross_server: 'https://31225080.ap-southeast-1.fc.aliyuncs.com/2016-08-15/proxy/gitment/gitment-cross/',
+                        },
+                        labels : [
+                            'CatLib'
+                        ],
+                        link: 'https://cn.catlib.io/v1/helper/arr.html',
+                        maintainer: ["yb199478"],
+                        theme : theme,
+                        perPage : 30,
+                    });
+
+                    gitment.render(this.$refs.comments);
+                
+            },
+        },mounted : function() {
+            this.isPC = this.withSummary = this.testPC();
+            this.$nextTick(function(){
+                this.bindScroll();
+                this.bindAnchor();
+                this.hashChange();
+                this.initComments();
+                this.bindMinHeight();
+            });
+        },
+        watch: {
+            searched : function(){
+                $('.cookbook-content').animate({scrollTop:0}, 0);
+            }
+        },
+        computed:{
+            minHeightStyle : function()
+            {
+                return { 'min-height' : this.clientHeight + "px" }
+            }
+        }
+    });
+};
+</script>
+    
+
+    
+    <script src="/scripts/cookbook.js"></script>
+    
+      <script src="/scripts/gitment.js"></script>
+    
+    
+    
+  </body>
+</html>

@@ -1,0 +1,634 @@
+<!doctype html>
+<html lang="en">
+  <head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="description" content>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1.0, user-scalable=0">
+
+    
+
+    
+
+    <!-- stylesheets -->
+    <link rel="stylesheet" href="/styles/cookbook.css">
+    <link rel="stylesheet" href="/styles/fontawesome.css">
+    
+      <link rel="stylesheet" href="/styles/gitment.css">
+    
+
+    <!-- favicon -->
+    
+    <link rel="shortcut icon" href="/favicon.ico">
+    
+
+    
+
+    
+
+    <title>CatLib - 更新日志 </title>
+  </head>
+
+  <body>
+    
+    
+    <div id="cookbook" :class="{'with-summary' : withSummary}" v-cloak>
+    <div class="cookbook-summary">
+    
+    <search placeholder="Type to search" :versions="versions" :root="root" v-model="searched" v-on:submit="searchSubmit" :disable="searchDisabled" v-on:disabled="setSearchDisabled"></search>
+    <navigation :data="navigation" :web="web" :versions="versions" :root="root" active="v1/upgrade.html" :subnavdata="contentNavigation" :value="contentOffset" :searchdisabled="searchDisabled"></navigation>
+    
+</div>    <div class="cookbook-content" ref="content">
+    
+    <div class="cookbook-header" role="navigation">
+        <header-tool :web="web" path="v1/upgrade.html" editor v-model="withSummary"></header-tool>
+        <header-navigation :web="web" :versions="versions" :root="root"></header-navigation>
+    </div>
+    <div class="content-wrapper" @click="hidenSummary" :style="minHeightStyle">
+        <checkout :navigation="navigation" :web="web" :versions="versions" v-model="checkout"></checkout>
+        <div v-if="checkout" class="cookbook-search-results">
+            <div id="search-noresults" v-show="searched == null">
+                <section ref="section" class="markdown-section">
+                    <h1 id="更新日志"><a href="#更新日志" class="headerlink" title="更新日志"></a>更新日志</h1><blockquote>
+<p>CatLib的版本标准是采用：<a href="http://semver.org/lang/zh-CN/" target="_blank" rel="noopener">Semver语义化版本标准</a></p>
+</blockquote>
+<h2 id="摘要"><a href="#摘要" class="headerlink" title="摘要"></a>摘要</h2><p>版本格式：主版本号.次版本号.修订号，版本号递增规则如下：</p>
+<ul>
+<li>主版本号：当你做了不兼容的 API 修改，</li>
+<li>次版本号：当你做了向下兼容的功能性新增，</li>
+<li>修订号：当你做了向下兼容的问题修正。</li>
+</ul>
+<blockquote>
+<p>先行版本号及版本编译信息可以加到<code>主版本号.次版本号.修订号</code>的后面，作为延伸。</p>
+</blockquote>
+<h2 id="v1-4-0-2019-03-20"><a href="#v1-4-0-2019-03-20" class="headerlink" title="v1.4.0 (2019-03-20)"></a><a href="https://github.com/CatLib/Core/releases/tag/v1.4.0" target="_blank" rel="noopener">v1.4.0 (2019-03-20)</a></h2><p><strong>Added</strong></p>
+<ul>
+<li><code>Arr</code>增加<code>Test</code>函数，支持对数组进行自定义检查(<a href="https://github.com/CatLib/Core/issues/178" target="_blank">#178</a> )</li>
+<li><code>Arr</code>增加<code>Set</code>函数，允许替换匹配值或者在尾部增加替换值(<a href="https://github.com/CatLib/Core/issues/190" target="_blank">#190</a> )</li>
+<li><code>Str</code>增加<code>Is</code>重载，允许对于数组类型的模式进行匹配(<a href="https://github.com/CatLib/Core/issues/179" target="_blank">#179</a> )</li>
+<li><code>Str</code>增加<code>JoinList</code>函数，允许顺序组合给定的字符串数组(<a href="https://github.com/CatLib/Core/issues/195" target="_blank">#195</a> )</li>
+<li><code>Str</code>增加<code>Levenshtein</code>函数，允许计算两个字符串之间的近似度(<a href="https://github.com/CatLib/Core/issues/194" target="_blank">#194</a> )</li>
+<li><code>Str</code>增加<code>Space</code>常量代表一个含有空格的空字符串(<a href="https://github.com/CatLib/Core/issues/197" target="_blank">#197</a> )</li>
+<li><code>Application.Register</code>增加强制注册支持，允许在已注册服务提供者的基础上强制注册(<a href="https://github.com/CatLib/Core/issues/184" target="_blank">#184</a> )</li>
+<li><code>增加CHANGELOG</code>(<a href="https://github.com/CatLib/Core/issues/185" target="_blank">#185</a> )</li>
+</ul>
+<p><strong>Changed</strong></p>
+<ul>
+<li>代码标准规范调整：只有在引导流程完成后才能进行容器构建(<a href="https://github.com/CatLib/Core/issues/180" target="_blank">#180</a> )</li>
+<li><code>Application</code>代码优化(<a href="https://github.com/CatLib/Core/issues/181" target="_blank">#181</a> )</li>
+<li><code>Arr</code>中的<code>Filter</code>函数，允许传入一个期望值来决定结果集(<a href="https://github.com/CatLib/Core/issues/196" target="_blank">#196</a> )</li>
+<li><code>IContainer.Flash</code> 标记将会在2.0版本中被移除(<a href="https://github.com/CatLib/Core/issues/193" target="_blank">#193</a> )</li>
+<li><code>Str</code>中的<code>Pad</code>函数增加拓展并且标记旧的格式为已过时(<a href="https://github.com/CatLib/Core/issues/198" target="_blank">#198</a> )</li>
+<li>单元测试项目升级到4.0 framework(<a href="https://github.com/CatLib/Core/issues/191" target="_blank">#191</a> )</li>
+</ul>
+<h2 id="v1-3-2-Beta"><a href="#v1-3-2-Beta" class="headerlink" title="v1.3.2 Beta"></a>v1.3.2 Beta</h2><ul>
+<li>修复无法对Nullable对象注入的问题(<a href="https://github.com/CatLib/Core/issues/175" target="_blank">#175</a> )</li>
+<li>StreamExtension中的AppendTo应该使用参数为空异常而不是空引用异常(<a href="https://github.com/CatLib/Core/issues/182" target="_blank">#182</a> )</li>
+</ul>
+<h2 id="v1-3-1-Beta"><a href="#v1-3-1-Beta" class="headerlink" title="v1.3.1 Beta"></a>v1.3.1 Beta</h2><ul>
+<li>RegisterCoreAlias 中应该使用<code>IApplication</code>作为服务名(<a href="https://github.com/CatLib/Core/issues/167" target="_blank">#167</a> )</li>
+<li>Alias的服务名不能以别名的形式来确定(<a href="https://github.com/CatLib/Core/issues/170" target="_blank">#170</a> )</li>
+<li>修复以源码形式使用的情况下在终止框架时会引发异常的bug(<a href="https://github.com/CatLib/Core/issues/171" target="_blank">#171</a> )</li>
+<li>增加package.json允许通过包管理系统分发(<a href="https://github.com/CatLib/Core/issues/174" target="_blank">#174</a> )</li>
+</ul>
+<h2 id="v1-3-0-Beta"><a href="#v1-3-0-Beta" class="headerlink" title="v1.3.0 Beta"></a>v1.3.0 Beta</h2><p><strong>框架相关</strong></p>
+<ul>
+<li>修复Terminate()框架时会释放不属于自己的全局句柄(<a href="https://github.com/CatLib/Core/issues/131" target="_blank">#131</a> )</li>
+<li>Arr.Map函数的返回值会根据闭包的返回值来决定(<a href="https://github.com/CatLib/Core/issues/138" target="_blank">#138</a> )</li>
+<li>Arr.Map允许传入<code>null</code>元素将会转意为：new object<a href="!--￼22--">0</a></li>
+<li>修复<code>OnNewApplication</code>给定新的事件时导致关注该事件的全部事件都生效的bug(<a href="https://github.com/CatLib/Core/issues/144" target="_blank">#144</a> )</li>
+<li>App.cs缺失的接口补全(<a href="https://github.com/CatLib/Core/issues/152" target="_blank">#152</a> )</li>
+<li>Application的部分函数调整为protected(<a href="https://github.com/CatLib/Core/issues/153" target="_blank">#153</a> )</li>
+</ul>
+<p><strong>容器相关</strong></p>
+<ul>
+<li><code>WrapperTypeBuilder</code> 中给定的服务名无需在进行格式化处理，服务名在传入之前就应该被处理(<a href="https://github.com/CatLib/Core/issues/139" target="_blank">#139</a> )</li>
+<li>调整GetBindFillable由private变更为protected(<a href="https://github.com/CatLib/Core/issues/141" target="_blank">#141</a> )</li>
+<li>调整容器Extend函数，允许进行全局监控(<a href="https://github.com/CatLib/Core/issues/142" target="_blank">#142</a> )</li>
+<li>IBindable接口增加Container属性允许获取绑定数据的容器信息(<a href="https://github.com/CatLib/Core/issues/145" target="_blank">#145</a> )</li>
+<li>为IGivenData的泛型类增加IBindable的约束(<a href="https://github.com/CatLib/Core/issues/146" target="_blank">#146</a> )</li>
+<li>修复容器未能解决时，错误指向的类型关系不正确的问题(<a href="https://github.com/CatLib/Core/issues/150" target="_blank">#150</a> )</li>
+<li>Bind和Singleton增加写法语法糖(<a href="https://github.com/CatLib/Core/issues/156" target="_blank">#156</a> )</li>
+<li>BindIf和SingletonIf增加写法语法糖(<a href="https://github.com/CatLib/Core/issues/158" target="_blank">#158</a> )</li>
+<li>Watch接口调整(<a href="https://github.com/CatLib/Core/issues/163" target="_blank">#163</a> )</li>
+</ul>
+<p><strong>即将被移除</strong></p>
+<ul>
+<li>自定义枚举类，被标记为已过时，这个类将会在2.0版本中被移除(<a href="https://github.com/CatLib/Core/issues/134" target="_blank">#134</a> )</li>
+</ul>
+<p><strong>内部调整</strong></p>
+<ul>
+<li>代码风格优化(<a href="https://github.com/CatLib/Core/issues/135" target="_blank">#135</a> )</li>
+<li>将类名调整为风格指南建议的类名 (<a href="https://github.com/CatLib/Core/issues/148" target="_blank">#148</a> )</li>
+<li>修正App.Factory没有扩展函数提供的Factory的问题(<a href="https://github.com/CatLib/Core/issues/159" target="_blank">#159</a> )</li>
+<li>统一ContainerExtend的模版名转换函数(<a href="https://github.com/CatLib/Core/issues/137" target="_blank">#137</a> )</li>
+<li>引用增加System.Core(<a href="https://github.com/CatLib/Core/issues/155" target="_blank">#155</a> )</li>
+<li>对一些可能为空的逻辑代码进行空判断检查(<a href="https://github.com/CatLib/Core/issues/149" target="_blank">#149</a> )</li>
+<li>泛型命名优化(<a href="https://github.com/CatLib/Core/issues/151" target="_blank">#151</a> )</li>
+<li>Facade性能优化(<a href="https://github.com/CatLib/Core/issues/162" target="_blank">#162</a> )</li>
+</ul>
+<h2 id="v1-3-0-Alpha-3"><a href="#v1-3-0-Alpha-3" class="headerlink" title="v1.3.0 Alpha.3"></a>v1.3.0 Alpha.3</h2><p><strong>框架相关</strong></p>
+<ul>
+<li>修复初始化顺序不正确的异常，不同运行时环境不一致(<a href="https://github.com/CatLib/Core/issues/102" target="_blank">#102</a> )</li>
+<li>copyright 名称变更为 CatLib(<a href="https://github.com/CatLib/Core/issues/106" target="_blank">#106</a> )</li>
+<li>为Type增加ToService扩展函数(<a href="https://github.com/CatLib/Core/issues/105" target="_blank">#105</a> )</li>
+<li>注释中的文档地址更新为 https(<a href="https://github.com/CatLib/Core/issues/108" target="_blank">#108</a> )</li>
+<li>DebugLevels允许在Register中被使用（<a href="https://github.com/CatLib/Core/issues/109" target="_blank">#109</a> ）</li>
+<li>提示内容优化(<a href="https://github.com/CatLib/Core/issues/117" target="_blank">#117</a> )</li>
+<li>App门面增加IsResolved(string service)的支持(<a href="https://github.com/CatLib/Core/issues/118" target="_blank">#118</a> )</li>
+<li>移除实验的属性App.AutoInstance; 如果全局实例没有被构建则引发一个异常（<a href="https://github.com/CatLib/Core/issues/129" target="_blank">#129</a> ）</li>
+<li>如果在构建CatLib实例时，允许传入一个bool值决定是否应用到全局（<a href="https://github.com/CatLib/Core/issues/128" target="_blank">#128</a> ）</li>
+</ul>
+<p><strong>服务容器</strong></p>
+<ul>
+<li>将IContainer接口缩减，缩减的接口将会被移动到扩展方法(<a href="https://github.com/CatLib/Core/issues/111" target="_blank">#111</a> )<br>– Factory</li>
+<li>语意行为变更：Bind和Singleton相关(<a href="https://github.com/CatLib/Core/issues/112" target="_blank">#112</a> )</li>
+<li><code>IContainer.Release</code>接口参数由<code>string</code>变更为<code>object</code>,允许通过对象实例来进行释放(<a href="https://github.com/CatLib/Core/issues/115" target="_blank">#115</a> )</li>
+<li>优化UnresolvableException的异常提示消息 （<a href="https://github.com/CatLib/Core/issues/120" target="_blank">#120</a> ）</li>
+<li>允许在Needs时提供需求的变量名，以支持变量名需求，改善变量名上下文关系的流程 (<a href="https://github.com/CatLib/Core/issues/122" target="_blank">#122</a> )</li>
+<li>服务容器的构建策略可以通过虚函数覆写（<a href="https://github.com/CatLib/Core/issues/124" target="_blank">#124</a> ）</li>
+<li>移除了Inject的别名支持 （<a href="https://github.com/CatLib/Core/issues/126" target="_blank">#126</a> ）</li>
+</ul>
+<p><strong>其他</strong></p>
+<ul>
+<li>清理了无用代码(<a href="https://github.com/CatLib/Core/issues/119" target="_blank">#119</a> )</li>
+<li>移除了上个版本被标记为已过时的代码(<a href="https://github.com/CatLib/Core/issues/127" target="_blank">#127</a> )</li>
+</ul>
+<h2 id="v1-3-0-Alpha-2"><a href="#v1-3-0-Alpha-2" class="headerlink" title="v1.3.0 Alpha.2"></a>v1.3.0 Alpha.2</h2><ul>
+<li>Type2Service 将不允许为虚方法。(<a href="https://github.com/CatLib/Core/issues/96" target="_blank">#96</a> )</li>
+<li>服务提供者的传入顺序为初始化顺序(<a href="https://github.com/CatLib/Core/issues/97" target="_blank">#97</a> )</li>
+<li>Given 允许返回一个闭包 (<a href="https://github.com/CatLib/Core/issues/98" target="_blank">#98</a> )</li>
+</ul>
+<h2 id="v1-3-0-Alpha-1"><a href="#v1-3-0-Alpha-1" class="headerlink" title="v1.3.0 Alpha.1"></a>v1.3.0 Alpha.1</h2><p><strong>框架</strong></p>
+<ul>
+<li>升级为 c# 7.0 语法(<a href="https://github.com/CatLib/Core/issues/64" target="_blank">#64</a>)</li>
+<li>增加<code>LogicException</code>逻辑错误异常(<a href="https://github.com/CatLib/Core/issues/80" target="_blank">#80</a>)</li>
+<li>增加<code>CodeStandardException</code>代码规范异常(<a href="https://github.com/CatLib/Core/issues/62" target="_blank">#62</a>)</li>
+<li><code>ServiceProvider.Register</code>不再是<code>abstract</code> </li>
+<li>增加了<code>ICoroutineInit</code> 协同初始化接口(默认的迭代器为同步迭代器和<code>Init</code>没有本质区别,在其他环境下可能受到环境影响)</li>
+<li><code>ApplicationEvents.OnIniting</code>被标记为已过时，使用：<code>ApplicationEvents.OnProviderInit</code>替换</li>
+<li>新增了<code>ApplicationEvents.OnProviderInit</code> 服务提供者初始化之前</li>
+<li>新增了<code>ApplicationEvents.OnProviderInited</code> 服务提供者初始化完成</li>
+<li>Application Version现在是静态化的了(<a href="https://github.com/CatLib/Core/issues/90" target="_blank">#90</a>)</li>
+</ul>
+<p><strong>代码规范性检查</strong> </p>
+<ul>
+<li>如果尝试为同一个单例化的实例注册不同的服务名，则会异常发一个异常(<a href="https://github.com/CatLib/Core/issues/62" target="_blank">#62</a>)</li>
+<li>如果尝试在注册流程中Make服务，那么会引发一个异常。 (<a href="https://github.com/CatLib/Core/issues/59" target="_blank">#59</a>)</li>
+<li>通过容器Watch一个对象时，只有当对象时可以被构建时才允许被watch。因为我们认为观察的只能是一个已经被确定的服务，而不是一个未知服务。 (<a href="https://github.com/CatLib/Core/issues/59" target="_blank">#59</a>)</li>
+<li>如果尝试在注册流程中Invoke函数，那么会引发一个异常。(<a href="https://github.com/CatLib/Core/issues/62" target="_blank">#62</a>)</li>
+</ul>
+<p><strong>容器服务</strong></p>
+<ul>
+<li>服务容器增加了解决事件和释放事件的条件筛选(<a href="https://github.com/CatLib/Core/issues/84" target="_blank">#84</a>)</li>
+<li>服务容器增加OnAfterResolving的支持。(<a href="https://github.com/CatLib/Core/issues/83" target="_blank">#83</a>)</li>
+<li>使用this[] set对象时会进行隐式的对象绑定(bind)(<a href="https://github.com/CatLib/Core/issues/82" target="_blank">#82</a>)</li>
+<li>增加Extend函数，用于处理服务的覆盖及拓展关系，OnResolving不再允许覆盖对象。(<a href="https://github.com/CatLib/Core/issues/79" target="_blank">#79</a>)</li>
+<li>服务容器Watch接口从容器实现转移至扩展函数(<a href="https://github.com/CatLib/Core/issues/81" target="_blank">#81</a>)</li>
+<li>增加服务特殊字符<code>@</code>,<code>$</code>和<code>:</code>识别，如果包含则不允许注册。(<a href="https://github.com/CatLib/Core/issues/61" target="_blank">#61</a>)</li>
+<li>增加变量标签<code>$</code>同<code>@</code>一样，具备相同的变量映射作用。(<a href="https://github.com/CatLib/Core/issues/61" target="_blank">#61</a>)</li>
+<li>容器在<code>flush</code>对象时将会按照构建顺序的相反顺序释放服务（之前是需要通过辅助组件来完成）(<a href="https://github.com/CatLib/Core/issues/55" target="_blank">#55</a>)</li>
+<li>服务容器增加<code>App.Alias&lt;TService, TAlias&gt;()</code>的拓展方法支持(<a href="https://github.com/CatLib/Core/issues/57" target="_blank">#57</a>)</li>
+</ul>
+<p><strong>支持库</strong></p>
+<ul>
+<li>增加 <code>SegmentStream</code> 分片流(<a href="https://github.com/CatLib/Core/issues/74" target="_blank">#74</a>)</li>
+<li>增加 <code>WrapperStream</code> 包装流(<a href="https://github.com/CatLib/Core/issues/69" target="_blank">#69</a>)</li>
+<li>增加 <code>CombineStream</code> 组合流(<a href="https://github.com/CatLib/Core/issues/70" target="_blank">#70</a>)</li>
+<li><code>Arr.Filter</code> 支持迭代器(<a href="https://github.com/CatLib/Core/issues/67" target="_blank">#67</a>)</li>
+<li><code>Arr.Map</code> 支持迭代器(<a href="https://github.com/CatLib/Core/issues/66" target="_blank">#66</a>)</li>
+<li>增加了<code>SortSet.ReverseIterator(bool forward)</code>指定反转方向的接口(<a href="https://github.com/CatLib/Core/issues/56" target="_blank">#56</a>)</li>
+<li>StreamExtension.ToText() 加入对不能读取流的判断(<a href="https://github.com/CatLib/Core/issues/75" target="_blank">#75</a>)</li>
+<li>管理器模版支持OnAfterResolving(<a href="https://github.com/CatLib/Core/issues/92" target="_blank">#92</a>)</li>
+</ul>
+<h2 id="v1-2-12-Beta"><a href="#v1-2-12-Beta" class="headerlink" title="v1.2.12 Beta"></a>v1.2.12 Beta</h2><ul>
+<li>增加模版方法的门面静态类</li>
+<li>修复<code>Dict.Modify</code>的bug，这个bug导致不必要的字典实例 <a href="https://github.com/CatLib/Core/issues/52" target="_blank">#52</a></li>
+<li><code>DebugLevels</code> 枚举命名调整<br>– Prod标记为已过时<br>– Dev标记为已过时<br>– 增加 Production<br>– 增加 Development</li>
+<li>尝试重复调用引导(Bootstrap)时会引发一个<code>RuntimeException</code>而不是静默忽略。</li>
+<li>尝试重复调用初始化(Init)时会引发一个<code>RuntimeException</code>而不是静默忽略。</li>
+<li>增加了<code>ApplicationEvents.OnBootstrap</code>在引导开始之前</li>
+<li>增加了<code>ApplicationEvents.Bootstrapping</code>在引导进行中</li>
+<li>增加了<code>ApplicationEvents.OnInit</code>在初始化开始之前</li>
+<li>增加了<code>ApplicationEvents.OnInited</code>在初始化完成之后</li>
+<li>增加了<code>ApplicationEvents.OnRegisterProvider</code>注册服务提供者事件</li>
+<li>允许<code>ApplicationEvents.Bootstrapping</code>返回一个不为<code>null</code>的值(一般是<code>false</code>)来终止当前引导激活。</li>
+<li>允许<code>ApplicationEvents.OnRegisterProvider</code>返回一个不为<code>null</code>的值(一般是<code>false</code>)来终止服务提供者注册。</li>
+</ul>
+<h2 id="v1-2-11-Beta"><a href="#v1-2-11-Beta" class="headerlink" title="v1.2.11 Beta"></a>v1.2.11 Beta</h2><ul>
+<li>PipelineStream支持SetLength</li>
+<li>增加ToStream();</li>
+</ul>
+<h2 id="v1-2-10-Beta"><a href="#v1-2-10-Beta" class="headerlink" title="v1.2.10 Beta"></a>v1.2.10 Beta</h2><ul>
+<li>增加 <code>Stream.ToText();</code> 扩展函数</li>
+<li><code>Arr.Merge</code>支持对于<code>null</code>元素的合并兼容</li>
+<li>增加了<code>PipelineStream</code> 管道流，可以用于安全的线程间通讯</li>
+</ul>
+<h2 id="v1-2-9-Beta"><a href="#v1-2-9-Beta" class="headerlink" title="v1.2.9 Beta"></a>v1.2.9 Beta</h2><ul>
+<li><code>SingleManager</code> 中的扩展实现，支持释放接口</li>
+<li><code>Arr</code>增加了<code>IndexOfAny</code>函数可以用于查找任意匹配的下标</li>
+<li>管理器模版重构</li>
+<li>修复了.NetStandard下dll缺失了部分功能的问题</li>
+<li>增加 <code>int.ToPrime()</code> 扩展方法</li>
+<li>IBindData 增加了函数<code>Tag</code>，可以用于服务标记</li>
+<li>新增了 <code>ThreadStatic</code> 线程静态变量辅助库</li>
+</ul>
+<h2 id="v1-2-8-Beta"><a href="#v1-2-8-Beta" class="headerlink" title="v1.2.8 Beta"></a>v1.2.8 Beta</h2><ul>
+<li>新增了 Stream 扩展函数 <code>AppendTo</code></li>
+<li>修复了 SortSet.GetRangeCount 在一定情况下引发异常的bug</li>
+<li>增加了内存存储结构 MemoryStorage </li>
+<li>增加了存储流 StorageStream</li>
+<li>修复了Facade中Instance导致40B的GC Alloc</li>
+</ul>
+<h2 id="v1-2-7-Beta"><a href="#v1-2-7-Beta" class="headerlink" title="v1.2.7 Beta"></a>v1.2.7 Beta</h2><ul>
+<li>移除了引用计数模块</li>
+<li>修复一个bug，这个bug导致<code>SortSet</code>在存储相同的Value时有概率不能正确移除元素， 同等情况下获取排名不正确的问题</li>
+<li><code>OnResolving</code>增加无参数Lambda支持</li>
+<li>为<code>RingBuffer</code>增加了接口</li>
+<li>删除了不必要的Using</li>
+</ul>
+<h2 id="v1-2-6-Beta"><a href="#v1-2-6-Beta" class="headerlink" title="v1.2.6 Beta"></a>v1.2.6 Beta</h2><ul>
+<li>增加了新的数据结构，环型缓冲区(RingBuffer)</li>
+<li>增加了 <code>Arr.Cut</code> 裁剪函数，允许裁剪数组</li>
+<li><code>SortSet</code> 支持自定义比较器来进行排序</li>
+<li>优化了在容器构建发生异常后的错误提示</li>
+<li>事件系统可以通过字符串注册获取私有的方法了</li>
+<li>增加ServiceProvider抽象类, 意味着接口的Init将不是必须的了</li>
+<li><code>Release</code>方法在通过类型释放时可以获得没有释放成功的类型了</li>
+<li>对<code>Container</code>性能进行了优化</li>
+<li>对事件系统进行了性能优化</li>
+</ul>
+<h2 id="v1-2-5-Beta"><a href="#v1-2-5-Beta" class="headerlink" title="v1.2.5 Beta"></a>v1.2.5 Beta</h2><ul>
+<li>优化了Listen，不在只允许监听返回值为object的函数</li>
+<li>修复了一个bug，这个bug导致全局事件不能够正确的在Static函数上监听</li>
+<li>修复了一个bug 这个bug导致如果作为参数筛选器，要求注入的是筛选器类型的话将会导致无效匹配</li>
+<li>Call(Action…)相关函数将支持自定义用户参数传入</li>
+</ul>
+<h2 id="v1-2-4-Beta"><a href="#v1-2-4-Beta" class="headerlink" title="v1.2.4 Beta"></a>v1.2.4 Beta</h2><ul>
+<li>无用代码清理</li>
+<li>Params特殊参数通过IParams来代替</li>
+</ul>
+<h2 id="v1-2-3-Beta"><a href="#v1-2-3-Beta" class="headerlink" title="v1.2.3 Beta"></a>v1.2.3 Beta</h2><ul>
+<li>紧急修复了Netstandard Dll库未能正确发布的问题</li>
+</ul>
+<h2 id="v1-2-2-Beta"><a href="#v1-2-2-Beta" class="headerlink" title="v1.2.2 Beta"></a>v1.2.2 Beta</h2><p><strong>新增内容</strong></p>
+<ul>
+<li>增加了<code>Tag&lt;TService&gt;(string)</code>允许直接将类型标记</li>
+<li>增加了<code>Release(params object[]...)</code>允许通过实例对象进行释放</li>
+<li>增加了<code>Terminate()</code>函数，用于终止CatLib框架</li>
+<li>增加了<code>ApplicationEvents.OnTerminate</code>用于监听框架终止之前的事件</li>
+<li>增加了<code>ApplicationEvents.OnTerminated</code>用于监听框架终止之后的事件</li>
+</ul>
+<p><strong>其他优化</strong></p>
+<ul>
+<li><code>Facade</code>增加<code>HasInstance</code>来优化<code>App.HasInstance</code>(这是个内部优化)</li>
+<li><code>OnResolving</code>允许只获取实例</li>
+<li><code>OnRelease</code>允许只获取实例</li>
+<li><code>OnResolving</code>允许不在获取返回值</li>
+</ul>
+<h2 id="v1-2-1-Beta"><a href="#v1-2-1-Beta" class="headerlink" title="v1.2.1 Beta"></a>v1.2.1 Beta</h2><p><strong>性能优化</strong></p>
+<ul>
+<li><code>Facade</code> 拥有更好的性能。</li>
+<li><code>App.Make</code> 拥有更好的性能。</li>
+</ul>
+<p><strong>接口调整</strong></p>
+<ul>
+<li><code>App.Release</code> 可以获取一个返回值，表示是否成功的释放。</li>
+</ul>
+<h2 id="v1-2-0-Beta"><a href="#v1-2-0-Beta" class="headerlink" title="v1.2.0 Beta"></a>v1.2.0 Beta</h2><p><strong>新增内容</strong></p>
+<ul>
+<li>App类可以被继承。</li>
+<li>容器可以为实现 <code>IDisposable</code> 接口的对象，在 <code>Release</code> 时会自动触发接口。</li>
+<li>容器增加可变类型接口(<code>IVariant</code>)，允许将一个基础类型转为复杂类型。</li>
+<li>容器增加<code>Params</code>数据结构，允许容器进行参数名参数匹配。</li>
+<li>容器增加 <code>BindMethod</code> 方法允许向容器注册一个方法。</li>
+<li>容器增加 <code>OnRebound</code> 和 <code>Watch</code> 函数，该函数用于监听当已经解决的服务发生重定义时触发的事件，这个事件对实例绑定的服务也会有效。</li>
+<li>Str辅助函数库增加了Method方法可以获取字符串中符合规则的函数名。</li>
+<li>Arr增加了Flash函数，该函数可以处理只在片段时间内产生作用的内容。</li>
+<li>增加了字典辅助函数库（Dict）<br>– Filter函数可以过滤返回值为false的键值对<br>– Remove函数可以移除比较回掉返回为true的元素<br>– Modify函数可以直接修改键值对的值<br>– AddRange允许批量添加到字典<br>– Map函数将回调的返回值作为新的字典<br>– Keys函数可以获取字典的键名数组<br>– Values函数可以获取字典的值数组<br>– Get函数可以通过点状表达式访问深度字典<br>– Set函数可以通过点状表达式写入深度字典<br>– Remove函数可以通过点状表达式删除深度字典元素</li>
+<li>Arr 增加了 <code>RemoveAt</code> 函数，可以通过数组下标移除元素，并且返回被移除的元素值。</li>
+<li><code>Container.Call</code> 支持直接为lambda表达式提供依赖注入。</li>
+</ul>
+<p><strong>更新内容</strong></p>
+<ul>
+<li>容器获得了更好的绑定(<code>Bind</code>)校验并及时的抛出异常。</li>
+<li>Facade(门面)机制优化， 拥有了更好的访问性能。</li>
+<li>容器中<code>string</code>被认为是不可以被实例的对象。</li>
+<li>全局事件系统关联服务容器，这意味着所有的函数绑定事件不会再限制参数了，容器会选择最合适的参数自动注入。</li>
+<li>全局事件移除生命周期支持，因为全局事件的监听不应该频繁发生变化，生命周期功能会诱导开发者进行不正确的操作</li>
+<li>优化了注入算法，能够尽可能的推导出注入实例。</li>
+<li><code>OnResolving</code> 和 <code>OnRelease</code> 所加入的新的修饰器不会再处理已经生成的实例。实例的变化应该使用<code>Watch</code>来监控</li>
+<li>容器注入的策略被调整为必然注入成功（不为null）（以前是可以为null）（如果希望提供默认值必须显示的申明）否则将抛出一个不能解决的异常</li>
+<li>容器在无法解决注入时可以根据 <code>@变量名</code> 来推测类型了。</li>
+<li><code>BindIf</code> API 不再返回已绑定的api，而是返回bool来表示是否成功绑定，<code>IBindData</code> 将以out参数的形式返回。</li>
+<li>全局修饰器的策略调整为即时状态不会再为已经生成的对象进行修饰。因为旧的设计这会导致表达语意不明。</li>
+<li>对于基础类型的注入变得更加严格，不能在直接注入基础类型的默认值了例如：int的默认值为0，因为我们认为这可能会导致一些不被发现的错误。</li>
+<li>对容器进行了重构，使容器具备更加好的可拓展性及性能，同时也开放了大量可以直接更改容器行为的虚函数，这对于其他框架开发者或者高级定制的开发者可以更加轻松的修改容器行为。</li>
+<li>用户参数注入的检查由绝对顺序调整为相对顺序，这意味着参数顺序的要求将会更加松散。</li>
+</ul>
+<p><strong>Bug修复</strong></p>
+<ul>
+<li>修复了一个bug这个bug导致在调用Instance时如果存在修饰器修改对象的情况，那么不能返回已经被修改的对象。</li>
+<li>修复了 <code>App.Trigger</code> 返回值不正确的bug。</li>
+</ul>
+<p><strong>移除内容</strong></p>
+<ul>
+<li>移除了LRUCache，理由是由于性能不过关。</li>
+<li>移除了Inject注入标记的Required选项，因为我们认为Required的存在使开发者不再注重对传入值的校验，这对于非catlib下使用组件是存在安全风险的。</li>
+</ul>
+<h2 id="v1-1-1-RC"><a href="#v1-1-1-RC" class="headerlink" title="v1.1.1 RC"></a>v1.1.1 RC</h2><ul>
+<li>移除了在Unity环境下单元测试的支持 - 所有的基础类库都是可靠的无需在Unity下再进行额外测试。</li>
+<li>兼容合并(直接使用Framework和Core的)源码导致的类型指定错误</li>
+<li>对容器所产生的异常提供更加明确的错误提示</li>
+</ul>
+<h2 id="V1-1-0-RC"><a href="#V1-1-0-RC" class="headerlink" title="V1.1.0 RC"></a>V1.1.0 RC</h2><p><strong>开发者体验改善</strong></p>
+<ul>
+<li>错误提示对开发者更加友好和直观</li>
+<li>Container在手动给予参数时如果转换失败辣么会抛出异常</li>
+<li>Application事件名变得更有意义</li>
+<li>鲁棒性增强</li>
+</ul>
+<p><strong>错误修正</strong></p>
+<ul>
+<li>错误的函数名修正: <code>Releases</code> 修正为 <code>Release</code></li>
+</ul>
+<p><strong>新增功能</strong></p>
+<ul>
+<li>增加了启动引导完成事件: <code>OnBootstraped</code></li>
+<li><code>Arr</code> 增加 <code>IndexOf</code> 查找函数</li>
+</ul>
+<p><strong>已过时</strong></p>
+<ul>
+<li>已过时: <code>Str.RegexQuote()</code></li>
+</ul>
+<p><strong>其他改进</strong></p>
+<ul>
+<li>将事件转移至Support（所有using CatLib; 的可以无缝升级）</li>
+</ul>
+<h2 id="V1-0-0-RC"><a href="#V1-0-0-RC" class="headerlink" title="V1.0.0 RC"></a>V1.0.0 RC</h2><ul>
+<li>依赖注入容器</li>
+<li>基础事件系统</li>
+<li>标准库</li>
+</ul>
+
+                </section>
+
+                
+                    <div ref="comments" id="gitment-container"></div>
+                
+                
+                <support :web="web" visiable></support>
+            </div>
+            <div v-if="searched != null" id="search-result" class="search-result" v-cloak>
+                <p v-if="searched.results.length > 0" class="search-title">
+                    与"{{ searched.keyword }}"相关的内容{{searched.results.length}}条
+                </p>
+                <p v-else class="search-title">无搜索结果可以匹配"{{ searched.keyword }}"</p>
+                <div v-for="(record) in searched.results" class="searched-line">
+                    <h3>
+                        <a :href="'/' + record.href + '#!' + encodeURI(anchorEscaping(record.hash))" @click="clearSearch">
+                            {{ record.hash }}
+                        </a>
+                    </h3>
+                    <ul>
+                        <li><i>{{ record.page }} <span v-if="record.page_title != ''">- {{ record.page_title }}</span></i> <i>score:<span>{{ record.score }}</span></i></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div></div>
+
+<script>
+window.onload = function(){  
+    new Vue({
+        el : '#cookbook',
+        data: { 
+            navigation : {"navigation":[{"levels":[{"text":"CatLib","href":"/"},{"text":"核心库","href":"index.html"}]},{"divider":true},{"text":"起步"},{"text":"介绍","href":"index.html"},{"text":"风格指南","href":"style.html"},{"text":"常见问题","href":"faq.html"},{"text":"已知BUG","href":"bug.html"},{"text":"贡献指南","href":"contribution.html"},{"text":"更新日志","href":"upgrade.html"},{"text":"迁移指南","href":"migration.html"},{"text":"系统架构"},{"text":"服务提供者","href":"architecture/service-provider.html"},{"text":"应用程序","href":"architecture/application.html"},{"text":"服务容器","href":"architecture/container.html"},{"text":"服务门面","href":"architecture/facade.html"},{"text":"框架组件"},{"text":"事件系统","href":"components/event.html"},{"text":"管理器模版","href":"components/template.html"},{"text":"辅助函数"},{"text":"数组","href":"helper/arr.html"},{"text":"字符串","href":"helper/str.html"},{"text":"字典","href":"helper/dict.html"},{"text":"时间","href":"helper/system-time.html"},{"text":"线程静态","href":"helper/thread-static.html"},{"text":"通用","href":"helper/util.html"},{"text":"数据结构"},{"text":"有序集","href":"data-structure/sort-set.html"},{"text":"快速列表","href":"data-structure/quick-list.html"},{"text":"环型缓冲区","href":"data-structure/ring-buffer.html"},{"text":"内存存储","href":"data-structure/memory-storage.html"},{"text":"过滤器链","href":"data-structure/filter-chain.html"},{"text":"流"},{"text":"包装流","href":"stream/wrapper-stream.html"},{"text":"管道流","href":"stream/pipeline-stream.html"},{"text":"存储流","href":"stream/storage-stream.html"},{"text":"组合流","href":"stream/combine-stream.html"},{"text":"分片流","href":"stream/segment-stream.html"},{"divider":true},{"text":"Power by CatLib","href":"https://github.com/CatLib","external":true}]},
+            web : {"navigation":[{"type":"versions","mobile":true},{"type":"menu","text":"组件库","mobile":true,"list":[{"text":"ILRuntime支持库","href":"https://ilruntime.catlib.io"}]},{"type":"normal","text":"English","href":"https://catlib.io/lasted/index.html","mobile":true},{"type":"icon","fontawesome":"github","href":"https://github.com/CatLib/Core","mobile":true}],"tool":{"editor":{"text":"编辑","href":"https://github.com/CatLib/catlib-cn.io/tree/2.0/","external":true}},"support":{"label":["在文档中没有找到您需要的内容？","尝试在左侧搜索栏中搜索，或者{text}"],"text":"在GitHub中发起提问","href":"https://github.com/CatLib/catlib-cn.io/issues","external":true}},
+            versions: {
+                current :  {"test":"^v1\\/","name":"v1.4","active":"Latest(v1.4)","data":"v1"},
+                list: [{"test":"^v1\\/","name":"v1.4","active":"Latest(v1.4)","data":"v1"},{"test":"^v2\\/","name":"v2.0","active":"Latest(v2.0)","data":"v2"}]
+            },
+            withSummary : true,
+            isPC : null,
+            checkout: false,
+            root: "/",
+            contentNavigation: [],
+            contentOffset : { 'offsetTop' : 0, 'height' : 0 },
+            searched: null,
+            searchDisabled: localStorage.getItem("search-input-disabled") == 'true',
+            clientHeight : 0
+        },
+        methods :{
+            testPC : function(){ 
+                var userAgentInfo = navigator.userAgent;
+                var deviceReg = [
+                    /(MI(\s+)|2013022|2013023|HM|2014011|2014501|2014813|2014811|2014812|2014817|2014818|2014819|2014502|2015|xiaomi).*/i,
+                    /(MI(.*|\s*)PAD).*/i,
+                    /(iPhone | iPod).*/i,
+                    /(iPad).*/i,
+                    /(Android).*/i,
+                    /(iPhone|iPad|iPod|iOS).*/i,
+                    /(windows(.*|\s*)phone).*/i
+                ];
+                var flag = true;
+                for (var v = 0; v < deviceReg.length; v++) {
+                    if (deviceReg[v].test(userAgentInfo)) {
+                        flag = false;
+                        break;
+                    }
+                }
+                
+                return flag;
+            },
+            hidenSummary : function(){
+                if(!this.isPC)
+                {
+                    this.withSummary = false;
+                }
+            },
+            bindMinHeight: function(){
+                var vue = this;
+                window.addEventListener("resize", function(){
+                    vue.clientHeight = document.documentElement.clientHeight - 50;
+                }, false);
+                this.clientHeight = document.documentElement.clientHeight - 50;
+            },
+            bindAnchor : function(){
+                if(this.$refs.section == undefined){
+                    return;
+                }
+                window.addEventListener("hashchange", this.hashChange, false);
+                window.addEventListener("resize", this.refreshContentNavigation, false);
+                var elements = this.$refs.section.getElementsByTagName("a");
+                var vue = this;
+                for(var index = 0; index < elements.length; index++){
+                    let element = elements[index];
+                    let href = element.getAttribute("href");
+                    if(href.length <= 0 || href[0] != "#"){
+                        continue;
+                    }
+
+                    element.addEventListener('click', function(event){
+                        location.hash = "!" + encodeURI(decodeURI(vue.anchorEscaping(element.hash.substring(1))));
+                        event.preventDefault();
+                    }, false);
+                }
+
+                this.refreshContentNavigation();
+            },
+            refreshContentNavigation : function(){
+                if(this.$refs.section == undefined || !this.supportSubnav()){
+                    return;
+                }
+                var subnavIndex = 0;
+                var elements = this.$refs.section.getElementsByClassName("headerlink");
+                var subnav = [];
+                for(var index=0; index < elements.length; index++){
+                    var element = elements[index];
+                    if(element.parentElement.nodeName == "H2"){
+                        subnav[subnavIndex++] = {'text' : element.title , 'hash' : "!" + element.hash.substring(1), 'offsetTop' : element.offsetTop};
+                    }
+                }
+                this.contentNavigation = subnav;
+            },
+            hashChange : function(){
+                var locationHash = location.hash.replace(/^#!/ig, "#");
+                if(locationHash == ''){
+                    return;
+                }
+                locationHash = decodeURI(locationHash);
+                var hashes = this.$refs.section.getElementsByClassName("headerlink");
+                var target = null;
+                for(var index=0; index < hashes.length; index++){
+                    var hash = hashes[index];
+                    if(decodeURI(hash.hash) == locationHash){
+                        target = hash;
+                        break;
+                    }
+                }
+                
+                if(target == null){
+                    return;
+                }
+
+                var top = target.offsetTop - 20; 
+                
+                if(top > 0)
+                {
+                    var vue = this;
+                    $('.cookbook-content').animate({scrollTop:top}, 500, function(){
+                        if(!vue.isPC){
+                            vue.withSummary = false;
+                        }
+                    });
+                }        
+            },
+            bindScroll : function(){
+                if(!this.supportSubnav()){
+                    return;
+                }
+                this.$refs.content.addEventListener("scroll", this.scrollChange, false);
+            },
+            scrollChange : function(e){
+                this.contentOffset = { 
+                    'offsetTop' : this.$refs.content.scrollTop,
+                    'height' : this.$refs.content.scrollHeight - this.$refs.content.offsetHeight
+                };
+            },
+            supportSubnav : function(){
+                if(this.navigation.subnav != undefined && this.navigation.subnav == false){
+                    return false;
+                }
+                return true;
+            },
+            clearSearch: function(){
+                this.searched = null;
+                this.$nextTick(function(){
+                    this.hashChange();
+                });
+            },
+            searchSubmit: function(){
+                if(!this.isPC)
+                {
+                    this.withSummary = false;
+                }
+            },
+            anchorEscaping : function(str){
+                return str.replace(' ', '-').replace('.', '-');
+            },
+            setSearchDisabled : function(value){
+                this.searchDisabled = value;
+            },
+            initComments : function(){
+                
+                    var vue = this;
+                    var theme = {
+                        render : function(state, instance) {
+                            var container = document.createElement('div');
+                            container.lang = "en-US";
+                            container.className = 'gitment-container gitment-root-container';
+                            container.appendChild(instance.renderHeader(state, instance));
+                            container.appendChild(instance.renderComments(state, instance));
+                            container.appendChild(instance.renderEditor(state, instance));
+                            return container;
+                        },
+                    }
+
+                    var gitment = new Gitment({
+                        id : 'catlib-cn:v1/upgrade.html',
+                        owner: 'catlib',
+                        repo: 'catlib-cn.io',
+                        oauth: {
+                            client_id: '3620f7cdd1c50b4b6e3c',
+                            client_secret: '50664006a799cb29b27e8358b88a6a4580e8dc0c',
+                            cross_server: 'https://31225080.ap-southeast-1.fc.aliyuncs.com/2016-08-15/proxy/gitment/gitment-cross/',
+                        },
+                        labels : [
+                            'CatLib'
+                        ],
+                        link: 'https://cn.catlib.io/v1/upgrade.html',
+                        maintainer: ["yb199478"],
+                        theme : theme,
+                        perPage : 30,
+                    });
+
+                    gitment.render(this.$refs.comments);
+                
+            },
+        },mounted : function() {
+            this.isPC = this.withSummary = this.testPC();
+            this.$nextTick(function(){
+                this.bindScroll();
+                this.bindAnchor();
+                this.hashChange();
+                this.initComments();
+                this.bindMinHeight();
+            });
+        },
+        watch: {
+            searched : function(){
+                $('.cookbook-content').animate({scrollTop:0}, 0);
+            }
+        },
+        computed:{
+            minHeightStyle : function()
+            {
+                return { 'min-height' : this.clientHeight + "px" }
+            }
+        }
+    });
+};
+</script>
+    
+
+    
+    <script src="/scripts/cookbook.js"></script>
+    
+      <script src="/scripts/gitment.js"></script>
+    
+    
+    
+  </body>
+</html>
