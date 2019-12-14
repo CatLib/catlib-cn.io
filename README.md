@@ -20,7 +20,7 @@ $ git clone https://github.com/CatLib/catlib-cn.io.git
 - 安装项目依赖包
 
 ```shell
-$ cd catlib-cn.io && npm install && npm install -g hexo-cli
+$ cd catlib-cn.io && npm install && npm install -g hexo-cli && npm install hexo-server --save
 ```
 
 - 启动开发者服务器
